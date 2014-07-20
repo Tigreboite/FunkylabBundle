@@ -34,7 +34,7 @@ Then, add the bundle into `symfony/app/AppKernel.php`:
 
 Add the FunkylabBundle routing file in your symfony/app/config/routing.yml
 
-```yml
+```
 ...
 funkylab:
     resource: "@CyrilPereiraFunkylabBundle/Controller/"
@@ -49,11 +49,10 @@ $ php app/console assets:install web --symlink
 $ php app/console doctrine:database:create
 $ php app/console doctrine:schema:create
 $ php app/console doctrine:fixtures:load
-```
 
 #Start
 
-go to http://domain/funkylab
+http://domain/funkylab
 
 login : admin@admin.com
 pass  : admin

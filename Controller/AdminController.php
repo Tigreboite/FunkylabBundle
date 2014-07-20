@@ -1,6 +1,6 @@
 <?php
 
-namespace CyrilPereira\FunkylabBundle\Controller;
+namespace Tigreboite\FunkylabBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class AdminController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="funkylab_home")
      * @Template()
      */
     public function indexAction()

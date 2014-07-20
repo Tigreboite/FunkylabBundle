@@ -1,6 +1,6 @@
 <?php
 
-namespace CyrilPereira\FunkylabBundle\Controller;
+namespace Tigreboite\FunkylabBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

@@ -6,11 +6,11 @@
 
     <!--
     <parameters>
-        <parameter key="cyril_pereira_funkylab.example.class">CyrilPereira\FunkylabBundle\Example</parameter>
+        <parameter key="tigreboite_funkylab.example.class">CyrilPereira\FunkylabBundle\Example</parameter>
     </parameters>
 
     <services>
-        <service id="cyril_pereira_funkylab.example" class="%cyril_pereira_funkylab.example.class%">
+        <service id="tigreboite_funkylab.example" class="%tigreboite_funkylab.example.class%">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>
