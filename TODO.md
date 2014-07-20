@@ -102,9 +102,6 @@ Funkylab 5
 		- ex:
 			$ ./app/console funkylab:plugins:add toto --cached (keep generated file)
 
-###Install
-	* A simple SF2 bundle
-
-###Usage : 
+###Usage :
 	* Generate all type of admin & tools
 	* Generate a tool to edit page online, and specifiy a type of content
