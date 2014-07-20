@@ -34,7 +34,7 @@ Then, add the bundle into `symfony/app/AppKernel.php`:
 
 Add the FunkylabBundle routing file in your symfony/app/config/routing.yml
 
-```
+```yml
 ...
 funkylab:
     resource: "@CyrilPereiraFunkylabBundle/Controller/"
