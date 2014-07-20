@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>Funkylab 5</title>
+    {% block head %}{% endblock %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link rel="stylesheet" href="{{ asset('bundles/cyrilpereirafunkylab/vendor/bootstrap/css/bootstrap.min.css') }}" type="text/css" />
+</head>
+<body>
+<br />
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+<script type="text/javascript" src="{{ asset('bundles/cyrilpereirafunkylab/vendor/jquery-2.1.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cyrilpereirafunkylab/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+</html>
