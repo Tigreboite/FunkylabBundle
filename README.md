@@ -1,6 +1,6 @@
 ##Author
 
-Cyril Pereira <cyril.pereira@extremegmail.com>
+Cyril Pereira <cyril.pereira@gmail.com>
 
 ## Installation
 
