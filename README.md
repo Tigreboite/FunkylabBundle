@@ -38,9 +38,23 @@ Add the FunkylabBundle routing file in your symfony/app/config/routing.yml
 ...
 funkylab:
     resource: "@CyrilPereiraFunkylabBundle/Controller/"
+    prefix:   /funkylab/
 ```
 
 
-##Documentation
+##Console
 
-* first, in commandline type ./app/console assets:install web --symlink
+```
+$ php app/console assets:install web --symlink
+$ php app/console doctrine:database:create
+$ php app/console doctrine:database:create
+$ php app/console doctrine:fixtures:load
+
+#Start
+
+http://domain/funkylab
+
+login : admin
+pass  : admin
+
+
