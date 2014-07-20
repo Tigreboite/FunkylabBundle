@@ -23,6 +23,8 @@ Then, add the bundle into `symfony/app/AppKernel.php`:
     {
         $bundles = array(
             ...
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
             new Tigreboite\FunkylabBundle\TigreboiteFunkylabBundle(),
         );
 
@@ -47,9 +49,7 @@ fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 ```
 
-###Security.yml
-
-Edit /app/config/security.yml
+###Edit the file /app/config/security.yml
 
 ```yml
 security:
