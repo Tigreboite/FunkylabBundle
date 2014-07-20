@@ -18,12 +18,14 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/login")
+     * @Route("/login", name="funkylab_login")
      * @Template()
      */
     public function loginAction()
     {
-        return array();
+        return $this->render('TigreboiteFunkylabBundle:Admin:login.html.twig', array(
+          'csrf_token' => $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
+        ));
     }
 
     /**
@@ -32,6 +34,7 @@ class AdminController extends Controller
      */
     public function logoutAction()
     {
-        return array();
+        $logout = $this->generateUrl('fos_user_security_logout');
+        return $this->redirect($logout);
     }
 }

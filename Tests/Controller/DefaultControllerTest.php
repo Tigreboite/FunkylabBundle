@@ -1,6 +1,6 @@
 <?php
 
-namespace CyrilPereira\FunkylabBundle\Tests\Controller;
+namespace Tigreboite\FunkylabBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
