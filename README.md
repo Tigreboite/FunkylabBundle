@@ -9,11 +9,11 @@ Edit `symfony/composer.json` file to add this bundle package:
 ```yml
 "require": {
     ...
-    "cyril-pereira/funkylab-bundle": "dev-master"
+    "tigreboite/funkylab-bundle": "dev-master"
 },
 ```
 
-Run `php composer.phar update cyril-pereira/funkylab-bundle`
+Run `php composer.phar update tigreboite/funkylab-bundle`
 
 Then, add the bundle into `symfony/app/AppKernel.php`:
 
@@ -23,7 +23,7 @@ Then, add the bundle into `symfony/app/AppKernel.php`:
     {
         $bundles = array(
             ...
-            new CyrilPereira\FunkylabBundle\CyrilPereiraFunkylabBundle(),
+            new Tigreboite\FunkylabBundle\TigreboiteFunkylabBundle(),
         );
 
         ...
@@ -34,10 +34,10 @@ Then, add the bundle into `symfony/app/AppKernel.php`:
 
 Add the FunkylabBundle routing file in your symfony/app/config/routing.yml
 
-```
+```yml
 ...
 funkylab:
-    resource: "@CyrilPereiraFunkylabBundle/Controller/"
+    resource: "@TigreboiteFunkylabBundle/Controller/"
     prefix:   /funkylab/
 ```
 
@@ -49,7 +49,7 @@ $ php app/console assets:install web --symlink
 $ php app/console doctrine:database:create
 $ php app/console doctrine:schema:create
 $ php app/console doctrine:fixtures:load
-
+```
 #Start
 
 http://domain/funkylab
