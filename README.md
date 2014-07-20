@@ -47,14 +47,14 @@ funkylab:
 ```
 $ php app/console assets:install web --symlink
 $ php app/console doctrine:database:create
-$ php app/console doctrine:database:create
+$ php app/console doctrine:schema:create
 $ php app/console doctrine:fixtures:load
 
 #Start
 
 http://domain/funkylab
 
-login : admin
+login : admin@admin.com
 pass  : admin
 
 
