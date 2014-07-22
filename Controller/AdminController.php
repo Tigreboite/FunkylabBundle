@@ -14,6 +14,8 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
+        $logger = $this->get('logger');
+        $logger->info('Funkylab : Home');
         return array();
     }
 
@@ -23,6 +25,8 @@ class AdminController extends Controller
      */
     public function loginAction()
     {
+        $logger = $this->get('logger');
+        $logger->info('Funkylab : call Login form');
         return $this->render('TigreboiteFunkylabBundle:Admin:login.html.twig', array(
           'csrf_token' => $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
         ));
@@ -34,6 +38,8 @@ class AdminController extends Controller
      */
     public function logoutAction()
     {
+        $logger = $this->get('logger');
+        $logger->info('Funkylab : call Logout');
         $logout = $this->generateUrl('fos_user_security_logout');
         return $this->redirect($logout);
     }
