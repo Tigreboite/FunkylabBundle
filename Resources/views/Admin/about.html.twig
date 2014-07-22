@@ -1,0 +1,240 @@
+{% extends 'TigreboiteFunkylabBundle::layout.html.twig' %}
+
+{% block title %}À propos{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block breadcrumb %}
+    <h1>
+        À propos
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ path('funkylab_home') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">À propos</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <p><strong>Funkylab</strong> depuis 2005 par <strong>Cyril Pereira</strong>.</p>
+
+    <ul class="timeline">
+
+        <!-- timeline time label -->
+        <li class="time-label">
+            <span class="bg-teal">15 Dec. 2014</span>
+        </li>
+        <!-- /.timeline-label -->
+
+        <!-- timeline item -->
+        <li>
+            <!-- timeline icon -->
+            <i class="fa fa-github bg-teal"></i>
+            <div class="timeline-item">
+                <span class="time"><a href="https://github.com/Tigreboite/FunkylabBundle" target="_blank"><i class="fa fa-github"></i> github</a></span>
+                <h3 class="timeline-header">Funkylab 5 </h3>
+                <div class="timeline-body">
+                </div>
+
+                <div class='timeline-footer'>
+                    <a class="btn bg-teal btn-xs">PHP</a>
+                    <a class="btn bg-teal btn-xs">Myql</a>
+                    <a class="btn bg-teal btn-xs">Symfony 2.x</a>
+                    <a class="btn bg-teal btn-xs">Jquery</a>
+                    <a class="btn bg-teal btn-xs">Boostrap</a>
+                    <a class="btn bg-teal btn-xs">AdminLTE</a>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item -->
+
+        <!-- timeline time label -->
+        <li class="time-label">
+            <span class="bg-blue">10 Jan. 2009</span>
+        </li>
+        <!-- /.timeline-label -->
+
+        <!-- timeline item -->
+        <li>
+            <!-- timeline icon -->
+            <i class="fa fa-github bg-blue"></i>
+            <div class="timeline-item">
+                <span class="time"><a href="https://github.com/funkymed/funkylab4" target="_blank"><i class="fa fa-github"></i> github</a></span>
+                <h3 class="timeline-header">Funkylab 4</h3>
+
+                <div class="timeline-body">
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_1.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_1.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_2.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_2.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_3.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_3.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_4.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_4.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_5.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_5.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_6.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_6.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_7.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab4/scr_7.jpg') }}" alt="..." class="margin"></a>
+                </div>
+
+                <div class='timeline-footer'>
+                    <a class="btn bg-blue btn-xs">ZendFramework</a>
+                    <a class="btn bg-blue btn-xs">ExtJs</a>
+                    <a class="btn bg-blue btn-xs">PHP</a>
+                    <a class="btn bg-blue btn-xs">Mysql</a>
+                    <a class="btn bg-blue btn-xs">XML</a>
+                    <a class="btn bg-blue btn-xs">JSON</a>
+                    <a class="btn bg-blue btn-xs">JAVASCRIPT</a>
+                    <a class="btn bg-blue btn-xs">FullAjax</a>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item -->
+
+        <!-- timeline time label -->
+        <li class="time-label">
+            <span class="bg-purple">18 May 2008</span>
+        </li>
+        <!-- /.timeline-label -->
+
+        <!-- timeline item -->
+        <li>
+            <!-- timeline icon -->
+            <i class="fa fa-github bg-purple"></i>
+            <div class="timeline-item">
+                <span class="time"><a href="https://github.com/funkymed/funkylab3" target="_blank"><i class="fa fa-github"></i> github</a></span>
+                <h3 class="timeline-header">Funkylab 3</h3>
+
+                <div class="timeline-body">
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_1.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_1.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_2.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_2.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_3.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_3.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_4.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_4.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_5.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_5.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_6.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_6.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_7.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/scr_7.jpg') }}" alt="..." class="margin"></a>
+                </div>
+
+                <div class='timeline-footer'>
+                    <a class="btn bg-purple btn-xs">PHP</a>
+                    <a class="btn bg-purple btn-xs">Myql</a>
+                    <a class="btn bg-purple btn-xs">Javascript</a>
+                    <a class="btn bg-purple btn-xs">PrototypeJS</a>
+                    <a class="btn bg-purple btn-xs">Scriptaculous</a>
+                </div>
+
+            </div>
+        </li>
+        <!-- END timeline item -->
+
+        <!-- timeline time label -->
+        <li class="time-label">
+            <span class="bg-red">8 April 2007</span>
+        </li>
+        <!-- /.timeline-label -->
+
+        <!-- timeline item -->
+        <li>
+            <!-- timeline icon -->
+            <i class="fa fa-info bg-red"></i>
+            <div class="timeline-item">
+                <h3 class="timeline-header">Funkylab 3 Beta</h3>
+
+                <div class="timeline-body">
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr1_620x400.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr1_620x400.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr2_620x400.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr2_620x400.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr3_620x400.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr3_620x400.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr4_620x400.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr4_620x400.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr5_620x400.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr5_620x400.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr6_620x400.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab3/beta/funkylab3_scr6_620x400.jpg') }}" alt="..." class="margin"></a>
+                </div>
+
+                <div class='timeline-footer'>
+                    <a class="btn bg-red btn-xs">PHP</a>
+                    <a class="btn bg-red btn-xs">Myql</a>
+                    <a class="btn bg-red btn-xs">XML</a>
+                    <a class="btn bg-red btn-xs">XSL</a>
+                    <a class="btn bg-red btn-xs">Javascript</a>
+                    <a class="btn bg-red btn-xs">PrototypeJS</a>
+                    <a class="btn bg-red btn-xs">Scriptaculous</a>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item -->
+
+        <!-- timeline time label -->
+        <li class="time-label">
+            <span class="bg-yellow">20 April 2006</span>
+        </li>
+        <!-- /.timeline-label -->
+
+        <!-- timeline item -->
+        <li>
+            <!-- timeline icon -->
+            <i class="fa fa-github bg-yellow"></i>
+            <div class="timeline-item">
+                <span class="time"><a href="https://github.com/funkymed/funkylab2" target="_blank"><i class="fa fa-github"></i> github</a></span>
+                <h3 class="timeline-header">Funkylab 2</h3>
+
+                <div class="timeline-body">
+                    <div class="timeline-body">
+                        <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_1.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_1.jpg') }}" alt="..." class="margin"></a>
+                        <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_2.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_2.jpg') }}" alt="..." class="margin"></a>
+                        <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_3.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_3.jpg') }}" alt="..." class="margin"></a>
+                        <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_4.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_4.jpg') }}" alt="..." class="margin"></a>
+                        <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_5.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_5.jpg') }}" alt="..." class="margin"></a>
+                        <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_6.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_6.jpg') }}" alt="..." class="margin"></a>
+                        <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_7.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_7.jpg') }}" alt="..." class="margin"></a>
+                        <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_8.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_8.jpg') }}" alt="..." class="margin"></a>
+                        <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_9.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_9.jpg') }}" alt="..." class="margin"></a>
+                        <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_91.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab2/scr_91.jpg') }}" alt="..." class="margin"></a>
+                    </div>
+                </div>
+
+                <div class='timeline-footer'>
+                    <a class="btn bg-yellow btn-xs">PHP</a>
+                    <a class="btn bg-yellow btn-xs">Mysql</a>
+                    <a class="btn bg-yellow btn-xs">Javascript</a>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item -->
+
+        <!-- timeline time label -->
+        <li class="time-label">
+            <span class="bg-olive">1 June 2005</span>
+        </li>
+        <!-- /.timeline-label -->
+
+        <!-- timeline item -->
+        <li>
+            <!-- timeline icon -->
+            <i class="fa fa-info bg-olive"></i>
+            <div class="timeline-item">
+                <h3 class="timeline-header">Funkylab 1</h3>
+                <div class="timeline-body">
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/lecranstdenis/scr_1.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/lecranstdenis/scr_1.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/lecranstdenis/scr_2.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/lecranstdenis/scr_2.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/lecranstdenis/scr_3.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/lecranstdenis/scr_3.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/lecranstdenis/scr_4.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/lecranstdenis/scr_4.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/lecranstdenis/scr_5.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/lecranstdenis/scr_5.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/funkylab_v001_1.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/funkylab_v001_1.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/funkylab_v001_2.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/funkylab_v001_2.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/funkylab_v001_3.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/funkylab_v001_3.jpg') }}" alt="..." class="margin"></a>
+                    <a href="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/funkylab_v001_4.jpg') }}" target="_blank"><img width="150" src="{{ asset('bundles/tigreboitefunkylab/images/funkylab1/funkylab_v001_4.jpg') }}" alt="..." class="margin"></a>
+                </div>
+                <div class='timeline-footer'>
+                    <a class="btn bg-olive btn-xs">PHP</a>
+                    <a class="btn bg-olive btn-xs">Mysql</a>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item -->
+
+    </ul>
+
+    <h4>Follow me</h4>
+    <p>
+        <a href="http://www.github.com/funkymed" target="_blank" class="btn btn-social-icon btn-github"><i class="fa fa-github"></i></a>
+        <a href="http://www.linkedin.com/profile/view?id=17735474" target="_blank" class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+        <a href="http://twitter.com/CyrilGPereira" target="_blank" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+        <a href="http://plus.google.com/114634672094201895731" target="_blank" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i></a>
+    </p>
+
+{% endblock %}

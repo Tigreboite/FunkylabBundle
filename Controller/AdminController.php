@@ -18,6 +18,16 @@ class AdminController extends Controller
         $logger->info('Funkylab : Home');
         return array();
     }
+    /**
+     * @Route("/about", name="funkylab_about")
+     * @Template()
+     */
+    public function aboutAction()
+    {
+        $logger = $this->get('logger');
+        $logger->info('Funkylab : About');
+        return array();
+    }
 
     /**
      * @Route("/login", name="funkylab_login")
