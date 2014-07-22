@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>AdminLTE | {% block title %}{% endblock %}</title>
+    <title>Funkylab | {% block title %}{% endblock %}</title>
     {% block head %}{% endblock %}
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
@@ -59,54 +59,6 @@
                         <p>Why not buy a new awesome theme?</p>
                     </a>
                 </li><!-- end message -->
-                <li>
-                    <a href="#">
-                        <div class="pull-left">
-                            <img src="img/avatar2.png" class="img-circle" alt="user image"/>
-                        </div>
-                        <h4>
-                            AdminLTE Design Team
-                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="pull-left">
-                            <img src="img/avatar.png" class="img-circle" alt="user image"/>
-                        </div>
-                        <h4>
-                            Developers
-                            <small><i class="fa fa-clock-o"></i> Today</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="pull-left">
-                            <img src="img/avatar2.png" class="img-circle" alt="user image"/>
-                        </div>
-                        <h4>
-                            Sales Department
-                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="pull-left">
-                            <img src="img/avatar.png" class="img-circle" alt="user image"/>
-                        </div>
-                        <h4>
-                            Reviewers
-                            <small><i class="fa fa-clock-o"></i> 2 days</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                    </a>
-                </li>
             </ul>
         </li>
         <li class="footer"><a href="#">See All Messages</a></li>
@@ -126,27 +78,6 @@
                 <li>
                     <a href="#">
                         <i class="ion ion-ios7-people info"></i> 5 new members joined today
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-warning danger"></i> Very long description here that may not fit into the page and may cause design problems
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-users warning"></i> 5 new members joined
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <i class="ion ion-ios7-cart success"></i> 25 sales made
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="ion ion-ios7-person danger"></i> You changed your username
                     </a>
                 </li>
             </ul>
@@ -178,45 +109,6 @@
                         </div>
                     </a>
                 </li><!-- end task item -->
-                <li><!-- Task item -->
-                    <a href="#">
-                        <h3>
-                            Create a nice theme
-                            <small class="pull-right">40%</small>
-                        </h3>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                <span class="sr-only">40% Complete</span>
-                            </div>
-                        </div>
-                    </a>
-                </li><!-- end task item -->
-                <li><!-- Task item -->
-                    <a href="#">
-                        <h3>
-                            Some task I need to do
-                            <small class="pull-right">60%</small>
-                        </h3>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                <span class="sr-only">60% Complete</span>
-                            </div>
-                        </div>
-                    </a>
-                </li><!-- end task item -->
-                <li><!-- Task item -->
-                    <a href="#">
-                        <h3>
-                            Make beautiful transitions
-                            <small class="pull-right">80%</small>
-                        </h3>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                <span class="sr-only">80% Complete</span>
-                            </div>
-                        </div>
-                    </a>
-                </li><!-- end task item -->
             </ul>
         </li>
         <li class="footer">
@@ -228,28 +120,16 @@
 <li class="dropdown user user-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="glyphicon glyphicon-user"></i>
-        <span>Jane Doe <i class="caret"></i></span>
+        <span>{{ app.user.firstName }} {{ app.user.lastName }} <i class="caret"></i></span>
     </a>
     <ul class="dropdown-menu">
         <!-- User image -->
         <li class="user-header bg-light-blue">
-            <img src="img/avatar3.png" class="img-circle" alt="User Image" />
+            <img src="{{ asset('bundles/tigreboitefunkylab/images/user.png') }}" class="img-circle" alt="User Image" />
             <p>
-                Jane Doe - Web Developer
-                <small>Member since Nov. 2012</small>
+                {{ app.user.firstName }} {{ app.user.lastName }}
+                <!-- <small>Member since Nov. 2012</small> -->
             </p>
-        </li>
-        <!-- Menu Body -->
-        <li class="user-body">
-            <div class="col-xs-4 text-center">
-                <a href="#">Followers</a>
-            </div>
-            <div class="col-xs-4 text-center">
-                <a href="#">Sales</a>
-            </div>
-            <div class="col-xs-4 text-center">
-                <a href="#">Friends</a>
-            </div>
         </li>
         <!-- Menu Footer-->
         <li class="user-footer">
@@ -274,23 +154,22 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="img/avatar3.png" class="img-circle" alt="User Image" />
+                    <img src="{{ asset('bundles/tigreboitefunkylab/images/user.png') }}" class="img-circle" alt="User Image" />
                 </div>
-                {%  if app.user.firstName is defined %}
                 <div class="pull-left info">
                     <p>{{ app.user.firstName }} {{ app.user.lastName }}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
-                {% endif %}
             </div>
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="active">
-                    <a href="index.html">
+                    <a href="{{ path('funkylab_home') }}">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
+                <!--
                 <li>
                     <a href="pages/widgets.html">
                         <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
@@ -370,6 +249,7 @@
                         <li><a href="pages/examples/blank.html"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
                     </ul>
                 </li>
+                -->
             </ul>
         </section>
         <!-- /.sidebar -->
