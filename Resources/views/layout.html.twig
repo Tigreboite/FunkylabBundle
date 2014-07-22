@@ -87,31 +87,37 @@
             </div>
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
+            {% set current_route =  app.request.attributes.get('_route') %}
+            {% set current_controller =  app.request.attributes.get('_template').get('controller') %}
             <ul class="sidebar-menu">
-                <li class="{%  if app.request.attributes.get('_route') == 'funkylab_home' %}active{% endif %}">
+                <li class="{%  if current_route == 'funkylab_home' %}active{% endif %}">
                     <a href="{{ path('funkylab_home') }}">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="treeview {%  if app.request.attributes.get('_template').get('controller') == 'System' %}active {% endif %}">
+                <li class="treeview {%  if current_controller == 'System' %}active {% endif %}">
                     <a href="#">
                         <i class="fa fa-bar-chart-o"></i>
                         <span>Systeme</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="{%  if app.request.attributes.get('_route') == 'funkylab_system_manager' %}active{% endif %}">
-                            <a href="{{ path('funkylab_system_manager') }}"><i class="fa fa-angle-double-right"></i> Maintenance</a></li>
-                        <li class="{%  if app.request.attributes.get('_route') == 'funkylab_system_users' %}active{% endif %}">
-                            <a href="{{ path('funkylab_system_users') }}"><i class="fa fa-angle-double-right"></i> Utilisateurs</a></li>
-                        <li class="{%  if app.request.attributes.get('_route') == 'funkylab_system_files' %}active{% endif %}">
-                            <a href="{{ path('funkylab_system_files') }}"><i class="fa fa-angle-double-right"></i> Gestionnaire de fichier</a></li>
-                        <li class="{%  if app.request.attributes.get('_route') == 'funkylab_system_languages' %}active{% endif %}">
-                            <a href="{{ path('funkylab_system_languages') }}"><i class="fa fa-angle-double-right"></i> Langues</a></li>
+                        <li class="{%  if current_route == 'funkylab_system_manager' %}active{% endif %}">
+                            <a href="{{ path('funkylab_system_manager') }}"><i class="fa fa-angle-double-right"></i> Maintenance</a>
+                        </li>
+                        <li class="{%  if current_route == 'funkylab_system_users' %}active{% endif %}">
+                            <a href="{{ path('funkylab_system_users') }}"><i class="fa fa-angle-double-right"></i> Utilisateurs</a>
+                        </li>
+                        <li class="{%  if current_route == 'funkylab_system_files' %}active{% endif %}">
+                            <a href="{{ path('funkylab_system_files') }}"><i class="fa fa-angle-double-right"></i> Gestionnaire de fichier</a>
+                        </li>
+                        <li class="{%  if current_route == 'funkylab_system_languages' %}active{% endif %}">
+                            <a href="{{ path('funkylab_system_languages') }}"><i class="fa fa-angle-double-right"></i> Langues</a>
+                        </li>
                     </ul>
                 </li>
 
-                <li class="{%  if app.request.attributes.get('_route') == 'funkylab_about' %}active{% endif %}">
+                <li class="{%  if current_route == 'funkylab_about' %}active{% endif %}">
                     <a href="{{ path('funkylab_about') }}">
                         <i class="fa fa-info"></i> <span>À propos</span>
                     </a>
