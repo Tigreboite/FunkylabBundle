@@ -1,0 +1,168 @@
+{% extends ajax
+? 'TigreboiteFunkylabBundle::popin.html.twig'
+: 'TigreboiteFunkylabBundle::layout.html.twig' %}
+
+{% block content -%}
+
+    <div class="modal-body">
+        <div class="row">
+            <form method="post" action="{% if app.request.get('_route') == "admin_blog_edit" %}{{ path('admin_blog_update',{'id':entity.id}) }}{% else %}{{ path('admin_blog_create') }}{% endif %}" role="form">
+                {{ form_errors(form) }}
+                {% if app.request.get('_route') == "admin_blog_edit" %}
+                    <input type="hidden" name="_method" value="PUT">
+                {% endif %}
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#home" role="tab" data-toggle="tab">Général</a></li>
+                    <li><a href="#images" role="tab" data-toggle="tab">Contenu</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <div class="box box-primary">
+
+                            <div class="col-md-6">
+                                <div class="box-body clearfix">
+                                    <div class="form-group">
+                                        <label for="{{ form.title.vars.id }}">Title</label>
+                                        {{ form_widget(form.title, {'attr':{'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="{{ form.parent.vars.id }}">Parent</label>
+                                        {{ form_widget(form.parent, {'attr':{'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="{{ form.user.vars.id }}">User</label>
+                                        {{ form_widget(form.user, {'attr':{'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="{{ form.language.vars.id }}">Language</label>
+                                        {{ form_widget(form.language, {'attr':{'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="{{ form.type.vars.id }}">Type</label>
+                                        {{ form_widget(form.type, {'attr':{'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="{{ form.datePublished.vars.id }}">Date de publication</label>
+                                        {{ form_widget(form.datePublished, {'attr':{'class': 'form-control date'}}) }}
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="{{ form.dateUnpublished.vars.id }}">Date de dé-publication</label>
+                                        {{ form_widget(form.dateUnpublished, {'attr':{'class': 'form-control date'}}) }}
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="{{ form.status.vars.id }}">Statut</label>
+                                        {{ form_widget(form.status, {'attr':{'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="images">
+                        <div class="box box-primary">
+                            <div class="box-body clearfix">
+                                <div class="form-group">
+                                    <label for="picto_loader">Image</label>
+                                    {{ form_widget(form.image) }}
+                                    <div id="{{ form.image.vars.id }}-preview">
+                                        {% if  entity.webPath %}
+                                            <img src="/{{ entity.webPath }}" style="max-width:64px" />
+                                        {% endif %}
+                                    </div>
+                                    <input type="file" data-after="{{ form.image.vars.id }}" id="picto_loader" name="images" class="input-file" data-url="{{ path('admin_blog_upload') }}" />
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="{{ form.content.vars.id }}">Content</label>
+                                    {{ form_widget(form.content, {'attr':{'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{ form_widget(form._token) }}
+
+                <button class="btn btn-success btn-lg"><i class="fa fa-check"></i> Valid</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block callback_popin %}
+
+    <script type="text/javascript">
+
+        $('document').ready(function()
+        {
+            $('.date').datepicker({
+                buttonImageOnly: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd/mm/yy',
+                yearRange: "-1:+2"
+            });
+
+            $('#{{ form.content.vars.id }}').editable({
+                inlineMode: false,
+
+                buttons: ["bold", "italic", "underline", "formatBlock", "sep", "insertUnorderedList", "sep", "createLink", "insertImage", "insertVideo", "sep", "undo", "redo", "html"],
+                imagesLoadURL:Routing.generate('admin_media_list')+"?dir=blog",
+                imageDeleteURL:Routing.generate('admin_media_delete')+"?dir=blog",
+                blockTags: {
+                    n: 'Normal',
+                    h2: 'Heading 2',
+                    h3: 'Heading 3',
+                    h4: 'Heading 4'
+                },
+
+                defaultImageAlignment: "left",
+                defaultVideoAlignment: "left",
+
+                imageUploadURL: Routing.generate('upload_image_wysiwyg', {blog:true}),
+
+                imageUploadParams: {id: "my_editor"}
+            });
+
+            $('.input-file').fileupload({
+                dataType: 'json',
+                done: function (e, data) {
+                    var filename = data.result.filename;
+                    var path = data.result.path;
+                    var _div = $('#'+$(this).data('after')+"-preview");
+                    _div.html('<img src="/'+path+'" style="width:64px" />');
+
+                    $('#'+$(this).data('after')).val(path);
+                }
+            });
+        });
+
+        function callBackAfterSubmit()
+        {
+            table.draw();
+        }
+
+    </script>
+
+
+{% endblock %}

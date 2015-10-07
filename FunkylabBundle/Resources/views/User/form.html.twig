@@ -1,0 +1,259 @@
+{% extends ajax
+? 'TigreboiteFunkylabBundle::popin.html.twig'
+: 'TigreboiteFunkylabBundle::layout.html.twig' %}
+
+{% block content -%}
+
+
+
+    <div class="modal-body">
+    <div class="row">
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+    <form method="post" action="{% if app.request.get('_route') == "admin_user_edit" %}{{ path('admin_user_update',{'id':entity.id}) }}{% else %}{{ path('admin_user_create') }}{% endif %}" role="form" novalidate>
+    {% else %}
+    <form method="post" action="" role="form" novalidate disabled onsubmit="return false;">
+    {% endif %}
+        {% if app.request.get('_route') == "admin_user_edit" %}
+            <input type="hidden" name="_method" value="PUT">
+        {% endif %}
+
+        <div role="tabpanel">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#profil" aria-controls="profil" role="tab" data-toggle="tab">Profile</a></li>
+                <li><a href="#extras" aria-controls="extras" role="tab" data-toggle="tab">Extras</a></li>
+                <li><a href="#social" aria-controls="social" role="tab" data-toggle="tab">Social</a></li>
+                <li><a href="#points" aria-controls="points" role="tab" data-toggle="tab">Points</a></li>
+                <li><a href="#decathlon" aria-controls="decathlon" role="tab" data-toggle="tab">Sport</a></li>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li><a href="#roles" aria-controls="roles" role="tab" data-toggle="tab">Roles</a></li>
+                {% endif %}
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="profil">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="{{ form.civility.vars.id }}">{{ form_label(form.civility) }}</label>
+                                {{ form_widget(form.civility) }}
+                                {{ form_errors(form.civility) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.email.vars.id }}">{{ form_label(form.email) }}</label>
+                                {{ form_widget(form.email) }}
+                                {{ form_errors(form.email) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.lastname.vars.id }}">{{ form_label(form.lastname) }}</label>
+                                {{ form_widget(form.lastname) }}
+                                {{ form_errors(form.lastname) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.firstname.vars.id }}">{{ form_label(form.firstname) }}</label>
+                                {{ form_widget(form.firstname) }}
+                                {{ form_errors(form.firstname) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.plainpassword.vars.id }}">{{ form_label(form.plainpassword) }}</label>
+                                {{ form_widget(form.plainpassword) }}
+                                {{ form_errors(form.plainpassword) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.language.vars.id }}">{{ form_label(form.language) }}</label>
+                                {{ form_widget(form.language) }}
+                                {{ form_errors(form.language) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div role="tabpanel" class="tab-pane" id="extras">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="{{ form.dob.vars.id }}">{{ form_label(form.dob) }}</label>
+                                {{ form_widget(form.dob) }}
+                                {{ form_errors(form.dob) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.adresse.vars.id }}">{{ form_label(form.adresse) }}</label>
+                                {{ form_widget(form.adresse) }}
+                                {{ form_errors(form.adresse) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.adresse2.vars.id }}">{{ form_label(form.adresse2) }}</label>
+                                {{ form_widget(form.adresse2) }}
+                                {{ form_errors(form.adresse2) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.zipcode.vars.id }}">{{ form_label(form.zipcode) }}</label>
+                                {{ form_widget(form.zipcode) }}
+                                {{ form_errors(form.zipcode) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.city.vars.id }}">{{ form_label(form.city) }}</label>
+                                {{ form_widget(form.city) }}
+                                {{ form_errors(form.city) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.country.vars.id }}">{{ form_label(form.country) }}</label>
+                                {{ form_widget(form.country) }}
+                                {{ form_errors(form.country) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.decathlonCardId.vars.id }}">{{ form_label(form.decathlonCardId) }}</label>
+                                {{ form_widget(form.decathlonCardId) }}
+                                {{ form_errors(form.decathlonCardId) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.description.vars.id }}">{{ form_label(form.description) }}</label>
+                                {{ form_widget(form.description) }}
+                                {{ form_errors(form.description) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.howItWorkDisplay.vars.id }}">{{ form_label(form.howItWorkDisplay) }}</label>
+                                {{ form_widget(form.howItWorkDisplay) }}
+                                {{ form_errors(form.howItWorkDisplay) }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="social">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="{{ form.idFacebook.vars.id }}">{{ form_label(form.idFacebook) }}</label>
+                                {{ form_widget(form.idFacebook) }}
+                                {{ form_errors(form.idFacebook) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.idTwitter.vars.id }}">{{ form_label(form.idTwitter) }}</label>
+                                {{ form_widget(form.idTwitter) }}
+                                {{ form_errors(form.idTwitter) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.idGoogleplus.vars.id }}">{{ form_label(form.idGoogleplus) }}</label>
+                                {{ form_widget(form.idGoogleplus) }}
+                                {{ form_errors(form.idGoogleplus) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.twitterOauth.vars.id }}">{{ form_label(form.twitterOauth) }}</label>
+                                {{ form_widget(form.twitterOauth) }}
+                                {{ form_errors(form.twitterOauth) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.twitterOauthSecret.vars.id }}">{{ form_label(form.twitterOauthSecret) }}</label>
+                                {{ form_widget(form.twitterOauthSecret) }}
+                                {{ form_errors(form.twitterOauthSecret) }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div role="tabpanel" class="tab-pane" id="points">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="{{ form.nbPointsCurrent.vars.id }}">{{ form_label(form.nbPointsCurrent) }}</label>
+                                {{ form_widget(form.nbPointsCurrent) }}
+                                {{ form_errors(form.nbPointsCurrent) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.nbPointsTotal.vars.id }}">{{ form_label(form.nbPointsTotal) }}</label>
+                                {{ form_widget(form.nbPointsTotal) }}
+                                {{ form_errors(form.nbPointsTotal) }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="decathlon">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="{{ form.favSport1.vars.id }}">{{ form_label(form.favSport1) }}</label>
+                                {{ form_widget(form.favSport1) }}
+                                {{ form_errors(form.favSport1) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.favSport2.vars.id }}">{{ form_label(form.favSport2) }}</label>
+                                {{ form_widget(form.favSport2) }}
+                                {{ form_errors(form.favSport2) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.favSport3.vars.id }}">{{ form_label(form.favSport3) }}</label>
+                                {{ form_widget(form.favSport3) }}
+                                {{ form_errors(form.favSport3) }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <div role="tabpanel" class="tab-pane" id="roles">
+                    <div class="box box-primary">
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <label for="{{ form.roles.vars.id }}">{{ form_label(form.roles) }}</label>
+                                {{ form_widget(form.roles) }}
+                                {{ form_errors(form.roles) }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+
+        </div>
+        {{ form_widget(form._token) }}
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <button class="btn btn-success btn-lg"><i class="fa fa-check"></i> Valid</button>
+        {% endif %}
+    </form>
+    </div>
+    </div>
+{% endblock %}
+
+{% block callback_popin %}
+
+    <script type="text/javascript">
+
+        $('document').ready(function()
+        {
+            $('.date').datepicker({
+                buttonImageOnly: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                yearRange: "-90:+1"
+            });
+
+            {% if is_granted('ROLE_SUPER_ADMIN')==false %}
+            $('#modal-ajax input').attr("disabled","disabled");
+            $('#modal-ajax select').attr("disabled","disabled");
+            $('#modal-ajax textarea').attr("disabled","disabled");
+            {% endif %}
+
+        });
+
+
+        function callBackAfterSubmit()
+        {
+            table.draw();
+        }
+
+    </script>
+
+{% endblock %}

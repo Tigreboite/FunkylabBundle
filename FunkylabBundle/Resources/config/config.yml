@@ -1,0 +1,66 @@
+twig:
+    globals:
+        froala_editor: test
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Tigreboite\FunkylabBundle\Entity\User
+
+knp_menu:
+    twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
+        template: knp_menu.html.twig
+    templating: false # if true, enables the helper for PHP templates
+    default_renderer: twig # The renderer to use, list is also available by default
+
+stof_doctrine_extensions:
+    default_locale: %locale%
+    translation_fallback: true
+    orm:
+        default:
+            sluggable: true
+            translatable: true
+            timestampable: true
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path:
+            cache_prefix: medias/cache
+
+    filter_sets:
+        cache: ~
+        thumb_100x100:
+            quality: 95
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound, allow_upscale: true }
+        thumb_24x24:
+            quality: 95
+            filters:
+                thumbnail: { size: [24, 24], mode: outbound, allow_upscale: true }
+        thumb_50x50:
+            quality: 95
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound, allow_upscale: true }
+        thumb_185x185:
+            quality: 95
+            filters:
+                thumbnail: { size: [185, 185], mode: outbound, allow_upscale: true }
+
+liip_url_auto_converter:
+    linkclass:
+    target: _blank
+    debugmode: false
+
+# app/config/config.yml
+lexik_translation:
+    fallback_locale: en      # (required) default locale to use
+    managed_locales: [fr,pt_br,en,es]    # (required) locales that the bundle have to manage
+    base_layout:     "TigreboiteFunkylabBundle::layout.html.twig" # layout used with the translation edition template
+    use_yml_tree:    true    # if "true" we will print a nice tree in the yml source files. It is a little slower.
+    grid_input_type: textarea     # define field type used in the grid (text|textarea)
+    storage:
+        type: orm                   # where to store translations: "orm", "mongodb" or "propel"
+        object_manager: default    # The name of the entity / document manager which uses different connection (see: http://symfony.com/doc/current/cookbook/doctrine/multiple_entity_managers.html)
+    resources_registration:
+        type:                 all     # resources type to register: "all", "files" or "database"
+        managed_locales_only: true    # will only load resources for managed locales

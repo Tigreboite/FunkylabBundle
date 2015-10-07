@@ -8,102 +8,125 @@ Edit `symfony/composer.json` file to add this bundle package:
 
 ```yml
 "require": {
-    ...
     "tigreboite/funkylab-bundle": "dev-master"
 },
 ```
 
-Run `php composer.phar update tigreboite/funkylab-bundle`
+And do a composer update
 
-Then, add the bundle into `symfony/app/AppKernel.php`:
+Then, add the new bundles into `symfony/app/AppKernel.php`:
 
 ```php
-<?php
-    public function registerBundles()
-    {
-        $bundles = array(
-            ...
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
-            new Tigreboite\FunkylabBundle\TigreboiteFunkylabBundle(),
-        );
-
+public function registerBundles()
+{
+    $bundles = array(
         ...
+        new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+        new FOS\UserBundle\FOSUserBundle(),
+        new Tigreboite\FunkylabBundle\TigreboiteFunkylabBundle(),
+        new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+        new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+        new JMS\SerializerBundle\JMSSerializerBundle(),
+        new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+        new Liip\ImagineBundle\LiipImagineBundle(),
+        new Liip\UrlAutoConverterBundle\LiipUrlAutoConverterBundle(),
+        new JMS\TranslationBundle\JMSTranslationBundle(),
+        new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
+        new Lexik\Bundle\TranslationBundle\LexikTranslationBundle(),
+        new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+        new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
+    );
 
-        return $bundles;
-    }
+    ...
+
+    return $bundles;
+}
 ```
 
-Add the FunkylabBundle and FOS user-bundle routing file in your symfony/app/config/routing.yml
+edit config.yml and update imports variable
 
-```yml
-...
-#Funkylab
-tigreboite_funkylab:
-    resource: "@TigreboiteFunkylabBundle/Controller/"
-    type:     annotation
-    prefix:   /funkylab/
-
-#FOS
-fos_user_security:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+```
+imports:
+    - { resource: parameters.yml }
+    - { resource: services.yml }
+    - { resource: "@TigreboiteFunkylabBundle/Resources/config/security.yml" }
+    - { resource: "@TigreboiteFunkylabBundle/Resources/config/config.yml" }
 ```
 
-###Edit the file /app/config/security.yml
+###Medias
 
-```yml
-security:
-    encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-        Tigreboite\FunkylabBundle\Entity\User: sha512
+create a directory images
 
-    providers:
-        user_db:
-            entity: { class: Tigreboite\FunkylabBundle\Entity\User, property: username }
-
-    firewalls:
-        dev:
-            pattern:   ^/(_(profiler|wdt)|css|images|js)/
-            security:  false
-            anonymous: true
-
-        secured_area:
-            pattern:    ^/
-            form_login:
-                login_path: funkylab_login
-                provider:   user_db
-                check_path: fos_user_security_check
-                default_target_path: funkylab_home
-            logout:
-                path:   fos_user_security_logout
-                target: funkylab_home
-            anonymous:  true
-
-    access_control:
-        # Login, password request
-        - { path: ^/.*/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Customer access
-        - { path: ^/.*, role:  [ROLE_USER, ROLE_ADMIN]}
-
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+```
+$ mkdir web/images
+$ chmod -R 777 web/images
 ```
 
 ##Console
 
 ```
 $ php app/console assets:install web --symlink
-$ php app/console doctrine:database:create
-$ php app/console doctrine:schema:create
+$ php app/console d:s:u --force
 $ php app/console doctrine:fixtures:load
 ```
+
 #Start
 
-http://domain/funkylab
+http://yourwebsite.local/admin/login
 
 login : admin@admin.com
 pass  : admin
+
+#Documentation
+
+##Role and menu
+
+To extend the admin, create a controller in your own bundle :
+
+```php
+use Tigreboite\FunkylabBundle\Annotation\Menu;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+```
+
+Configure with annotation your action's controller  
+
+```php
+/**
+ * Lists all Language entities.
+ *
+ * @Route("/", name="admin_language")
+ * @Method("GET")
+ * @Template()
+ * @Menu("Languages", dataType="string", icon="fa-flag", groupe="CMS")
+ * @Security("has_role('ROLE_SUPER_ADMIN') || has_role('ROLE_MODERATOR')")
+ */
+ public function indexAction()
+ {
+     return array();
+ }
+```
+
+Menu : name, icon : image to display in admin, groupe, tab where to put this action
+Security : Role ROLE_MODERATOR, ROLE_BRAND, ROLE_USER, ROLE_ADMIN
+
+don't forget to add the global route to your controller to be included in the admin.
+
+```php
+/**
+ * Language controller.
+ *
+ * @Route("/admin/language")
+ */
+class LanguageController extends Controller
+```
+
+By default the template twig need to be in
+
+```
+src/AppBundle/Resources/views/yourcontroller/action/index.html.twig
+```
+
+or you can set your template name and path in annotation
+
 
 

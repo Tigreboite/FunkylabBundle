@@ -1,0 +1,77 @@
+.sortable-bloc,.sortable { list-style-type: none; margin: 0; padding: 0; }
+.sortable-bloc li,.sortable li { margin: 0; padding:0;}
+.sortable-bloc li span,.sortable li span { position: absolute; margin-left: 5px; margin-top:5px;}
+.sortable-bloc table,.sortable table{margin:0;padding:0;}
+.blocs{
+    display:none;
+    padding: 15px;
+    margin-bottom: 0;
+}
+.blocs .btn-edit-bloc {
+    margin-bottom: 10px;
+}
+.blocs .sortable-bloc li ,.blocs .sortable li {
+    margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em;
+}
+.blocs .sortable-bloc li .btn,.blocs .sortable li .btn
+{
+    color:white;
+}
+.blocs img
+{
+    width:24px;
+    height:24px;
+}
+li.ui-sortable-helper{
+    cursor:move;
+}
+.ui-state-highlight {
+    height: 3.5em; line-height: 3.2em;
+}
+
+body .modal-dialog {
+    width: 70%;
+}
+
+#es_samsungcsbundle_application_introduction,
+#es_samsungcsbundle_bloc_text {
+    height: 250px;
+}
+
+.table th.action {
+
+}
+
+div.modal-loader {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+div.modal-loader .overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: lightgrey;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    z-index: 1000;
+}
+
+div.modal-loader i {
+    font-size: 40px;
+    color: black;
+    top: 50%;
+    position: absolute;
+    z-index: 1001;
+    left: 50%;
+}
+
+
+/* project */
+form.newproject .project, form.newproject .user {
+    display: none;
+}
+

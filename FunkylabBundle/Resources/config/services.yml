@@ -1,0 +1,37 @@
+services:
+    # the menu builder service. Can be used for several menus
+    tigreboitefunkylab.menu_builder:
+        class: Tigreboite\FunkylabBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+
+    # Main Menu
+    tigreboitefunkylab.menu.main_menu:
+        class: Knp\Menu\MenuItem
+        factory_service: tigreboitefunkylab.menu_builder
+        factory_method: createMainMenu
+        arguments: ["@request", @annotation_reader,@service_container]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: main_menu }
+
+    # Breadcrumb
+    tigreboitefunkylab.menu.breadcrumb:
+        class: Knp\Menu\MenuItem
+        factory_service: tigreboitefunkylab.menu_builder
+        factory_method: createBreadcrumbMenu
+        arguments: ["@request", @annotation_reader,@service_container]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: breadcrumb }
+
+    gedmo.listener.sluggable:
+        class: Gedmo\Sluggable\SluggableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default, priority: 1 }
+        calls:
+            - [ setAnnotationReader, [ @annotation_reader ] ]
+
+    tigreboitefunkylab.file_name_generator:
+        class: Tigreboite\FunkylabBundle\Service\UniqueFileNameGeneratorService
+        arguments:
+            - "@cocur_slugify"

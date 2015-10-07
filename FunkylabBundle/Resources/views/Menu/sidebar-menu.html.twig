@@ -1,0 +1,24 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block label %}
+    {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}
+         {{ item.label|raw }}{% else %}{{ item.label }}
+    {% endif %}
+{% endblock %}
+
+{% block linkElement %}
+    {% import "knp_menu.html.twig" as macros %}
+    {% if item.extras.treeview is defined and item.extras.treeview %}
+        <a href="#"{{ macros.attributes(item.linkAttributes) }}>
+            <i class="{{ item.getExtra('class_icon') }}"></i>
+            <span>{{ block('label') }}</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+    {% else %}
+        <a href="{{ item.uri }}"{{ macros.attributes(item.linkAttributes) }}>
+            <i class="{{ item.getExtra('class_icon') }}"></i>
+            {{ block('label') }}
+        </a>
+    {% endif %}
+
+{% endblock %}

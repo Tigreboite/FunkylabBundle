@@ -1,0 +1,67 @@
+{% extends ajax
+    ? 'TigreboiteFunkylabBundle::popin.html.twig' 
+    : 'TigreboiteFunkylabBundle::layout.html.twig' %}
+
+{% block content -%}
+
+
+    {% if app.request.get('_route') == "admin_blogcomment_edit"  %}
+        {% set edit_mode = true %}
+    {% else %}
+        {% set edit_mode = false %}
+    {% endif %}
+
+
+    <div class="modal-body">
+            <div class="row">
+                <form method="post" action="{% if edit_mode %}{{ path('admin_blogcomment_update',{'id':entity.id}) }}{% else %}{{ path('admin_blogcomment_create') }}{% endif %}" role="form">
+
+                    {% if edit_mode %}
+                        <input type="hidden" name="_method" value="PUT">
+                    {% endif %}
+
+                    <div class="box box-primary">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="{{ form.comment.vars.id }}">Comment</label>
+                            {{ form_widget(form.comment, {'attr':{'class': 'form-control'}})|htmldecode }}
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="{{ form.blog.vars.id }}">Blog</label>
+                            {{ form_widget(form.blog, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="{{ form.user.vars.id }}">User</label>
+                            {{ form_widget(form.user, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="{{ form.language.vars.id }}">Language</label>
+                            {{ form_widget(form.language, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    {{ form_widget(form._token) }}
+                </div>
+                <button class="btn btn-success btn-lg"><i class="fa fa-check"></i> Valid</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block callback_popin %}
+
+    <script type="text/javascript">
+        function callBackAfterSubmit()
+        {
+            table.draw();
+        }
+
+    </script>
+
+{% endblock %}
