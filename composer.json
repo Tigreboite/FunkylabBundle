@@ -29,5 +29,6 @@
   },
   "autoload": {
     "psr-0": { "Tigreboite\\FunkylabBundle": "" }
-  }
+  },
+  "target-dir": "Tigreboite/FunkylabBundle"
 }
