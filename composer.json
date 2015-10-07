@@ -17,7 +17,6 @@
     "knplabs/knp-menu-bundle": "~2.0",
     "friendsofsymfony/jsrouting-bundle": "1.5.3",
     "jms/serializer-bundle": "0.12.0",
-    "extreme-sensio/webservices-bundle": "dev-master",
     "stof/doctrine-extensions-bundle": "dev-master",
     "liip/imagine-bundle": "dev-master",
     "liip/url-auto-converter-bundle": "dev-master",
