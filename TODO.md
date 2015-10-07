@@ -2,13 +2,7 @@ Funkylab 5
 
 ###Features :
 
-	* easy to translate
-	* extendable by plugin (packagist or external personnal server)
-	* easy to add feature
 	* plugins 
-		- modules (acces by role) (funkylab 3)
-			- configurable by xml, yaml, etc..
-			- launch personnal code
 			- generated from doctrine information
 				- table (datagrid) funkylab 4
 					- list
@@ -26,7 +20,9 @@ Funkylab 5
 							- textarea
 							- textfield (password, email, number, range)
 					- export (pdf, csv, html, xml)
-
+          - form singleton
+          - relation grid
+          
 				- tree (funkylab 3 et 4)
 					- order
 					- dragndrop
@@ -34,42 +30,14 @@ Funkylab 5
 
 		- system (funkylab 1)
 
-			- maintenance
-				- clear cache
-				- export database
-				- import database
-				- do something tricky
-
-			- user (datagrid)
-				- role
-				- FOSBundle
-				- configuration
-					- admin css
-					- localisation
-					- password etc..
-					- role
-
 			- file manager 
 				- multiupload
 				- preview (all file format supported)
 				- zip
 				- unzip
 
-			- language
-				- upload location file
-
 		=== A REPENSER ===
 		=== peut etre en faire le premier plugin ===
-
-		- mode website (funkylab2)
-			- billet (funkylab 2)
-				- format
-				- contenu
-					- plugins
-						- images
-						- text
-						- seo
-						- contenu from plugin (see up)
 
 			- menus (funkylab 2)	
 				- unlimited menu
@@ -79,11 +47,8 @@ Funkylab 5
 				- unlimited menu
 
 			- configuration (funkylab 2)
-				- cache
-				- clear cache
 				- select template
-				- activation website mode
-				- localisation configuration
+				- activation website mode maintenance
 				- stats
 
 ###Tools
@@ -93,15 +58,7 @@ Funkylab 5
 
 ###Commandline
 	* generate interface
-	* add plugin
-		- paramters.yml
-		- module.xml
+	* crud
 		- all in commande ex :
 			$ ./app/console funkylab:plugins:add toto --type=datagrid --entity=post
-	* remove plugin
-		- ex:
-			$ ./app/console funkylab:plugins:add toto --cached (keep generated file)
 
-###Usage :
-	* Generate all type of admin & tools
-	* Generate a tool to edit page online, and specifiy a type of content
