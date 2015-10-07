@@ -4,12 +4,8 @@ Cyril Pereira <cyril.pereira@gmail.com>
 
 ## Installation
 
-Edit `symfony/composer.json` file to add this bundle package:
-
-```yml
-"require": {
-    "tigreboite/funkylab-bundle": "dev-master"
-},
+```
+composer require tigreboite/funkylab-bundle dev-master
 ```
 
 And do a composer update
