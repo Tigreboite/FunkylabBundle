@@ -27,5 +27,8 @@
     "gedmo/doctrine-extensions": "2.3.*",
     "cocur/slugify": "^1.2"
   },
-  "psr-4": { "Tigreboite\\FunkylabBundle\\": "" }
+  "autoload": {
+    "psr-0": { "Tigreboite\\FunkylabBundle": "" }
+  },
+  "target-dir": "Tigreboite/FunkylabBundle"
 }
