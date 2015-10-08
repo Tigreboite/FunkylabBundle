@@ -23,12 +23,13 @@ abstract class Formater {
     }
 
     public function getController(){}
+
     public function getViews()
     {
         $files = array();
         $path = dirname(__FILE__)."/Resources/views/".$this->type;
         foreach (glob($path."/*.twig") as $filename) {
-            $files[basename($filename)]=file_get_contents($filename);
+            $files[basename($filename)]=$this->fixedCode(file_get_contents($filename));
         }
         return $files;
     }
@@ -71,6 +72,16 @@ abstract class Formater {
         }
 
         return $annotations;
+    }
 
+    public function fixedCode($code)
+    {
+        $code = str_replace($this->type,$this->entityName,$code);
+        $code = str_replace('_'.strtolower($this->type),"_".strtolower($this->entityName),$code);
+        $code = str_replace('/admin/'.strtolower($this->type),"/admin/".strtolower($this->entityName),$code);
+        $code = str_replace('%entity_name%',$this->entityName,$code);
+        $code = str_replace('%class_name%',strtolower($this->entityName),$code);
+        $code = str_replace('%bundle_name%',$this->bundle,$code);
+        return $code;
     }
 }

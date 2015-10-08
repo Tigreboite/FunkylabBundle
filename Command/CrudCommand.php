@@ -104,6 +104,8 @@ class CrudCommand extends ContainerAwareCommand
 
         // Generate CRUD
         $res = new GeneratorCrud($entityClass, $bundle, $type);
+        $this->output->writeln("<info>Files generated in</info> : ".$bundle);
+        $this->output->writeln($res->getFiles());
 
         // Display Timer
         $this->processEnd($timeStart);

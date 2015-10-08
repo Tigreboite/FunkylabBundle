@@ -6,13 +6,16 @@ namespace Tigreboite\FunkylabBundle\Generator;
 
 class GeneratorCrud {
 
+    private $files = array();
+
     public function __construct($entity,$bundle,$type) {
         $type = UCFirst(strtolower($type));
+        $this->bundle   = $bundle;
         $this->entityName   = explode('\\',$entity);
         $this->entityName   = end($this->entityName);
         $path = explode('vendor',dirname(__FILE__));
         $path = $path[0]."src/".$bundle."/";
-
+        $this->files = array();
         $className = 'Tigreboite\\FunkylabBundle\\Generator\\'.$type.'Formater';
         if(class_exists($className))
         {
@@ -20,7 +23,9 @@ class GeneratorCrud {
             $formater = new $className($bundle,$entity);
             $code_controller = $formater->getController($type);
 
-            file_put_contents($path."Controller/".$this->entityName."Controller.php","<?php\n".$code_controller);
+            $filename = $path."Controller/".$this->entityName."Controller.php";
+            file_put_contents($filename,"<?php\n".$code_controller);
+            $this->addFile($filename);
 
             //EntityType
 
@@ -33,6 +38,7 @@ class GeneratorCrud {
                     if(!is_dir($path."Resources/views/".$this->entityName))
                         mkdir($path."Resources/views/".$this->entityName);
                     file_put_contents($path."Resources/views/".$this->entityName."/".$filename,$body);
+                    $this->addFile($path."Resources/views/".$this->entityName."/".$filename);
                 }
             }
 
@@ -41,6 +47,16 @@ class GeneratorCrud {
         }
     }
 
+    public function addFile($filename)
+    {
+        $filename = explode($this->bundle."/",$filename);
+        $this->files[]=end($filename);
+    }
+
+    public function getFiles()
+    {
+        return $this->files;
+    }
 
 
 

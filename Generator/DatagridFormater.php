@@ -22,13 +22,7 @@ class DatagridFormater extends Formater {
         $generator = new CodeGenerator();
 
         $code = $generator->generate($class);
-        $code = str_replace('Datagrid',$this->entityName,$code);
-        $code = str_replace('_datagrid',"_".strtolower($this->entityName),$code);
-        $code = str_replace('/admin/datagrid',"/admin/".strtolower($this->entityName),$code);
-        $code = str_replace('%entity_name%',$this->entityName,$code);
-        $code = str_replace('%class_name%',strtolower($this->entityName),$code);
-        $code = str_replace('%bundle_name%',$this->bundle,$code);
-
+        $code = $this->fixedCode($code);
         return $code;
     }
 }

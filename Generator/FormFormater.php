@@ -10,9 +10,18 @@ class FormFormater extends Formater {
 
     protected $type = "Form";
 
-    protected function formatController()
+    public function getController()
     {
-        $class = parent::getController();
+        $class = PhpClass::fromReflection(new \ReflectionClass($this->classController));
 
+        $class->setQualifiedName($this->bundle.'\\Controller\\'.$this->entityName.'Controller extends Controller');
+        $class->addUseStatement($this->entity);
+        $class->addUseStatement($this->entity."Type");
+
+        $generator = new CodeGenerator();
+
+        $code = $generator->generate($class);
+        $code = $this->fixedCode($code);
+        return $code;
     }
 }
