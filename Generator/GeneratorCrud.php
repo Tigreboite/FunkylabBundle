@@ -7,7 +7,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 
 
 class GeneratorCrud {
-    private $formatter;
+
     public function __construct($entity,$bundle,$type) {
         $type = UCFirst(strtolower($type));
         $className = 'Tigreboite\\FunkylabBundle\\Generator\\'.$type.'Formater';
@@ -33,32 +33,15 @@ class GeneratorCrud {
         // fields Annotations
         foreach($reflectionClass->getProperties() as $reflectionProperty)
         {
-            $annotations = $annotationReader
-              ->getPropertyAnnotations(
-                new \ReflectionProperty($entity, $reflectionProperty->getName())
-              );
-        }
-
-        // get variables
-        $methods = $reflectionClass->getProperties();
-        foreach($methods as $m)
-        {
-            $method = new \ReflectionProperty($entity, $m->getName());
+            $variable = new \ReflectionProperty($entity, $reflectionProperty->getName());
+            $variable_annotations = $annotationReader->getPropertyAnnotations($variable);
         }
 
         // Methods Annotations
         foreach($reflectionClass->getMethods() as $reflectionMethod)
         {
-            $annotations = $annotationReader->getMethodAnnotations(
-              new \ReflectionMethod($entity, $reflectionMethod->getName())
-            );
-        }
-
-        // get Methods
-        $methods = $reflectionClass->getMethods();
-        foreach($methods as $m)
-        {
-            $method = new \ReflectionMethod($entity, $m->getName());
+            $method = new \ReflectionMethod($entity, $reflectionMethod->getName());
+            $method_annotations = $annotationReader->getMethodAnnotations($method);
         }
 
     }
