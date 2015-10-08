@@ -1,0 +1,97 @@
+{% extends ajax
+    ? 'TigreboiteFunkylabBundle::popin.html.twig' 
+    : 'TigreboiteFunkylabBundle::layout.html.twig' %}
+
+{% block content -%}
+
+	<div class="modal-body">
+            <div class="row">
+                <form method="post" action="{% if app.request.get('_route') == "admin_language_edit" %}{{ path('admin_language_update',{'id':entity.id}) }}{% else %}{{ path('admin_language_create') }}{% endif %}" role="form" enctype="multipart/form-data">
+
+        		{% if app.request.get('_route') == "admin_language_edit" %}
+        			<input type="hidden" name="_method" value="PUT">
+        		{% endif %}
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="{{ form.isenable.vars.id }}">Active</label>
+                            {{ form_widget(form.isenable, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.name.vars.id }}">Name</label>
+                            {{ form_widget(form.name, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.code.vars.id }}">Code language</label>
+                            {{ form_widget(form.code, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.flag.vars.id }}">Linked to country (code country)</label>
+                            {{ form_widget(form.flag, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group pdf-loader">
+                            <label for="picto_loader">PDF Payment</label>
+                            {{ form_widget(form.pdf_payment) }}
+                            <div id="{{ form.pdf_payment.vars.id }}-preview">
+                                {% if  entity.pdf_payment %}
+                                    <a href="/{{ entity.pdf_payment }}" target="blank" class="btn btn-default">Show file</a>
+                                {% endif %}
+                            </div>
+                            <input type="file" data-after="{{ form.pdf_payment.vars.id }}" id="picto_loader" name="images" class="input-file" data-url="{{ path('admin_language_upload') }}" />
+                        </div>
+                        <div class="form-group img-loader">
+                            <label for="picto_loader">Image</label>
+                            {{ form_widget(form.image) }}
+                            <div id="{{ form.image.vars.id }}-preview">
+                                {% if  entity.webPath %}
+                                    <img src="/{{ entity.webPath }}" style="max-width:64px" />
+                                {% endif %}
+                            </div>
+                            <input type="file" data-after="{{ form.image.vars.id }}" id="picto_loader" name="images" class="input-file" data-url="{{ path('admin_language_image_upload') }}" />
+                        </div>
+
+                    </div>
+
+                    {{ form_widget(form._token) }}
+                </div>
+                <button class="btn btn-success btn-lg"><i class="fa fa-check"></i> Valid</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block callback_popin %}
+
+    <script type="text/javascript">
+        function callBackAfterSubmit()
+        {
+            table.draw();
+        }
+
+        $('.pdf-loader .input-file').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                var filename = data.result.filename;
+                var path = data.result.path;
+                var _div = $('#'+$(this).data('after')+"-preview");
+                _div.html('<a href="/'+path+'" target="blank" class="btn btn-default">Show file</a>');
+
+                $('#'+$(this).data('after')).val(path);
+            }
+        });
+
+        $('.img-loader .input-file').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                var filename = data.result.filename;
+                var path = data.result.path;
+                var _div = $('#'+$(this).data('after')+"-preview");
+                _div.html('<img src="/'+path+'" style="width:64px" />');
+
+                $('#'+$(this).data('after')).val(path);
+            }
+        });
+
+    </script>
+
+{% endblock %}
