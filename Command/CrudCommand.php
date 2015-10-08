@@ -6,21 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\HttpFoundation\Request;
-
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
-
 use Tigreboite\FunkylabBundle\Generator\GeneratorCrud;
 
 class CrudCommand extends ContainerAwareCommand
 {
     private $em;
-    private $emDefault;
-    private $router;
-    private $mailer;
-    private $logger;
     private $verbose;
     private $output;
 
@@ -40,15 +30,12 @@ class CrudCommand extends ContainerAwareCommand
         $timeStart = microtime(true);
 
         $this->output       = $output;
-        $this->logger       = $this->getContainer()->get('logger');
-        $this->router       = $this->getContainer()->get('router');
         $this->em           = $this->getContainer()->get('doctrine');
+        $this->verbose      = $input->getOption('verbose');
         $type               = $input->getOption('type');
         $entityClass        = $input->getOption('entity');
         $bundle             = $input->getOption('bundle');
-        $this->verbose      = $input->getOption('verbose');
-
-        $dialog = $this->getHelper('dialog');
+        $dialog             = $this->getHelper('dialog');
 
         // Get Entity
         if(!$entityClass)
@@ -115,25 +102,18 @@ class CrudCommand extends ContainerAwareCommand
             $type = implode(', ', $selectedColors);
         }
 
+        // Generate CRUD
         $res = new GeneratorCrud($entityClass, $bundle, $type);
 
         // Display Timer
         $this->processEnd($timeStart);
     }
 
-
-
     private function processEnd($timeStart)
     {
         $timeEnd = microtime(true);
         $generationTime = $timeEnd - $timeStart;
-        $this->ouputConsole('<info>Done in ' . date('i \m\i\n s \s\e\c', $generationTime) .'</info>');
-    }
-
-    private function ouputConsole($txt)
-    {
-        if($this->verbose)
-            $this->output->writeln($txt);
+        $this->output->writeln('<info>Done in ' . date('i \m\i\n s \s\e\c', $generationTime) .'</info>');
     }
 
 }
