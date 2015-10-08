@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
+use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Annotations\AnnotationReader;
+
 class CrudCommand extends ContainerAwareCommand
 {
     private $em;
@@ -48,6 +51,7 @@ class CrudCommand extends ContainerAwareCommand
 
         $dialog = $this->getHelper('dialog');
 
+        // Get Entity
         if(!$entityClass)
         {
             $entityClass = $dialog->askAndValidate(
@@ -65,12 +69,12 @@ class CrudCommand extends ContainerAwareCommand
             $output->writeln('You enter : '.$entityClass);
         }
 
-        if ($entityClass!="" && class_exists($entityClass)) {
-            $entityBase = new $entityClass();
-        }else{
+        // Test Entity
+        if (!class_exists($entityClass)) {
             throw new \RuntimeException("Entity doesn't exist");
         }
 
+        // Get Bundle
         if(!$bundle)
         {
             $bundle = $dialog->askAndValidate(
@@ -85,6 +89,14 @@ class CrudCommand extends ContainerAwareCommand
             );
             $output->writeln('You enter : '.$bundle);
         }
+
+        // Test Bundle
+        if(!array_key_exists($bundle,$this->getContainer()->getParameter('kernel.bundles')))
+        {
+            throw new \RuntimeException("Bundle doesn't exist");
+        }
+
+        // Get Type to generate
         if(!$type)
         {
             $typeNames = array('datagrid', 'tree', 'form');
@@ -104,11 +116,55 @@ class CrudCommand extends ContainerAwareCommand
             $type = implode(', ', $selectedColors);
         }
 
-        dump($entityClass,$bundle,$type);
-
+        //Read and process annotation of the entity
+        $this->processAnnotation($bundle,$entityClass,$type);
 
         // Display Timer
         $this->processEnd($timeStart);
+    }
+
+    private function processAnnotation($bundle,$entity,$type)
+    {
+        $annotationReader = new AnnotationReader();
+        $reflectionClass = new \ReflectionClass($entity);
+
+        // Class Annotations
+        $classAnnotations = $annotationReader->getClassAnnotations($reflectionClass);
+        dump($classAnnotations);
+
+
+        // fields Annotations
+        foreach($reflectionClass->getProperties() as $reflectionProperty)
+        {
+            $annotations = $annotationReader
+              ->getPropertyAnnotations(
+                new \ReflectionProperty($entity, $reflectionProperty->getName())
+              );
+        }
+
+        // get variables
+        $methods = $reflectionClass->getProperties();
+        foreach($methods as $m)
+        {
+            $method = new \ReflectionProperty($entity, $m->getName());
+        }
+
+        // Methods Annotations
+        foreach($reflectionClass->getMethods() as $reflectionMethod)
+        {
+            $annotations = $annotationReader->getMethodAnnotations(
+              new \ReflectionMethod($entity, $reflectionMethod->getName())
+            );
+        }
+
+        // get Methods
+        $methods = $reflectionClass->getMethods();
+        foreach($methods as $m)
+        {
+            $method = new \ReflectionMethod($entity, $m->getName());
+        }
+
+
     }
 
     private function processEnd($timeStart)
