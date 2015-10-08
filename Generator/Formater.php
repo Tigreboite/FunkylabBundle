@@ -26,20 +26,22 @@ abstract class Formater {
     public function getController()
     {
         $classController = 'Tigreboite\\FunkylabBundle\\Generator\\Controller\\'.$this->type.'Controller';
-        dump($classController);
 
         $class = PhpClass::fromReflection(new \ReflectionClass($classController));
 
-        $class->setQualifiedName($this->bundle.'\\Controller\\'.$this->entityName.'Controller');
+        $class->setQualifiedName($this->bundle.'\\Controller\\'.$this->entityName.'Controller extends Controller');
         $class->addUseStatement($this->entity);
         $class->addUseStatement($this->entity."Type");
 
         $generator = new CodeGenerator();
-        $code = $generator->generate($class);
 
+        $code = $generator->generate($class);
         $code = str_replace('Datagrid',$this->entityName,$code);
+        $code = str_replace('_datagrid',"_".strtolower($this->entityName),$code);
+        $code = str_replace('/admin/datagrid',"/admin/".strtolower($this->entityName),$code);
         $code = str_replace('%entity_name%',$this->entityName,$code);
         $code = str_replace('%class_name%',strtolower($this->entityName),$code);
+        $code = str_replace('%bundle_name%',$this->bundle,$code);
 
         return $code;
     }
@@ -51,11 +53,12 @@ abstract class Formater {
     private function processAnnotation()
     {
         $annotations = array(
-            'variables'=>array(),
-            'variables_annotations'=>array(),
-            'methodes'=>array(),
-            'methodes_annotations'=>array(),
+            'variables'             => array(),
+            'variables_annotations' => array(),
+            'methodes'              => array(),
+            'methodes_annotations'  => array(),
         );
+
         $annotationReader = new AnnotationReader();
         $reflectionClass = new \ReflectionClass($this->entity);
 

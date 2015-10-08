@@ -18,19 +18,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Datagrid controller.
  *
- * @Route("/admin/%class_name%")
+ * @Route("/admin/datagrid")
  */
 class DatagridController extends Controller
 {
 
     protected $formType   = 'DatagridType';
-    protected $route_base = 'admin_%class_name%';
-    protected $repository = 'TigreboiteFunkylabBundle:%entity_name%';
+    protected $route_base = 'admin_datagrid';
+    protected $repository = '%bundle_name%:%entity_name%';
 
     /**
      * Lists all Datagrid entities.
      *
-     * @Route("/", name="admin_%class_name%")
+     * @Route("/", name="admin_datagrid")
      * @Method("GET")
      * @Template()
      * @Menu("Datagrid", dataType="string",icon="fa-flag",groupe="CMS")
@@ -44,7 +44,7 @@ class DatagridController extends Controller
     /**
      * Lists all Datagrid entities.
      *
-     * @Route("/list", name="admin_%class_name%_list", options={"expose"=true})
+     * @Route("/list", name="admin_datagrid_list", options={"expose"=true})
      * @Method("GET")
      */
     public function listAction(Request $request)
@@ -87,7 +87,7 @@ class DatagridController extends Controller
     /**
      * Creates a new Datagrid entity.
      *
-     * @Route("/", name="admin_%class_name%_create")
+     * @Route("/", name="admin_datagrid_create")
      * @Method("POST")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
@@ -113,32 +113,12 @@ class DatagridController extends Controller
         );
     }
 
-    /**
-     * Creates a form to create a Datagrid entity.
-     *
-     * @param Datagrid $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Datagrid $entity)
-    {
-        $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new $this->formType($em), $entity, array(
-            'action' => $this->generateUrl($this->route_base.'_create'),
-            'method' => 'POST',
-            'allow_extra_fields'=>true,
 
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
 
     /**
      * Displays a form to create a new Datagrid entity.
      *
-     * @Route("/new", name="admin_%class_name%_new")
+     * @Route("/new", name="admin_datagrid_new")
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
@@ -158,7 +138,7 @@ class DatagridController extends Controller
     /**
      * Displays a form to edit an existing Datagrid entity.
      *
-     * @Route("/{id}/edit", name="admin_%class_name%_edit", options={"expose"=true})
+     * @Route("/{id}/edit", name="admin_datagrid_edit", options={"expose"=true})
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
@@ -182,17 +162,34 @@ class DatagridController extends Controller
     }
 
     /**
-    * Creates a form to edit a Datagrid entity.
-    *
-    * @param Datagrid $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Datagrid $entity)
+     * Creates a form to create a Datagrid entity.
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm( $entity)
     {
         $em = $this->get('doctrine')->getManager();
         $form = $this->createForm(new $this->formType($em), $entity, array(
-            'action' => $this->generateUrl('admin_%class_name%_update', array('id' => $entity->getId())),
+          'action' => $this->generateUrl($this->route_base.'_create'),
+          'method' => 'POST',
+          'allow_extra_fields'=>true,
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+
+    /**
+    * Creates a form to edit a Datagrid entity.
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createEditForm( $entity)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $form = $this->createForm(new $this->formType($em), $entity, array(
+            'action' => $this->generateUrl('admin_datagrid_update', array('id' => $entity->getId())),
             'method' => 'PUT',
 
         ));
@@ -201,10 +198,11 @@ class DatagridController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Datagrid entity.
      *
-     * @Route("/{id}", name="admin_%class_name%_update")
+     * @Route("/{id}", name="admin_datagrid_update")
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
@@ -236,7 +234,7 @@ class DatagridController extends Controller
     /**
      * Deletes a Datagrid entity.
      *
-     * @Route("/{id}", name="admin_%class_name%_delete", options={"expose"=true})
+     * @Route("/{id}", name="admin_datagrid_delete", options={"expose"=true})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
