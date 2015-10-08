@@ -34,9 +34,9 @@ class CrudCommand extends ContainerAwareCommand
         $this->verbose      = $input->getOption('verbose');
         $type               = $input->getOption('type');
         $entityClass        = $input->getOption('entity');
+        $entityClass        = str_replace('/','\\',$entityClass);
         $bundle             = $input->getOption('bundle');
         $dialog             = $this->getHelper('dialog');
-
         // Get Entity
         if(!$entityClass)
         {

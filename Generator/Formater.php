@@ -2,9 +2,6 @@
 
 namespace Tigreboite\FunkylabBundle\Generator;
 
-use gossi\codegen\generator\CodeGenerator;
-use gossi\codegen\model\PhpClass;
-
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\AnnotationReader;
 
@@ -13,41 +10,27 @@ abstract class Formater {
     protected $bundle;
     protected $entity;
     protected $type;
+    protected $classController;
 
     public function __construct($bundle,$entity)
     {
-        $this->bundle       = $bundle;
-        $this->entity       = $entity;
-        $this->entityName   = explode('\\',$entity);
-        $this->entityName   = end($this->entityName);
-        $this->annotations  = $this->processAnnotation();
+        $this->bundle          = $bundle;
+        $this->entity          = $entity;
+        $this->entityName      = explode('\\',$entity);
+        $this->entityName      = end($this->entityName);
+        $this->annotations     = $this->processAnnotation();
+        $this->classController = 'Tigreboite\\FunkylabBundle\\Generator\\Controller\\'.$this->type.'Controller';
     }
 
-    public function getController()
-    {
-        $classController = 'Tigreboite\\FunkylabBundle\\Generator\\Controller\\'.$this->type.'Controller';
-
-        $class = PhpClass::fromReflection(new \ReflectionClass($classController));
-
-        $class->setQualifiedName($this->bundle.'\\Controller\\'.$this->entityName.'Controller extends Controller');
-        $class->addUseStatement($this->entity);
-        $class->addUseStatement($this->entity."Type");
-
-        $generator = new CodeGenerator();
-
-        $code = $generator->generate($class);
-        $code = str_replace('Datagrid',$this->entityName,$code);
-        $code = str_replace('_datagrid',"_".strtolower($this->entityName),$code);
-        $code = str_replace('/admin/datagrid',"/admin/".strtolower($this->entityName),$code);
-        $code = str_replace('%entity_name%',$this->entityName,$code);
-        $code = str_replace('%class_name%',strtolower($this->entityName),$code);
-        $code = str_replace('%bundle_name%',$this->bundle,$code);
-
-        return $code;
-    }
-
+    public function getController(){}
     public function getViews()
     {
+        $files = array();
+        $path = dirname(__FILE__)."/Resources/views/".$this->type;
+        foreach (glob($path."/*.twig") as $filename) {
+            $files[basename($filename)]=file_get_contents($filename);
+        }
+        return $files;
     }
 
     private function processAnnotation()
