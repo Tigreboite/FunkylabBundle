@@ -12,8 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
-use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Annotations\AnnotationReader;
+use Tigreboite\FunkylabBundle\Generator\GeneratorCrud;
 
 class CrudCommand extends ContainerAwareCommand
 {
@@ -116,56 +115,13 @@ class CrudCommand extends ContainerAwareCommand
             $type = implode(', ', $selectedColors);
         }
 
-        //Read and process annotation of the entity
-        $this->processAnnotation($bundle,$entityClass,$type);
+        $res = new GeneratorCrud($entityClass, $bundle, $type);
 
         // Display Timer
         $this->processEnd($timeStart);
     }
 
-    private function processAnnotation($bundle,$entity,$type)
-    {
-        $annotationReader = new AnnotationReader();
-        $reflectionClass = new \ReflectionClass($entity);
 
-        // Class Annotations
-        $classAnnotations = $annotationReader->getClassAnnotations($reflectionClass);
-        dump($classAnnotations);
-
-
-        // fields Annotations
-        foreach($reflectionClass->getProperties() as $reflectionProperty)
-        {
-            $annotations = $annotationReader
-              ->getPropertyAnnotations(
-                new \ReflectionProperty($entity, $reflectionProperty->getName())
-              );
-        }
-
-        // get variables
-        $methods = $reflectionClass->getProperties();
-        foreach($methods as $m)
-        {
-            $method = new \ReflectionProperty($entity, $m->getName());
-        }
-
-        // Methods Annotations
-        foreach($reflectionClass->getMethods() as $reflectionMethod)
-        {
-            $annotations = $annotationReader->getMethodAnnotations(
-              new \ReflectionMethod($entity, $reflectionMethod->getName())
-            );
-        }
-
-        // get Methods
-        $methods = $reflectionClass->getMethods();
-        foreach($methods as $m)
-        {
-            $method = new \ReflectionMethod($entity, $m->getName());
-        }
-
-
-    }
 
     private function processEnd($timeStart)
     {
