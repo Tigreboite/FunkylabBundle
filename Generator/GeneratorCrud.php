@@ -11,14 +11,12 @@ class GeneratorCrud {
     public function __construct($entity,$bundle,$type) {
         $type = UCFirst(strtolower($type));
         $className = 'Tigreboite\\FunkylabBundle\\Generator\\'.$type.'Formater';
-        dump($className);
         if(class_exists($className))
         {
-
             $this->processAnnotation($bundle,$entity,$type);
-
             $formater = new $className($bundle,$entity);
             $controller = $formater->getController($type);
+            dump($controller);
         }else{
             throw new \RuntimeException($type." format doesn't exist");
         }
@@ -31,8 +29,6 @@ class GeneratorCrud {
 
         // Class Annotations
         $classAnnotations = $annotationReader->getClassAnnotations($reflectionClass);
-        dump($classAnnotations);
-
 
         // fields Annotations
         foreach($reflectionClass->getProperties() as $reflectionProperty)

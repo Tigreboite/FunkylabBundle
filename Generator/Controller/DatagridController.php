@@ -8,29 +8,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Tigreboite\FunkylabBundle\Entity\Language;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-//use Tigreboite\FunkylabBundle\Form\LanguageType;
+//use Tigreboite\FunkylabBundle\Entity\Datagrid;
+//use Tigreboite\FunkylabBundle\Form\DatagridType;
 
 /**
- * Language controller.
+ * Datagrid controller.
  *
- * @Route("/admin/datagrid")
+ * @Route("/admin/%class_name%")
  */
 class DatagridController extends Controller
 {
 
     protected $formType   = 'DatagridType';
-    protected $route_base = 'admin_datagrid';
-    protected $repository = 'TigreboiteFunkylabBundle:Language';
+    protected $route_base = 'admin_%class_name%';
+    protected $repository = 'TigreboiteFunkylabBundle:%entity_name%';
 
     /**
-     * Lists all Language entities.
+     * Lists all Datagrid entities.
      *
-     * @Route("/", name="admin_datagrid")
+     * @Route("/", name="admin_%class_name%")
      * @Method("GET")
      * @Template()
      * @Menu("Datagrid", dataType="string",icon="fa-flag",groupe="CMS")
@@ -42,9 +42,9 @@ class DatagridController extends Controller
     }
 
     /**
-     * Lists all Language entities.
+     * Lists all Datagrid entities.
      *
-     * @Route("/list", name="admin_datagrid_list", options={"expose"=true})
+     * @Route("/list", name="admin_%class_name%_list", options={"expose"=true})
      * @Method("GET")
      */
     public function listAction(Request $request)
@@ -87,13 +87,13 @@ class DatagridController extends Controller
     /**
      * Creates a new Datagrid entity.
      *
-     * @Route("/", name="admin_datagrid_create")
+     * @Route("/", name="admin_%class_name%_create")
      * @Method("POST")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Language();
+        $entity = new Datagrid();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -114,13 +114,13 @@ class DatagridController extends Controller
     }
 
     /**
-     * Creates a form to create a Language entity.
+     * Creates a form to create a Datagrid entity.
      *
-     * @param Language $entity The entity
+     * @param Datagrid $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Language $entity)
+    private function createCreateForm(Datagrid $entity)
     {
         $em = $this->get('doctrine')->getManager();
         $form = $this->createForm(new $this->formType($em), $entity, array(
@@ -136,15 +136,15 @@ class DatagridController extends Controller
     }
 
     /**
-     * Displays a form to create a new Language entity.
+     * Displays a form to create a new Datagrid entity.
      *
-     * @Route("/new", name="admin_datagrid_new")
+     * @Route("/new", name="admin_%class_name%_new")
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
     public function newAction(Request $request)
     {
-        $entity = new Language();
+        $entity = new Datagrid();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -156,9 +156,9 @@ class DatagridController extends Controller
 
 
     /**
-     * Displays a form to edit an existing Language entity.
+     * Displays a form to edit an existing Datagrid entity.
      *
-     * @Route("/{id}/edit", name="admin_datagrid_edit", options={"expose"=true})
+     * @Route("/{id}/edit", name="admin_%class_name%_edit", options={"expose"=true})
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
@@ -169,7 +169,7 @@ class DatagridController extends Controller
         $entity = $em->getRepository($this->repository)->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Language entity.');
+            throw $this->createNotFoundException('Unable to find Datagrid entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -182,17 +182,17 @@ class DatagridController extends Controller
     }
 
     /**
-    * Creates a form to edit a Language entity.
+    * Creates a form to edit a Datagrid entity.
     *
-    * @param Language $entity The entity
+    * @param Datagrid $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Language $entity)
+    private function createEditForm(Datagrid $entity)
     {
         $em = $this->get('doctrine')->getManager();
         $form = $this->createForm(new $this->formType($em), $entity, array(
-            'action' => $this->generateUrl('admin_datagrid_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_%class_name%_update', array('id' => $entity->getId())),
             'method' => 'PUT',
 
         ));
@@ -202,9 +202,9 @@ class DatagridController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Language entity.
+     * Edits an existing Datagrid entity.
      *
-     * @Route("/{id}", name="admin_datagrid_update")
+     * @Route("/{id}", name="admin_%class_name%_update")
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
@@ -236,7 +236,7 @@ class DatagridController extends Controller
     /**
      * Deletes a Datagrid entity.
      *
-     * @Route("/{id}", name="admin_datagrid_delete", options={"expose"=true})
+     * @Route("/{id}", name="admin_%class_name%_delete", options={"expose"=true})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
