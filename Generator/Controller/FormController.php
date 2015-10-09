@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Code by Cyril Pereira
+ * Extreme-Sensio 2015
+ */
 namespace Tigreboite\FunkylabBundle\Generator\Controller;
 
 use Symfony\Component\HttpFoundation\Response;

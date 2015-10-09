@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Code by Cyril Pereira
+ * Extreme-Sensio 2015
+ */
 namespace Tigreboite\FunkylabBundle\Generator\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -228,9 +231,9 @@ class TreeController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'ajax'   => $request->isXmlHttpRequest()
         );
     }
     /**

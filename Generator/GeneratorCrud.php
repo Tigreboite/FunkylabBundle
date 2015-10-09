@@ -24,7 +24,7 @@ class GeneratorCrud {
             $code_controller = $formater->getController($type);
 
             $filename = $path."Controller/".$this->entityName."Controller.php";
-            file_put_contents($filename,"<?php\n".$code_controller);
+            file_put_contents($filename,$code_controller);
             $this->addFile($filename);
 
             //EntityType

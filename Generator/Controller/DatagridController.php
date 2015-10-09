@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Code by Cyril Pereira, Julien Hay
+ * Extreme-Sensio 2015
+ */
 namespace Tigreboite\FunkylabBundle\Generator\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -11,9 +14,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Tigreboite\FunkylabBundle\Entity\Datagrid;
+use Tigreboite\FunkylabBundle\Form\DatagridType;
 
-//use Tigreboite\FunkylabBundle\Entity\Datagrid;
-//use Tigreboite\FunkylabBundle\Form\DatagridType;
 
 /**
  * Datagrid controller.
@@ -34,7 +37,7 @@ class DatagridController extends Controller
      * @Method("GET")
      * @Template()
      * @Menu("Datagrid", dataType="string",icon="fa-flag",groupe="CMS")
-     * @Security("has_role('ROLE_SUPER_ADMIN') || has_role('ROLE_MODERATOR')")
+     * %security_roles%
      */
     public function indexAction()
     {
@@ -166,7 +169,7 @@ class DatagridController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm( $entity)
+    private function createCreateForm(Datagrid $entity)
     {
         $em = $this->get('doctrine')->getManager();
         $form = $this->createForm(new $this->formType($em), $entity, array(
@@ -185,7 +188,7 @@ class DatagridController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm( $entity)
+    private function createEditForm(Datagrid $entity)
     {
         $em = $this->get('doctrine')->getManager();
         $form = $this->createForm(new $this->formType($em), $entity, array(
