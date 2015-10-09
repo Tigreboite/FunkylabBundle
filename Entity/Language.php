@@ -58,11 +58,6 @@ class Language
     private $flag;
 
     /**
-     * @ORM\Column(name="pdf_payment", type="string", length=255, nullable=true)
-     */
-    public $pdf_payment;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
@@ -173,30 +168,6 @@ class Language
         return $this->isenable;
     }
 
-
-    /**
-     * Set file_payment
-     *
-     * @param string $filePayment
-     * @return Language
-     */
-    public function setFilePayment($filePayment)
-    {
-        $this->file_payment = $filePayment;
-
-        return $this;
-    }
-
-    /**
-     * Get file_payment
-     *
-     * @return string
-     */
-    public function getFilePayment()
-    {
-        return $this->file_payment;
-    }
-
     /**
      * Get id
      *
@@ -208,57 +179,10 @@ class Language
     }
 
     /**
-     * Set path
-     *
-     * @param string $path
-     * @return Language
-     */
-    public function setPath($path)
-    {
-        $this->path_payment = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path_payment;
-    }
-
-
-    /**
-     * Set pdf_payment
-     *
-     * @param string $pdfPayment
-     * @return Language
-     */
-    public function setPdfPayment($pdfPayment)
-    {
-        $this->pdf_payment = $pdfPayment;
-
-        return $this;
-    }
-
-    /**
-     * Get pdf_payment
-     *
-     * @return string
-     */
-    public function getPdfPayment()
-    {
-        return $this->pdf_payment;
-    }
-
-    /**
      * Set image
      *
      * @param string $image
-     * @return Idea
+     * @return Language
      */
     public function setImage($image)
     {
