@@ -22,9 +22,38 @@ abstract class Formater {
         $this->classController = 'Tigreboite\\FunkylabBundle\\Generator\\Controller\\'.$this->type.'Controller';
     }
 
-    public function getController(){
-        $codeController = file_get_contents(dirname(__FILE__)."/Controller/".$this->type."Controller.php");
-        return $this->fixedCode($codeController);
+    public function getController()
+    {
+        $code = file_get_contents(dirname(__FILE__)."/Controller/".$this->type."Controller.php");
+
+        $repoBundle = explode('\\',$this->entity);
+        unset($repoBundle[count($repoBundle)-1]);
+        unset($repoBundle[count($repoBundle)-1]);
+        $repoBundle = implode('',$repoBundle);
+
+        $code = str_replace('Tigreboite\FunkylabBundle\Form\DatagridType',$this->bundle.'\\Form\\'.$this->entityName."Type",$code);
+        $code = str_replace('Tigreboite\FunkylabBundle\Entity\Datagrid',$this->bundle.'\\Entity\\'.$this->entityName,$code);
+        $code = str_replace('TigreboiteFunkylabBundle',$repoBundle,$code);
+        $code = str_replace('Tigreboite\FunkylabBundle\Generator',$this->bundle,$code);
+        $code = str_replace('_'.strtolower($this->type),"_".strtolower($this->entityName),$code);
+        $code = str_replace('/admin/'.strtolower($this->type),"/admin/".strtolower($this->entityName),$code);
+        $code = str_replace('%entity_name%',$this->entityName,$code);
+        $code = str_replace('%class_name%',strtolower($this->entityName),$code);
+        $code = str_replace('%bundle_name%',$this->bundle,$code);
+        $code = str_replace('%security_roles%','@Security("has_role(\'ROLE_MODERATOR\') || has_role(\'ROLE_SUPER_ADMIN\')")',$code);
+        $code = str_replace($this->type,$this->entityName,$code);
+
+        return $code;
+    }
+
+    public function getFormType()
+    {
+        $code = file_get_contents(dirname(__FILE__)."/Form/DataType.php");
+        $code = str_replace('%entity_name%',UCFirst(strtolower($this->entityName)),$code);
+        $code = str_replace('%bundle_name%',$this->bundle,$code);
+        $code = str_replace('%bundle_name_entity_name%',strtolower($this->bundle."_".$this->entityName),$code);
+        $code = str_replace('DataType',UCFirst(strtolower($this->entityName))."Type",$code);
+        return $code;
     }
 
     public function getViews()
@@ -84,27 +113,4 @@ abstract class Formater {
         return $annotations;
     }
 
-    public function fixedCode($code)
-    {
-        $repoBundle = explode('\\',$this->entity);
-        unset($repoBundle[count($repoBundle)-1]);
-        unset($repoBundle[count($repoBundle)-1]);
-        $repoBundle = implode('',$repoBundle);
-
-        $code = str_replace('Tigreboite\FunkylabBundle\Form\DatagridType',$this->bundle.'\\Form\\'.$this->entityName."Type",$code);
-        $code = str_replace('Tigreboite\FunkylabBundle\Entity\Datagrid',$this->bundle.'\\Entity\\'.$this->entityName,$code);
-        $code = str_replace('TigreboiteFunkylabBundle',$repoBundle,$code);
-        $code = str_replace('Tigreboite\FunkylabBundle\Generator',$this->bundle,$code);
-        $code = str_replace('_'.strtolower($this->type),"_".strtolower($this->entityName),$code);
-        $code = str_replace('/admin/'.strtolower($this->type),"/admin/".strtolower($this->entityName),$code);
-        $code = str_replace('%entity_name%',$this->entityName,$code);
-        $code = str_replace('%class_name%',strtolower($this->entityName),$code);
-        $code = str_replace('%bundle_name%',$this->bundle,$code);
-        $code = str_replace('%security_roles%','@Security("has_role(\'ROLE_MODERATOR\') || has_role(\'ROLE_SUPER_ADMIN\')")',$code);
-        $code = str_replace($this->type,$this->entityName,$code);
-
-
-
-        return $code;
-    }
 }

@@ -19,15 +19,21 @@ class GeneratorCrud {
         $className = 'Tigreboite\\FunkylabBundle\\Generator\\'.$type.'Formater';
         if(class_exists($className))
         {
-            //Controller
             $formater = new $className($bundle,$entity);
-            $code_controller = $formater->getController($type);
 
+            //Controller
+            $code_controller = $formater->getController($type);
             $filename = $path."Controller/".$this->entityName."Controller.php";
             file_put_contents($filename,$code_controller);
             $this->addFile($filename);
 
             //EntityType
+            $code_type = $formater->getFormType($type);
+            if(!is_dir($path."Form"))
+                mkdir($path."Form");
+            $filename = $path."Form/".$this->entityName."Type.php";
+            file_put_contents($filename,$code_type);
+            $this->addFile($filename);
 
             //Views
             $code_views = $formater->getViews($type);
