@@ -51,14 +51,3 @@ Funkylab 5
 				- activation website mode maintenance
 				- stats
 
-###Tools
-	* from extjs
-	* generated
-	* extend twig
-
-###Commandline
-	* generate interface
-	* crud
-		- all in commande ex :
-			$ ./app/console funkylab:plugins:add toto --type=datagrid --entity=post
-

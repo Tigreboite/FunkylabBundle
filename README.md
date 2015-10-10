@@ -149,31 +149,16 @@ private $name;
 
 ###Datagrid
 
-Add a repository to your entity
+Add the repository Tigreboite\FunkylabBundle\Entity\BaseRepository to your entity
 
 ```php
 /**
  * Car
  *
  * @ORM\Table(name="car")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\CarRepository")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\BaseRepository")
  */
 class Car
-```
-
-Your repository need to extends the Tigreboite\FunkylabBundle\Entity\BaseRepository
-
-```php
-<?php
-
-namespace AppBundle\Entity;
-
-use Tigreboite\FunkylabBundle\Entity\BaseRepository;
-
-class CarRepository extends BaseRepository
-{
-}
 ```
 
 ##Console

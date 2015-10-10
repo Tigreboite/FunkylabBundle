@@ -48,7 +48,7 @@
             },
             "fnCreatedRow": function( nRow, aData, iDataIndex ) {
 
-                var url_update = Routing.generate('admin_datagrid_edit', {id:aData[aData.length-1]});
+                var url_update = Routing.generate('%datagrid_entity_path%_edit', {id:aData[aData.length-1]});
                 $(nRow).find('td:last .btn-edit').attr('data-url', url_update);
             }
         });
@@ -64,7 +64,7 @@
                 confirm: function(button) {
                     $.ajax({
                         type: "DELETE",
-                        url: Routing.generate('admin_datagrid_delete', {id:id_line}),
+                        url: Routing.generate('%datagrid_entity_path%_delete', {id:id_line}),
                         success: function(msg){
                             table.draw();
                         }
