@@ -1,6 +1,6 @@
 ##Author
 
-Cyril Pereira <cyril.pereira@gmail.com>
+Cyril Pereira <cyril.pereira@extreme-sensio.com>
 
 ## Installation
 
@@ -124,5 +124,22 @@ src/AppBundle/Resources/views/yourcontroller/action/index.html.twig
 
 or you can set your template name and path in annotation
 
+By default, visible and editable is true, but if you want set it
+edit you entity and add
 
+```php
+use Tigreboite\FunkylabBundle\Annotation\Crud;
+```
+
+and @Crud annotation to your property
+
+```php
+/**
+ * @var string
+ *
+ * @ORM\Column(name="name", type="string", length=100, nullable=false)
+ * @Crud("id",visible="true",editable="true",sortable="false")
+ */
+private $name;
+```
 

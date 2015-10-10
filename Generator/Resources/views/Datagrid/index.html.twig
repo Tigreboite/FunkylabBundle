@@ -17,7 +17,6 @@
                     <th class="action"></th>
                 </tr>
             </thead>
-
         </table>
     </div>
 
@@ -31,13 +30,8 @@
             "processing": true,
             "serverSide": true,
             "ajax": Routing.generate('%datagrid_entity_path%_list'),
-            "aoColumns": [    
-                { "sName": "id" },
-                { "sName": "name" },
-                { "sName": "code" },
-                { "sName": "flag" },
-                { "sName": "isenable" },
-                { "sName": "image" },
+            "aoColumns": [
+                %sname_fields%,
                 { "sName": "action" }
             ],
             "columnDefs": [ {

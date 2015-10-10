@@ -116,8 +116,6 @@ class DatagridController extends Controller
         );
     }
 
-
-
     /**
      * Displays a form to create a new Datagrid entity.
      *
@@ -136,7 +134,6 @@ class DatagridController extends Controller
             'ajax' => $request->isXmlHttpRequest()
         );
     }
-
 
     /**
      * Displays a form to edit an existing Datagrid entity.

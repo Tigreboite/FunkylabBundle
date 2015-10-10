@@ -21,13 +21,13 @@ class GeneratorCrud {
         {
             $formater = new $className($bundle,$entity);
 
-            //Controller
+            //Process Controller
             $code_controller = $formater->getController($type);
             $filename = $path."Controller/".$this->entityName."Controller.php";
             file_put_contents($filename,$code_controller);
             $this->addFile($filename);
 
-            //EntityType
+            //Process EntityType
             $code_type = $formater->getFormType($type);
             if(!is_dir($path."Form"))
                 mkdir($path."Form");
@@ -35,7 +35,7 @@ class GeneratorCrud {
             file_put_contents($filename,$code_type);
             $this->addFile($filename);
 
-            //Views
+            //Process Views
             $code_views = $formater->getViews($type);
             if(is_array($code_views))
             {
