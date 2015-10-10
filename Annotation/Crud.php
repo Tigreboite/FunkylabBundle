@@ -13,6 +13,7 @@ class Crud
     private $editable   = 'string';
     private $visible    = 'string';
     private $sortable   = 'string';
+    private $searchable = 'string';
 
     public function __construct($options)
     {
@@ -53,5 +54,10 @@ class Crud
     public function getSortable()
     {
         return $this->sortable=="true" ? true :false;
+    }
+
+    public function getSearchable()
+    {
+        return $this->searchable=="true" ? true :false;
     }
 }

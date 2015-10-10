@@ -38,7 +38,7 @@
                 "targets": -1,
                 "data": null,
                 'bSortable': false, 'aTargets': [ 1 ],
-                "defaultContent": '<div class="btn-group pull-right"><a class="btn btn-info btn-sm btn-edit" href="#" data-toggle="modal" data-url=""><i class="fa fa-edit"></i> Edit</a></div>'
+                "defaultContent": '<div class="btn-group pull-right"><a class="btn btn-info btn-sm btn-edit" href="#" data-toggle="modal" data-url=""><i class="fa fa-edit"></i> Edit</a><a class="btn btn-warning btn-sm btn-remove" href="#" data-toggle="modal" data-url=""><i class="fa fa-edit"></i> Delete</a> </div>'
             }],
             "oLanguage": {
                 "sProcessing": "<img src='/bundles/tigreboitefunkylab/images/ajax-loader.gif'>"
@@ -48,18 +48,8 @@
             },
             "fnCreatedRow": function( nRow, aData, iDataIndex ) {
 
-                var url_reset = Routing.generate('admin_datagrid_reset', {id:aData[aData.length-1]});
-                $(nRow).find('.btn-exclamation').attr('data-url', url_reset);
-
                 var url_update = Routing.generate('admin_datagrid_edit', {id:aData[aData.length-1]});
                 $(nRow).find('td:last .btn-edit').attr('data-url', url_update);
-
-                var num_col_image = 5;
-                if(aData[num_col_image] != "")
-                {
-                    var image = '<img src="/medias/language/'+aData[num_col_image]+'" width="24" />';
-                    $('td:eq('+num_col_image+')', nRow).html( image );
-                }
             }
         });
 

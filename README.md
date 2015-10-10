@@ -124,6 +124,10 @@ src/AppBundle/Resources/views/yourcontroller/action/index.html.twig
 
 or you can set your template name and path in annotation
 
+##Entity
+
+###Annotation
+
 By default, visible and editable is true, but if you want set it
 edit you entity and add
 
@@ -142,4 +146,34 @@ and @Crud annotation to your property
  */
 private $name;
 ```
+
+###Datagrid
+
+Add a repository to your entity
+
+```php
+/**
+ * Car
+ *
+ * @ORM\Table(name="car")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\CarRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class Car
+```
+
+Your repository need to extends the Tigreboite\FunkylabBundle\Entity\BaseRepository
+
+```php
+<?php
+
+namespace AppBundle\Entity;
+
+use Tigreboite\FunkylabBundle\Entity\BaseRepository;
+
+class CarRepository extends BaseRepository
+{
+}
+```
+
 

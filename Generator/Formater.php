@@ -40,7 +40,7 @@ abstract class Formater {
         $code = str_replace('%entity_name%',$this->entityName,$code);
         $code = str_replace('%class_name%',strtolower($this->entityName),$code);
         $code = str_replace('%bundle_name%',$this->bundle,$code);
-        $code = str_replace('%security_roles%','@Security("has_role(\'ROLE_MODERATOR\') || has_role(\'ROLE_SUPER_ADMIN\')")',$code);
+        $code = str_replace('%security_roles%','@Security("has_role(\'ROLE_SUPER_ADMIN\')")',$code);
         $code = str_replace($this->type,$this->entityName,$code);
 
         return $code;
@@ -65,7 +65,7 @@ abstract class Formater {
             if($field['visible'])
             {
                 $TRName[]="<th>".$field['name']."</th>";
-                $sName[]='{ "sName": "'.$field['fieldname'].'" }';
+                $sName[]='{ "sName": "'.$field['varname'].'" }';
             }
         }
 
@@ -92,25 +92,28 @@ abstract class Formater {
         foreach($this->annotations['variables_annotations'] as $k=>$annotations)
         {
             $field = array(
-              'name'=>'',
-              'fieldname'=>'',
-              'type'=>'',
-              'editable'=>true,
-              'visible'=>true,
-              'sortable'=>false,
+              'name'        => '',
+              'fieldname'   => '',
+              'type'        => '',
+              'editable'    => true,
+              'visible'     => true,
+              'sortable'    => false,
+              'searchable'  => false,
             );
 
             foreach($annotations as $annotation)
             {
                 if(get_class($annotation)=="Tigreboite\\FunkylabBundle\\Annotation\\Crud")
                 {
-                    $field['name']     = $annotation->getPropertyName();
-                    $field['visible']  = $annotation->getVisible();
-                    $field['sortable'] = $annotation->getSortable();
-                    $field['editable'] = $annotation->getEditable();
+                    $field['name']       = $annotation->getPropertyName();
+                    $field['visible']    = $annotation->getVisible();
+                    $field['sortable']   = $annotation->getSortable();
+                    $field['editable']   = $annotation->getEditable();
+                    $field['searchable'] = $annotation->getSearchable();
                 }
                 if(get_class($annotation)=="Doctrine\\ORM\\Mapping\\Column")
                 {
+                    $field['varname']   = $this->annotations['variables'][$k]->name;
                     $field['fieldname'] = $annotation->name;
                     $field['type']      = $annotation->type;
                 }
