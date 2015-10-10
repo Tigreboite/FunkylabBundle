@@ -176,4 +176,14 @@ class CarRepository extends BaseRepository
 }
 ```
 
+##Console
+
+You can generate admin interface like form tree and datagrid.
+
+variables are optionnal
+
+```
+$ php app/console funkylab:crud --entity=AppBundle/Entity/Car --bundle=AppBundle --type=datagrid
+```
+
 
