@@ -54,20 +54,36 @@ abstract class Formater {
         $code = str_replace('%bundle_name_entity_name%',strtolower($this->bundle."_".$this->entityName),$code);
         $code = str_replace('DataType',UCFirst(strtolower($this->entityName))."Type",$code);
         $code = str_replace('Tigreboite\FunkylabBundle\Generator',$this->bundle,$code);
+
+        $fields="";
+        foreach($this->getFields() as $field)
+        {
+            if($field['editable'])
+            {
+                $fields.="\$builder->add('".$field['varname']."');\n";
+            }
+        }
+
+        $code = str_replace('$builder->add("");',$fields,$code);
+
         return $code;
     }
 
     public function getViews()
     {
-        $sName = array();
-        $TRName = array();
+        $sName          = array();
+        $TRName         = array();
+        $EditableFields = array();
         foreach($this->getFields() as $field)
         {
             if($field['visible'])
             {
                 $TRName[]="<th>".$field['name']."</th>";
                 $sName[]='{ "sName": "'.$field['varname'].'" }';
+
             }
+            if($field['editable'])
+                $EditableFields[]='<div class="form-group"><label for="{{ form.'.$field['varname'].'.vars.id }}">'.$field['name'].'</label>{{ form_widget(form.'.$field['varname'].', {\'attr\':{\'class\': \'form-control\'}}) }}</div>';
         }
 
         $files = array();
@@ -81,6 +97,7 @@ abstract class Formater {
             $body = str_replace('%sname_fields%',implode(',',$sName),$body);
             $body = str_replace('%datagrid_entity_fields%',implode('',$TRName),$body);
             $body = str_replace('%sname_fields%',implode(',',$sName),$body);
+            $body = str_replace('%editable_fields%',implode("\n",$EditableFields),$body);
 
             $files[basename($filename)]=$body;
         }
