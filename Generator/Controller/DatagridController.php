@@ -169,7 +169,7 @@ class DatagridController extends Controller
     private function createCreateForm(Datagrid $entity)
     {
         $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new $this->formType($em), $entity, array(
+        $form = $this->createForm(new DatagridType($em), $entity, array(
           'action' => $this->generateUrl($this->route_base.'_create'),
           'method' => 'POST',
           'allow_extra_fields'=>true,
@@ -188,7 +188,7 @@ class DatagridController extends Controller
     private function createEditForm(Datagrid $entity)
     {
         $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new $this->formType($em), $entity, array(
+        $form = $this->createForm(new DatagridType($em), $entity, array(
             'action' => $this->generateUrl('admin_datagrid_update', array('id' => $entity->getId())),
             'method' => 'PUT',
 

@@ -53,6 +53,7 @@ abstract class Formater {
         $code = str_replace('%bundle_name%',$this->bundle,$code);
         $code = str_replace('%bundle_name_entity_name%',strtolower($this->bundle."_".$this->entityName),$code);
         $code = str_replace('DataType',UCFirst(strtolower($this->entityName))."Type",$code);
+        $code = str_replace('Tigreboite\FunkylabBundle\Generator',$this->bundle,$code);
         return $code;
     }
 
