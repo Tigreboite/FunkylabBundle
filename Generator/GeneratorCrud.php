@@ -2,7 +2,8 @@
 
 namespace Tigreboite\FunkylabBundle\Generator;
 
-
+use Symfony\CS\Finder\DefaultFinder;
+use Symfony\CS\Config\Config;
 
 class GeneratorCrud {
 
@@ -47,6 +48,18 @@ class GeneratorCrud {
                     $this->addFile($path."Resources/views/".$this->entityName."/".$filename);
                 }
             }
+
+            $finder = DefaultFinder::create()
+              ->files()->in($path."Form")
+              ->files()->in($path."Controller")
+              ->files()->contains($this->entityName)
+            ;
+
+            Config::create()
+              ->level(\Symfony\CS\FixerInterface::NONE_LEVEL)
+              ->fixers(array('trailing_spaces', 'indentation','eof_ending','list_commas'))
+              ->finder($finder)
+            ;
 
         }else{
             throw new \RuntimeException($type." format doesn't exist");
