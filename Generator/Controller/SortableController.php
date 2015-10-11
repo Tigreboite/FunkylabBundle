@@ -1,6 +1,6 @@
 <?php
 /**
- * Code by Cyril Pereira
+ * Code by Cyril Pereira, Julien Hay
  * Extreme-Sensio 2015
  */
 namespace Tigreboite\FunkylabBundle\Generator\Controller;
@@ -11,33 +11,33 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Tigreboite\FunkylabBundle\Entity\Sortable;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Tigreboite\FunkylabBundle\Entity\Sortable;
+use Tigreboite\FunkylabBundle\Form\SortableType;
 
-//use Tigreboite\FunkylabBundle\Form\SortableType;
 
 /**
  * Sortable controller.
  *
- * @Route("/admin/datagrid")
+ * @Route("/admin/sortable")
  */
-class TreeController extends Controller
+class SortableController extends Controller
 {
 
-    protected $formType   = 'DatagridType';
-    protected $route_base = 'admin_datagrid';
-    protected $repository = 'TigreboiteFunkylabBundle:Sortable';
+    protected $formType   = 'SortableType';
+    protected $route_base = 'admin_sortable';
+    protected $repository = '%bundle_name%:%entity_name%';
 
     /**
      * Lists all Sortable entities.
      *
-     * @Route("/", name="admin_datagrid")
+     * @Route("/", name="admin_sortable")
      * @Method("GET")
      * @Template()
-     * @Menu("Datagrid", dataType="string",icon="fa-flag",groupe="CMS")
-     * @Security("has_role('ROLE_SUPER_ADMIN') || has_role('ROLE_MODERATOR')")
+     * @Menu("Sortable", dataType="string",icon="fa-flag",groupe="CMS")
+     * %security_roles%
      */
     public function indexAction()
     {
@@ -47,7 +47,7 @@ class TreeController extends Controller
     /**
      * Lists all Sortable entities.
      *
-     * @Route("/list", name="admin_datagrid_list", options={"expose"=true})
+     * @Route("/list", name="admin_sortable_list", options={"expose"=true})
      * @Method("GET")
      */
     public function listAction(Request $request)
@@ -70,7 +70,7 @@ class TreeController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository($this->repository)
-            ->findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir);
+          ->findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir);
 
         $serializer = $this->get('jms_serializer');
 
@@ -88,11 +88,11 @@ class TreeController extends Controller
     }
 
     /**
-     * Creates a new Datagrid entity.
+     * Creates a new Sortable entity.
      *
-     * @Route("/", name="admin_datagrid_create")
+     * @Route("/", name="admin_sortable_create")
      * @Method("POST")
-     * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -110,40 +110,18 @@ class TreeController extends Controller
         }
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+          'entity' => $entity,
+          'form'   => $form->createView(),
+          'ajax' => $request->isXmlHttpRequest()
         );
-    }
-
-    /**
-     * Creates a form to create a Sortable entity.
-     *
-     * @param Sortable $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Sortable $entity)
-    {
-        $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new $this->formType($em), $entity, array(
-            'action' => $this->generateUrl($this->route_base.'_create'),
-            'method' => 'POST',
-            'allow_extra_fields'=>true,
-
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
     }
 
     /**
      * Displays a form to create a new Sortable entity.
      *
-     * @Route("/new", name="admin_datagrid_new")
+     * @Route("/new", name="admin_sortable_new")
      * @Method("GET")
-     * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
     public function newAction(Request $request)
     {
@@ -151,19 +129,18 @@ class TreeController extends Controller
         $form   = $this->createCreateForm($entity);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+          'entity' => $entity,
+          'form'   => $form->createView(),
+          'ajax' => $request->isXmlHttpRequest()
         );
     }
-
 
     /**
      * Displays a form to edit an existing Sortable entity.
      *
-     * @Route("/{id}/edit", name="admin_datagrid_edit", options={"expose"=true})
+     * @Route("/{id}/edit", name="admin_sortable_edit", options={"expose"=true})
      * @Method("GET")
-     * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
     public function editAction(Request $request, $id)
     {
@@ -178,25 +155,42 @@ class TreeController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+          'entity'      => $entity,
+          'form'   => $editForm->createView(),
+          'ajax' => $request->isXmlHttpRequest()
         );
     }
 
     /**
-    * Creates a form to edit a Sortable entity.
-    *
-    * @param Sortable $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Sortable entity.
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Sortable $entity)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $form = $this->createForm(new SortableType($em), $entity, array(
+          'action' => $this->generateUrl($this->route_base.'_create'),
+          'method' => 'POST',
+          'allow_extra_fields'=>true,
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+
+    /**
+     * Creates a form to edit a Sortable entity.
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Sortable $entity)
     {
         $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new $this->formType($em), $entity, array(
-            'action' => $this->generateUrl('admin_datagrid_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+        $form = $this->createForm(new SortableType($em), $entity, array(
+          'action' => $this->generateUrl('admin_sortable_update', array('id' => $entity->getId())),
+          'method' => 'PUT',
 
         ));
 
@@ -204,12 +198,13 @@ class TreeController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Sortable entity.
      *
-     * @Route("/{id}", name="admin_datagrid_update")
+     * @Route("/{id}", name="admin_sortable_update")
      * @Method("PUT")
-     * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -231,15 +226,15 @@ class TreeController extends Controller
         }
 
         return array(
-            'entity' => $entity,
-            'form'   => $editForm->createView(),
-            'ajax'   => $request->isXmlHttpRequest()
+          'entity'      => $entity,
+          'form'   => $editForm->createView(),
+          'ajax' => $request->isXmlHttpRequest()
         );
     }
     /**
-     * Deletes a Datagrid entity.
+     * Deletes a Sortable entity.
      *
-     * @Route("/{id}", name="admin_datagrid_delete", options={"expose"=true})
+     * @Route("/{id}", name="admin_sortable_delete", options={"expose"=true})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -255,5 +250,83 @@ class TreeController extends Controller
         $em->flush();
 
         return new Response('Deleted');
+    }
+
+    /**
+     * Upload files
+     *
+     * @Route("/upload", name="admin_sortable_upload")
+     */
+    public function uploadAction(Request $request)
+    {
+        $dir_path = 'medias/%entity_path_file%/';
+        $data = array('success'=>false);
+        $uploadedFile = $request->files->get('file');
+
+        if ($uploadedFile)
+        {
+            $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
+            if($file)
+            {
+                $data = array(
+                  'success'=>true,
+                  'filename'=>$uploadedFile->getClientOriginalName(),
+                  'path'=>$dir_path.$uploadedFile->getClientOriginalName()
+                );
+            }
+        }
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     * Lists all Platform entities.
+     *
+     * @Route("/liste", name="admin_sortable_liste")
+     * @Method("GET")
+     * @Template()
+     */
+    public function listeAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities  = $em->getRepository($this->repository)->findAll();
+
+        return array(
+          'entities' => $entities,
+        );
+    }
+
+    /**
+     * Save order
+     *
+     * @Route("/save/order", name="admin_sortable_order")
+     * @Method("POST")
+     */
+    public function orderAction()
+    {
+        $request    = $this->get('request');
+        $type       = $request->get('type',false);
+        $platform   = $request->get('platform',false);
+        $items      = $request->get('item', array());
+
+        $data = array();
+        $data['type'] = $type;
+        $data['platform'] = $platform;
+        $data['items'] = $items;
+
+        $em = $this->getDoctrine()->getManager();
+
+        $count = 1;
+        foreach($items as $id)
+        {
+            $entity = $em->getRepository($this->repository)->find($id);
+            $entity->setOrdre($count);
+            $em->persist($entity);
+            $count++;
+        }
+
+        $em->flush();
+        return new JsonResponse($data);
     }
 }

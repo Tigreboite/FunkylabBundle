@@ -1,0 +1,33 @@
+{% for entity in entities %}
+    <li id="item-{{ entity.id }}">
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <td><a href="{{ path('admin_platform_edit', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.platformcol }}</td>
+                    <td>
+                        <i class="fa fa-{% if entity.type=='mobile' %}mobile{% else %}tablet{% endif %}"></i>
+                        {{ entity.type }}
+                    </td>
+                    <td>{%  if entity.isIndispensable==1 %}<i class="fa fa-check"></i>{% endif %}</td>
+                    <td>{%  if entity.isOffre==1 %}<i class="fa fa-check"></i>{% endif %}</td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <a class="btn btn-info btn-sm" href="{{ path('admin_platform_edit', { 'id': entity.id }) }}"><i class="fa fa-edit"></i> Editer</a>
+                            <a class="btn btn-danger btn-sm" href="{{ path('admin_platform_delete', { 'id': entity.id }) }}"><i class="fa fa-times-circle"></i> Effacer</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="blocs-{{ entity.id }}" class="box blocs">
+                <div class="btn-edit-bloc">
+                    <a class="btn btn-default btn-sm" href="#" data-toggle="modal" data-url="{{ path('admin_bloc_new') }}?application={{ entity.id }}"><i class="fa fa-plus"></i> Ajouter un bloc</a>
+                </div>
+                <ul id="bloc-liste-{{ entity.id }}" class="sortable-bloc" data-application="{{ entity.id }}">
+                </ul>
+            </div>
+        </div>
+    </li>
+{% endfor %}

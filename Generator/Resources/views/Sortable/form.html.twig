@@ -1,0 +1,38 @@
+{% extends ajax
+    ? 'TigreboiteFunkylabBundle::popin.html.twig' 
+    : 'TigreboiteFunkylabBundle::layout.html.twig' %}
+
+{% block content -%}
+	<div class="modal-body">
+            <div class="row">
+                <form method="post" action="{% if app.request.get('_route') == "%datagrid_entity_path%_edit" %}{{ path('%datagrid_entity_path%_update',{'id':entity.id}) }}{% else %}{{ path('%datagrid_entity_path%_create') }}{% endif %}" role="form" enctype="multipart/form-data">
+
+        		{% if app.request.get('_route') == "%datagrid_entity_path%_edit" %}
+        			<input type="hidden" name="_method" value="PUT">
+        		{% endif %}
+                <div class="box box-primary">
+                    <div class="box-body">
+                        %editable_fields%
+                    </div>
+                    {{ form_widget(form._token) }}
+                </div>
+                <button class="btn btn-success btn-lg"><i class="fa fa-check"></i> Valid</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block callback_popin %}
+
+    <script type="text/javascript">
+        function callBackAfterSubmit()
+        {
+            table.draw();
+        }
+        $(function () {
+            %javascript%
+        });
+
+    </script>
+
+{% endblock %}
