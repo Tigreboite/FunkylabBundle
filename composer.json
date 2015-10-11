@@ -26,7 +26,7 @@
     "liuggio/excelbundle": "~2.0",
     "gedmo/doctrine-extensions": "2.3.*",
     "cocur/slugify": "^1.2",
-    "jms/cg":"1.1.0"
+    "fabpot/php-cs-fixer":"v1.10"
   },
   "autoload": {
     "psr-0": { "Tigreboite\\FunkylabBundle": "" }
