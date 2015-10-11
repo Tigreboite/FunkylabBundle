@@ -251,4 +251,32 @@ class DatagridController extends Controller
 
         return new Response('Deleted');
     }
+
+    /**
+     * Upload files
+     *
+     * @Route("/upload", name="admin_datagrid_upload")
+     */
+    public function uploadAction(Request $request)
+    {
+        $dir_path = 'medias/%entity_path_file%/';
+        $data = array('success'=>false);
+        $uploadedFile = $request->files->get('file');
+
+        if ($uploadedFile)
+        {
+            $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
+            if($file)
+            {
+                $data = array(
+                  'success'=>true,
+                  'filename'=>$uploadedFile->getClientOriginalName(),
+                  'path'=>$dir_path.$uploadedFile->getClientOriginalName()
+                );
+            }
+        }
+
+        return new JsonResponse($data);
+    }
+
 }

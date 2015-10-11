@@ -2,26 +2,25 @@
 
 namespace Tigreboite\FunkylabBundle\Generator\Field;
 
-class Fields {
+class Field {
 
     private $type;
     private $name;
     private $varname;
     private $field;
 
-    public function __construct($type,$name,$varname)
+    public function __construct($type,$name,$varname,$options=array())
     {
         $this->type     = UCFirst(strtolower($type));
+        $classType     = 'Tigreboite\\FunkylabBundle\\Generator\\Field\\'.$this->type;
         $this->name     = $name;
         $this->varname  = $varname;
-
-        if(class_exists('Tigreboite\\FunkylabBundle\\Generator\\'.$this->type))
+        if(class_exists($classType))
         {
-            $this->field = new $this->type($this->varname,$this->name);
+            $this->field = new $classType($this->varname,$this->name,$options);
         }else{
-            $this->field = new Base($this->varname,$this->name);
+            $this->field = new Base($this->varname,$this->name,$options);
         }
-        dump($this->field);
     }
 
     public function getHTML()

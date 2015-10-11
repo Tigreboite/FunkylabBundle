@@ -4,7 +4,7 @@ namespace Tigreboite\FunkylabBundle\Generator;
 
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\AnnotationReader;
-use Tigreboite\FunkylabBundle\Generator\Field\Fields;
+use Tigreboite\FunkylabBundle\Generator\Field\Field;
 
 abstract class Formater {
 
@@ -41,6 +41,7 @@ abstract class Formater {
         $code = str_replace('%entity_name%',$this->entityName,$code);
         $code = str_replace('%class_name%',strtolower($this->entityName),$code);
         $code = str_replace('%bundle_name%',$this->bundle,$code);
+        $code = str_replace('%entity_path_file%',strtolower($this->entityName),$code);
         $code = str_replace('%security_roles%','@Security("has_role(\'ROLE_SUPER_ADMIN\')")',$code);
         $code = str_replace($this->type,$this->entityName,$code);
 
@@ -61,7 +62,13 @@ abstract class Formater {
         {
             if($field['editable'])
             {
-                $fields.="\$builder->add('".$field['varname']."');\n";
+                if($field['dataType']=="image")
+                {
+                    $fields.="\$builder->add('".$field['varname']."','hidden');\n";
+                }else{
+
+                    $fields.="\$builder->add('".$field['varname']."');\n";
+                }
             }
         }
 
@@ -75,6 +82,7 @@ abstract class Formater {
         $sName          = array();
         $TRName         = array();
         $EditableFields = array();
+        $EditableJS     = array();
 
         foreach($this->getFields() as $field)
         {
@@ -86,8 +94,9 @@ abstract class Formater {
             }
             if($field['editable'])
             {
-                $OBjField = new Fields($field['dataType'],$field['name'],$field['varname']);
+                $OBjField = new Field($field['dataType'],$field['name'],$field['varname'],array('path'=>"admin_".strtolower($this->entityName)));
                 $EditableFields[]=$OBjField->getHTML();
+                $EditableJS[]=$OBjField->getJS();
             }
         }
 
@@ -103,6 +112,7 @@ abstract class Formater {
             $body = str_replace('%datagrid_entity_fields%',implode('',$TRName),$body);
             $body = str_replace('%sname_fields%',implode(',',$sName),$body);
             $body = str_replace('%editable_fields%',implode("\n",$EditableFields),$body);
+            $body = str_replace('%javascript%',implode("\n",$EditableJS),$body);
 
             $files[basename($filename)]=$body;
         }
@@ -153,13 +163,15 @@ abstract class Formater {
             {
                 $field['name'] = $field['fieldname'];
             }
+
             if(isset($field['generatedValue']))
             {
                 $field['editable'] = false;
             }
-            $fields[] = $field;
-        }
 
+            if(!empty($field['name']))
+                $fields[] = $field;
+        }
         return $fields;
     }
 
