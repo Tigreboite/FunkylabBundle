@@ -24,6 +24,7 @@
 
 {% block js %}
 <script>
+
     $('document').ready(function()
     {
         table = $('#table_admin').DataTable( {
@@ -38,7 +39,7 @@
                 "targets": -1,
                 "data": null,
                 'bSortable': false, 'aTargets': [ 1 ],
-                "defaultContent": '<div class="btn-group pull-right"><a class="btn btn-info btn-sm btn-edit" href="#" data-toggle="modal" data-url=""><i class="fa fa-edit"></i> Edit</a><a class="btn btn-warning btn-sm btn-remove" href="#" data-toggle="modal" data-url=""><i class="fa fa-edit"></i> Delete</a> </div>'
+                "defaultContent": '<div class="btn-group pull-right"><a class="btn btn-info btn-sm btn-edit" href="#" data-toggle="modal" data-url=""><i class="fa fa-edit"></i> Edit</a><a class="btn btn-danger btn-sm btn-remove" href="#" data-url="%datagrid_entity_path%_delete"><i class="fa fa-edit"></i> Delete</a> </div>'
             }],
             "oLanguage": {
                 "sProcessing": "<img src='/bundles/tigreboitefunkylab/images/ajax-loader.gif'>"
@@ -50,32 +51,13 @@
 
                 var url_update = Routing.generate('%datagrid_entity_path%_edit', {id:aData[aData.length-1]});
                 $(nRow).find('td:last .btn-edit').attr('data-url', url_update);
+
+                var url_delete = Routing.generate('%datagrid_entity_path%_delete', {id:aData[aData.length-1]});
+                $(nRow).find('td:last .btn-remove').attr('data-url', url_delete);
+
             }
         });
 
-        // Remove btn
-        $('#table_admin tbody').on( 'click', '.btn-delete-action', function (e) {
-            e.preventDefault();
-            var data = table.row( $(this).parents('tr') ).data();
-            var id_line = data[data.length-1];
-
-            $.confirm({
-                text: "Are you sure you want to delete ?",
-                confirm: function(button) {
-                    $.ajax({
-                        type: "DELETE",
-                        url: Routing.generate('%datagrid_entity_path%_delete', {id:id_line}),
-                        success: function(msg){
-                            table.draw();
-                        }
-                    });
-                },
-                cancel: function(button) {
-                    // do something
-                }
-            });
-
-        });
     });
 </script>
 {% endblock %}

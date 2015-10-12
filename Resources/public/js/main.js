@@ -3,6 +3,7 @@ var table; // Datatable variable
 
 function updateModalBtn()
 {
+  setDeleteButton();
   // Support for AJAX loaded modal window.
   // Focuses on first input textbox after it loads the window.
   $('[data-toggle="modal"]').unbind();
@@ -127,6 +128,32 @@ function loadEditor(id, entity)
     });
 
   }
+}
+
+function setDeleteButton()
+{
+  // Remove btn
+  $('#table_admin tbody .btn-remove' ).on( 'click', function (e) {
+    e.preventDefault();
+    var route = $(this).data('url');
+    var data = table.row( $(this).parents('tr') ).data();
+    $.confirm({
+      text: "Are you sure you want to delete ?",
+      confirm: function(button) {
+        $.ajax({
+          type: "DELETE",
+          url: route,
+          success: function(msg){
+            table.draw();
+          }
+        });
+      },
+      cancel: function(button) {
+        // do something
+      }
+    });
+
+  });
 }
 
 $('document').ready(function()
