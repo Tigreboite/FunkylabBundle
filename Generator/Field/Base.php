@@ -43,4 +43,9 @@ class Base
     {
         return "";
     }
+
+    public function getBuilder()
+    {
+        return "\$builder->add('".$this->varname."');\n";
+    }
 }

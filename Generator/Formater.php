@@ -62,13 +62,8 @@ abstract class Formater {
         {
             if($field['editable'])
             {
-                if($field['dataType']=="image")
-                {
-                    $fields.="\$builder->add('".$field['varname']."','hidden');\n";
-                }else{
-
-                    $fields.="\$builder->add('".$field['varname']."');\n";
-                }
+                $OBjField = new Field($field['dataType'],$field['name'],$field['varname'],array('path'=>"admin_".strtolower($this->entityName)));
+                $fields.=$OBjField->getBuilder();
             }
         }
 

@@ -46,4 +46,9 @@ class Image extends Base
 
     }
 
+    public function getBuilder()
+    {
+        return "";
+    }
+
 }

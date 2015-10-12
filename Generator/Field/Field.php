@@ -33,5 +33,10 @@ class Field {
         return ($this->field) ? $this->field->getJS() : "";
     }
 
+    public function getBuilder()
+    {
+        return ($this->field) ? $this->field->getBuilder() : "";
+    }
+
 
 }
