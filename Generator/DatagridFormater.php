@@ -2,8 +2,6 @@
 
 namespace Tigreboite\FunkylabBundle\Generator;
 
-use Tigreboite\FunkylabBundle\Generator\Field\Field;
-
 class DatagridFormater extends Formater {
 
     protected $type = "Datagrid";
