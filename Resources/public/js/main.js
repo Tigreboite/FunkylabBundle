@@ -33,8 +33,8 @@ function updateModalBtn()
         $(_html)
           .modal()
           .on('hidden.bs.modal', function(){
-          $(this).remove();
-        });
+            $(this).remove();
+          });
 
         setTimeout(function()
         {
@@ -101,18 +101,18 @@ function loadEditor(id, entity)
 
   if(editor)
   {
-      CKEDITOR.remove(editor);
+    CKEDITOR.remove(editor);
   }
 
   if(entity == 'idea') {
     CKEDITOR.replace( id, {
       toolbar: [
-        { name: 'document', items: [ ] }, 
+        { name: 'document', items: [ ] },
       ]
     });
   }
   else if (entity == 'blog' || entity == 'faq') {
-    
+
     CKEDITOR.replace( id, {
       toolbar: [
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
