@@ -21,36 +21,6 @@ stof_doctrine_extensions:
             translatable: true
             timestampable: true
 
-liip_imagine:
-    resolvers:
-       default:
-          web_path:
-            cache_prefix: medias/cache
-
-    filter_sets:
-        cache: ~
-        thumb_100x100:
-            quality: 95
-            filters:
-                thumbnail: { size: [100, 100], mode: outbound, allow_upscale: true }
-        thumb_24x24:
-            quality: 95
-            filters:
-                thumbnail: { size: [24, 24], mode: outbound, allow_upscale: true }
-        thumb_50x50:
-            quality: 95
-            filters:
-                thumbnail: { size: [50, 50], mode: outbound, allow_upscale: true }
-        thumb_185x185:
-            quality: 95
-            filters:
-                thumbnail: { size: [185, 185], mode: outbound, allow_upscale: true }
-
-liip_url_auto_converter:
-    linkclass:
-    target: _blank
-    debugmode: false
-
 # app/config/config.yml
 lexik_translation:
     fallback_locale: en      # (required) default locale to use

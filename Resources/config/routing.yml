@@ -16,12 +16,6 @@ fos_user_resetting:
 fos_user_profile_show:
     path: /account
 
-_liip_imagine:
-    resource: "@LiipImagineBundle/Resources/config/routing.xml"
-
-_bazinga_jstranslation:
-    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
-
 lexik_translation_edition:
     resource: "@LexikTranslationBundle/Resources/config/routing.yml"
     prefix:   /admin/translator/
