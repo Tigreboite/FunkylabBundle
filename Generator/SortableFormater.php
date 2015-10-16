@@ -41,7 +41,6 @@ class SortableFormater extends Formater {
                     $TDName[]="<td>{{ entity.".$field['varname']."|date('d/m/Y H:i:s') }}</td>";
                 }else{
                     $TDName[]="<td>{{ entity.".$field['varname']." }}</td>";
-
                 }
                 $TRName[]="<th>".$field['name']."</th>";
             }
