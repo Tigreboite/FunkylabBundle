@@ -19,18 +19,14 @@ public function registerBundles()
         ...
         new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         new FOS\UserBundle\FOSUserBundle(),
-        new Tigreboite\FunkylabBundle\TigreboiteFunkylabBundle(),
         new Knp\Bundle\MenuBundle\KnpMenuBundle(),
         new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-        new JMS\SerializerBundle\JMSSerializerBundle(),
         new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-        new Liip\ImagineBundle\LiipImagineBundle(),
-        new Liip\UrlAutoConverterBundle\LiipUrlAutoConverterBundle(),
-        new JMS\TranslationBundle\JMSTranslationBundle(),
-        new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
         new Lexik\Bundle\TranslationBundle\LexikTranslationBundle(),
         new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+        new JMS\SerializerBundle\JMSSerializerBundle(),
         new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
+        new Tigreboite\FunkylabBundle\TigreboiteFunkylabBundle(),
     );
 
     ...
@@ -41,12 +37,19 @@ public function registerBundles()
 
 edit config.yml and update imports variable
 
-```
+```yml
 imports:
     - { resource: parameters.yml }
     - { resource: services.yml }
     - { resource: "@TigreboiteFunkylabBundle/Resources/config/security.yml" }
     - { resource: "@TigreboiteFunkylabBundle/Resources/config/config.yml" }
+```
+
+edit routing.yml and add :
+
+```yml
+tigreboite_routing:
+    resource: "@TigreboiteFunkylabBundle/Resources/config/routing.yml"
 ```
 
 ###Medias
