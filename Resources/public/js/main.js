@@ -38,7 +38,7 @@ function updateModalBtn()
 
         setTimeout(function()
         {
-          //$('input:visible:first').focus();
+          $('input:visible:first').focus();
 
           $('#'+id+' form').on('submit',function(e)
           {
