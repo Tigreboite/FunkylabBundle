@@ -70,7 +70,7 @@ class DatagridController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository($this->repository)
-            ->findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir);
+          ->findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir);
 
         $serializer = $this->get('jms_serializer');
 
@@ -110,9 +110,9 @@ class DatagridController extends Controller
         }
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+          'entity' => $entity,
+          'form'   => $form->createView(),
+          'ajax' => $request->isXmlHttpRequest()
         );
     }
 
@@ -129,9 +129,9 @@ class DatagridController extends Controller
         $form   = $this->createCreateForm($entity);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+          'entity' => $entity,
+          'form'   => $form->createView(),
+          'ajax' => $request->isXmlHttpRequest()
         );
     }
 
@@ -155,9 +155,9 @@ class DatagridController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+          'entity'      => $entity,
+          'form'   => $editForm->createView(),
+          'ajax' => $request->isXmlHttpRequest()
         );
     }
 
@@ -181,16 +181,16 @@ class DatagridController extends Controller
     }
 
     /**
-    * Creates a form to edit a Datagrid entity.
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Datagrid entity.
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Datagrid $entity)
     {
         $em = $this->get('doctrine')->getManager();
         $form = $this->createForm(new DatagridType($em), $entity, array(
-            'action' => $this->generateUrl('admin_datagrid_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+          'action' => $this->generateUrl('admin_datagrid_update', array('id' => $entity->getId())),
+          'method' => 'PUT',
 
         ));
 
@@ -202,7 +202,7 @@ class DatagridController extends Controller
     /**
      * Edits an existing Datagrid entity.
      *
-     * @Route("/{id}", name="admin_datagrid_update")
+     * @Route("/update/{id}", name="admin_datagrid_update")
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
@@ -226,11 +226,12 @@ class DatagridController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+          'entity'      => $entity,
+          'form'   => $editForm->createView(),
+          'ajax' => $request->isXmlHttpRequest()
         );
     }
+
     /**
      * Deletes a Datagrid entity.
      *

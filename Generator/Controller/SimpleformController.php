@@ -122,11 +122,10 @@ class SimpleformController extends Controller
         return $form;
     }
 
-
     /**
      * Edits an existing Simpleform entity.
      *
-     * @Route("/{id}", name="admin_simpleform_update")
+     * @Route("/update/{id}", name="admin_simpleform_update")
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
      */

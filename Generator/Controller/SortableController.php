@@ -159,7 +159,7 @@ class SortableController extends Controller
     /**
      * Edits an existing Sortable entity.
      *
-     * @Route("/{id}", name="admin_sortable_update")
+     {id}", name="admin_sortable_update")
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
