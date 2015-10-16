@@ -1,7 +1,7 @@
 {% extends 'TigreboiteFunkylabBundle::layout.html.twig' %}
 
 {% block content -%}
-    <div class="modal-body">
+    <div class="modal-body ">
         <div class="row">
             <form method="post" action="{% if app.request.get('_route') == "%admin_entity_path%_edit" %}{{ path('%admin_entity_path%_update',{'id':entity.id}) }}{% else %}{{ path('%admin_entity_path%_create') }}{% endif %}" role="form" enctype="multipart/form-data">
 
