@@ -20,7 +20,7 @@ class CrudCommand extends ContainerAwareCommand
           ->setName('funkylab:crud')
           ->setDescription('Create a CRUD from entity for Funkylab')
           ->addOption('entity', null, InputOption::VALUE_REQUIRED, 'Entity Class ex Tigreboite\\FunkylabBundle\\Entity\\Post')
-          ->addOption('type', null, InputOption::VALUE_REQUIRED, 'Type of the crud to generate : grid|tree|form')
+          ->addOption('type', null, InputOption::VALUE_REQUIRED, 'Type of the crud to generate : datagrid|sortable|simpleform')
           ->addOption('bundle', null, InputOption::VALUE_REQUIRED, 'Bundle where to create CRUD')
         ;
     }
@@ -85,7 +85,7 @@ class CrudCommand extends ContainerAwareCommand
         // Get Type to generate
         if(!$type)
         {
-            $typeNames = array('datagrid', 'tree', 'form');
+            $typeNames = array('datagrid', 'simpleform', 'sortable');
             $selected = $dialog->select(
               $output,
               'Please select the type of CRUD (default to datagrid)',
