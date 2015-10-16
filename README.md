@@ -168,30 +168,6 @@ date,file,html,image,number,string
 
 by default it's string.
 
-####Image
-
-You need to add to your entity use those class
-```php
-use Tigreboite\FunkylabBundle\Entity\Image;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-```
-
-and add this trait to your class
-
-```php
-class Car
-{
-    use Image;
-```
-
-at the end of your variables in your class add this
-
-```php
-public $IMAGE_DEFAULT = "images/car/car_default.jpg";
-public $IMAGE_PATH    = "images/car";
-```
-
 ##Console
 
 You can generate admin interface like form tree and datagrid.
