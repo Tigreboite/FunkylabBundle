@@ -39,30 +39,28 @@ class SimpleformController extends Controller
      * @Menu("Simpleform", dataType="string",icon="fa-flag",groupe="CMS")
      * %security_roles%
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository($this->repository);
-        $entity = $repo->find(1);
+        $em     = $this->getDoctrine()->getManager();
+        $repo   = $em->getRepository($this->repository);
+        $entity = $repo->findOneBy(array(), array('id' => 'DESC'));
 
         if (!$entity) {
-            $entity = new Simpleform();
+            $entity   = new Car();
+            $editForm = $this->createCreateForm($entity);
+        } else {
+            $editForm = $this->createEditForm($entity);
         }
 
-        $editForm = $this->createEditForm($entity);
+        return array('entity' => $entity, 'form' => $editForm->createView(), 'ajax' => $request->isXmlHttpRequest());
 
-        return array(
-          'entity'      => $entity,
-          'form'   => $editForm->createView(),
-        );
     }
-
     /**
      * Creates a new Simpleform entity.
      *
      * @Route("/", name="admin_simpleform_create")
      * @Method("POST")
-     * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Simpleform:index.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -82,51 +80,6 @@ class SimpleformController extends Controller
         return array(
           'entity' => $entity,
           'form'   => $form->createView(),
-          'ajax' => $request->isXmlHttpRequest()
-        );
-    }
-
-    /**
-     * Displays a form to create a new Simpleform entity.
-     *
-     * @Route("/new", name="admin_simpleform_new")
-     * @Method("GET")
-     * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
-     */
-    public function newAction(Request $request)
-    {
-        $entity = new Simpleform();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-          'entity' => $entity,
-          'form'   => $form->createView(),
-          'ajax' => $request->isXmlHttpRequest()
-        );
-    }
-
-    /**
-     * Displays a form to edit an existing Simpleform entity.
-     *
-     * @Route("/{id}/edit", name="admin_simpleform_edit", options={"expose"=true})
-     * @Method("GET")
-     * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
-     */
-    public function editAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository($this->repository)->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Simpleform entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-
-        return array(
-          'entity'      => $entity,
-          'form'   => $editForm->createView(),
           'ajax' => $request->isXmlHttpRequest()
         );
     }
@@ -168,6 +121,7 @@ class SimpleformController extends Controller
 
         return $form;
     }
+
 
     /**
      * Edits an existing Simpleform entity.
