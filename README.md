@@ -198,9 +198,9 @@ You can generate admin interface like form tree and datagrid.
 
 variables are optionnal
 
-entity = the entity you want to generate CRUD for
-bundle = the bundle where you want generate the code
-type = simpleform|datagrid|sortable
+entity = the entity you want to generate CRUD for   
+bundle = the bundle where you want generate the code   
+type = simpleform|datagrid|sortable   
 
 ```
 $ php app/console funkylab:crud --entity=AppBundle/Entity/Car --bundle=AppBundle --type=datagrid
