@@ -5,9 +5,9 @@
 {% block content -%}
 	<div class="modal-body">
             <div class="row">
-                <form method="post" action="{% if app.request.get('_route') == "%datagrid_entity_path%_edit" %}{{ path('%datagrid_entity_path%_update',{'id':entity.id}) }}{% else %}{{ path('%datagrid_entity_path%_create') }}{% endif %}" role="form" enctype="multipart/form-data">
+                <form method="post" action="{% if app.request.get('_route') == "%admin_entity_path%_edit" %}{{ path('%admin_entity_path%_update',{'id':entity.id}) }}{% else %}{{ path('%admin_entity_path%_create') }}{% endif %}" role="form" enctype="multipart/form-data">
 
-        		{% if app.request.get('_route') == "%datagrid_entity_path%_edit" %}
+        		{% if app.request.get('_route') == "%admin_entity_path%_edit" %}
         			<input type="hidden" name="_method" value="PUT">
         		{% endif %}
                 <div class="box box-primary">

@@ -22,12 +22,9 @@ class DatagridFormater extends Formater {
         }
 
         foreach ($files as  $k=>$body) {
-            $body = str_replace('%datagrid_entity_path%',"admin_".strtolower($this->entityName),$body);
-            $body = str_replace('%datagrid_entity_name%',UCFirst(strtolower($this->entityName)),$body);
             $body = str_replace('%sname_fields%',implode(',',$sName),$body);
             $body = str_replace('%datagrid_entity_fields%',implode('',$TRName),$body);
             $body = str_replace('%sname_fields%',implode(',',$sName),$body);
-
             $files[$k]=$body;
         }
         return $files;
