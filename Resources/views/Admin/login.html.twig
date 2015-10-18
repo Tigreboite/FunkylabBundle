@@ -31,8 +31,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
         <form method="post" role="form" action="{{ path('fos_user_security_check') }}">
-            <input type="hidden" name="_target_path" value="{{ path('funkylab_home') }}" />
-            <input type="hidden" name="redirect" value="{{ path('funkylab_home') }}" />
+            <input type="hidden" name="_target_path" value="/admin" />
             <div class="form-group has-feedback">
                 <input name="_username" type="email" class="form-control" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
