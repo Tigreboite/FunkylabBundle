@@ -24,9 +24,6 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#profil" aria-controls="profil" role="tab" data-toggle="tab">Profile</a></li>
                 <li><a href="#extras" aria-controls="extras" role="tab" data-toggle="tab">Extras</a></li>
-                <li><a href="#social" aria-controls="social" role="tab" data-toggle="tab">Social</a></li>
-                <li><a href="#points" aria-controls="points" role="tab" data-toggle="tab">Points</a></li>
-                <li><a href="#decathlon" aria-controls="decathlon" role="tab" data-toggle="tab">Sport</a></li>
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
                 <li><a href="#roles" aria-controls="roles" role="tab" data-toggle="tab">Roles</a></li>
                 {% endif %}
@@ -104,100 +101,10 @@
                                 {{ form_widget(form.country) }}
                                 {{ form_errors(form.country) }}
                             </div>
-                            <div class="form-group">
-                                <label for="{{ form.decathlonCardId.vars.id }}">{{ form_label(form.decathlonCardId) }}</label>
-                                {{ form_widget(form.decathlonCardId) }}
-                                {{ form_errors(form.decathlonCardId) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.description.vars.id }}">{{ form_label(form.description) }}</label>
-                                {{ form_widget(form.description) }}
-                                {{ form_errors(form.description) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.howItWorkDisplay.vars.id }}">{{ form_label(form.howItWorkDisplay) }}</label>
-                                {{ form_widget(form.howItWorkDisplay) }}
-                                {{ form_errors(form.howItWorkDisplay) }}
-                            </div>
-
                         </div>
                     </div>
                 </div>
 
-                <div role="tabpanel" class="tab-pane" id="social">
-                    <div class="box box-primary">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="{{ form.idFacebook.vars.id }}">{{ form_label(form.idFacebook) }}</label>
-                                {{ form_widget(form.idFacebook) }}
-                                {{ form_errors(form.idFacebook) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.idTwitter.vars.id }}">{{ form_label(form.idTwitter) }}</label>
-                                {{ form_widget(form.idTwitter) }}
-                                {{ form_errors(form.idTwitter) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.idGoogleplus.vars.id }}">{{ form_label(form.idGoogleplus) }}</label>
-                                {{ form_widget(form.idGoogleplus) }}
-                                {{ form_errors(form.idGoogleplus) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.twitterOauth.vars.id }}">{{ form_label(form.twitterOauth) }}</label>
-                                {{ form_widget(form.twitterOauth) }}
-                                {{ form_errors(form.twitterOauth) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.twitterOauthSecret.vars.id }}">{{ form_label(form.twitterOauthSecret) }}</label>
-                                {{ form_widget(form.twitterOauthSecret) }}
-                                {{ form_errors(form.twitterOauthSecret) }}
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div role="tabpanel" class="tab-pane" id="points">
-                    <div class="box box-primary">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="{{ form.nbPointsCurrent.vars.id }}">{{ form_label(form.nbPointsCurrent) }}</label>
-                                {{ form_widget(form.nbPointsCurrent) }}
-                                {{ form_errors(form.nbPointsCurrent) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.nbPointsTotal.vars.id }}">{{ form_label(form.nbPointsTotal) }}</label>
-                                {{ form_widget(form.nbPointsTotal) }}
-                                {{ form_errors(form.nbPointsTotal) }}
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div role="tabpanel" class="tab-pane" id="decathlon">
-                    <div class="box box-primary">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="{{ form.favSport1.vars.id }}">{{ form_label(form.favSport1) }}</label>
-                                {{ form_widget(form.favSport1) }}
-                                {{ form_errors(form.favSport1) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.favSport2.vars.id }}">{{ form_label(form.favSport2) }}</label>
-                                {{ form_widget(form.favSport2) }}
-                                {{ form_errors(form.favSport2) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.favSport3.vars.id }}">{{ form_label(form.favSport3) }}</label>
-                                {{ form_widget(form.favSport3) }}
-                                {{ form_errors(form.favSport3) }}
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
                 <div role="tabpanel" class="tab-pane" id="roles">
                     <div class="box box-primary">
@@ -219,7 +126,11 @@
         </div>
         {{ form_widget(form._token) }}
         {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <button class="btn btn-success btn-lg"><i class="fa fa-check"></i> Valid</button>
+
+            <div class="modal-footer">
+                <button class="btn btn-success btn-lg pull-left"><i class="fa fa-check"></i> Submit</button>
+                <button type="button" class="btn btn-default  btn-lg" data-dismiss="modal">Cancel</button>
+            </div>
         {% endif %}
     </form>
     </div>

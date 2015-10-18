@@ -26,8 +26,6 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-
         $builder
           ->add('email', null, array(
             'attr' => array(
@@ -36,6 +34,42 @@ class UserType extends AbstractType
             'constraints' => array(
               new \Symfony\Component\Validator\Constraints\Email(),
               new \Symfony\Component\Validator\Constraints\NotBlank()
+            )
+          ))
+          ->add('roles', 'choice', array(
+            'choices' => array(
+              User::ROLE_BRAND => User::ROLE_BRAND,
+              User::ROLE_MODERATOR => User::ROLE_MODERATOR,
+              User::ROLE_SUPER_ADMIN => User::ROLE_SUPER_ADMIN,
+              User::ROLE_ADMIN => User::ROLE_ADMIN,
+            ),
+            'multiple'  => true,
+            'expanded' => true,
+            'required'  => false,
+            'empty_value' => false,
+            'attr' => array(
+              'class' => 'form-control'
+            )
+          ))
+
+          ->add('dob', 'date',array(
+            'widget' => 'single_text',
+            'format' => 'dd-MM-yyyy',
+            'attr' => array('class' => 'date form-control'),
+            'label' => 'Date of birth'
+          ))
+          ->add('civility', 'choice', array(
+            'choices' => array(
+              'Mlle' => 'Mlle',
+              'Mme' => 'Mme',
+              'Mr' => 'Mr'
+            ),
+            'multiple'  => false,
+            'expanded' => false,
+            'required'  => false,
+            'empty_value' => false,
+            'attr' => array(
+              'class' => 'form-control'
             )
           ))
           ->add('lastname', null, array(
@@ -88,146 +122,9 @@ class UserType extends AbstractType
               'class' => 'form-control'
             )
           ))
-          ->add('description', null, array(
-            'attr' => array(
-              'class' => 'form-control'
-            )
-          ))
-          ->add('file')
+          ->add('image','hidden')
         ;
 
-        $builder->add('favSport1', 'entity', array(
-          'class' => 'TigreboiteFunkylabBundle:Sport',
-          'query_builder' => function(EntityRepository $er) {
-              return $this->getOrderedSportsList($er);
-          },
-          'attr' => array( 'class' => 'form-control' ),
-          'empty_data'  => null,
-          'required' => false
-        ));
-        $builder->add('favSport2', 'entity', array(
-          'class' => 'TigreboiteFunkylabBundle:Sport',
-          'query_builder' => function(EntityRepository $er) {
-              return $this->getOrderedSportsList($er);
-          },
-          'attr' => array( 'class' => 'form-control' ),
-          'empty_data'  => null,
-          'required' => false
-        ));
-        $builder->add('favSport3', 'entity', array(
-          'class' => 'TigreboiteFunkylabBundle:Sport',
-          'query_builder' => function(EntityRepository $er) {
-              return $this->getOrderedSportsList($er);
-          },
-          'attr' => array( 'class' => 'form-control' ),
-          'empty_data'  => null,
-          'required' => false
-        ));
-
-
-        if (!$this->front) {
-            $builder
-              // ->add('username', null, array(
-              //     'attr' => array(
-              //         'class' => 'form-control'
-              //     )
-              // ))
-              ->add('decathlonCardId', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('idFacebook', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('idTwitter', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('idGoogleplus', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('twitterOauth', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('twitterOauthSecret', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('nbPointsCurrent', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('nbPointsTotal', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('newsletter', 'choice', array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('newsletterPartner', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('language', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('howItWorkDisplay', null, array(
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('dob', 'date',array(
-                'widget' => 'single_text',
-                'format' => 'dd-MM-yyyy',
-                'attr' => array('class' => 'date form-control'),
-                'label' => 'Date of birth'
-              ))
-              ->add('civility', 'choice', array(
-                'choices' => array(
-                  'Mrs' => 'Mrs',
-                  'Mr' => 'Mr'
-                ),
-                'multiple'  => false,
-                'expanded' => false,
-                'required'  => false,
-                'empty_value' => false,
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-              ->add('roles', 'choice', array(
-                'choices' => array(
-                  User::ROLE_BRAND => User::ROLE_BRAND,
-                  User::ROLE_MODERATOR => User::ROLE_MODERATOR,
-                  User::ROLE_SUPER_ADMIN => User::ROLE_SUPER_ADMIN,
-                  User::ROLE_ADMIN => User::ROLE_ADMIN,
-                ),
-                'multiple'  => true,
-                'expanded' => true,
-                'required'  => false,
-                'empty_value' => false,
-                'attr' => array(
-                  'class' => 'form-control'
-                )
-              ))
-            ;
-        }
     }
 
     /**
@@ -257,29 +154,5 @@ class UserType extends AbstractType
         return $languages;
     }
 
-    private function getOrderedSportsList($er)
-    {
-        $sports = $er->createQueryBuilder('u')
-          ->orderBy('u.name', 'ASC');
 
-        $t = $this->container->get('translator');
-        $sort = array();
-        foreach($sports->getQuery()->getResult() as $s)
-        {
-            $sort[$t->trans($s->getName())]=$s;
-        }
-        ksort($sort);
-
-        $ids = array();
-        foreach ($sort as $sport) {
-            $ids[] = $sport->getId();
-        }
-
-        $sports = $er->createQueryBuilder('u')
-          ->addSelect('FIELD(u.id,'.implode(',', $ids).') as HIDDEN field')
-          ->where('u.id IN ('.implode(',',$ids).')')
-          ->orderBy('field');
-
-        return $sports;
-    }
 }

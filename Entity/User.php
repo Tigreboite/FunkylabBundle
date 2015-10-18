@@ -24,11 +24,6 @@ use Tigreboite\FunkylabBundle\Entity\QuestionnaireQuestion;
  */
 class User extends BaseUser
 {
-    use Image;
-
-    public $IMAGE_PATH     = "medias/profile";
-    public $IMAGE_DEFAULT  = "images/icons@2x/picto_user_default.png";
-
     const ROLE_MODERATOR  = 'ROLE_MODERATOR';
     const ROLE_BRAND      = 'ROLE_BRAND';
     const ROLE_USER       = 'ROLE_USER';
@@ -163,14 +158,6 @@ class User extends BaseUser
     private $image;
 
     /**
-     * @Assert\File(
-     *     maxSize = "6000000",
-     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
-     * )
-     */
-    public $file;
-
-    /**
      * @Assert\Regex(
      *  pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{7,}/",
      *  message="Password must be seven or more characters long and contain at least one digit, one upper- and one lowercase character."
@@ -198,7 +185,6 @@ class User extends BaseUser
         parent::__construct();
         $this->setEnabled(true);
         $this->setCreatedAt(new \DateTime);
-        $this->isarchived       = false;
     }
 
     /**
@@ -442,75 +428,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set decathlonCardId
-     *
-     * @param string $decathlonCardId
-     * @return User
-     */
-    public function setDecathlonCardId($decathlonCardId)
-    {
-        $this->decathlonCardId = $decathlonCardId;
-
-        return $this;
-    }
-
-    /**
-     * Get decathlonCardId
-     *
-     * @return string
-     */
-    public function getDecathlonCardId()
-    {
-        return $this->decathlonCardId;
-    }
-
-    /**
-     * Set nbPointsCurrent
-     *
-     * @param string $nbPointsCurrent
-     * @return User
-     */
-    public function setNbPointsCurrent($nbPointsCurrent)
-    {
-        $this->nbPointsCurrent = $nbPointsCurrent;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPointsCurrent
-     *
-     * @return string
-     */
-    public function getNbPointsCurrent()
-    {
-        return $this->nbPointsCurrent;
-    }
-
-    /**
-     * Set nbPointsTotal
-     *
-     * @param integer $nbPointsTotal
-     * @return User
-     */
-    public function setNbPointsTotal($nbPointsTotal)
-    {
-        $this->nbPointsTotal = $nbPointsTotal;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPointsTotal
-     *
-     * @return integer
-     */
-    public function getNbPointsTotal()
-    {
-        return $this->nbPointsTotal;
-    }
-
-    /**
      * Set newsletter
      *
      * @param boolean $newsletter
@@ -534,29 +451,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set cgu
-     *
-     * @param boolean $cgu
-     * @return User
-     */
-    public function setCgu($cgu)
-    {
-        $this->cgu = $cgu;
-
-        return $this;
-    }
-
-    /**
-     * Get cgu
-     *
-     * @return boolean
-     */
-    public function getCgu()
-    {
-        return $this->cgu;
-    }
-
-    /**
      * Set newsletterPartner
      *
      * @param boolean $newsletterPartner
@@ -577,144 +471,6 @@ class User extends BaseUser
     public function getNewsletterPartner()
     {
         return $this->newsletterPartner;
-    }
-
-    /**
-     * Set idFacebook
-     *
-     * @param string $idFacebook
-     * @return User
-     */
-    public function setIdFacebook($idFacebook)
-    {
-        $this->idFacebook = $idFacebook;
-
-        return $this;
-    }
-
-    /**
-     * Get idFacebook
-     *
-     * @return string
-     */
-    public function getIdFacebook()
-    {
-        return $this->idFacebook;
-    }
-
-    /**
-     * Set idTwitter
-     *
-     * @param string $idTwitter
-     * @return User
-     */
-    public function setIdTwitter($idTwitter)
-    {
-        $this->idTwitter = $idTwitter;
-
-        return $this;
-    }
-
-    /**
-     * Get idTwitter
-     *
-     * @return string
-     */
-    public function getIdTwitter()
-    {
-        return $this->idTwitter;
-    }
-
-    /**
-     * Set idGoogleplus
-     *
-     * @param string $idGoogleplus
-     * @return User
-     */
-    public function setIdGoogleplus($idGoogleplus)
-    {
-        $this->idGoogleplus = $idGoogleplus;
-
-        return $this;
-    }
-
-    /**
-     * Get idGoogleplus
-     *
-     * @return string
-     */
-    public function getIdGoogleplus()
-    {
-        return $this->idGoogleplus;
-    }
-
-    /**
-     * Set idDecathlon
-     *
-     * @param string $idDecathlon
-     * @return User
-     */
-    public function setIdDecathlon($idDecathlon)
-    {
-        $this->idDecathlon = $idDecathlon;
-
-        return $this;
-    }
-
-    /**
-     * Get idDecathlon
-     *
-     * @return string
-     */
-    public function getIdDecathlon()
-    {
-        return $this->idDecathlon;
-    }
-
-    /**
-     * Set twitterOauth
-     *
-     * @param string $twitterOauth
-     * @return User
-     */
-    public function setTwitterOauth($twitterOauth)
-    {
-        $this->twitterOauth = $twitterOauth;
-
-        return $this;
-    }
-
-    /**
-     * Get twitterOauth
-     *
-     * @return string
-     */
-    public function getTwitterOauth()
-    {
-        return $this->twitterOauth;
-    }
-
-    /**
-     * Set twitterOauthSecret
-     *
-     * @param string $twitterOauthSecret
-     * @return User
-     */
-    public function setTwitterOauthSecret($twitterOauthSecret)
-    {
-        $this->twitterOauthSecret = $twitterOauthSecret;
-
-        return $this;
-    }
-
-    /**
-     * Get twitterOauthSecret
-     *
-     * @return string
-     */
-    public function getTwitterOauthSecret()
-    {
-        return $this->twitterOauthSecret;
     }
 
     /**
@@ -803,122 +559,6 @@ class User extends BaseUser
     }
 
     /**
-     * Add idea
-     *
-     * @param \Tigreboite\FunkylabBundle\Entity\Idea
-     * @return User
-     */
-    public function addFavorite(\Tigreboite\FunkylabBundle\Entity\Idea $idea)
-    {
-        $this->favorite[] = $idea;
-
-        return $this;
-    }
-
-    /**
-     * Get favorite
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFavorite()
-    {
-        return $this->favorite;
-    }
-
-    /**
-     * Remove favorite
-     *
-     * @param \Tigreboite\FunkylabBundle\Entity\Idea
-     * @return User
-     */
-    public function removeFavorite(\Tigreboite\FunkylabBundle\Entity\Idea $idea)
-    {
-        foreach($this->favorite as $k=>$v)
-        {
-            if($idea == $v)
-            {
-                unset($this->favorite[$k]);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get participation
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getParticipation()
-    {
-        return $this->participation;
-    }
-
-    /**
-     * Add idea
-     *
-     * @param \Tigreboite\FunkylabBundle\Entity\Idea
-     * @return User
-     */
-    public function addParticipation(\Tigreboite\FunkylabBundle\Entity\Idea $idea)
-    {
-        $this->participation[] = $idea;
-
-        return $this;
-    }
-
-    /**
-     * Remove participation
-     *
-     * @param \Tigreboite\FunkylabBundle\Entity\Idea
-     * @return User
-     */
-    public function removeParticipation(\Tigreboite\FunkylabBundle\Entity\Idea $idea)
-    {
-        foreach($this->participation as $k=>$v)
-        {
-            if($idea == $v)
-            {
-                unset($this->participation[$k]);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getIdea()
-    {
-        return $this->idea;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getChallenge()
-    {
-        return $this->challenge;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getNote()
-    {
-        return $this->note;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getActivity()
-    {
-        return $this->activity;
-    }
-
-    /**
      * Set connectedAt
      *
      * @param \DateTime $connectedAt
@@ -942,29 +582,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     * @return User
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
      * Set image
      *
      * @param string $image
@@ -972,7 +589,7 @@ class User extends BaseUser
      */
     public function setImage($image)
     {
-        $this->image = str_replace($this->getUploadDir(), '', $image);
+        $this->image = $image;
 
         return $this;
     }
@@ -1015,75 +632,6 @@ class User extends BaseUser
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set ref_cust
-     *
-     * @param integer $refCust
-     * @return User
-     */
-    public function setRefCust($refCust)
-    {
-        $this->ref_cust = $refCust;
-
-        return $this;
-    }
-
-    /**
-     * Get ref_cust
-     *
-     * @return integer
-     */
-    public function getRefCust()
-    {
-        return $this->ref_cust;
-    }
-
-    /**
-     * Set code_parrain
-     *
-     * @param integer $codeParrain
-     * @return User
-     */
-    public function setCodeParrain($codeParrain)
-    {
-        $this->code_parrain = $codeParrain;
-
-        return $this;
-    }
-
-    /**
-     * Get code_parrain
-     *
-     * @return integer
-     */
-    public function getCodeParrain()
-    {
-        return $this->code_parrain;
-    }
-
-    /**
-     * Set isarchived
-     *
-     * @param boolean $isarchived
-     * @return User
-     */
-    public function setIsarchived($isarchived)
-    {
-        $this->isarchived = $isarchived;
-
-        return $this;
-    }
-
-    /**
-     * Get isarchived
-     *
-     * @return boolean
-     */
-    public function getIsarchived()
-    {
-        return $this->isarchived;
     }
 
 }
