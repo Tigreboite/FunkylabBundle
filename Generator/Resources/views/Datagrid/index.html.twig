@@ -27,6 +27,7 @@
         table = $('#table_admin').DataTable( {
             "processing": true,
             "serverSide": true,
+            "autoWidth":true,
             "ajax": Routing.generate('%admin_entity_path%_list'),
             "aoColumns": [
                 %sname_fields%,
