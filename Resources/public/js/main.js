@@ -1,6 +1,7 @@
 
 var table; // Datatable variable
 
+
 function updateModalBtn()
 {
   setDeleteButton();
@@ -23,6 +24,7 @@ function updateModalBtn()
 
     } else {
       $.get(url, function(data) {
+
         var _html = '' +
           '<div id="'+id+'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">' +
           ' <div class="modal-dialog modal-lg">' +
@@ -31,21 +33,18 @@ function updateModalBtn()
           '</div>';
 
         $(_html)
-          .modal()
           .on('hidden.bs.modal', function(){
             $(this).remove();
-          });
+          })
+          .modal()
+        ;
 
         setTimeout(function()
         {
-
-          $(function() {
-            $("form input").on('invalid', function(e){
-              $('#modal-ajax div.modal-body ul>li:first a').click();
-            });
-          });
-
           $('input:visible:first').focus();
+
+          //$('.modal .modal-body').css('overflow-y', 'auto');
+          //$('.modal .modal-body').css('max-height', $(window).height() * 0.82);
 
           $('#'+id+' form').on('submit',function(e)
           {
@@ -114,7 +113,7 @@ function loadEditor(id, entity)
   if(entity == 'idea') {
     CKEDITOR.replace( id, {
       toolbar: [
-        { name: 'document', items: [ ] },
+        { name: 'document', items: [ ] }
       ]
     });
   }
