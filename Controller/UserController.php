@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Entity\User;
 use Tigreboite\FunkylabBundle\Form\UserType;
 use Tigreboite\FunkylabBundle\Tools;
@@ -197,8 +197,7 @@ class UserController extends Controller
     /**
      * Edits an existing User entity.
      *
-     * @Route("/{id}", name="admin_user_update")
-     * @Method("PUT")
+     * @Route("/update/{id}", name="admin_user_update")
      * @Template("TigreboiteFunkylabBundle:User:form.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -215,9 +214,8 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $entity->setPassword($entity->getPlainPassword());
+//            $entity->setPassword($entity->getPlainPassword());
 
-            $this->HowItWorkDisplay($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_user'));
@@ -268,40 +266,6 @@ class UserController extends Controller
         $em->flush();
 
         return new Response('Archived');
-    }
-    /**
-     * UnArchive a User entity.
-     *
-     * @Route("/unarchive/{id}", name="admin_user_unarchive", options={"expose"=true})
-     */
-    public function unarchiveAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('TigreboiteFunkylabBundle:User')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-
-        $entity->setIsarchived(false);
-        $em->persist($entity);
-        $em->flush();
-
-        return new Response('UnArchived');
-    }
-
-    private function HowItWorkDisplay($entity)
-    {
-        if ($entity->getHowItWorkDisplay()) {
-            $em = $this->getDoctrine()->getManager();
-            $howit_display = $em->getRepository('TigreboiteFunkylabBundle:User')->findOneBy(array('howItWorkDisplay' => true));
-            
-            if ($howit_display) {
-                $howit_display->setHowItWorkDisplay(false);
-                $em->persist($howit_display);
-                $em->flush();
-            }
-        }
     }
 
     /**
@@ -376,5 +340,34 @@ class UserController extends Controller
             'Content-Type' => 'application/force-download',
             'Content-Disposition' => 'attachment; filename="export-users.csv"'
         ));
+    }
+
+
+
+    /**
+     * Upload files
+     *
+     * @Route("/upload", name="admin_user_upload")
+     */
+    public function uploadAction(Request $request)
+    {
+        $dir_path = 'medias/user/';
+        $data = array('success'=>false);
+        $uploadedFile = $request->files->get('file');
+
+        if ($uploadedFile)
+        {
+            $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
+            if($file)
+            {
+                $data = array(
+                  'success'=>true,
+                  'filename'=>$uploadedFile->getClientOriginalName(),
+                  'path'=>$dir_path.$uploadedFile->getClientOriginalName()
+                );
+            }
+        }
+
+        return new JsonResponse($data);
     }
 }
