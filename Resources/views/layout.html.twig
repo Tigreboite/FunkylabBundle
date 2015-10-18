@@ -63,7 +63,11 @@
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{ asset(app.user.image) }}" class="img-circle" alt="User Image" />
+                                {% if app.user.image %}
+                                <img src="{{ asset(app.user.image) }}" class="img-circle"  />
+                                {% else %}
+                                <img src="{{ asset('bundles/tigreboitefunkylab/images/user.png') }}" class="img-circle"  />
+                                {% endif %}
                                 <p>
                                     {{ app.user.username }}
                                 </p>
@@ -89,7 +93,11 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ asset(app.user.image) }}" class="img-circle" alt="User Image" />
+                    {% if app.user.image %}
+                    <img src="{{ asset(app.user.image) }}" class="img-circle" />
+                    {% else %}
+                    <img src="{{ asset('bundles/tigreboitefunkylab/images/user.png') }}" class="img-circle" />
+                    {% endif %}
                 </div>
                 <div class="pull-left info">
                     <p>{{ app.user.username }}</p>
