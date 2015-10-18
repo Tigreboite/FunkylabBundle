@@ -60,6 +60,11 @@ create a directory images
 $ mkdir web/images
 $ chmod -R 777 web/images
 ```
+###AdminLTE JS/CSS
+
+```
+$ln -s vendor/almasaeed2010/adminlte/ web/bundles/adminlte
+```
 
 ##Console
 

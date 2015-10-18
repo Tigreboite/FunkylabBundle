@@ -1,25 +1,16 @@
-<div class="modal-content">
-
-    <script>
-		$(function() {
-			$("form input").on('invalid', function(e){
-			  $('#modal-ajax div.modal-body ul>li:first a').click();
-			});
-		});
-    </script>
-
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">{{ knp_menu_render('breadcrumb', {'template': 'TigreboiteFunkylabBundle:Menu:title.html.twig'}) }}</h4>
-    </div>
-
-    <div class="modal-loader">
-        <div class="overlay"></div>
-        <i class="fa fa-spinner fa-spin"></i>
-    </div>
-
-    {% block content %}{% endblock %}
-
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{ knp_menu_render('breadcrumb', {'template': 'TigreboiteFunkylabBundle:Menu:title.html.twig'}) }}</h4>
 </div>
+
+{#
+<div class="modal-loader">
+    <div class="overlay"></div>
+    <i class="fa fa-spinner fa-spin"></i>
+</div>
+#}
+
+{% block content %}{% endblock %}
+
 {% block callback_popin %}
 {% endblock %}

@@ -25,7 +25,7 @@ function updateModalBtn()
       $.get(url, function(data) {
         var _html = '' +
           '<div id="'+id+'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">' +
-          ' <div class="modal-dialog">' +
+          ' <div class="modal-dialog modal-lg">' +
           '   <div class="modal-content">'+ data + '</div>' +
           ' </div>' +
           '</div>';
@@ -38,6 +38,13 @@ function updateModalBtn()
 
         setTimeout(function()
         {
+
+          $(function() {
+            $("form input").on('invalid', function(e){
+              $('#modal-ajax div.modal-body ul>li:first a').click();
+            });
+          });
+
           $('input:visible:first').focus();
 
           $('#'+id+' form').on('submit',function(e)
