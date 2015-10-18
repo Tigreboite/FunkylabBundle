@@ -62,7 +62,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
-                            <li class="user-header bg-light-blue">
+                            <li class="user-header">
                                 <img src="{{ asset(app.user.image) }}" class="img-circle" alt="User Image" />
                                 <p>
                                     {{ app.user.username }}
@@ -71,7 +71,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ path('admin_user_edit',{'id':app.user.id}) }}" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="#" data-toggle="modal" data-url="{{ path('admin_user_edit',{'id':app.user.id}) }}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ path('tigreboite_funkylab_admin_logout') }}" class="btn btn-default btn-flat">Sign out</a>

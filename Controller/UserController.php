@@ -214,7 +214,8 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-//            $entity->setPassword($entity->getPlainPassword());
+            if($entity->getPlainPassword())
+                $entity->setPassword($entity->getPlainPassword());
 
             $em->flush();
 
