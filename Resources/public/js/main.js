@@ -164,14 +164,19 @@ function setDeleteButton()
 
 $('document').ready(function()
 {
-  $(".sidebar-toggle").on('click',function()
+  $(".sidebar-toggle").on('click',function(e)
   {
+    e.preventDefault();
     if($('body').hasClass('sidebar-collapse'))
     {
-      $.removeCookie("sidebar_collasped");
+      $.removeCookie("sidebar_collasped",{
+        path    : '/'
+      });
       $('body').removeClass('sidebar-collapse');
     }else{
-      $.cookie("sidebar_collasped", 1);
+      $.cookie("sidebar_collasped", 1,{
+        path    : '/'
+      });
       $('body').addClass('sidebar-collapse');
     }
   });
