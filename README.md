@@ -110,8 +110,8 @@ Configure with annotation your action's controller
  }
 ```
 
-Menu : name, icon : image to display in admin, groupe, tab where to put this action
-Security : Role ROLE_MODERATOR, ROLE_BRAND, ROLE_USER, ROLE_ADMIN
+Menu : name, icon : image to display in admin, groupe, tab where to put this action   
+Security : Role ROLE_MODERATOR, ROLE_BRAND, ROLE_USER, ROLE_ADMIN   
 
 don't forget to add the global route to your controller to be included in the admin.
 
