@@ -34,7 +34,7 @@
 
     <link rel="stylesheet" href="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.css') }}">
 </head>
-<body class="hold-transition skin-yellow-light sidebar-mini">
+<body class="hold-transition skin-yellow-light sidebar-mini {% if app.request.cookies.has('sidebar_collasped') %}sidebar-collapse{% endif %}">
 
 <div class="wrapper">
     <!-- header logo: style can be found in header.less -->
@@ -142,12 +142,19 @@
     <!-- Bootstrap -->
     <script src="{{ asset('bundles/adminlte/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
     <!-- AdminLTE App -->
+    <script type="text/javascript">
+        var AdminLTEOptions = {
+            animationSpeed: 500,
+            sidebarPushMenu: false
+        };
+    </script>
     <script src="{{ asset('bundles/adminlte/dist/js/app.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('bundles/adminlte/plugins/datatables/jquery.dataTables.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('bundles/adminlte/plugins/datatables/dataTables.bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('bundles/tigreboitefunkylab/vendor/jquery.confirm.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('bundles/tigreboitefunkylab/vendor/jquery.fileupload.js') }}" type="text/javascript"></script>
     <script src="{{ asset('bundles/tigreboitefunkylab/vendor/jquery.fileupload-jquery-ui.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/tigreboitefunkylab/vendor/jquery.cookie.js') }}" type="text/javascript"></script>
 
     <!-- Bootstrap WYSIHTML5 -->
     <script src="{{ asset('bundles/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}" type="text/javascript"></script>

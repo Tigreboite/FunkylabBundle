@@ -164,6 +164,17 @@ function setDeleteButton()
 
 $('document').ready(function()
 {
+  $(".sidebar-toggle").on('click',function()
+  {
+    if($('body').hasClass('sidebar-collapse'))
+    {
+      $.removeCookie("sidebar_collasped");
+      $('body').removeClass('sidebar-collapse');
+    }else{
+      $.cookie("sidebar_collasped", 1);
+      $('body').addClass('sidebar-collapse');
+    }
+  });
   updateModalBtn();
 });
 
