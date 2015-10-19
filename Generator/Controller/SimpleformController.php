@@ -26,9 +26,11 @@ use Tigreboite\FunkylabBundle\Form\SimpleformType;
 class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\SimpleformController
 {
 
-    protected $formType   = 'SimpleformType';
+    protected $entityName = '%bundle_name%\Entity\Simpleform';
+    protected $formType   = '%bundle_name%\Form\SimpleformType';
     protected $route_base = 'admin_simpleform';
     protected $repository = '%bundle_name%:%entity_name%';
+    protected $dir_path   = 'medias/%bundle_name%/';
 
     /**
      * Lists all Simpleform entities.
@@ -39,87 +41,56 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
      * @Menu("Simpleform", dataType="string",icon="fa-flag",groupe="CMS")
      * %security_roles%
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        $em     = $this->getDoctrine()->getManager();
-        $repo   = $em->getRepository($this->repository);
-        $entity = $repo->findOneBy(array(), array('id' => 'DESC'));
-
-        if (!$entity) {
-            $entity   = new Car();
-            $editForm = $this->createCreateForm($entity);
-        } else {
-            $editForm = $this->createEditForm($entity);
-        }
-
-        return array('entity' => $entity, 'form' => $editForm->createView(), 'ajax' => $request->isXmlHttpRequest());
-
+        return parent::indexAction();
     }
+
+    /**
+     * Lists all Simpleform entities.
+     *
+     * @Route("/list", name="admin_simpleform_list", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function listAction(Request $request)
+    {
+        return parent::listAction($request);
+    }
+
     /**
      * Creates a new Simpleform entity.
      *
      * @Route("/", name="admin_simpleform_create")
      * @Method("POST")
-     * @Template("TigreboiteFunkylabBundle:Simpleform:index.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Simpleform();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl($this->route_base));
-        }
-
-        return array(
-          'entity' => $entity,
-          'form'   => $form->createView(),
-          'ajax' => $request->isXmlHttpRequest()
-        );
+        return parent::createAction($request);
     }
 
     /**
-     * Creates a form to create a Simpleform entity.
+     * Displays a form to create a new Simpleform entity.
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @Route("/new", name="admin_simpleform_new")
+     * @Method("GET")
+     * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
      */
-    private function createCreateForm(Simpleform $entity)
+    public function newAction(Request $request)
     {
-        $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new SimpleformType($em), $entity, array(
-          'action' => $this->generateUrl($this->route_base.'_create'),
-          'method' => 'POST',
-          'allow_extra_fields'=>true,
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
+        return parent::newAction($request);
     }
 
     /**
-     * Creates a form to edit a Simpleform entity.
+     * Displays a form to edit an existing Simpleform entity.
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @Route("/{id}/edit", name="admin_simpleform_edit", options={"expose"=true})
+     * @Method("GET")
+     * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
      */
-    private function createEditForm(Simpleform $entity)
+    public function editAction(Request $request, $id)
     {
-        $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new SimpleformType($em), $entity, array(
-          'action' => $this->generateUrl('admin_simpleform_update', array('id' => $entity->getId())),
-          'method' => 'PUT',
-
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
+        return parent::editAction($request, $id);
     }
 
     /**
@@ -131,28 +102,18 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
+        return parent::updateAction($request, $id);
+    }
 
-        $entity = $em->getRepository($this->repository)->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl($this->route_base.'_edit', array('id' => $id)));
-        }
-
-        return array(
-          'entity'      => $entity,
-          'form'   => $editForm->createView(),
-          'ajax' => $request->isXmlHttpRequest()
-        );
+    /**
+     * Deletes a Simpleform entity.
+     *
+     * @Route("/{id}", name="admin_simpleform_delete", options={"expose"=true})
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        return parent::deleteAction($request, $id);
     }
 
     /**
@@ -162,24 +123,7 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
      */
     public function uploadAction(Request $request)
     {
-        $dir_path = 'medias/%entity_path_file%/';
-        $data = array('success'=>false);
-        $uploadedFile = $request->files->get('file');
-
-        if ($uploadedFile)
-        {
-            $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
-            if($file)
-            {
-                $data = array(
-                  'success'=>true,
-                  'filename'=>$uploadedFile->getClientOriginalName(),
-                  'path'=>$dir_path.$uploadedFile->getClientOriginalName()
-                );
-            }
-        }
-
-        return new JsonResponse($data);
+        return parent::uploadAction($request);
     }
 
 }
