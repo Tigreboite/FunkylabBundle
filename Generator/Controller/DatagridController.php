@@ -92,7 +92,6 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * Edits an existing Datagrid entity.
      *
      * @Route("/update/{id}", name="admin_datagrid_update")
-     * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
     public function updateAction(Request $request, $id)

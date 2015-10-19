@@ -47,17 +47,6 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
     }
 
     /**
-     * Lists all Simpleform entities.
-     *
-     * @Route("/list", name="admin_simpleform_list", options={"expose"=true})
-     * @Method("GET")
-     */
-    public function listAction(Request $request)
-    {
-        return parent::listAction($request);
-    }
-
-    /**
      * Creates a new Simpleform entity.
      *
      * @Route("/", name="admin_simpleform_create")
@@ -97,23 +86,11 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
      * Edits an existing Simpleform entity.
      *
      * @Route("/update/{id}", name="admin_simpleform_update")
-     * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         return parent::updateAction($request, $id);
-    }
-
-    /**
-     * Deletes a Simpleform entity.
-     *
-     * @Route("/{id}", name="admin_simpleform_delete", options={"expose"=true})
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, $id)
-    {
-        return parent::deleteAction($request, $id);
     }
 
     /**

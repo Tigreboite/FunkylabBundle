@@ -105,8 +105,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     /**
      * Edits an existing Sortable entity.
      *
-     {id}", name="admin_sortable_update")
-     * @Method("PUT")
+     * @Route("/update/{id}", name="admin_sortable_update")
      * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
     public function updateAction(Request $request, $id)

@@ -25,18 +25,18 @@ class DatagridController extends BaseController
         }
 
         // GET
-        $draw = $request->query->get('draw');
-        $start = $request->query->get('start');
-        $length = $request->query->get('length');
-        $search_string = $request->query->get('search');
-        $search_string = $search_string['value'];
-        $order_column = $request->query->get('order');
-        $order_column = $order_column[0]['column'];
-        $order_dir = $request->query->get('order');
-        $order_dir = $order_dir[0]['dir'];
-        $columns = $request->query->get('columns');
+        $draw           = $request->query->get('draw');
+        $start          = $request->query->get('start');
+        $length         = $request->query->get('length');
+        $search_string  = $request->query->get('search');
+        $search_string  = $search_string['value'];
+        $order_column   = $request->query->get('order');
+        $order_column   = $order_column[0]['column'];
+        $order_dir      = $request->query->get('order');
+        $order_dir      = $order_dir[0]['dir'];
+        $columns        = $request->query->get('columns');
 
-        $em = $this->getDoctrine()->getManager();
+        $em       = $this->getDoctrine()->getManager();
         $entities = $em->getRepository($this->repository)
           ->findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir);
 
