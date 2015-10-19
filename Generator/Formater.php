@@ -51,7 +51,9 @@ abstract class Formater {
         $code = str_replace('%bundle_name%',$this->bundle,$code);
         $code = str_replace('%entity_path_file%',strtolower($this->entityName),$code);
         $code = str_replace('%security_roles%','@Security("has_role(\'ROLE_SUPER_ADMIN\')")',$code);
+        $code = str_replace("\\Controller\\".$this->type."Controller","#tmpController#",$code);
         $code = str_replace($this->type,$this->entityName,$code);
+        $code = str_replace("#tmpController#","\\Controller\\".$this->type."Controller",$code);
 
         $code = str_replace('Tigreboite\\FunkylabBundle\\Form',$this->bundle.'\\Form',$code);
         $code = str_replace('Tigreboite\\FunkylabBundle\\Entity',$this->bundle.'\\Entity',$code);
