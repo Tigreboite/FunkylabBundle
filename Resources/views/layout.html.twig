@@ -58,7 +58,7 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="glyphicon glyphicon-user"></i>
-                            <span>{{ app.user.username }} <i class="caret"></i></span>
+                            <span>{{ app.user.firstname }} {{ app.user.lastname }}<i class="caret"></i></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -69,7 +69,7 @@
                                 <img src="{{ asset('bundles/tigreboitefunkylab/images/user.png') }}" class="img-circle"  />
                                 {% endif %}
                                 <p>
-                                    {{ app.user.username }}
+                                    {{ app.user.firstname }} {{ app.user.lastname }}
                                 </p>
                             </li>
                             <!-- Menu Footer-->
@@ -100,7 +100,8 @@
                     {% endif %}
                 </div>
                 <div class="pull-left info">
-                    <p>{{ app.user.username }}</p>
+                    <br/>
+                    <p>{{ app.user.firstname }} {{ app.user.lastname }}</p>
                 </div>
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
