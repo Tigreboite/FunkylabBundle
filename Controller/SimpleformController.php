@@ -19,6 +19,10 @@ class SimpleformController extends BaseController
     protected $repository = 'Tigreboite:Simpleform';
     protected $dir_path   = 'medias/simpleform/';
 
+    /**
+     * Display a simpleform
+     * @return array
+     */
     public function indexAction()
     {
         $request = $this->get('request');

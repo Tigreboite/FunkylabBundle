@@ -19,6 +19,10 @@ class SortableController extends BaseController
     protected $repository = 'Tigreboite:Simpleform';
     protected $dir_path   = 'medias/simpleform/';
 
+    /**
+     * Get a list to feed sortable
+     * @return array
+     */
     public function listeAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -33,6 +37,10 @@ class SortableController extends BaseController
         );
     }
 
+    /**
+     * Save order
+     * @return JsonResponse
+     */
     public function orderAction()
     {
         $request    = $this->get('request');

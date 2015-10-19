@@ -28,7 +28,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     protected $dir_path   = 'medias/%bundle_name%/';
 
     /**
-     * Lists all Datagrid entities.
+     * Lists all entities.
      *
      * @Route("/", name="admin_datagrid")
      * @Method("GET")
@@ -42,7 +42,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     }
 
     /**
-     * Lists all Datagrid entities.
+     * Get all entities
      *
      * @Route("/list", name="admin_datagrid_list", options={"expose"=true})
      * @Method("GET")
@@ -53,7 +53,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     }
 
     /**
-     * Creates a new Datagrid entity.
+     * Create entity
      *
      * @Route("/", name="admin_datagrid_create")
      * @Method("POST")
@@ -65,7 +65,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     }
 
     /**
-     * Displays a form to create a new Datagrid entity.
+     * Displays a form to create a new entity.
      *
      * @Route("/new", name="admin_datagrid_new")
      * @Method("GET")
@@ -77,7 +77,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     }
 
     /**
-     * Displays a form to edit an existing Datagrid entity.
+     * Displays a form to edit an existing entity.
      *
      * @Route("/{id}/edit", name="admin_datagrid_edit", options={"expose"=true})
      * @Method("GET")
@@ -89,7 +89,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     }
 
     /**
-     * Edits an existing Datagrid entity.
+     * Edits an existing entity.
      *
      * @Route("/update/{id}", name="admin_datagrid_update")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
@@ -100,7 +100,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     }
 
     /**
-     * Deletes a Datagrid entity.
+     * Delete an entity.
      *
      * @Route("/{id}", name="admin_datagrid_delete", options={"expose"=true})
      * @Method("DELETE")

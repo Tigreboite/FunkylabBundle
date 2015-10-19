@@ -18,6 +18,11 @@ class DatagridController extends BaseController
     protected $repository = 'Tigreboite:Datagrid';
     protected $dir_path   = 'medias/datagrid/';
 
+    /**
+     * Get a list to feed datagrid
+     * @param Request $request
+     * @return Response
+     */
     public function listAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {

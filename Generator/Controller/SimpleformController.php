@@ -33,7 +33,7 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
     protected $dir_path   = 'medias/%bundle_name%/';
 
     /**
-     * Lists all Simpleform entities.
+     * Display a form to edit current entity
      *
      * @Route("/", name="admin_simpleform")
      * @Method("GET")
@@ -47,7 +47,7 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
     }
 
     /**
-     * Creates a new Simpleform entity.
+     * Creates a new entity.
      *
      * @Route("/", name="admin_simpleform_create")
      * @Method("POST")
@@ -59,7 +59,7 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
     }
 
     /**
-     * Displays a form to create a new Simpleform entity.
+     * Displays a form to create a new entity.
      *
      * @Route("/new", name="admin_simpleform_new")
      * @Method("GET")
@@ -71,7 +71,7 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
     }
 
     /**
-     * Displays a form to edit an existing Simpleform entity.
+     * Displays a form to edit an existing entity.
      *
      * @Route("/{id}/edit", name="admin_simpleform_edit", options={"expose"=true})
      * @Method("GET")
@@ -83,7 +83,7 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
     }
 
     /**
-     * Edits an existing Simpleform entity.
+     * Edits an existing entity.
      *
      * @Route("/update/{id}", name="admin_simpleform_update")
      * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")

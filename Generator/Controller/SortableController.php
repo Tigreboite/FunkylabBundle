@@ -33,7 +33,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     protected $dir_path   = 'medias/%bundle_name%/';
 
     /**
-     * Lists all Sortable entities.
+     * Lists all entities.
      *
      * @Route("/", name="admin_sortable")
      * @Method("GET")
@@ -47,7 +47,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     }
 
     /**
-     * Creates a new Sortable entity.
+     * Creates a new entity.
      *
      * @Route("/", name="admin_sortable_create")
      * @Method("POST")
@@ -59,7 +59,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     }
 
     /**
-     * Displays a form to create a new Sortable entity.
+     * Displays a form to create a new entity.
      *
      * @Route("/new", name="admin_sortable_new")
      * @Method("GET")
@@ -71,7 +71,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     }
 
     /**
-     * Displays a form to edit an existing Sortable entity.
+     * Displays a form to edit an existing entity.
      *
      * @Route("/{id}/edit", name="admin_sortable_edit", options={"expose"=true})
      * @Method("GET")
@@ -83,7 +83,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     }
 
     /**
-     * Creates a form to create a Sortable entity.
+     * Creates a form to create a entity.
      *
      * @return \Symfony\Component\Form\Form The form
      */
@@ -93,7 +93,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     }
 
     /**
-     * Creates a form to edit a Sortable entity.
+     * Creates a form to edit a entity.
      *
      * @return \Symfony\Component\Form\Form The form
      */
@@ -103,7 +103,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     }
 
     /**
-     * Edits an existing Sortable entity.
+     * Edits an existing entity.
      *
      * @Route("/update/{id}", name="admin_sortable_update")
      * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
@@ -113,7 +113,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
         return parent::updateAction($request, $id);
     }
     /**
-     * Deletes a Sortable entity.
+     * Deletes an entity.
      *
      * @Route("/{id}", name="admin_sortable_delete", options={"expose"=true})
      * @Method("DELETE")
@@ -134,7 +134,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     }
 
     /**
-     * Lists all Platform entities.
+     * Get a list of all entities.
      *
      * @Route("/liste", name="admin_sortable_liste")
      * @Method("GET")
