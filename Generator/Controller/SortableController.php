@@ -23,12 +23,14 @@ use Tigreboite\FunkylabBundle\Form\SortableType;
  *
  * @Route("/admin/sortable")
  */
-class SortableController extends Controller
+class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableController
 {
 
-    protected $formType   = 'SortableType';
+    protected $entityName = '%bundle_name%\Entity\Sortable';
+    protected $formType   = '%bundle_name%\Form\SortableType';
     protected $route_base = 'admin_sortable';
     protected $repository = '%bundle_name%:%entity_name%';
+    protected $dir_path   = 'medias/%bundle_name%/';
 
     /**
      * Lists all Sortable entities.
@@ -41,7 +43,7 @@ class SortableController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        return parent::indexAction();
     }
 
     /**
@@ -53,24 +55,7 @@ class SortableController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Sortable();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl($this->route_base));
-        }
-
-        return array(
-          'entity' => $entity,
-          'form'   => $form->createView(),
-          'ajax' => $request->isXmlHttpRequest()
-        );
+        return parent::createAction($request);
     }
 
     /**
@@ -82,14 +67,7 @@ class SortableController extends Controller
      */
     public function newAction(Request $request)
     {
-        $entity = new Sortable();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-          'entity' => $entity,
-          'form'   => $form->createView(),
-          'ajax' => $request->isXmlHttpRequest()
-        );
+        return parent::newAction($request);
     }
 
     /**
@@ -101,21 +79,7 @@ class SortableController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository($this->repository)->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Sortable entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-
-        return array(
-          'entity'      => $entity,
-          'form'   => $editForm->createView(),
-          'ajax' => $request->isXmlHttpRequest()
-        );
+        return parent::editAction($request, $id);
     }
 
     /**
@@ -123,18 +87,9 @@ class SortableController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Sortable $entity)
+    public function createCreateForm($entity)
     {
-        $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new SortableType($em), $entity, array(
-          'action' => $this->generateUrl($this->route_base.'_create'),
-          'method' => 'POST',
-          'allow_extra_fields'=>true,
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
+        return parent::createCreateForm($entity);
     }
 
     /**
@@ -142,18 +97,9 @@ class SortableController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(Sortable $entity)
+    public function createEditForm($entity)
     {
-        $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new SortableType($em), $entity, array(
-          'action' => $this->generateUrl('admin_sortable_update', array('id' => $entity->getId())),
-          'method' => 'PUT',
-
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
+        return parent::createEditForm($entity);
     }
 
     /**
@@ -165,28 +111,7 @@ class SortableController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository($this->repository)->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl($this->route_base.'_edit', array('id' => $id)));
-        }
-
-        return array(
-          'entity'      => $entity,
-          'form'   => $editForm->createView(),
-          'ajax' => $request->isXmlHttpRequest()
-        );
+        return parent::updateAction($request, $id);
     }
     /**
      * Deletes a Sortable entity.
@@ -196,17 +121,7 @@ class SortableController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository($this->repository)->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find entity.');
-        }
-
-        $em->remove($entity);
-        $em->flush();
-
-        return new Response('Deleted');
+        return parent::deleteAction($request, $id);
     }
 
     /**
@@ -216,24 +131,7 @@ class SortableController extends Controller
      */
     public function uploadAction(Request $request)
     {
-        $dir_path = 'medias/%entity_path_file%/';
-        $data = array('success'=>false);
-        $uploadedFile = $request->files->get('file');
-
-        if ($uploadedFile)
-        {
-            $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
-            if($file)
-            {
-                $data = array(
-                  'success'=>true,
-                  'filename'=>$uploadedFile->getClientOriginalName(),
-                  'path'=>$dir_path.$uploadedFile->getClientOriginalName()
-                );
-            }
-        }
-
-        return new JsonResponse($data);
+        return parent::uploadAction($request);
     }
 
     /**
@@ -245,16 +143,7 @@ class SortableController extends Controller
      */
     public function listeAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities  = $em->getRepository($this->repository)->findBy(
-          array(),
-          array('ordre'=>'ASC')
-        );
-
-        return array(
-          'entities' => $entities,
-        );
+        return parent::listeAction();
     }
 
     /**
@@ -265,29 +154,7 @@ class SortableController extends Controller
      */
     public function orderAction()
     {
-        $request    = $this->get('request');
-        $type       = $request->get('type',false);
-        $platform   = $request->get('platform',false);
-        $items      = $request->get('item', array());
-
-        $data = array();
-        $data['type'] = $type;
-        $data['platform'] = $platform;
-        $data['items'] = $items;
-
-        $em = $this->getDoctrine()->getManager();
-
-        $count = 1;
-        foreach($items as $id)
-        {
-            $entity = $em->getRepository($this->repository)->find($id);
-            $entity->setOrdre($count);
-            $em->persist($entity);
-            $count++;
-        }
-
-        $em->flush();
-        return new JsonResponse($data);
+        return parent::orderAction();
     }
 
 

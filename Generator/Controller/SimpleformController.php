@@ -23,7 +23,7 @@ use Tigreboite\FunkylabBundle\Form\SimpleformType;
  *
  * @Route("/admin/simpleform")
  */
-class SimpleformController extends Controller
+class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\SimpleformController
 {
 
     protected $formType   = 'SimpleformType';
