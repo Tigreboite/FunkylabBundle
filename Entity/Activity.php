@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * FaqCategory
  *
- * @ORM\Table(name="activity")
+ * @ORM\Table(name="flb_activity")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\ActivityRepository")
  * @ORM\HasLifecycleCallbacks
  */

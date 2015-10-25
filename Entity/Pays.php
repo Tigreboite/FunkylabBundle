@@ -9,7 +9,7 @@ use Gedmo\Translatable\Translatable;
 /**
  * Pays
  *
- * @ORM\Table(name="pays")
+ * @ORM\Table(name="flb_pays")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\PaysRepository")
  */
 class Pays

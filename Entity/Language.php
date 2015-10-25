@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Language
  *
- * @ORM\Table(name="language")
+ * @ORM\Table(name="flb_language")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\LanguageRepository")
  * @ORM\HasLifecycleCallbacks
  */

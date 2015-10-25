@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * BlogComment
  *
- * @ORM\Table(name="blog_comment", indexes={@ORM\Index(name="fk_blog_comment_language1_idx", columns={"language_id"}), @ORM\Index(name="fk_blog_comment_iead1_idx", columns={"blog_id"}), @ORM\Index(name="fk_blog_comment_user1_idx", columns={"user_id"})})
+ * @ORM\Table(name="flb_blog_comment", indexes={@ORM\Index(name="fk_blog_comment_language1_idx", columns={"language_id"}), @ORM\Index(name="fk_blog_comment_iead1_idx", columns={"blog_id"}), @ORM\Index(name="fk_blog_comment_user1_idx", columns={"user_id"})})
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\BlogCommentRepository")
  */
 class BlogComment

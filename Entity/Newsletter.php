@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * FaqCategory
  *
- * @ORM\Table(name="newsletter")
+ * @ORM\Table(name="flb_newsletter")
  * @ORM\Entity
  * @UniqueEntity("email")
  */

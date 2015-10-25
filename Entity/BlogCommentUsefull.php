@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * CommentUsefull
  *
- * @ORM\Table(name="blog_comment_usefull")
+ * @ORM\Table(name="flb_blog_comment_usefull")
  * @ORM\Entity
  */
 class BlogCommentUsefull

@@ -20,9 +20,34 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('tigreboite_funkylab');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+          ->addDefaultsIfNotSet()
+          ->children()
+              ->arrayNode('controllers')
+                  ->addDefaultsIfNotSet()
+                  ->children()
+                      ->booleanNode('blog')
+                        ->defaultTrue()
+                      ->end()
+                      ->booleanNode('page')
+                        ->defaultTrue()
+                      ->end()
+                      ->booleanNode('user')
+                        ->defaultTrue()
+                      ->end()
+                      ->booleanNode('language')
+                        ->defaultTrue()
+                      ->end()
+                      ->booleanNode('country')
+                        ->defaultTrue()
+                      ->end()
+                      ->booleanNode('translator')
+                        ->defaultTrue()
+                      ->end()
+                  ->end()
+              ->end()
+          ->end()
+        ;
 
         return $treeBuilder;
     }

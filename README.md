@@ -52,6 +52,21 @@ tigreboite_routing:
     resource: "@TigreboiteFunkylabBundle/Resources/config/routing.yml"
 ```
 
+ontrollers :
+
+You can configure all the controllers of the admin to be displayed or not in the menu
+
+```
+tigreboite_funkylab:
+  controllers:
+      user: false
+      translator: false
+      page: false
+      blog: false
+      country: false
+      language: false
+```
+
 ###Medias
 
 create a directory images

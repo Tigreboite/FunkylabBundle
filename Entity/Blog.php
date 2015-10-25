@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Brand
  *
- * @ORM\Table(name="blog")
+ * @ORM\Table(name="flb_blog")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\BlogRepository")
  */
 class Blog

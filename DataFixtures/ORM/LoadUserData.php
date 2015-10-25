@@ -63,7 +63,6 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
 
             $entity->setNewsletter(false);
             $entity->setNewsletterPartner(false);
-            $entity->setIsarchived(false);
 
             foreach ($user['roles'] as $role) {
                 $entity->addRole($role);

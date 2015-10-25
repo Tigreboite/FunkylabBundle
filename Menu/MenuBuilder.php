@@ -11,6 +11,7 @@ use Tigreboite\FunkylabBundle\Annotation\Driver\MenuConverter;
 class MenuBuilder
 {
     private $factory;
+    private $config;
 
     /**
      * @param FactoryInterface $factory
@@ -22,8 +23,8 @@ class MenuBuilder
 
     public function createMainMenu(Request $request, Reader $reader, ContainerInterface $container)
     {
-        $menuConverter= new MenuConverter($reader, $container);
-
+        $menuConverter = new MenuConverter($reader, $container);
+        $this->config = $menuConverter->getFunkylabConfiguration();
         $list = $menuConverter->getControllersWithAnnotationModules();
 
         $menu = $this->factory->createItem('root', array(
@@ -34,6 +35,17 @@ class MenuBuilder
         {
             if(isset($l['children']))
             {
+                if($l['children'][0]['route']=="admin_user" && !$this->config['user'])
+                    continue;
+                if($l['children'][0]['route']=="admin_blog" && !$this->config['blog'])
+                    continue;
+                if($l['children'][0]['route']=="admin_language" && !$this->config['language'])
+                    continue;
+                if($l['children'][0]['route']=="admin_pays" && !$this->config['country'])
+                    continue;
+                if($l['children'][0]['route']=="admin_page" && !$this->config['page'])
+                    continue;
+
                 $i = $menu->addChild($k, array(
                   'route' => $l['children'][0]['route'],
                   'extras' => array('treeview'=>true,'class_icon' => 'fa '.$l['children'][0]['menu']->getIcon()),
@@ -44,6 +56,18 @@ class MenuBuilder
                 {
                     if($request->get('_route')==$m['route'])
                         $i->setCurrent(true);
+
+                    if($m['route']=="admin_user" && !$this->config['user'])
+                        continue;
+                    if($m['route']=="admin_blog" && !$this->config['blog'])
+                        continue;
+                    if($m['route']=="admin_language" && !$this->config['language'])
+                        continue;
+                    if($m['route']=="admin_pays" && !$this->config['country'])
+                        continue;
+                    if($m['route']=="admin_page" && !$this->config['page'])
+                        continue;
+
                     $i->addChild($m['menu']->getPropertyName(), array(
                       'route' => $m['route'],
                       'extras' => array('class_icon' => "fa ".$m['menu']->getIcon())
@@ -52,17 +76,20 @@ class MenuBuilder
 
                 if($k=="CMS")
                 {
-                    if($request->get('_route')=="lexik_translation_grid")
-                        $i->setCurrent(true);
+                    if($this->config['translator'])
+                    {
+                        if($request->get('_route')=="lexik_translation_grid")
+                            $i->setCurrent(true);
 
-                    $i->addChild('Translator', array(
-                      'route' => 'lexik_translation_grid',
-                      'extras' => array('class_icon' => 'fa fa-globe')
+                        $i->addChild('Translator', array(
+                          'route' => 'lexik_translation_grid',
+                          'extras' => array('class_icon' => 'fa fa-globe')
 
-                    ));$i->addChild('Translator download', array(
-                      'route' => 'admin_translator_download',
-                      'extras' => array('class_icon' => 'fa fa-download')
-                    ));
+                        ));$i->addChild('Translator download', array(
+                          'route' => 'admin_translator_download',
+                          'extras' => array('class_icon' => 'fa fa-download')
+                        ));
+                    }
                 }
             }else{
                 $menu->addChild($l['menu']->getName(), array(

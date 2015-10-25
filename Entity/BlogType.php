@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Brand
  *
- * @ORM\Table(name="blog_type")
+ * @ORM\Table(name="flb_blog_type")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\BlogTypeRepository")
  */
 class BlogType

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Brand
  *
- * @ORM\Table(name="page")
+ * @ORM\Table(name="flb_page")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\PageRepository")
  * @ORM\HasLifecycleCallbacks
  */
