@@ -35,15 +35,15 @@ class MenuBuilder
         {
             if(isset($l['children']))
             {
-                if($l['children'][0]['route']=="admin_user" && !$this->config['user'])
+                if($l['children'][0]['route']=="admin_user"     && !$this->config['user'])
                     continue;
-                if($l['children'][0]['route']=="admin_blog" && !$this->config['blog'])
+                if($l['children'][0]['route']=="admin_blog"     && !$this->config['blog'])
                     continue;
                 if($l['children'][0]['route']=="admin_language" && !$this->config['language'])
                     continue;
-                if($l['children'][0]['route']=="admin_pays" && !$this->config['country'])
+                if($l['children'][0]['route']=="admin_pays"     && !$this->config['country'])
                     continue;
-                if($l['children'][0]['route']=="admin_page" && !$this->config['page'])
+                if($l['children'][0]['route']=="admin_page"     && !$this->config['page'])
                     continue;
 
                 $i = $menu->addChild($k, array(
@@ -57,15 +57,15 @@ class MenuBuilder
                     if($request->get('_route')==$m['route'])
                         $i->setCurrent(true);
 
-                    if($m['route']=="admin_user" && !$this->config['user'])
+                    if($m['route']=="admin_user"     && !$this->config['user'])
                         continue;
-                    if($m['route']=="admin_blog" && !$this->config['blog'])
+                    if($m['route']=="admin_blog"     && !$this->config['blog'])
                         continue;
                     if($m['route']=="admin_language" && !$this->config['language'])
                         continue;
-                    if($m['route']=="admin_pays" && !$this->config['country'])
+                    if($m['route']=="admin_pays"     && !$this->config['country'])
                         continue;
-                    if($m['route']=="admin_page" && !$this->config['page'])
+                    if($m['route']=="admin_page"     && !$this->config['page'])
                         continue;
 
                     $i->addChild($m['menu']->getPropertyName(), array(

@@ -36,7 +36,7 @@ class MenuConverter
         );
         foreach($config as $k=>$v)
         {
-            $config[$k]=$this->container->getParameter('tigreboite_funkylab.controllers.'.$k);
+            $config[$k]=$this->container->getParameter('tigreboite_funkylab.default_menu.'.$k);
         }
         return $config;
     }

@@ -58,7 +58,7 @@ You can configure all the controllers of the admin to be displayed or not in the
 
 ```
 tigreboite_funkylab:
-  controllers:
+  default_menu:
       user: false
       translator: false
       page: false

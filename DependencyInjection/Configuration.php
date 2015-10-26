@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
           ->addDefaultsIfNotSet()
           ->children()
-              ->arrayNode('controllers')
+              ->arrayNode('default_menu')
                   ->addDefaultsIfNotSet()
                   ->children()
                       ->booleanNode('blog')
