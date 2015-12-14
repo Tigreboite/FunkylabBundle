@@ -1,0 +1,9 @@
+.fixselect2 .select2{min-width:100%;}
+.fixselect2 .select2{min-width:100%;}
+.select2-result-repository { padding-top: 4px; padding-bottom: 3px; }
+.select2-result-repository__avatar { float: left; width: 60px; margin-right: 10px; }
+.select2-result-repository__avatar img { width: 100%; height: auto; border-radius: 2px; }
+.select2-result-repository__meta { margin-left: 70px; }
+.select2-result-item { color: black; font-weight: bold; word-wrap: break-word; line-height: 1.1; margin-bottom: 4px; }
+.select2-results__option--highlighted .select2-result-item { color: white; }
+.select2-results__option--highlighted .select2-result-item { color: #c6dcef; }
