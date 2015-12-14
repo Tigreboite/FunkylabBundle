@@ -5,7 +5,7 @@ var autoTplDefault = function (repo) {
     "<div class='select2-result-repository clearfix'>" +
     "   <div class='select2-result-repository__meta'>" +
     "       <div class='select2-result-item'>" + repo.title + "</div>"+
-    "       <div class='select2-result-item'>" + repo.summary + "</div>" +
+    "       <div class='select2-result-repository__meta'>" + repo.summary + "</div>" +
     "   </div>" +
     "</div>";
 
