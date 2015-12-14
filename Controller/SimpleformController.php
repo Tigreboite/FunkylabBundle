@@ -30,6 +30,7 @@ class SimpleformController extends BaseController
         $repo    = $em->getRepository($this->repository);
         $entity  = $repo->findOneBy(array(), array('id' => 'DESC'));
 
+
         if (!$entity) {
             $entity   = new $this->entityName();
             $editForm = $this->createCreateForm($entity);
@@ -39,6 +40,32 @@ class SimpleformController extends BaseController
 
         return array('entity' => $entity, 'form' => $editForm->createView(), 'ajax' => $request->isXmlHttpRequest());
 
+    }
+
+    public function updateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository($this->repository)->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find entity.');
+        }
+
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl($this->route_base));
+        }
+
+        return array(
+          'entity'      => $entity,
+          'form'   => $editForm->createView(),
+          'ajax' => $request->isXmlHttpRequest()
+        );
     }
 
 }
