@@ -4,12 +4,12 @@ var table; // Datatable variable
 
 function updateModalBtn()
 {
-  setDeleteButton();
   // Support for AJAX loaded modal window.
   // Focuses on first input textbox after it loads the window.
   $('[data-toggle="modal"]').unbind();
   $('[data-toggle="modal"]').click(function(e) {
     e.preventDefault();
+    loadingModal.showPleaseWait();
 
     if($('#modal-ajax').length)
       $('#modal-ajax').modal('hide');
@@ -19,36 +19,37 @@ function updateModalBtn()
     var id = $(this).data('id') ? $(this).data('id') : 'modal-ajax';
 
     if (url.indexOf('#') == 0) {
-
       $(url).modal('open');
 
     } else {
       $.get(url, function(data) {
-
         var _html = '' +
-          '<div id="'+id+'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">' +
+            //'<div id="'+id+'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">' +
+          '<div id="'+id+'" class="modal fade" role="dialog" aria-hidden="true">' +
           ' <div class="modal-dialog modal-lg">' +
           '   <div class="modal-content">'+ data + '</div>' +
           ' </div>' +
           '</div>';
 
         $(_html)
+          .modal()
+          .on('shown.bs.modal', function(){
+            loadingModal.hidePleaseWait();
+          })
           .on('hidden.bs.modal', function(){
             $(this).remove();
           })
-          .modal()
         ;
 
         setTimeout(function()
         {
-          $('input:visible:first').focus();
-
-          //$('.modal .modal-body').css('overflow-y', 'auto');
-          //$('.modal .modal-body').css('max-height', $(window).height() * 0.82);
+          //$('input:visible:first').focus();
 
           $('#'+id+' form').on('submit',function(e)
           {
             e.preventDefault();
+            loadingModal.showPleaseWait();
+            $('#'+id).addClass('hide');
 
             var postData = $(this).serializeArray();
             var formURL  = $(this).attr("action");
@@ -60,7 +61,7 @@ function updateModalBtn()
               complete:function(data, textStatus, jqXHR)
               {
                 $('#'+id).modal('hide');
-
+                loadingModal.hidePleaseWait();
                 if(callBackAfterSubmit && typeof callBackAfterSubmit  == "function")
                 {
                   callBackAfterSubmit();
@@ -161,6 +162,43 @@ function setDeleteButton()
 
   });
 }
+
+var loadingModal;
+$('document').ready(function()
+{
+  var html = '<div id="loaderModal" class="modal fade" data-backdrop="static" data-keyboard="false" aria-hidden="true">' +
+    ' <div class="modal-dialog">' +
+    '   <div class="modal-content">' +
+    ' <div class="modal-header">' +
+    '   <h1>Processing...</h1>' +
+    ' </div>' +
+    ' <div class="modal-body">' +
+    '   <div class="progress">' +
+    '     <div class="progress-bar progress-bar-info progress-bar-striped active" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%">' +
+    '       <span class="sr-only">Processing</span>' +
+    '     </div>' +
+    '   </div>' +
+    '</div>' +
+    ' </div>' +
+    '</div>';
+
+  loadingModal = loadingModal || (function () {
+    var pleaseWaitDiv = $(html);
+    return {
+      showPleaseWait: function() {
+        pleaseWaitDiv.modal();
+      },
+      hidePleaseWait: function () {
+        pleaseWaitDiv.modal('hide');
+      },
+
+    };
+  })();
+
+
+  updateModalBtn();
+});
+
 
 $('document').ready(function()
 {

@@ -70,9 +70,9 @@ class BaseController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
-          'entity'      => $entity,
-          'form'   => $editForm->createView(),
-          'ajax' => $request->isXmlHttpRequest()
+          'entity'  => $entity,
+          'form'    => $editForm->createView(),
+          'ajax'    => $request->isXmlHttpRequest()
         );
     }
 

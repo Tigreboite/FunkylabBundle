@@ -18,7 +18,7 @@ class SortableFormater extends Formater {
         }
 
         if(!$foundOrdre)
-            throw new \RuntimeException("Field `Ordre missing in your entity");
+            throw new \RuntimeException("Field `ordre' missing in your entity");
 
         return $fields;
 

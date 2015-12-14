@@ -172,4 +172,45 @@ class BaseRepository extends EntityRepository
 
         return $result;
     }
+
+    /**
+     * @param $query
+     * @param $orderby
+     * @param $order
+     * @param $limit
+     * @param $offset
+     * @return mixed
+     */
+    public function findDataQuery($query,$orderby,$order,$limit,$offset)
+    {
+        $qb = $this->dataQuery($query);
+
+        $qb->orderBy('i.'.$orderby, $order)
+          ->setFirstResult($offset*$limit)
+          ->setMaxResults($limit)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function dataQuery($query)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        if($query)
+        {
+            $qb->andWhere('i.title like :query OR i.summary like :query')
+              ->setParameter('query', '%'.$query.'%')
+            ;
+        }
+
+        return $qb;
+    }
+
+    public function countDataQuery($query)
+    {
+        $qb = $this->dataQuery($query);
+        $query = $qb->select('COUNT(i.id)')->getQuery();
+        return $query->getSingleScalarResult();
+    }
 }

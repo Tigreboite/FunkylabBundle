@@ -77,11 +77,12 @@ function updateSortBloc()
   ;
 }
 
-function refreshAppList()
+function refreshAppList(category)
 {
   $.ajax({
     type: 'GET',
     url: 'liste',
+    data: {category:category ? category : ""},
     complete:function(d)
     {
       $('#contentSort').html(d.responseText);
@@ -144,3 +145,4 @@ $(function() {
   $(window).on('resize',onResizeApp);
 
 });
+
