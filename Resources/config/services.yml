@@ -9,7 +9,7 @@ services:
         class: Knp\Menu\MenuItem
         factory_service: tigreboitefunkylab.menu_builder
         factory_method: createMainMenu
-        arguments: ["@request", @annotation_reader,@service_container]
+        arguments: ["@request", @annotation_reader, @service_container]
         scope: request
         tags:
             - { name: knp_menu.menu, alias: main_menu }
@@ -38,19 +38,19 @@ services:
 
     tigreboitefunkylab.listener.post_persist_listner:
         class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
-        arguments: [@service_container]
+        arguments: [@security.token_storage, @router]
         tags:
             - { name: doctrine.event_listener, event: postPersist }
 
     tigreboitefunkylab.listener.post_update_listner:
         class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
-        arguments: [@service_container]
+        arguments: [@security.token_storage, @router]
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
 
     tigreboitefunkylab.listener.post_delete_listner:
         class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
-        arguments: [@service_container]
+        arguments: [@security.token_storage, @router]
         tags:
             - { name: doctrine.event_listener, event: preRemove }
 
