@@ -13,7 +13,7 @@ knp_menu:
     default_renderer: twig # The renderer to use, list is also available by default
 
 stof_doctrine_extensions:
-    default_locale: %locale%
+    default_locale: "%locale%"
     translation_fallback: true
     orm:
         default:
@@ -23,14 +23,15 @@ stof_doctrine_extensions:
 
 # app/config/config.yml
 lexik_translation:
-    fallback_locale: en      # (required) default locale to use
-    managed_locales: [fr,pt_br,en,es]    # (required) locales that the bundle have to manage
+    fallback_locale: "%locale%"      # (required) default locale to use
+    managed_locales: "%locales%"    # (required) locales that the bundle have to manage
     base_layout:     "TigreboiteFunkylabBundle::layout.html.twig" # layout used with the translation edition template
     use_yml_tree:    true    # if "true" we will print a nice tree in the yml source files. It is a little slower.
-    grid_input_type: textarea     # define field type used in the grid (text|textarea)
+    grid_input_type: text     # define field type used in the grid (text|textarea)
     storage:
         type: orm                   # where to store translations: "orm", "mongodb" or "propel"
         object_manager: default    # The name of the entity / document manager which uses different connection (see: http://symfony.com/doc/current/cookbook/doctrine/multiple_entity_managers.html)
     resources_registration:
         type:                 all     # resources type to register: "all", "files" or "database"
         managed_locales_only: true    # will only load resources for managed locales
+

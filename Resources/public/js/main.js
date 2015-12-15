@@ -219,6 +219,7 @@ $('document').ready(function()
     }
   });
   updateModalBtn();
+  $('.sidebar-mini .container').css('width','100%');
 });
 
 

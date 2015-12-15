@@ -44,13 +44,14 @@ function refreshBlocList(application)
 function saveOrder(_this)
 {
   var data = $(_this).sortable('serialize');
-  if($(_this).data('application'))
+
+  /*if($(_this).data('application'))
   {
     data+="&type=bloc";
     data+="&application="+$(_this).data('application');
   }else{
     data+="&type=application";
-  }
+  }*/
 
   $.ajax({
     data: data,
@@ -77,12 +78,12 @@ function updateSortBloc()
   ;
 }
 
-function refreshAppList(category)
+function refreshAppList(data)
 {
   $.ajax({
     type: 'GET',
     url: 'liste',
-    data: {category:category ? category : ""},
+    data: data ? data : {},
     complete:function(d)
     {
       $('#contentSort').html(d.responseText);
@@ -140,7 +141,7 @@ $(function() {
 
   AddUrlPlatform = $('#btn-add').data('url');
 
-  refreshAppList();
+  //refreshAppList();
 
   $(window).on('resize',onResizeApp);
 

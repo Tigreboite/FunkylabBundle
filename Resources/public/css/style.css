@@ -75,3 +75,4 @@ form.newproject .project, form.newproject .user {
     display: none;
 }
 
+.sidebar-mini .container{width:100%;}
