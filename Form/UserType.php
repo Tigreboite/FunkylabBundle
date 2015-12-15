@@ -38,10 +38,10 @@ class UserType extends AbstractType
           ))
           ->add('roles', 'choice', array(
             'choices' => array(
-              User::ROLE_BRAND => User::ROLE_BRAND,
-              User::ROLE_MODERATOR => User::ROLE_MODERATOR,
+              User::ROLE_BRAND       => User::ROLE_BRAND,
+              User::ROLE_MODERATOR   => User::ROLE_MODERATOR,
               User::ROLE_SUPER_ADMIN => User::ROLE_SUPER_ADMIN,
-              User::ROLE_ADMIN => User::ROLE_ADMIN,
+              User::ROLE_ADMIN       => User::ROLE_ADMIN,
             ),
             'multiple'  => true,
             'expanded' => true,

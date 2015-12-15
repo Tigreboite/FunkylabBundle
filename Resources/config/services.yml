@@ -35,3 +35,22 @@ services:
         class: Tigreboite\FunkylabBundle\Service\UniqueFileNameGeneratorService
         arguments:
             - "@cocur_slugify"
+
+    tigreboitefunkylab.listener.post_persist_listner:
+        class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+
+    tigreboitefunkylab.listener.post_update_listner:
+        class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+
+    tigreboitefunkylab.listener.post_delete_listner:
+        class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
+        arguments: [@service_container]
+        tags:
+            - { name: doctrine.event_listener, event: preRemove }
+

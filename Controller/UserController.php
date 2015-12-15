@@ -11,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Entity\User;
 use Tigreboite\FunkylabBundle\Form\UserType;
-use Tigreboite\FunkylabBundle\Tools;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
