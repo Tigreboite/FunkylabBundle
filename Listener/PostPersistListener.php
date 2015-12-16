@@ -1,58 +1,84 @@
 <?php
 namespace Tigreboite\FunkylabBundle\Listener;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Routing\Router;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Tigreboite\FunkylabBundle\Entity\Activity;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Bundle\SecurityBundle\Security\FirewallContext;
 
 class PostPersistListener
 {
     private $security;
     private $router;
+    private $request;
     private $user;
 
-    public function __construct(TokenStorage $security, Router $router) {
-
+    /**
+     * @param TokenStorage $security
+     * @param Router       $router
+     */
+    public function __construct(TokenStorage $security, Router $router, RequestStack $request)
+    {
         $this->security  = $security;
+        $this->request   = $request->getCurrentRequest();
         $this->router    = $router;
-
     }
 
+    /**
+     * @param LifecycleEventArgs $args
+     */
     public function postUpdate(LifecycleEventArgs $args)
     {
         $this->createActivity($args,Activity::ACTION_UPDATE);
     }
 
+    /**
+     * @param LifecycleEventArgs $args
+     */
     public function preRemove(LifecycleEventArgs $args)
     {
         $this->createActivity($args,Activity::ACTION_DELETE);
     }
 
+    /**
+     * @param LifecycleEventArgs $args
+     */
     public function postPersist(LifecycleEventArgs $args)
     {
         $this->createActivity($args,Activity::ACTION_CREATED);
     }
 
-    private function createActivity(LifecycleEventArgs $args,$action)
+    /**
+     * @param LifecycleEventArgs $args
+     * @param                    $action
+     */
+    private function createActivity(LifecycleEventArgs $args, $action)
     {
+        // $route = $this->router->match($this->request->getPathInfo());
         $entity         = $args->getEntity();
         $entityManager  = $args->getEntityManager();
         $this->user     = $this->getLoggedUser();
-        
-        if(!($entity instanceof Activity) &&  $this->user)
+        $path           = $this->request->getPathInfo();
+        if($this->str_starts_with($path,"/admin"))
         {
-            $activity = new Activity();
-            $activity->setUser($this->user);
-            $activity->setAction(Activity::ACTION_CREATED);
-            $activity->setEntityId($entity->getId());
-            $activity->setEntityType(get_class($entity));
-            $entityManager->persist($activity);
-            $entityManager->flush();
+            if(!($entity instanceof Activity) &&  $this->user)
+            {
+                $activity = new Activity();
+                $activity->setUser($this->user);
+                $activity->setAction($action);
+                $activity->setEntityId($entity->getId());
+                $activity->setEntityType(get_class($entity));
+                $entityManager->persist($activity);
+                $entityManager->flush();
+            }
         }
     }
 
+    /**
+     * @return bool
+     */
     public function getLoggedUser()
     {
         $token = $this->security->getToken();
@@ -65,4 +91,8 @@ class PostPersistListener
         }
     }
 
+    function str_starts_with($haystack, $needle)
+    {
+        return strpos($haystack, $needle) === 0;
+    }
 }
