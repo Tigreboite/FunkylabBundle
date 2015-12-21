@@ -21,7 +21,7 @@ class TigreboiteFunkylabExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
+        $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -33,14 +33,22 @@ class TigreboiteFunkylabExtension extends Extension
             {
                 foreach($v1 as $k2=>$v2)
                 {
-                    $container->setParameter('tigreboite_funkylab.'.$k1.'.'.$k2, $v2);
+                    $name = 'tigreboite_funkylab.'.$k1.'.'.$k2;
+                    $container->setParameter($name, $v2);
+                    $container
+                      ->register('globals', 'twig')
+                      ->addArgument('%'.$name.'%');
+
                 }
             }else{
                 $container->setParameter('tigreboite_funkylab.'.$k1, $v1);
             }
-
-
         }
-
     }
+
+    public function getAlias()
+    {
+        return 'tigreboite_funkylab';
+    }
+
 }

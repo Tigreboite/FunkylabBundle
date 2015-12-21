@@ -54,7 +54,6 @@ class MenuConverter
     }
 
     public function onKernel(FilterControllerEvent $event) {
-        $processedMenu = array();
         $menu = $this->getControllersWithAnnotationModules();
         return $menu;
     }

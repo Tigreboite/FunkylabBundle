@@ -24,7 +24,7 @@
     <link href="{{ asset('bundles/tigreboitefunkylab/vendor/css/smoothness/jquery-ui-1.10.0.custom.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('bundles/adminlte/dist/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('bundles/adminlte/dist/css/skins/skin-yellow-light.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bundles/adminlte/dist/css/skins/'~ admin_skin ~'.css') }}" rel="stylesheet" type="text/css" />
 
     {#<link href="{{ asset('bundles/tigreboitefunkylab/css/style.css') }}" rel="stylesheet" type="text/css" />#}
 
@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.css') }}">
     <link href="{{ asset('bundles/tigreboitefunkylab/vendor/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<body class="hold-transition skin-yellow-light sidebar-mini {% if app.request.cookies.has('sidebar_collasped') %}sidebar-collapse{% endif %}">
+<body class="hold-transition {{ admin_skin }} sidebar-mini {% if app.request.cookies.has('sidebar_collasped') %}sidebar-collapse{% endif %}">
 
 <div class="wrapper">
     <!-- header logo: style can be found in header.less -->
