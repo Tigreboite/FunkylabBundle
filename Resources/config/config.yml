@@ -1,6 +1,6 @@
 twig:
     globals:
-        froala_editor: test
+        froala_editor: "%froala_editor_key%"
         admin_skin: "%admin_skin%"
 
 fos_user:

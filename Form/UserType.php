@@ -2,23 +2,15 @@
 
 namespace Tigreboite\FunkylabBundle\Form;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
 use Tigreboite\FunkylabBundle\Entity\User;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 class UserType extends AbstractType
 {
-    private $front;
-    private $container;
-
-    public function __construct(ContainerInterface $container, $front = false)
-    {
-        $this->container = $container;
-        $this->front = $front;
-    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -142,7 +134,7 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_user';
+        return 'tigreboite_funkylabbundle_user';
     }
 
     private function getOrderLanguageList($er)

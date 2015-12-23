@@ -2,10 +2,9 @@
 
 namespace Tigreboite\FunkylabBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -14,7 +13,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="flb_user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_7D93D64992FC23A8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="UNIQ_7D93D649A0D96FBF", columns={"email_canonical"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})}, indexes={@ORM\Index(name="fk_user_languages1_idx", columns={"language_id"})})
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\UserRepository")
- * @ORM\HasLifecycleCallbacks
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(
  *     fields={"email"},
@@ -632,6 +630,29 @@ class User extends BaseUser
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set isarchived
+     *
+     * @param string $isarchived
+     * @return User
+     */
+    public function setIsarchived($isarchived)
+    {
+        $this->isarchived = $isarchived;
+
+        return $this;
+    }
+
+    /**
+     * Get isarchived
+     *
+     * @return string
+     */
+    public function getIsarchived()
+    {
+        return $this->isarchived;
     }
 
 }

@@ -1,26 +1,31 @@
 <?php
+/**
+ * Code by Cyril Pereira, Julien Hay
+ * Extreme-Sensio 2015.
+ */
 
 namespace Tigreboite\FunkylabBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Tigreboite\FunkylabBundle\Entity\User;
-use Tigreboite\FunkylabBundle\Form\UserType;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Tigreboite\FunkylabBundle\Entity\User;
+use Tigreboite\FunkylabBundle\Form\UserType;
 
 /**
- * User controller.
- *
  * @Route("/user")
  */
-class UserController extends Controller
+class UserController extends DatagridController
 {
+    protected $entityName   = 'Tigreboite\FunkylabBundle\Entity\User';
+    protected $formType     = 'Tigreboite\FunkylabBundle\Form\UserType';
+    protected $route_base   = 'admin_user';
+    protected $repository   = 'TigreboiteFunkylabBundle:User';
+    protected $dir_path     = 'medias/user/';
 
     /**
      * Lists all User entities.
@@ -33,54 +38,22 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        return parent::indexAction();
     }
 
     /**
-     * Lists all User entities.
+     * Get all entities.
      *
      * @Route("/list", name="admin_user_list", options={"expose"=true})
      * @Method("GET")
      */
     public function listAction(Request $request)
     {
-        if (!$request->isXmlHttpRequest()) {
-            throw $this->createNotFoundException("Not found");
-        }
-
-        // GET
-        $draw = $request->query->get('draw');
-        $start = $request->query->get('start');
-        $length = $request->query->get('length');
-        $search_string = $request->query->get('search');
-        $search_string = $search_string['value'];
-        $order_column = $request->query->get('order');
-        $order_column = $order_column[0]['column'];
-        $order_dir = $request->query->get('order');
-        $order_dir = $order_dir[0]['dir'];
-        $columns = $request->query->get('columns');
-
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('TigreboiteFunkylabBundle:User')
-            ->findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir);
-
-        $serializer = $this->get('jms_serializer');
-
-        // Construct JSON
-        $data_to_return = array();
-        $data_to_return['draw'] = $draw;
-        $data_to_return['recordsTotal'] = $entities['count_all'];
-        $data_to_return['recordsFiltered'] = $entities['count_filtered'];
-
-        unset($entities['count_all']);
-        unset($entities['count_filtered']);
-        $data_to_return['data'] = $entities;
-
-        return new Response($serializer->serialize($data_to_return, 'json'));
+        return parent::listAction($request);
     }
 
     /**
-     * Creates a new User entity.
+     * Create entity.
      *
      * @Route("/", name="admin_user_create")
      * @Method("POST")
@@ -88,50 +61,11 @@ class UserController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new User();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity->setRefCust($em->getRepository("TigreboiteFunkylabBundle:User")->generateUniqueRefCust());
-            $this->HowItWorkDisplay($entity);
-
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_user'));
-        }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest(),
-            'error'=>Tools::getErrorMessages($form)
-        );
+        return parent::createAction($request);
     }
 
     /**
-     * Creates a form to create a User entity.
-     *
-     * @param User $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(User $entity)
-    {
-        $form = $this->createForm(new UserType($this->container), $entity, array(
-            'action' => $this->generateUrl('admin_user_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
-     * Displays a form to create a new User entity.
+     * Displays a form to create a new entity.
      *
      * @Route("/new", name="admin_user_new")
      * @Method("GET")
@@ -139,67 +73,17 @@ class UserController extends Controller
      */
     public function newAction(Request $request)
     {
-        $entity = new User();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
-        );
+        return parent::newAction($request);
     }
 
     /**
-     * Displays a form to edit an existing User entity.
+     * Displays a form to edit an existing entity.
      *
      * @Route("/{id}/edit", name="admin_user_edit", options={"expose"=true})
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:User:form.html.twig")
      */
-    public function editAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TigreboiteFunkylabBundle:User')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-
-        return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest(),
-        );
-    }
-
-    /**
-    * Creates a form to edit a User entity.
-    *
-    * @param User $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(User $entity)
-    {
-        $form = $this->createForm(new UserType($this->container), $entity, array(
-            'action' => $this->generateUrl('admin_user_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
-    /**
-     * Edits an existing User entity.
-     *
-     * @Route("/update/{id}", name="admin_user_update")
-     * @Template("TigreboiteFunkylabBundle:User:form.html.twig")
-     */
-    public function updateAction(Request $request, $id)
+    public function editAction(Request $request,  $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -222,50 +106,51 @@ class UserController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+          'entity'      => $entity,
+          'form'   => $editForm->createView(),
+          'ajax' => $request->isXmlHttpRequest()
         );
     }
+
     /**
-     * Deletes a User entity.
+     * Edits an existing entity.
+     *
+     * @Route("/update/{id}", name="admin_user_update")
+     * @Template("TigreboiteFunkylabBundle:User:form.html.twig")
+     */
+    public function updateAction(Request $request, $id)
+    {
+        return parent::updateAction($request, $id);
+    }
+
+    /**
+     * Delete an entity.
      *
      * @Route("/{id}", name="admin_user_delete", options={"expose"=true})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('TigreboiteFunkylabBundle:User')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-
-        $em->remove($entity);
-        $em->flush();
-
-        return new Response('Deleted');
+        return parent::deleteAction($request, $id);
     }
+
     /**
-     * Archive a User entity.
+     * Upload files.
      *
-     * @Route("/archive/{id}", name="admin_user_archive", options={"expose"=true})
+     * @Route("/upload", name="admin_user_upload")
      */
-    public function archiveAction(Request $request, $id)
+    public function uploadAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('TigreboiteFunkylabBundle:User')->find($id);
+        return parent::uploadAction($request);
+    }
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-
-        $entity->setIsarchived(true);
-        $em->persist($entity);
-        $em->flush();
-
-        return new Response('Archived');
+    /**
+     * @Route("/autocomplete/request", name="admin_user_autocomplete_request", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function ajaxAction(Request $request)
+    {
+        return parent::ajaxAction($request);
     }
 
     /**
@@ -276,52 +161,52 @@ class UserController extends Controller
     public function exportCSVAction(Request $request)
     {
         $em = $this->getDoctrine()->getEntityManager();
-       
+
         $iterableResult = $em->getRepository('TigreboiteFunkylabBundle:User')
-                            ->createQueryBuilder('a')
-                            ->getQuery()
-                            ->iterate();
+          ->createQueryBuilder('a')
+          ->getQuery()
+          ->iterate();
 
         $handle = fopen('php://memory', 'r+');
         $header = array();
 
         fputcsv($handle, array(
-            'ref cust',
-            'Email', 
-            'civility', 
-            'firstname', 
-            'last name', 
-            'dob', 
-            'adresse', 
-            'adresse 2', 
-            'zip code', 
-            'city', 
-            'enable', 
-            'roles', 
-            'Country ID', 
-            'Fav sport 1', 
-            'Fav sport 2', 
-            'Fav sport 3', 
-            'Language ID', 
-            'decathlon card id', 
-            'NB points current', 
-            'NB points total', 
-            'Newsletter', 
-            'Newsletter partner', 
-            'id facebook', 
-            'id twitter', 
-            'created at', 
-            'last login', 
-            'cgu',
-            'id decathlon',
-            'nombre d\'idees deposees',
-            'nombre de vote sur des idees',
-            'nombre total de participations au global',
-            'nombre de participation a un questionnaire sur projet',
-            'nombre de vote sur un questionnaire',
-            'nombre de commentaires au global',
-            'nombre de commentaires sur les idees',
-            'nombre de commentaires sur le blog',
+          'ref cust',
+          'Email',
+          'civility',
+          'firstname',
+          'last name',
+          'dob',
+          'adresse',
+          'adresse 2',
+          'zip code',
+          'city',
+          'enable',
+          'roles',
+          'Country ID',
+          'Fav sport 1',
+          'Fav sport 2',
+          'Fav sport 3',
+          'Language ID',
+          'decathlon card id',
+          'NB points current',
+          'NB points total',
+          'Newsletter',
+          'Newsletter partner',
+          'id facebook',
+          'id twitter',
+          'created at',
+          'last login',
+          'cgu',
+          'id decathlon',
+          'nombre d\'idees deposees',
+          'nombre de vote sur des idees',
+          'nombre total de participations au global',
+          'nombre de participation a un questionnaire sur projet',
+          'nombre de vote sur un questionnaire',
+          'nombre de commentaires au global',
+          'nombre de commentaires sur les idees',
+          'nombre de commentaires sur le blog',
         ), ';');
 
         while (false !== ($row = $iterableResult->next())) {
@@ -335,39 +220,11 @@ class UserController extends Controller
         rewind($handle);
         $content = stream_get_contents($handle);
         fclose($handle);
-        
+
         return new Response($content, 200, array(
-            'Content-Type' => 'application/force-download',
-            'Content-Disposition' => 'attachment; filename="export-users.csv"'
+          'Content-Type' => 'application/force-download',
+          'Content-Disposition' => 'attachment; filename="export-users.csv"'
         ));
     }
 
-
-
-    /**
-     * Upload files
-     *
-     * @Route("/upload", name="admin_user_upload")
-     */
-    public function uploadAction(Request $request)
-    {
-        $dir_path = 'medias/user/';
-        $data = array('success'=>false);
-        $uploadedFile = $request->files->get('file');
-
-        if ($uploadedFile)
-        {
-            $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
-            if($file)
-            {
-                $data = array(
-                  'success'=>true,
-                  'filename'=>$uploadedFile->getClientOriginalName(),
-                  'path'=>$dir_path.$uploadedFile->getClientOriginalName()
-                );
-            }
-        }
-
-        return new JsonResponse($data);
-    }
 }

@@ -16,7 +16,6 @@
         {% endif %}
 
         <div role="tabpanel">
-
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#profil" aria-controls="profil" role="tab" data-toggle="tab">Profile</a></li>
@@ -30,37 +29,44 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="profil">
                     <div class="box box-primary">
+
                         <div class="box-body">
-                            <div class="form-group">  <label for="id-loader-image">Image</label>  {{ form_widget(form.image) }}  <div id="{{ form.image.vars.id }}-preview">    {% if entity.image %}    <img src="/{{ entity.image }}" style="max-width:128px" />    {% endif %}  </div>  <input type="file" id="id-loader-image" data-after="{{ form.image.vars.id }}" name="file" class="file-loader-image" data-url="{{ path('admin_user_upload') }}" /></div>
-                            <div class="form-group">
-                                <label for="{{ form.civility.vars.id }}">{{ form_label(form.civility) }}</label>
-                                {{ form_widget(form.civility) }}
-                                {{ form_errors(form.civility) }}
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label for="{{ form.civility.vars.id }}">{{ form_label(form.civility) }}</label>
+                                    {{ form_widget(form.civility) }}
+                                    {{ form_errors(form.civility) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="{{ form.email.vars.id }}">{{ form_label(form.email) }}</label>
+                                    {{ form_widget(form.email) }}
+                                    {{ form_errors(form.email) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="{{ form.lastname.vars.id }}">{{ form_label(form.lastname) }}</label>
+                                    {{ form_widget(form.lastname) }}
+                                    {{ form_errors(form.lastname) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="{{ form.firstname.vars.id }}">{{ form_label(form.firstname) }}</label>
+                                    {{ form_widget(form.firstname) }}
+                                    {{ form_errors(form.firstname) }}
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="{{ form.email.vars.id }}">{{ form_label(form.email) }}</label>
-                                {{ form_widget(form.email) }}
-                                {{ form_errors(form.email) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.lastname.vars.id }}">{{ form_label(form.lastname) }}</label>
-                                {{ form_widget(form.lastname) }}
-                                {{ form_errors(form.lastname) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.firstname.vars.id }}">{{ form_label(form.firstname) }}</label>
-                                {{ form_widget(form.firstname) }}
-                                {{ form_errors(form.firstname) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.plainpassword.vars.id }}">{{ form_label(form.plainpassword) }}</label>
-                                {{ form_widget(form.plainpassword) }}
-                                {{ form_errors(form.plainpassword) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.language.vars.id }}">{{ form_label(form.language) }}</label>
-                                {{ form_widget(form.language) }}
-                                {{ form_errors(form.language) }}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.plainpassword.vars.id }}">{{ form_label(form.plainpassword) }}</label>
+                                    {{ form_widget(form.plainpassword) }}
+                                    {{ form_errors(form.plainpassword) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="{{ form.language.vars.id }}">{{ form_label(form.language) }}</label>
+                                    {{ form_widget(form.language) }}
+                                    {{ form_errors(form.language) }}
+                                </div>
+                                <div class="form-group">  <label for="id-loader-image">Image</label>  {{ form_widget(form.image) }}  <div id="{{ form.image.vars.id }}-preview">    {% if entity.image %}    <img src="/{{ entity.image }}" style="max-width:128px" />    {% endif %}  </div>  <input type="file" id="id-loader-image" data-after="{{ form.image.vars.id }}" name="file" class="file-loader-image" data-url="{{ path('admin_user_upload') }}" /></div>
                             </div>
                         </div>
                     </div>
@@ -69,35 +75,39 @@
                 <div role="tabpanel" class="tab-pane" id="extras">
                     <div class="box box-primary">
                         <div class="box-body">
-                            <div class="form-group">
-                                <label for="{{ form.dob.vars.id }}">{{ form_label(form.dob) }}</label>
-                                {{ form_widget(form.dob) }}
-                                {{ form_errors(form.dob) }}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.dob.vars.id }}">{{ form_label(form.dob) }}</label>
+                                    {{ form_widget(form.dob) }}
+                                    {{ form_errors(form.dob) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="{{ form.adresse.vars.id }}">{{ form_label(form.adresse) }}</label>
+                                    {{ form_widget(form.adresse) }}
+                                    {{ form_errors(form.adresse) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="{{ form.adresse2.vars.id }}">{{ form_label(form.adresse2) }}</label>
+                                    {{ form_widget(form.adresse2) }}
+                                    {{ form_errors(form.adresse2) }}
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="{{ form.adresse.vars.id }}">{{ form_label(form.adresse) }}</label>
-                                {{ form_widget(form.adresse) }}
-                                {{ form_errors(form.adresse) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.adresse2.vars.id }}">{{ form_label(form.adresse2) }}</label>
-                                {{ form_widget(form.adresse2) }}
-                                {{ form_errors(form.adresse2) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.zipcode.vars.id }}">{{ form_label(form.zipcode) }}</label>
-                                {{ form_widget(form.zipcode) }}
-                                {{ form_errors(form.zipcode) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.city.vars.id }}">{{ form_label(form.city) }}</label>
-                                {{ form_widget(form.city) }}
-                                {{ form_errors(form.city) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="{{ form.country.vars.id }}">{{ form_label(form.country) }}</label>
-                                {{ form_widget(form.country) }}
-                                {{ form_errors(form.country) }}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ form.zipcode.vars.id }}">{{ form_label(form.zipcode) }}</label>
+                                    {{ form_widget(form.zipcode) }}
+                                    {{ form_errors(form.zipcode) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="{{ form.city.vars.id }}">{{ form_label(form.city) }}</label>
+                                    {{ form_widget(form.city) }}
+                                    {{ form_errors(form.city) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="{{ form.country.vars.id }}">{{ form_label(form.country) }}</label>
+                                    {{ form_widget(form.country) }}
+                                    {{ form_errors(form.country) }}
+                                </div>
                             </div>
                         </div>
                     </div>

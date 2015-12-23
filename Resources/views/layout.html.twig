@@ -24,7 +24,7 @@
     <link href="{{ asset('bundles/tigreboitefunkylab/vendor/css/smoothness/jquery-ui-1.10.0.custom.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('bundles/adminlte/dist/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('bundles/adminlte/dist/css/skins/'~ admin_skin ~'.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bundles/adminlte/dist/css/skins/'~ admin_skin ~'.min.css') }}" rel="stylesheet" type="text/css" />
 
     {#<link href="{{ asset('bundles/tigreboitefunkylab/css/style.css') }}" rel="stylesheet" type="text/css" />#}
 
@@ -127,7 +127,6 @@
                 <div class="col-xs-12">
                     {% block action %}{% endblock %}
                     <p>&nbsp;</p>
-
                     {% block content %}{% endblock %}
                 </div>
             </div>
