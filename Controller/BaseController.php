@@ -80,12 +80,12 @@ class BaseController extends Controller
 
     public function createCreateForm($entity)
     {
-        $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new $this->formType($em), $entity, array(
+        $form = $this->createForm(new $this->formType(), $entity, array(
           'action' => $this->generateUrl($this->route_base.'_create'),
           'method' => 'POST',
           'allow_extra_fields'=>true,
         ));
+
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
