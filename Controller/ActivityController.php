@@ -31,7 +31,7 @@ class ActivityController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * @Route("/", name="admin_activity")
      * @Method("GET")
      * @Template()
-     * @Menu("Page Activity", dataType="string",icon="fa-flag",groupe="Nexity")
+     * @Menu("Activity", dataType="string",icon="fa-list",groupe="CMS")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function indexAction()
