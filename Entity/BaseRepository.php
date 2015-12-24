@@ -108,6 +108,10 @@ class BaseRepository extends EntityRepository
                     }
 
                 }
+                elseif($col['name'] == '_action') {
+                    $qb->addSelect('d.id');
+                    $col['name'] = 'd.id';
+                }
                 else {
                     $qb->addSelect('d.'.$col['name'].' as data_'.$col['data']);
                     $col['name'] = 'd.'.$col['name'];
