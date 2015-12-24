@@ -35,16 +35,18 @@ class MenuBuilder
         {
             if(isset($l['children']))
             {
+                if($l['children'][0]['route']=="admin_activity" && !$this->config['activity'])
+                    continue;
                 if($l['children'][0]['route']=="admin_user"     && !$this->config['user'])
-                    continue;
+                continue;
                 if($l['children'][0]['route']=="admin_blog"     && !$this->config['blog'])
-                    continue;
+                continue;
                 if($l['children'][0]['route']=="admin_language" && !$this->config['language'])
-                    continue;
+                continue;
                 if($l['children'][0]['route']=="admin_pays"     && !$this->config['country'])
-                    continue;
+                continue;
                 if($l['children'][0]['route']=="admin_page"     && !$this->config['page'])
-                    continue;
+                continue;
 
                 $i = $menu->addChild($k, array(
                   'route' => $l['children'][0]['route'],
@@ -57,6 +59,8 @@ class MenuBuilder
                     if($request->get('_route')==$m['route'])
                         $i->setCurrent(true);
 
+                    if($m['route']=="admin_activity" && !$this->config['activity'])
+                        continue;
                     if($m['route']=="admin_user"     && !$this->config['user'])
                         continue;
                     if($m['route']=="admin_blog"     && !$this->config['blog'])

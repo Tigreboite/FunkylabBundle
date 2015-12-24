@@ -33,6 +33,7 @@ class MenuConverter
           'country'=>false,
           'language'=>false,
           'translator'=>false,
+          'activity'=>false,
         );
         foreach($config as $k=>$v)
         {
