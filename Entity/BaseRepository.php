@@ -58,6 +58,7 @@ class BaseRepository extends EntityRepository
     {
         $columuns_select = "";
         $first = true;
+        $join = array();
 
         $qb = $this->createQueryBuilder('d');
 
@@ -72,7 +73,11 @@ class BaseRepository extends EntityRepository
                     $table = $cut[0];
                     $field = $cut[1];
 
-                    $qb->leftJoin('d.'.$table, $table);
+                    if(!in_array($table,$join))
+                    {
+                        $join[]=$table;
+                        $qb->leftJoin('d.'.$table, $table);
+                    }
                     $qb->addSelect($table.'.'.$field.' as data_'.$col['data']);
 
                     $col['name'] = $table.'.'.$field;

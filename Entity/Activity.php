@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * FaqCategory
  *
  * @ORM\Table(name="flb_activity")
- * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\ActivityRepository")
+ * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\BaseRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Activity
@@ -49,7 +49,7 @@ class Activity
     private $action;
 
     /**
-     * @var \User
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="User",inversedBy="activity")
      * @ORM\JoinColumns({
