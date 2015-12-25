@@ -76,3 +76,16 @@ form.newproject .project, form.newproject .user {
 }
 
 .sidebar-mini .container{width:100%;}
+.nav-tabs {
+    margin-left: 2px;
+}
+.modal-dialog{
+    border-radius: 5px;
+    overflow-y: auto;max-height:100%;
+}
+
+@media (min-width: 992px){
+    .modal-lg {
+        width: 90%;
+    }
+}
