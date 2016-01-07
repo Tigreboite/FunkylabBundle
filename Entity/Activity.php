@@ -71,8 +71,6 @@ class Activity
         $this->setCreatedAt(new \DateTime);
     }
 
-
-
     /**
      * Get id
      *
