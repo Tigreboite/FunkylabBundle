@@ -49,21 +49,18 @@ class Activity
     private $action;
 
     /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="User",inversedBy="activity")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
-     * })
-     */
-    private $user;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="created_by", type="string", nullable=true)
+     */
+    private $createdBy;
 
 
     public function __construct()
@@ -178,26 +175,24 @@ class Activity
     }
 
     /**
-     * Set user
-     *
-     * @param \Tigreboite\FunkylabBundle\Entity\User $user
+     * Set createdBy
      *
      * @return Activity
      */
-    public function setUser(\Tigreboite\FunkylabBundle\Entity\User $user = null)
+    public function setCreatedBy($createdBy)
     {
-        $this->user = $user;
+        $this->createdBy = $createdBy;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get createdBy
      *
-     * @return \Tigreboite\FunkylabBundle\Entity\User
+     * @return string
      */
-    public function getUser()
+    public function getCreatedBy()
     {
-        return $this->user;
+        return $this->createdBy;
     }
 }
