@@ -1,0 +1,6 @@
+funkylab.logout: "Deconnection"
+activity.action: "Action"
+activity.entityId: "Type Id"
+activity.entityType: "Type"
+activity.createdAt: "Le"
+activity.createdBy: "Par"

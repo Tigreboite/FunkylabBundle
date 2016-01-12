@@ -89,3 +89,6 @@ form.newproject .project, form.newproject .user {
         width: 90%;
     }
 }
+.wysiwyg{
+    min-height:150px;
+}
