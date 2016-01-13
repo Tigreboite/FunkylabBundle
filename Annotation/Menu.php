@@ -13,6 +13,7 @@ class Menu
     private $icon       = 'string';
     private $route      = 'string';
     private $groupe     = 'string';
+    private $order      = 0;
 
     public function __construct($options)
     {
@@ -53,5 +54,10 @@ class Menu
     public function getGroupe()
     {
         return $this->groupe;
+    }
+
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

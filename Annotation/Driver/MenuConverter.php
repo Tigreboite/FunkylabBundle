@@ -126,11 +126,23 @@ class MenuConverter
                 if(!isset($processedMenu[$groupe]))
                     $processedMenu[$groupe]=array('children'=>array());
 
-                $processedMenu[$groupe]['children'][]=$m;
+                if ($m['menu']->getOrder() >= 0) {
+                    $order = $m['menu']->getOrder();
+                    if (!isset($processedMenu[$groupe]['children'][$order])) {
+                        $processedMenu[$groupe]['children'][(integer)$order] = $m;
+                    } else {
+                        $processedMenu[$groupe]['children'][] = $m;
+                    }
+                } else {
+                    $processedMenu[$groupe]['children'][]=$m;
+                }
 
-            }else{
+                ksort($processedMenu[$groupe]['children']);
+
+            } else{
                 $processedMenu[]=$m;
             }
+
         }
         ksort($processedMenu);
 
