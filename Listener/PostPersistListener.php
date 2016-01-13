@@ -65,13 +65,13 @@ class PostPersistListener
         {
             if(!($entity instanceof Activity) &&  $this->user)
             {
-                $activity = new Activity();
+                /*$activity = new Activity();
                 $activity->setCreatedBy($this->user->getFirstname()." ".$this->user->getLastname());
                 $activity->setAction($action);
                 $activity->setEntityId($entity->getId());
                 $activity->setEntityType(get_class($entity));
                 $entityManager->persist($activity);
-                $entityManager->flush();
+                $entityManager->flush();*/
             }
         }
     }
