@@ -55,9 +55,26 @@ class DatagridController extends BaseController
 
         unset($entities['count_all']);
         unset($entities['count_filtered']);
-        $data_to_return['data'] = $entities;
+        $data_to_return['data'] = $this->dataTransformer($entities);
 
         return new Response($serializer->serialize($data_to_return, 'json'));
+    }
+
+
+    protected function dataTransformer($entities)
+    {
+        foreach($entities as &$data) {
+            foreach($data as &$column) {
+                if($column instanceof \DateTime) {
+                    /**
+                     * @var $column \DateTime
+                     */
+                    $column = $column->format('d/m/Y H:i');
+                }
+            }
+        }
+
+        return $entities;
     }
 
 
