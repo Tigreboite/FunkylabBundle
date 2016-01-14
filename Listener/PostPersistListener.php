@@ -60,18 +60,21 @@ class PostPersistListener
         $entity         = $args->getEntity();
         $entityManager  = $args->getEntityManager();
         $this->user     = $this->getLoggedUser();
-        $path           = $this->request->getPathInfo();
-        if($this->str_starts_with($path,"/admin"))
+        if($this->request)
         {
-            if(!($entity instanceof Activity) &&  $this->user)
+            $path           = $this->request->getPathInfo();
+            if($this->str_starts_with($path,"/admin"))
             {
-                /*$activity = new Activity();
-                $activity->setCreatedBy($this->user->getFirstname()." ".$this->user->getLastname());
-                $activity->setAction($action);
-                $activity->setEntityId($entity->getId());
-                $activity->setEntityType(get_class($entity));
-                $entityManager->persist($activity);
-                $entityManager->flush();*/
+                if(!($entity instanceof Activity) &&  $this->user)
+                {
+                    /*$activity = new Activity();
+                    $activity->setCreatedBy($this->user->getFirstname()." ".$this->user->getLastname());
+                    $activity->setAction($action);
+                    $activity->setEntityId($entity->getId());
+                    $activity->setEntityType(get_class($entity));
+                    $entityManager->persist($activity);
+                    $entityManager->flush();*/
+                }
             }
         }
     }
