@@ -146,6 +146,11 @@ class MenuConverter
         }
         ksort($processedMenu);
 
+        // RE-SORT ELEMENTS
+        foreach($processedMenu as &$group) {
+            $group['children'] = $this->sortMenu($group['children']);
+        }
+
         return $processedMenu;
 
     }
@@ -158,5 +163,15 @@ class MenuConverter
         }
         $array[$offset][$type]=$annotation;
         return $array;
+    }
+
+    function sortMenu($children)
+    {
+        $arrayTmp = array();
+
+        foreach($children as $child) {
+            $arrayTmp[] = $child;
+        }
+        return $arrayTmp;
     }
 }
