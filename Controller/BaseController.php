@@ -78,7 +78,7 @@ class BaseController extends Controller
         );
     }
 
-    public function createCreateForm($entity)
+    protected function createCreateForm($entity)
     {
         $form = $this->createForm(new $this->formType(), $entity, array(
           'action' => $this->generateUrl($this->route_base.'_create'),
@@ -92,7 +92,7 @@ class BaseController extends Controller
         return $form;
     }
 
-    public function createEditForm($entity)
+    protected function createEditForm($entity)
     {
         $form = $this->createForm(new $this->formType(), $entity, array(
           'action' => $this->generateUrl($this->route_base.'_update', array('id' => $entity->getId())),
