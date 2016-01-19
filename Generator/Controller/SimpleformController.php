@@ -86,6 +86,7 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
      * Edits an existing entity.
      *
      * @Route("/update/{id}", name="admin_simpleform_update")
+     * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -97,6 +98,7 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
      * Upload files
      *
      * @Route("/upload", name="admin_simpleform_upload")
+     * @Method({"POST","PUT"})
      */
     public function uploadAction(Request $request)
     {

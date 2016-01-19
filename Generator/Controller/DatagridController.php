@@ -92,6 +92,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * Edits an existing entity.
      *
      * @Route("/update/{id}", name="admin_datagrid_update")
+     * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -114,6 +115,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * Upload files
      *
      * @Route("/upload", name="admin_datagrid_upload")
+     * @Method({"POST","PUT"})
      */
     public function uploadAction(Request $request)
     {

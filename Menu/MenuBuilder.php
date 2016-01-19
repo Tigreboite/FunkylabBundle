@@ -4,7 +4,7 @@ namespace Tigreboite\FunkylabBundle\Menu;
 
 use Doctrine\Common\Annotations\Reader;
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tigreboite\FunkylabBundle\Annotation\Driver\MenuConverter;
 
@@ -21,8 +21,9 @@ class MenuBuilder
         $this->factory = $factory;
     }
 
-    public function createMainMenu(Request $request, Reader $reader, ContainerInterface $container)
+    public function createMainMenu(RequestStack $requestStack, Reader $reader, ContainerInterface $container)
     {
+        $request = $requestStack->getCurrentRequest();
         $menuConverter = new MenuConverter($reader, $container);
         $this->config = $menuConverter->getFunkylabConfiguration();
         $list = $menuConverter->getControllersWithAnnotationModules();
@@ -106,8 +107,10 @@ class MenuBuilder
         return $menu;
     }
 
-    public function createBreadcrumbMenu(Request $request, Reader $reader, ContainerInterface $container)
+    public function createBreadcrumbMenu(RequestStack $requestStack, Reader $reader, ContainerInterface $container)
     {
+
+        $request = $requestStack->getCurrentRequest();
         $menu = $this->factory->createItem('root', array(
           'childrenAttributes' => array('class' => 'breadcrumb'),
         ));

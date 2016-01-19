@@ -106,6 +106,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
      * Edits an existing entity.
      *
      * @Route("/update/{id}", name="admin_sortable_update")
+     * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -127,6 +128,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
      * Upload files
      *
      * @Route("/upload", name="admin_sortable_upload")
+     * @Method({"POST","PUT"})
      */
     public function uploadAction(Request $request)
     {

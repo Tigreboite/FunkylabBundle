@@ -9,7 +9,7 @@ services:
         class: Knp\Menu\MenuItem
         factory_service: tigreboitefunkylab.menu_builder
         factory_method: createMainMenu
-        arguments: ["@request", @annotation_reader, @service_container]
+        arguments: ["@request_stack", @annotation_reader, @service_container]
         scope: request
         tags:
             - { name: knp_menu.menu, alias: main_menu }
@@ -19,7 +19,7 @@ services:
         class: Knp\Menu\MenuItem
         factory_service: tigreboitefunkylab.menu_builder
         factory_method: createBreadcrumbMenu
-        arguments: ["@request", @annotation_reader,@service_container]
+        arguments: ["@request_stack", @annotation_reader,@service_container]
         scope: request
         tags:
             - { name: knp_menu.menu, alias: breadcrumb }
