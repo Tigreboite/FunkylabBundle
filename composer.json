@@ -19,7 +19,7 @@
     "stof/doctrine-extensions-bundle": "1.2.1",
     "lexik/translation-bundle": "~2.0",
     "liuggio/excelbundle": "~2.0",
-    "gedmo/doctrine-extensions": "2.3.*",
+    "gedmo/doctrine-extensions": "2.3.5",
     "jms/serializer-bundle": "0.12.0",
     "cocur/slugify": "^1.2",
     "almasaeed2010/adminlte":"~2.0"
