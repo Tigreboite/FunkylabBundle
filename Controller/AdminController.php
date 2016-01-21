@@ -4,6 +4,7 @@ namespace Tigreboite\FunkylabBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +36,14 @@ class AdminController extends Controller
         return $this->render('TigreboiteFunkylabBundle:Admin:login.html.twig', array(
           'csrf_token' => $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate'),
         ));
+    }
+
+    /**
+     * @Route("/login_check", name="funkylab_login_check")
+     * @Method({"GET","POST"})
+     */
+    public function loginCheckAction()
+    {
     }
 
     /**
