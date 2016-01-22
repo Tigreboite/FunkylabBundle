@@ -124,27 +124,7 @@ function refreshAppList(data)
 
 function setDeleteButtons()
 {
-  $(".btn-remove").on( 'click', function (e) {
-    e.preventDefault();
-    var route = $(this).data('url');
 
-    $.confirm({
-      text: "Êtes-vous sûr de vouloir supprimer cet élément ?",
-      confirm: function(button) {
-        $.ajax({
-          type: "DELETE",
-          url: route,
-          success: function(msg){
-            refreshAppList({'category' : $('#liste-category').val()});
-          }
-        });
-      },
-      cancel: function(button) {
-        // do something
-      }
-    });
-
-  });
 }
 
 function updateSortApp()
