@@ -92,3 +92,11 @@ form.newproject .project, form.newproject .user {
 .wysiwyg{
     min-height:150px;
 }
+
+.fr-popup.fr-active {
+  left:0 !important;
+}
+
+.fr-popup.fr-desktop .fr-arrow {
+  left: 7% !important;
+}
