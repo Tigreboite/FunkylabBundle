@@ -100,3 +100,7 @@ form.newproject .project, form.newproject .user {
 .fr-popup.fr-desktop .fr-arrow {
   left: 7% !important;
 }
+
+#table_admin .btn-group{
+    min-width:95px;
+}
