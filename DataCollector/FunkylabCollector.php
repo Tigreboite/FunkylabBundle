@@ -6,7 +6,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use TagcoBundle\Service\FunkylabService;
+use Tigreboite\FunkylabBundle\Service\FunkylabService;
 
 class FunkylabCollector extends DataCollector implements DataCollectorInterface
 {

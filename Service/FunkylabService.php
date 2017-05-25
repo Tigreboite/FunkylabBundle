@@ -14,7 +14,7 @@ class FunkylabService
     private $session_key = 'funkylab_profiler';
 
     /**
-     * TagCommander constructor.
+     * FunkylabService constructor.
      *
      * @param Session $session
      */
