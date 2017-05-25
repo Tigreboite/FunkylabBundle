@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Abuse controller.
@@ -28,13 +27,13 @@ class MediaController extends Controller
     {
         $request = $this->get('request');
         $dir = $request->get('dir');
-        $dir_image = 'medias/'.$dir;
+        $dir_image = 'medias/' . $dir;
         $data = array();
 
-        $path = $request->getBasePath()."/".$dir_image;
+        $path = $request->getBasePath() . "/" . $dir_image;
 
-        foreach (glob($path.'/*.*') as $filename) {
-            $data[] = '/'.$dir_image.'/'.basename($filename);
+        foreach (glob($path . '/*.*') as $filename) {
+            $data[] = '/' . $dir_image . '/' . basename($filename);
         }
 
         return new JsonResponse($data);
@@ -59,8 +58,8 @@ class MediaController extends Controller
 
         $path = $request->getBasePath();
 
-        if (file_exists($path.$src)) {
-            unlink($path.$src);
+        if (file_exists($path . $src)) {
+            unlink($path . $src);
             $data = array('success' => true);
         } else {
             $data = array('success' => false);
