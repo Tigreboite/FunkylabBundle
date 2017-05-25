@@ -1,8 +1,8 @@
 {
   "name": "tigreboite/funkylab-bundle",
   "description": "The Most Funky CMS",
-  "keywords": ["extreme-sensio","tigreboite","bundle","symfony","funkylab"],
-  "homepage": "https://github.com/Tigreboite/FunkylabBundle",
+  "keywords": ["tigreboite","bundle","symfony","funkylab"],
+  "homepage": "https://github.com/funkymed/FunkylabBundle",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -22,10 +22,9 @@
     "gedmo/doctrine-extensions": "2.3.*",
     "jms/serializer-bundle": "0.12.0",
     "cocur/slugify": "^1.2",
-    "almasaeed2010/adminlte":"2.3.2"
+    "almasaeed2010/adminlte":"2.*"
   },
   "autoload": {
-    "psr-0": { "Tigreboite\\FunkylabBundle": "" }
-  },
-  "target-dir": "Tigreboite/FunkylabBundle"
+    "psr-4": { "Tigreboite\\FunkylabBundle": "" }
+  }
 }
