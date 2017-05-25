@@ -1,6 +1,6 @@
 <?php
 
-namespace TagcoBundle\DataCollector;
+namespace Tigreboite\FunkylabBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
