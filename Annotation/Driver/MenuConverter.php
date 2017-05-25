@@ -68,8 +68,6 @@ class MenuConverter
      */
     public function getControllersWithAnnotationModules()
     {
-        $allAnnotations = new AnnotationReader();
-
         $controllers = array();
         foreach ($this->container->get('router')->getRouteCollection()->all() as $route) {
             $defaults = $route->getDefaults();

@@ -207,9 +207,6 @@ abstract class Formater
         $annotationReader = new AnnotationReader();
         $reflectionClass = new \ReflectionClass($this->entity);
 
-        // Class Annotations
-        $classAnnotations = $annotationReader->getClassAnnotations($reflectionClass);
-
         // fields Annotations
         foreach ($reflectionClass->getProperties() as $reflectionProperty) {
             $variable = new \ReflectionProperty($this->entity, $reflectionProperty->getName());
