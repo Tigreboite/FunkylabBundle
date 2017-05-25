@@ -59,7 +59,7 @@ class AdminController extends Controller
         return $this->redirect($logout);
     }
 
-    public function getLoggedUser()
+    private function getLoggedUser()
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         return $user && $user!='anon.' ? $user : false;

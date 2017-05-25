@@ -87,7 +87,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    public function createCreateForm($entity)
+    protected function createCreateForm($entity)
     {
         return parent::createCreateForm($entity);
     }
