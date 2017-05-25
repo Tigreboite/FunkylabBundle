@@ -1,4 +1,5 @@
 <?php
+
 namespace Tigreboite\FunkylabBundle\Listener;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -6,7 +7,6 @@ use Symfony\Component\Routing\Router;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Tigreboite\FunkylabBundle\Entity\Activity;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Bundle\SecurityBundle\Security\FirewallContext;
 
 class PostPersistListener
 {
@@ -21,9 +21,9 @@ class PostPersistListener
      */
     public function __construct(TokenStorage $security, Router $router, RequestStack $request)
     {
-        $this->security  = $security;
-        $this->request   = $request->getCurrentRequest();
-        $this->router    = $router;
+        $this->security = $security;
+        $this->request = $request->getCurrentRequest();
+        $this->router = $router;
     }
 
     /**
@@ -31,7 +31,7 @@ class PostPersistListener
      */
     public function postUpdate(LifecycleEventArgs $args)
     {
-        $this->createActivity($args,Activity::ACTION_UPDATE);
+        $this->createActivity($args, Activity::ACTION_UPDATE);
     }
 
     /**
@@ -39,7 +39,7 @@ class PostPersistListener
      */
     public function preRemove(LifecycleEventArgs $args)
     {
-        $this->createActivity($args,Activity::ACTION_DELETE);
+        $this->createActivity($args, Activity::ACTION_DELETE);
     }
 
     /**
@@ -47,7 +47,7 @@ class PostPersistListener
      */
     public function postPersist(LifecycleEventArgs $args)
     {
-        $this->createActivity($args,Activity::ACTION_CREATED);
+        $this->createActivity($args, Activity::ACTION_CREATED);
     }
 
     /**
@@ -57,16 +57,13 @@ class PostPersistListener
     private function createActivity(LifecycleEventArgs $args, $action)
     {
         // $route = $this->router->match($this->request->getPathInfo());
-        $entity         = $args->getEntity();
-        $entityManager  = $args->getEntityManager();
-        $this->user     = $this->getLoggedUser();
-        if($this->request)
-        {
-            $path           = $this->request->getPathInfo();
-            if($this->str_starts_with($path,"/admin"))
-            {
-                if(!($entity instanceof Activity) &&  $this->user)
-                {
+        $entity = $args->getEntity();
+        $entityManager = $args->getEntityManager();
+        $this->user = $this->getLoggedUser();
+        if ($this->request) {
+            $path = $this->request->getPathInfo();
+            if ($this->str_starts_with($path, '/admin')) {
+                if (!($entity instanceof Activity) &&  $this->user) {
                     /*$activity = new Activity();
                     $activity->setCreatedBy($this->user->getFirstname()." ".$this->user->getLastname());
                     $activity->setAction($action);
@@ -85,16 +82,16 @@ class PostPersistListener
     public function getLoggedUser()
     {
         $token = $this->security->getToken();
-        if($token)
-        {
+        if ($token) {
             $user = $token->getUser();
-            return $user && $user!='anon.' ? $user : false;
-        }else{
+
+            return $user && $user != 'anon.' ? $user : false;
+        } else {
             return false;
         }
     }
 
-    function str_starts_with($haystack, $needle)
+    public function str_starts_with($haystack, $needle)
     {
         return strpos($haystack, $needle) === 0;
     }

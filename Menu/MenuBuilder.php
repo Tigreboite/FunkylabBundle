@@ -29,77 +29,87 @@ class MenuBuilder
         $list = $menuConverter->getControllersWithAnnotationModules();
 
         $menu = $this->factory->createItem('root', array(
-          'childrenAttributes' => array('class' => 'sidebar-menu')
+          'childrenAttributes' => array('class' => 'sidebar-menu'),
         ));
 
-        foreach($list as $k=>$l)
-        {
-            if(isset($l['children']))
-            {
-                if($l['children'][0]['route']=="admin_activity" && !$this->config['activity'])
+        foreach ($list as $k => $l) {
+            if (isset($l['children'])) {
+                if ($l['children'][0]['route'] == 'admin_activity' && !$this->config['activity']) {
                     continue;
-                if($l['children'][0]['route']=="admin_user"     && !$this->config['user'])
-                continue;
-                if($l['children'][0]['route']=="admin_blog"     && !$this->config['blog'])
-                continue;
-                if($l['children'][0]['route']=="admin_language" && !$this->config['language'])
-                continue;
-                if($l['children'][0]['route']=="admin_pays"     && !$this->config['country'])
-                continue;
-                if($l['children'][0]['route']=="admin_page"     && !$this->config['page'])
-                continue;
+                }
+                if ($l['children'][0]['route'] == 'admin_user'     && !$this->config['user']) {
+                    continue;
+                }
+                if ($l['children'][0]['route'] == 'admin_blog'     && !$this->config['blog']) {
+                    continue;
+                }
+                if ($l['children'][0]['route'] == 'admin_language' && !$this->config['language']) {
+                    continue;
+                }
+                if ($l['children'][0]['route'] == 'admin_pays'     && !$this->config['country']) {
+                    continue;
+                }
+                if ($l['children'][0]['route'] == 'admin_page'     && !$this->config['page']) {
+                    continue;
+                }
 
                 $i = $menu->addChild($k, array(
                   'route' => $l['children'][0]['route'],
-                  'extras' => array('treeview'=>true,'class_icon' => 'fa '.$l['children'][0]['menu']->getIcon()),
-                  'attributes'=>array('class'=>"treeview"),
-                  'childrenAttributes' => array('class' => 'treeview-menu')
+                  'extras' => array('treeview' => true, 'class_icon' => 'fa '.$l['children'][0]['menu']->getIcon()),
+                  'attributes' => array('class' => 'treeview'),
+                  'childrenAttributes' => array('class' => 'treeview-menu'),
                 ));
-                foreach($l['children'] as $m)
-                {
-                    if($request->get('_route')==$m['route'])
+                foreach ($l['children'] as $m) {
+                    if ($request->get('_route') == $m['route']) {
                         $i->setCurrent(true);
+                    }
 
-                    if($m['route']=="admin_activity" && !$this->config['activity'])
+                    if ($m['route'] == 'admin_activity' && !$this->config['activity']) {
                         continue;
-                    if($m['route']=="admin_user"     && !$this->config['user'])
+                    }
+                    if ($m['route'] == 'admin_user'     && !$this->config['user']) {
                         continue;
-                    if($m['route']=="admin_blog"     && !$this->config['blog'])
+                    }
+                    if ($m['route'] == 'admin_blog'     && !$this->config['blog']) {
                         continue;
-                    if($m['route']=="admin_language" && !$this->config['language'])
+                    }
+                    if ($m['route'] == 'admin_language' && !$this->config['language']) {
                         continue;
-                    if($m['route']=="admin_pays"     && !$this->config['country'])
+                    }
+                    if ($m['route'] == 'admin_pays'     && !$this->config['country']) {
                         continue;
-                    if($m['route']=="admin_page"     && !$this->config['page'])
+                    }
+                    if ($m['route'] == 'admin_page'     && !$this->config['page']) {
                         continue;
+                    }
 
                     $i->addChild($m['menu']->getPropertyName(), array(
                       'route' => $m['route'],
-                      'extras' => array('class_icon' => "fa ".$m['menu']->getIcon())
+                      'extras' => array('class_icon' => 'fa '.$m['menu']->getIcon()),
                     ));
                 }
 
-                if($k=="CMS")
-                {
-                    if($this->config['translator'])
-                    {
-                        if($request->get('_route')=="lexik_translation_grid")
+                if ($k == 'CMS') {
+                    if ($this->config['translator']) {
+                        if ($request->get('_route') == 'lexik_translation_grid') {
                             $i->setCurrent(true);
+                        }
 
                         $i->addChild('Translator', array(
                           'route' => 'lexik_translation_grid',
-                          'extras' => array('class_icon' => 'fa fa-globe')
+                          'extras' => array('class_icon' => 'fa fa-globe'),
 
-                        ));$i->addChild('Translator download', array(
+                        ));
+                        $i->addChild('Translator download', array(
                           'route' => 'admin_translator_download',
-                          'extras' => array('class_icon' => 'fa fa-download')
+                          'extras' => array('class_icon' => 'fa fa-download'),
                         ));
                     }
                 }
-            }else{
+            } else {
                 $menu->addChild($l['menu']->getName(), array(
                   'route' => $l['route'],
-                  'extras' => array('class_icon' => "fa ".$l['menu']->getIcon())
+                  'extras' => array('class_icon' => 'fa '.$l['menu']->getIcon()),
                 ));
             }
         }
@@ -109,7 +119,6 @@ class MenuBuilder
 
     public function createBreadcrumbMenu(RequestStack $requestStack, Reader $reader, ContainerInterface $container)
     {
-
         $request = $requestStack->getCurrentRequest();
         $menu = $this->factory->createItem('root', array(
           'childrenAttributes' => array('class' => 'breadcrumb'),
@@ -117,84 +126,76 @@ class MenuBuilder
 
         $mainSection = 'Dashboard';
         $mainSectionIcon = 'fa fa-dashboard';
-        $subSection = "";
+        $subSection = '';
 
         $route_root = explode('_', $request->get('_route'));
         $section = $route_root[1];
-        $action = (!empty($route_root[2]) ? $route_root[2] : "");
+        $action = (!empty($route_root[2]) ? $route_root[2] : '');
 
-        $menuConverter= new MenuConverter($reader, $container);
+        $menuConverter = new MenuConverter($reader, $container);
 
         $list = $menuConverter->getControllersWithAnnotationModules();
 
-        foreach($list as $k=>$l)
-        {
-            if(isset($l['children']))
-            {
-                foreach($l['children'] as $m)
-                {
+        foreach ($list as $k => $l) {
+            if (isset($l['children'])) {
+                foreach ($l['children'] as $m) {
                     $menu_route_root = explode('_', $m['route']);
                     $menu_section = $menu_route_root[1];
 
-                    if($section==$menu_section)
-                    {
-                        $mainSectionIcon = "fa ".$m['menu']->getIcon();
+                    if ($section == $menu_section) {
+                        $mainSectionIcon = 'fa '.$m['menu']->getIcon();
                         $mainSection = $m['menu']->getPropertyName();
-                        $subSection = "list";
+                        $subSection = 'list';
                         $menu->addChild($k, array(
                           'route' => $m['route'],
-                          'extras' => array('class_icon' => "fa ".$l['children'][0]['menu']->getIcon())
+                          'extras' => array('class_icon' => 'fa '.$l['children'][0]['menu']->getIcon()),
                         ));
-                        if($request->get('_route')==$m['route'])
-                        {
-                          $menu->addChild($mainSection, array(
+                        if ($request->get('_route') == $m['route']) {
+                            $menu->addChild($mainSection, array(
                             'route' => $m['route'],
-                            'extras' => array('class_icon' => "fa ".$m['menu']->getIcon())
+                            'extras' => array('class_icon' => 'fa '.$m['menu']->getIcon()),
                           ));
                         }
                     }
                 }
-            }
-            else{
+            } else {
                 $menu_route_root = explode('_', $m['route']);
                 $menu_section = $menu_route_root[1];
-                if($section==$menu_section)
-                {
-                    $mainSectionIcon = "fa ".$m['menu']->getIcon();
+                if ($section == $menu_section) {
+                    $mainSectionIcon = 'fa '.$m['menu']->getIcon();
                     $mainSection = $m['menu']->getPropertyName();
-                    $subSection = "list";
+                    $subSection = 'list';
                     $menu->addChild($k, array(
                       'route' => $m['route'],
-                      'extras' => array('class_icon' => "fa ".$l['children'][0]['menu']->getIcon())
+                      'extras' => array('class_icon' => 'fa '.$l['children'][0]['menu']->getIcon()),
                     ));
-                    if($request->get('_route')==$m['route'])
-                    {
-                      $menu->addChild($mainSection, array(
+                    if ($request->get('_route') == $m['route']) {
+                        $menu->addChild($mainSection, array(
                         'route' => $m['route'],
-                        'extras' => array('class_icon' => "fa ".$m['menu']->getIcon())
+                        'extras' => array('class_icon' => 'fa '.$m['menu']->getIcon()),
                       ));
                     }
                 }
             }
         }
 
-        switch($action){
-            case "new":     $menu->addChild('Add');     break;
-            case "show":    $menu->addChild('Show');    break;
-            case "edit":    $menu->addChild('Edit');    break;
+        switch ($action) {
+            case 'new':     $menu->addChild('Add');     break;
+            case 'show':    $menu->addChild('Show');    break;
+            case 'edit':    $menu->addChild('Edit');    break;
         }
 
-        if(!empty($action)) $subSection = $action;
+        if (!empty($action)) {
+            $subSection = $action;
+        }
 
         $menu->setExtras(array(
           'mainSection' => $mainSection,
           'mainSectionIcon' => $mainSectionIcon,
           'subSection' => $subSection,
-          'title' => $mainSection.' - '.$subSection
+          'title' => $mainSection.' - '.$subSection,
         ));
 
         return $menu;
     }
-
-
 }

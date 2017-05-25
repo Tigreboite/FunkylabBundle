@@ -69,15 +69,15 @@ class AdminController extends Controller
         $dir_path = 'medias/wysiwyg_files/';
 
         $uploadedFile = $request->files->get('file');
-        $response = new \StdClass;
+        $response = new \StdClass();
 
         if ($uploadedFile) {
             $ext = $uploadedFile->getClientOriginalExtension();
             if (in_array($ext, $extensions)) {
-                $file = $uploadedFile->move('../web/' . $dir_path, $uploadedFile->getClientOriginalName());
+                $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
                 if ($file) {
                     // Generate response.
-                    $response->link = '/' . $dir_path . $uploadedFile->getClientOriginalName();
+                    $response->link = '/'.$dir_path.$uploadedFile->getClientOriginalName();
                 }
             }
         }
@@ -88,7 +88,7 @@ class AdminController extends Controller
     private function getLoggedUser()
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
+
         return $user && $user != 'anon.' ? $user : false;
     }
-
 }

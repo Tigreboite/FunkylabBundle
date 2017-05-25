@@ -5,7 +5,6 @@ namespace Tigreboite\FunkylabBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Tigreboite\FunkylabBundle\Entity\User;
 
 class LoginType extends AbstractType
 {

@@ -1,22 +1,18 @@
 <?php
 /**
  * Code by Cyril Pereira, Julien Hay
- * Extreme-Sensio 2015
+ * Extreme-Sensio 2015.
  */
+
 namespace Tigreboite\FunkylabBundle\Generator\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Tigreboite\FunkylabBundle\Entity\Sortable;
-use Tigreboite\FunkylabBundle\Form\SortableType;
-
 
 /**
  * Sortable controller.
@@ -25,12 +21,11 @@ use Tigreboite\FunkylabBundle\Form\SortableType;
  */
 class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableController
 {
-
     protected $entityName = '%bundle_name%\Entity\Sortable';
-    protected $formType   = '%bundle_name%\Form\SortableType';
+    protected $formType = '%bundle_name%\Form\SortableType';
     protected $route_base = 'admin_sortable';
     protected $repository = '%bundle_name%:%entity_name%';
-    protected $dir_path   = 'medias/%bundle_name%/';
+    protected $dir_path = 'medias/%bundle_name%/';
 
     /**
      * Lists all entities.
@@ -125,7 +120,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     }
 
     /**
-     * Upload files
+     * Upload files.
      *
      * @Route("/upload", name="admin_sortable_upload")
      * @Method({"POST","PUT"})
@@ -148,7 +143,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     }
 
     /**
-     * Save order
+     * Save order.
      *
      * @Route("/save/order", name="admin_sortable_order")
      * @Method("POST")
@@ -157,6 +152,4 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     {
         return parent::orderAction();
     }
-
-
 }

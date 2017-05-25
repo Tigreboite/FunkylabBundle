@@ -3,11 +3,10 @@
 namespace Tigreboite\FunkylabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Language
+ * Language.
  *
  * @ORM\Table(name="flb_language")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\LanguageRepository")
@@ -15,13 +14,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Language
 {
-
     use Image;
-    public $IMAGE_PATH    = "medias/language";
-    public $IMAGE_DEFAULT = "images/illustrations/illu_project_default.jpg";
+    public $IMAGE_PATH = 'medias/language';
+    public $IMAGE_DEFAULT = 'images/illustrations/illu_project_default.jpg';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -44,7 +42,7 @@ class Language
     private $name;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="isenable", type="boolean", nullable=true, options={"default" = 0})
      */
@@ -70,11 +68,11 @@ class Language
      */
     public $file;
 
-
     /**
-     * Set code
+     * Set code.
      *
      * @param string $code
+     *
      * @return Language
      */
     public function setCode($code)
@@ -85,7 +83,7 @@ class Language
     }
 
     /**
-     * Get code
+     * Get code.
      *
      * @return string
      */
@@ -95,9 +93,10 @@ class Language
     }
 
     /**
-     * Set flag
+     * Set flag.
      *
      * @param string $flag
+     *
      * @return Language
      */
     public function setFlag($flag)
@@ -108,7 +107,7 @@ class Language
     }
 
     /**
-     * Get flag
+     * Get flag.
      *
      * @return string
      */
@@ -123,9 +122,10 @@ class Language
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Language
      */
     public function setName($name)
@@ -136,7 +136,7 @@ class Language
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -146,9 +146,10 @@ class Language
     }
 
     /**
-     * Set isenable
+     * Set isenable.
      *
      * @param string $isenable
+     *
      * @return Language
      */
     public function setIsenable($isenable)
@@ -159,7 +160,7 @@ class Language
     }
 
     /**
-     * Get isenable
+     * Get isenable.
      *
      * @return string
      */
@@ -169,9 +170,9 @@ class Language
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -179,9 +180,10 @@ class Language
     }
 
     /**
-     * Set image
+     * Set image.
      *
      * @param string $image
+     *
      * @return Language
      */
     public function setImage($image)
@@ -191,7 +193,7 @@ class Language
         return $this;
     }
     /**
-     * Get image
+     * Get image.
      *
      * @return string
      */
@@ -199,6 +201,4 @@ class Language
     {
         return $this->image;
     }
-
-
 }

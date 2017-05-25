@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  *
@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Loader;
 class TigreboiteFunkylabExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -27,20 +27,16 @@ class TigreboiteFunkylabExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        foreach($config as $k1=>$v1)
-        {
-            if(is_array($v1))
-            {
-                foreach($v1 as $k2=>$v2)
-                {
+        foreach ($config as $k1 => $v1) {
+            if (is_array($v1)) {
+                foreach ($v1 as $k2 => $v2) {
                     $name = 'tigreboite_funkylab.'.$k1.'.'.$k2;
                     $container->setParameter($name, $v2);
                     $container
                       ->register('globals', 'twig')
                       ->addArgument('%'.$name.'%');
-
                 }
-            }else{
+            } else {
                 $container->setParameter('tigreboite_funkylab.'.$k1, $v1);
             }
         }
@@ -50,5 +46,4 @@ class TigreboiteFunkylabExtension extends Extension
     {
         return 'tigreboite_funkylab';
     }
-
 }

@@ -10,22 +10,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Tigreboite\FunkylabBundle\Entity\User;
-use Tigreboite\FunkylabBundle\Form\UserType;
 
 /**
  * @Route("/user")
  */
 class UserController extends DatagridController
 {
-    protected $entityName   = 'Tigreboite\FunkylabBundle\Entity\User';
-    protected $formType     = 'Tigreboite\FunkylabBundle\Form\UserType';
-    protected $route_base   = 'admin_user';
-    protected $repository   = 'TigreboiteFunkylabBundle:User';
-    protected $dir_path     = 'medias/user/';
+    protected $entityName = 'Tigreboite\FunkylabBundle\Entity\User';
+    protected $formType = 'Tigreboite\FunkylabBundle\Form\UserType';
+    protected $route_base = 'admin_user';
+    protected $repository = 'TigreboiteFunkylabBundle:User';
+    protected $dir_path = 'medias/user/';
 
     /**
      * Lists all User entities.
@@ -97,8 +95,9 @@ class UserController extends DatagridController
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            if($entity->getPlainPassword())
+            if ($entity->getPlainPassword()) {
                 $entity->setPassword($entity->getPlainPassword());
+            }
 
             $em->flush();
 
@@ -106,9 +105,9 @@ class UserController extends DatagridController
         }
 
         return array(
-          'entity'      => $entity,
-          'form'   => $editForm->createView(),
-          'ajax' => $request->isXmlHttpRequest()
+          'entity' => $entity,
+          'form' => $editForm->createView(),
+          'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -154,7 +153,7 @@ class UserController extends DatagridController
     }
 
     /**
-     * Export EXCEL idea list
+     * Export EXCEL idea list.
      *
      * @Route("/download_excel", name="admin_user_export")
      */
@@ -210,7 +209,6 @@ class UserController extends DatagridController
         ), ';');
 
         while (false !== ($row = $iterableResult->next())) {
-
             $data = $row[0]->getCSVData($em);
 
             fputcsv($handle, $data, ';');
@@ -223,8 +221,7 @@ class UserController extends DatagridController
 
         return new Response($content, 200, array(
           'Content-Type' => 'application/force-download',
-          'Content-Disposition' => 'attachment; filename="export-users.csv"'
+          'Content-Disposition' => 'attachment; filename="export-users.csv"',
         ));
     }
-
 }

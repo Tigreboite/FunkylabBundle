@@ -1,8 +1,9 @@
 <?php
 /**
  * Code by Cyril Pereira
- * Extreme-Sensio 2015
+ * Extreme-Sensio 2015.
  */
+
 namespace Tigreboite\FunkylabBundle\Generator\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tigreboite\FunkylabBundle\Entity\Sortable;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -25,8 +25,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class TreeController extends Controller
 {
-
-    protected $formType   = 'DatagridType';
+    protected $formType = 'DatagridType';
     protected $route_base = 'admin_datagrid';
     protected $repository = 'TigreboiteFunkylabBundle:Sortable';
 
@@ -53,7 +52,7 @@ class TreeController extends Controller
     public function listAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw $this->createNotFoundException("Not found");
+            throw $this->createNotFoundException('Not found');
         }
 
         // GET
@@ -111,8 +110,8 @@ class TreeController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -129,7 +128,7 @@ class TreeController extends Controller
         $form = $this->createForm(new $this->formType($em), $entity, array(
             'action' => $this->generateUrl($this->route_base.'_create'),
             'method' => 'POST',
-            'allow_extra_fields'=>true,
+            'allow_extra_fields' => true,
 
         ));
 
@@ -148,15 +147,14 @@ class TreeController extends Controller
     public function newAction(Request $request)
     {
         $entity = new Sortable();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
-
 
     /**
      * Displays a form to edit an existing Sortable entity.
@@ -178,19 +176,19 @@ class TreeController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
     /**
-    * Creates a form to edit a Sortable entity.
-    *
-    * @param Sortable $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Sortable entity.
+     *
+     * @param Sortable $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Sortable $entity)
     {
         $em = $this->get('doctrine')->getManager();
@@ -232,8 +230,8 @@ class TreeController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $editForm->createView(),
-            'ajax'   => $request->isXmlHttpRequest()
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
     /**

@@ -5,7 +5,7 @@ namespace Tigreboite\FunkylabBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * BlogComment
+ * BlogComment.
  *
  * @ORM\Table(name="flb_blog_comment", indexes={@ORM\Index(name="fk_blog_comment_language1_idx", columns={"language_id"}), @ORM\Index(name="fk_blog_comment_iead1_idx", columns={"blog_id"}), @ORM\Index(name="fk_blog_comment_user1_idx", columns={"user_id"})})
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\BlogCommentRepository")
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class BlogComment
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -66,7 +66,7 @@ class BlogComment
     private $user;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_parent", type="integer", nullable=true)
      */
@@ -78,16 +78,15 @@ class BlogComment
     protected $commentusefull;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="isarchived", type="boolean", nullable=true, options={"default" = 0})
      */
     private $isarchived;
 
-
     public function __construct()
     {
-        $this->setCreatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
         $this->commentusefull = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -96,9 +95,9 @@ class BlogComment
         return $this->comment;
     }
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -106,9 +105,10 @@ class BlogComment
     }
 
     /**
-     * Set comment
+     * Set comment.
      *
      * @param string $comment
+     *
      * @return BlogComment
      */
     public function setComment($comment)
@@ -119,9 +119,9 @@ class BlogComment
     }
 
     /**
-     * Get comment
+     * Get comment.
      *
-     * @return string 
+     * @return string
      */
     public function getComment()
     {
@@ -129,9 +129,10 @@ class BlogComment
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
+     *
      * @return BlogComment
      */
     public function setCreatedAt($createdAt)
@@ -142,9 +143,9 @@ class BlogComment
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -152,9 +153,10 @@ class BlogComment
     }
 
     /**
-     * Set blog
+     * Set blog.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Blog $blog
+     *
      * @return BlogComment
      */
     public function setBlog(\Tigreboite\FunkylabBundle\Entity\Blog $blog = null)
@@ -165,9 +167,9 @@ class BlogComment
     }
 
     /**
-     * Get blog
+     * Get blog.
      *
-     * @return \Tigreboite\FunkylabBundle\Entity\Blog 
+     * @return \Tigreboite\FunkylabBundle\Entity\Blog
      */
     public function getBlog()
     {
@@ -175,9 +177,10 @@ class BlogComment
     }
 
     /**
-     * Set language
+     * Set language.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Language $language
+     *
      * @return BlogComment
      */
     public function setLanguage(\Tigreboite\FunkylabBundle\Entity\Language $language = null)
@@ -188,9 +191,9 @@ class BlogComment
     }
 
     /**
-     * Get language
+     * Get language.
      *
-     * @return \Tigreboite\FunkylabBundle\Entity\Language 
+     * @return \Tigreboite\FunkylabBundle\Entity\Language
      */
     public function getLanguage()
     {
@@ -198,9 +201,10 @@ class BlogComment
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\User $user
+     *
      * @return BlogComment
      */
     public function setUser(\Tigreboite\FunkylabBundle\Entity\User $user = null)
@@ -211,9 +215,9 @@ class BlogComment
     }
 
     /**
-     * Get user
+     * Get user.
      *
-     * @return \Tigreboite\FunkylabBundle\Entity\User 
+     * @return \Tigreboite\FunkylabBundle\Entity\User
      */
     public function getUser()
     {
@@ -221,9 +225,10 @@ class BlogComment
     }
 
     /**
-     * Set id_parent
+     * Set id_parent.
      *
-     * @param integer $idParent
+     * @param int $idParent
+     *
      * @return BlogComment
      */
     public function setIdParent($idParent)
@@ -234,9 +239,9 @@ class BlogComment
     }
 
     /**
-     * Get id_parent
+     * Get id_parent.
      *
-     * @return integer 
+     * @return int
      */
     public function getIdParent()
     {
@@ -244,9 +249,10 @@ class BlogComment
     }
 
     /**
-     * Add commentusefull
+     * Add commentusefull.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\BlogCommentUsefull $commentusefull
+     *
      * @return IdeaComment
      */
     public function addCommentusefull(\Tigreboite\FunkylabBundle\Entity\BlogCommentUsefull $commentusefull)
@@ -257,7 +263,7 @@ class BlogComment
     }
 
     /**
-     * Remove commentusefull
+     * Remove commentusefull.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\BlogCommentUsefull $commentusefull
      */
@@ -265,7 +271,7 @@ class BlogComment
     {
         $this->commentusefull->removeElement($commentusefull);
     }
-    
+
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
@@ -275,9 +281,10 @@ class BlogComment
     }
 
     /**
-     * Set isarchived
+     * Set isarchived.
      *
-     * @param boolean $isarchived
+     * @param bool $isarchived
+     *
      * @return Idea
      */
     public function setIsarchived($isarchived)
@@ -288,9 +295,9 @@ class BlogComment
     }
 
     /**
-     * Get isarchived
+     * Get isarchived.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsarchived()
     {

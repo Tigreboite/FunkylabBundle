@@ -3,7 +3,6 @@
 namespace Tigreboite\FunkylabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 trait Image
@@ -13,9 +12,9 @@ trait Image
     //public $image = "";
 
     /**
-    * @ORM\PrePersist()
-    * @ORM\PreUpdate()
-    */
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
     public function preUpload()
     {
         if (null !== $this->getFile()) {
@@ -36,11 +35,10 @@ trait Image
             return;
         }
 
-        $extensions = array('png','jpg','jpeg','gif','bmp');
+        $extensions = array('png', 'jpg', 'jpeg', 'gif', 'bmp');
 //        $ext  = $this->getFile()->guessExtension();
-        $ext  = $this->getFile()->getClientOriginalExtension();
-        if(!in_array($ext, $extensions))
-        {
+        $ext = $this->getFile()->getClientOriginalExtension();
+        if (!in_array($ext, $extensions)) {
             return;
         }
 
@@ -99,16 +97,14 @@ trait Image
 
     public function getWebPath()
     {
-
         $file = null === $this->image
             ? null
             : $this->getUploadDir().'/'.$this->image;
 
-        $fileFullPath = ($file!=null) ?  $this->getUploadRootDir().'/'.$this->image : null;
+        $fileFullPath = ($file != null) ?  $this->getUploadRootDir().'/'.$this->image : null;
 
-        if((null===$file || !file_exists($fileFullPath)) || is_dir($fileFullPath))
-        {
-          return $this->IMAGE_DEFAULT;
+        if ((null === $file || !file_exists($fileFullPath)) || is_dir($fileFullPath)) {
+            return $this->IMAGE_DEFAULT;
         }
 
         return $file;
@@ -131,6 +127,7 @@ trait Image
     public function getBaseNameImage($image)
     {
         $tmp = explode('/', $image);
-        return $tmp[count($tmp)-1];
+
+        return $tmp[count($tmp) - 1];
     }
 }

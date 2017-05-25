@@ -2,15 +2,13 @@
 
 namespace Tigreboite\FunkylabBundle\Entity;
 
-use Tigreboite\FunkylabBundle\Entity\BaseRepository;
-
 class BlogCommentRepository extends BaseRepository
 {
-	public function findCommentsLimit($id, $first=0, $max=100, $id_parent = 0)
+    public function findCommentsLimit($id, $first = 0, $max = 100, $id_parent = 0)
     {
         $qb = $this->createQueryBuilder('i')
             ->leftJoin('i.blog', 'p')
-            ->setFirstResult($first*$max)
+            ->setFirstResult($first * $max)
             ->setMaxResults($max)
             ->orderBy('i.id', 'DESC')
             ->andWhere('i.id_parent = :idparent')
@@ -20,18 +18,19 @@ class BlogCommentRepository extends BaseRepository
         $qb->leftJoin('i.user', 'u');
         $qb->andWhere('u.isarchived = 0 OR u.isarchived IS NULL');
 
-        if($id != 0) {
-	        $qb = $qb->andWhere('p.id = :id')
-	            ->setParameter('id', $id);
-	    }
+        if ($id != 0) {
+            $qb = $qb->andWhere('p.id = :id')
+                ->setParameter('id', $id);
+        }
 
         return $qb->getQuery()
             ->getResult();
     }
 
-    public function findDataTableBlogComment($columns, $start, $length, $search_string, $order_column, $order_dir, $blog_id) {
+    public function findDataTableBlogComment($columns, $start, $length, $search_string, $order_column, $order_dir, $blog_id)
+    {
         foreach ($columns as &$col) {
-            if(!empty($col['name']) && $col['name'] == 'usefull') {
+            if (!empty($col['name']) && $col['name'] == 'usefull') {
                 $col['spe'] = true;
                 $col['group_concat_one_to_many'] = true;
                 $col['table'] = 'commentusefull';
@@ -44,5 +43,4 @@ class BlogCommentRepository extends BaseRepository
 
         return parent::findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir, $where_spe);
     }
-
 }

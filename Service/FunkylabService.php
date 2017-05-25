@@ -5,32 +5,32 @@ namespace Tigreboite\FunkylabBundle\Service;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
- * Class FunkylabService
- * @package Tigreboite\FunkylabBundle\Service
+ * Class FunkylabService.
  */
 class FunkylabService
 {
     private $data;
     private $session;
-    private $session_key = "funkylab_profiler";
+    private $session_key = 'funkylab_profiler';
 
     /**
      * TagCommander constructor.
+     *
      * @param Session $session
      */
     public function __construct(Session $session)
     {
         $this->session = $session;
-        $this->data = $this->session->get($this->session_key,[]);
+        $this->data = $this->session->get($this->session_key, []);
     }
 
     /**
      * @param $key
      * @param $value
      */
-    public function set($key,$value)
+    public function set($key, $value)
     {
-        $this->data[$key]=$value;
+        $this->data[$key] = $value;
         $this->updateSession();
     }
 

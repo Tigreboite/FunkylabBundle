@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * CommentUsefull
+ * CommentUsefull.
  *
  * @ORM\Table(name="flb_blog_comment_usefull")
  * @ORM\Entity
@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class BlogCommentUsefull
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -23,7 +23,6 @@ class BlogCommentUsefull
     private $id;
 
     /**
-     *
      * @ORM\ManyToOne(targetEntity="BlogComment", inversedBy="commentusefull")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="blogcomment_id", referencedColumnName="id")
@@ -32,7 +31,6 @@ class BlogCommentUsefull
     private $blogcomment;
 
     /**
-     *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
@@ -41,14 +39,14 @@ class BlogCommentUsefull
     private $user;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="isusefull", type="boolean")
      */
     private $isusefull;
 
-     /**
-     * @var \DateTime $created
+    /**
+     * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
@@ -56,7 +54,7 @@ class BlogCommentUsefull
     private $createdAt;
 
     /**
-     * @var \DateTime $updated
+     * @var \DateTime
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
@@ -64,9 +62,9 @@ class BlogCommentUsefull
     private $updated;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -74,9 +72,10 @@ class BlogCommentUsefull
     }
 
     /**
-     * Set ideacommentId
+     * Set ideacommentId.
      *
-     * @param integer $ideacommentId
+     * @param int $ideacommentId
+     *
      * @return CommentUsefull
      */
     public function setBlogcommentId($blogcommentId)
@@ -87,9 +86,9 @@ class BlogCommentUsefull
     }
 
     /**
-     * Get blogcommentId
+     * Get blogcommentId.
      *
-     * @return integer 
+     * @return int
      */
     public function getBlogcommentId()
     {
@@ -97,9 +96,10 @@ class BlogCommentUsefull
     }
 
     /**
-     * Set userId
+     * Set userId.
      *
-     * @param integer $userId
+     * @param int $userId
+     *
      * @return CommentUsefull
      */
     public function setUserId($userId)
@@ -110,9 +110,9 @@ class BlogCommentUsefull
     }
 
     /**
-     * Get userId
+     * Get userId.
      *
-     * @return integer 
+     * @return int
      */
     public function getUserId()
     {
@@ -120,9 +120,10 @@ class BlogCommentUsefull
     }
 
     /**
-     * Set isusefull
+     * Set isusefull.
      *
-     * @param boolean $isusefull
+     * @param bool $isusefull
+     *
      * @return CommentUsefull
      */
     public function setIsusefull($isusefull)
@@ -133,9 +134,9 @@ class BlogCommentUsefull
     }
 
     /**
-     * Get isusefull
+     * Get isusefull.
      *
-     * @return boolean 
+     * @return bool
      */
     public function getIsusefull()
     {
@@ -143,9 +144,10 @@ class BlogCommentUsefull
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
+     *
      * @return CommentUsefull
      */
     public function setCreatedAt($createdAt)
@@ -156,9 +158,9 @@ class BlogCommentUsefull
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -166,9 +168,10 @@ class BlogCommentUsefull
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\User $user
+     *
      * @return BlogCommentUsefull
      */
     public function setUser(\Tigreboite\FunkylabBundle\Entity\User $user = null)
@@ -179,9 +182,9 @@ class BlogCommentUsefull
     }
 
     /**
-     * Get user
+     * Get user.
      *
-     * @return \Tigreboite\FunkylabBundle\Entity\User 
+     * @return \Tigreboite\FunkylabBundle\Entity\User
      */
     public function getUser()
     {
@@ -189,9 +192,10 @@ class BlogCommentUsefull
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
+     *
      * @return CommentUsefull
      */
     public function setUpdated($updated)
@@ -202,9 +206,9 @@ class BlogCommentUsefull
     }
 
     /**
-     * Get updated
+     * Get updated.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -212,9 +216,10 @@ class BlogCommentUsefull
     }
 
     /**
-     * Set blogcomment
+     * Set blogcomment.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\IdeaComment $blogcomment
+     *
      * @return BlogCommentUsefull
      */
     public function setBlogcomment(\Tigreboite\FunkylabBundle\Entity\BlogComment $blogcomment = null)
@@ -225,7 +230,7 @@ class BlogCommentUsefull
     }
 
     /**
-     * Get blogcomment
+     * Get blogcomment.
      *
      * @return \Tigreboite\FunkylabBundle\Entity\BlogComment
      */
@@ -235,9 +240,9 @@ class BlogCommentUsefull
     }
 
     /**
-     * Get blogcomment
+     * Get blogcomment.
      *
-     * @return \Tigreboite\FunkylabBundle\Entity\BlogComment 
+     * @return \Tigreboite\FunkylabBundle\Entity\BlogComment
      */
     public function getBlogcomment()
     {

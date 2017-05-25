@@ -1,8 +1,9 @@
 <?php
 /**
  * Code by Cyril Pereira, Julien Hay
- * Extreme-Sensio 2015
+ * Extreme-Sensio 2015.
  */
+
 namespace Tigreboite\FunkylabBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -42,25 +43,24 @@ class BaseController extends Controller
             'error' => self::getErrorMessages($form),
             'entity' => $entity,
             'form' => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
     protected function createCreateForm($entity)
     {
         $form = $this->createForm(new $this->formType(), $entity, array(
-            'action' => $this->generateUrl($this->route_base . '_create'),
+            'action' => $this->generateUrl($this->route_base.'_create'),
             'method' => 'POST',
             'allow_extra_fields' => true,
         ));
-
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
 
-    static public function getErrorMessages(\Symfony\Component\Form\Form $form)
+    public static function getErrorMessages(\Symfony\Component\Form\Form $form)
     {
         $errors = array();
 
@@ -86,7 +86,6 @@ class BaseController extends Controller
         } else {
             return;
         }
-
     }
 
     public function newAction(Request $request)
@@ -98,7 +97,7 @@ class BaseController extends Controller
             'error' => self::getErrorMessages($form),
             'entity' => $entity,
             'form' => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -117,14 +116,14 @@ class BaseController extends Controller
         return array(
             'entity' => $entity,
             'form' => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
     protected function createEditForm($entity)
     {
         $form = $this->createForm(new $this->formType(), $entity, array(
-            'action' => $this->generateUrl($this->route_base . '_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl($this->route_base.'_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -149,13 +148,13 @@ class BaseController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl($this->route_base . '_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl($this->route_base.'_edit', array('id' => $id)));
         }
 
         return array(
             'entity' => $entity,
             'form' => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -180,12 +179,12 @@ class BaseController extends Controller
         $uploadedFile = $request->files->get('file');
 
         if ($uploadedFile) {
-            $file = $uploadedFile->move('../web/' . $this->dir_path, $uploadedFile->getClientOriginalName());
+            $file = $uploadedFile->move('../web/'.$this->dir_path, $uploadedFile->getClientOriginalName());
             if ($file) {
                 $data = array(
                     'success' => true,
                     'filename' => $uploadedFile->getClientOriginalName(),
-                    'path' => $this->dir_path . $uploadedFile->getClientOriginalName()
+                    'path' => $this->dir_path.$uploadedFile->getClientOriginalName(),
                 );
             }
         }
@@ -229,5 +228,4 @@ class BaseController extends Controller
 
         return new JsonResponse($data);
     }
-
 }

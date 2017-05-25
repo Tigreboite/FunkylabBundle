@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManager;
 
 class LanguageType extends AbstractType
 {
-
     private $em;
 
     public function __construct(EntityManager $em)
@@ -19,40 +18,38 @@ class LanguageType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $choice_countries = array();
-        if($this->em)
-        {
+        if ($this->em) {
             $pays = $this->em->getRepository('TigreboiteFunkylabBundle:Pays')->findAll();
-            foreach($pays as $p)
-            {
-                $choice_countries[strtolower($p->getCode())]=$p->getName()." (".$p->getCode().")";
+            foreach ($pays as $p) {
+                $choice_countries[strtolower($p->getCode())] = $p->getName().' ('.$p->getCode().')';
             }
         }
 
         $builder
             ->add('name')
             ->add('code')
-            ->add('flag','choice', array(
-              'choices' =>$choice_countries,
+            ->add('flag', 'choice', array(
+              'choices' => $choice_countries,
               )
             )
-            ->add('pdf_payment','hidden')
-            ->add('image','hidden')
+            ->add('pdf_payment', 'hidden')
+            ->add('image', 'hidden')
             ->add('isenable')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Language'
+            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Language',
         ));
     }
 

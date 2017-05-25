@@ -8,20 +8,20 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BaseEvent extends Event
 {
-
     private $name;
     private $container;
     private $request;
 
     /**
      * BaseEvent constructor.
+     *
      * @param Container $container
      */
     public function __construct(Container $container)
     {
         $this->container = $container;
         $this->request = $container->get('request_stack')->getCurrentRequest();
-        $this->name = "";
+        $this->name = '';
     }
 
     public function setName(string $name)
@@ -49,5 +49,4 @@ class BaseEvent extends Event
     {
         return $this->container;
     }
-
 }

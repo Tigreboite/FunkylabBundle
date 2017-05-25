@@ -18,7 +18,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
     private $container;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setContainer(ContainerInterface $container = null)
     {
@@ -26,32 +26,32 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
         $users = array(
             array(
                 'firstName' => 'Super',
-                'lastName'  => 'Admin',
-                'email'     => 'admin@admin.com',
-                'username'  => 'admin@admin.com',
-                'password'  => 'admin',
-                'uniq'      => 11111111,
-                'roles'     => array(
+                'lastName' => 'Admin',
+                'email' => 'admin@admin.com',
+                'username' => 'admin@admin.com',
+                'password' => 'admin',
+                'uniq' => 11111111,
+                'roles' => array(
                     'ROLE_SUPER_ADMIN',
-                    'ROLE_ADMIN'
+                    'ROLE_ADMIN',
                 ),
             ),
         );
 
-        $lang_en = $manager->getRepository("TigreboiteFunkylabBundle:Language", "default")->findOneByCode('en');
+        $lang_en = $manager->getRepository('TigreboiteFunkylabBundle:Language', 'default')->findOneByCode('en');
 
         $userManager = $this->container->get('fos_user.user_manager');
 
         foreach ($users as $k => $user) {
             $entity = new User();
-            
+
             $entity->setEmail($user['email']);
             $entity->setUsername($user['username']);
             $entity->setPlainPassword($user['password']);
@@ -79,7 +79,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getOrder()
     {

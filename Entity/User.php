@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * User
+ * User.
  *
  * @ORM\Table(name="flb_user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_7D93D64992FC23A8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="UNIQ_7D93D649A0D96FBF", columns={"email_canonical"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})}, indexes={@ORM\Index(name="fk_user_languages1_idx", columns={"language_id"})})
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\UserRepository")
@@ -22,14 +22,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class User extends BaseUser
 {
-    const ROLE_MODERATOR  = 'ROLE_MODERATOR';
-    const ROLE_BRAND      = 'ROLE_BRAND';
-    const ROLE_USER       = 'ROLE_USER';
-    const ROLE_ADMIN      = 'ROLE_ADMIN';
-
+    const ROLE_MODERATOR = 'ROLE_MODERATOR';
+    const ROLE_BRAND = 'ROLE_BRAND';
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -96,14 +95,14 @@ class User extends BaseUser
     protected $city;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="newsletter", type="boolean", nullable=true)
      */
     protected $newsletter;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="newsletter_partner", type="boolean", nullable=true)
      */
@@ -172,7 +171,7 @@ class User extends BaseUser
     private $slug;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="isarchived", type="boolean", nullable=true, options={"default" = 0})
      */
@@ -197,13 +196,13 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->setEnabled(true);
-        $this->setCreatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -211,9 +210,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set dob
+     * Set dob.
      *
      * @param \DateTime $dob
+     *
      * @return User
      */
     public function setDob($dob)
@@ -224,7 +224,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get dob
+     * Get dob.
      *
      * @return \DateTime
      */
@@ -234,9 +234,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set civility
+     * Set civility.
      *
      * @param string $civility
+     *
      * @return User
      */
     public function setCivility($civility)
@@ -247,7 +248,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get civility
+     * Get civility.
      *
      * @return string
      */
@@ -257,9 +258,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set firstname
+     * Set firstname.
      *
      * @param string $firstname
+     *
      * @return User
      */
     public function setFirstname($firstname)
@@ -270,7 +272,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get firstname
+     * Get firstname.
      *
      * @return string
      */
@@ -280,9 +282,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set lastname
+     * Set lastname.
      *
      * @param string $lastname
+     *
      * @return User
      */
     public function setLastname($lastname)
@@ -293,7 +296,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get lastname
+     * Get lastname.
      *
      * @return string
      */
@@ -303,9 +306,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set adresse
+     * Set adresse.
      *
      * @param string $adresse
+     *
      * @return User
      */
     public function setAdresse($adresse)
@@ -316,7 +320,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get adresse
+     * Get adresse.
      *
      * @return string
      */
@@ -326,9 +330,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set adresse2
+     * Set adresse2.
      *
      * @param string $adresse2
+     *
      * @return User
      */
     public function setAdresse2($adresse2)
@@ -339,7 +344,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get adresse2
+     * Get adresse2.
      *
      * @return string
      */
@@ -349,9 +354,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set zipcode
+     * Set zipcode.
      *
      * @param string $zipcode
+     *
      * @return User
      */
     public function setZipcode($zipcode)
@@ -362,7 +368,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get zipcode
+     * Get zipcode.
      *
      * @return string
      */
@@ -372,9 +378,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set city
+     * Set city.
      *
      * @param string $city
+     *
      * @return User
      */
     public function setCity($city)
@@ -385,7 +392,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string
      */
@@ -395,9 +402,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set avatar
+     * Set avatar.
      *
      * @param string $avatar
+     *
      * @return User
      */
     public function setAvatar($avatar)
@@ -408,7 +416,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get avatar
+     * Get avatar.
      *
      * @return string
      */
@@ -418,9 +426,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set oldpassword
+     * Set oldpassword.
      *
      * @param string $oldpassword
+     *
      * @return User
      */
     public function setOldpassword($oldpassword)
@@ -431,7 +440,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get oldpassword
+     * Get oldpassword.
      *
      * @return string
      */
@@ -441,9 +450,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set newsletter
+     * Set newsletter.
      *
-     * @param boolean $newsletter
+     * @param bool $newsletter
+     *
      * @return User
      */
     public function setNewsletter($newsletter)
@@ -454,9 +464,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get newsletter
+     * Get newsletter.
      *
-     * @return boolean
+     * @return bool
      */
     public function getNewsletter()
     {
@@ -464,9 +474,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set newsletterPartner
+     * Set newsletterPartner.
      *
-     * @param boolean $newsletterPartner
+     * @param bool $newsletterPartner
+     *
      * @return User
      */
     public function setNewsletterPartner($newsletterPartner)
@@ -477,9 +488,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get newsletterPartner
+     * Get newsletterPartner.
      *
-     * @return boolean
+     * @return bool
      */
     public function getNewsletterPartner()
     {
@@ -487,9 +498,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
+     *
      * @return User
      */
     public function setCreatedAt($createdAt)
@@ -500,7 +512,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -510,9 +522,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set country
+     * Set country.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Pays $country
+     *
      * @return User
      */
     public function setCountry(\Tigreboite\FunkylabBundle\Entity\Pays $country = null)
@@ -523,7 +536,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get country
+     * Get country.
      *
      * @return \Tigreboite\FunkylabBundle\Entity\Pays
      */
@@ -533,9 +546,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set language
+     * Set language.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Language $language
+     *
      * @return User
      */
     public function setLanguage(\Tigreboite\FunkylabBundle\Entity\Language $language = null)
@@ -546,7 +560,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get language
+     * Get language.
      *
      * @return \Tigreboite\FunkylabBundle\Entity\Language
      */
@@ -555,26 +569,29 @@ class User extends BaseUser
         return $this->language;
     }
 
-
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
+     *
      * @return User
      */
     public function setEmail($email)
     {
         $email = is_null($email) ? '' : $email;
         parent::setEmail($email);
-        if(!empty($email)) $this->setUsername($email);
+        if (!empty($email)) {
+            $this->setUsername($email);
+        }
 
         return $this;
     }
 
     /**
-     * Set connectedAt
+     * Set connectedAt.
      *
      * @param \DateTime $connectedAt
+     *
      * @return User
      */
     public function setConnectedAt($connectedAt)
@@ -585,7 +602,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get connectedAt
+     * Get connectedAt.
      *
      * @return \DateTime
      */
@@ -595,9 +612,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set image
+     * Set image.
      *
      * @param string $image
+     *
      * @return User
      */
     public function setImage($image)
@@ -607,7 +625,7 @@ class User extends BaseUser
         return $this;
     }
     /**
-     * Get image
+     * Get image.
      *
      * @return string
      */
@@ -621,13 +639,14 @@ class User extends BaseUser
      */
     public function __toString()
     {
-        return (string) $this->getFirstname()." ".$this->getLastname();
+        return (string) $this->getFirstname().' '.$this->getLastname();
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return User
      */
     public function setSlug($slug)
@@ -638,7 +657,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -648,9 +667,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set isarchived
+     * Set isarchived.
      *
      * @param string $isarchived
+     *
      * @return User
      */
     public function setIsarchived($isarchived)
@@ -661,7 +681,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get isarchived
+     * Get isarchived.
      *
      * @return string
      */
@@ -671,7 +691,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set company
+     * Set company.
      *
      * @param string $company
      *
@@ -685,7 +705,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get company
+     * Get company.
      *
      * @return string
      */
@@ -695,7 +715,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -709,7 +729,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -719,7 +739,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone
+     * Set phone.
      *
      * @param string $phone
      *
@@ -733,7 +753,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get phone
+     * Get phone.
      *
      * @return string
      */
@@ -746,5 +766,4 @@ class User extends BaseUser
     {
         return array();
     }
-
 }

@@ -18,7 +18,6 @@ use Tigreboite\FunkylabBundle\Form\BlogTypeType;
  */
 class BlogTypeController extends Controller
 {
-
     /**
      * Lists all BlogType entities.
      *
@@ -39,7 +38,7 @@ class BlogTypeController extends Controller
     public function listAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw $this->createNotFoundException("Not found");
+            throw $this->createNotFoundException('Not found');
         }
 
         // GET
@@ -91,12 +90,12 @@ class BlogTypeController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_blogtype'));
-       }
+        }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -129,12 +128,12 @@ class BlogTypeController extends Controller
     public function newAction(Request $request)
     {
         $entity = new BlogType();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -145,7 +144,7 @@ class BlogTypeController extends Controller
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:BlogType:form.html.twig")
      */
-    public function editAction(Request $request,$id)
+    public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -158,19 +157,19 @@ class BlogTypeController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
     /**
-    * Creates a form to edit a BlogType entity.
-    *
-    * @param BlogType $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a BlogType entity.
+     *
+     * @param BlogType $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(BlogType $entity)
     {
         $form = $this->createForm(new BlogTypeType(), $entity, array(
@@ -209,9 +208,9 @@ class BlogTypeController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
     /**

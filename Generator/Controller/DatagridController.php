@@ -1,18 +1,17 @@
 <?php
 /**
  * Code by Cyril Pereira, Julien Hay
- * Extreme-Sensio 2015
+ * Extreme-Sensio 2015.
  */
+
 namespace Tigreboite\FunkylabBundle\Generator\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Tigreboite\FunkylabBundle\Entity\Datagrid;
-use Tigreboite\FunkylabBundle\Form\DatagridType;
 
 /**
  * Datagrid controller.
@@ -22,10 +21,10 @@ use Tigreboite\FunkylabBundle\Form\DatagridType;
 class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridController
 {
     protected $entityName = '%bundle_name%\Entity\Datagrid';
-    protected $formType   = '%bundle_name%\Form\DatagridType';
+    protected $formType = '%bundle_name%\Form\DatagridType';
     protected $route_base = 'admin_datagrid';
     protected $repository = '%bundle_name%:%entity_name%';
-    protected $dir_path   = 'medias/%bundle_name%/';
+    protected $dir_path = 'medias/%bundle_name%/';
 
     /**
      * Lists all entities.
@@ -42,7 +41,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     }
 
     /**
-     * Get all entities
+     * Get all entities.
      *
      * @Route("/list", name="admin_datagrid_list", options={"expose"=true})
      * @Method("GET")
@@ -53,7 +52,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     }
 
     /**
-     * Create entity
+     * Create entity.
      *
      * @Route("/", name="admin_datagrid_create")
      * @Method("POST")
@@ -112,7 +111,7 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     }
 
     /**
-     * Upload files
+     * Upload files.
      *
      * @Route("/upload", name="admin_datagrid_upload")
      * @Method({"POST","PUT"})
@@ -121,5 +120,4 @@ class DatagridController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
     {
         return parent::uploadAction($request);
     }
-
 }

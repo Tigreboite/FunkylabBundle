@@ -13,6 +13,7 @@ use Tigreboite\FunkylabBundle\Form\LanguageType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 /**
  * Language controller.
  *
@@ -20,7 +21,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class LanguageController extends Controller
 {
-
     /**
      * Lists all Language entities.
      *
@@ -44,7 +44,7 @@ class LanguageController extends Controller
     public function listAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw $this->createNotFoundException("Not found");
+            throw $this->createNotFoundException('Not found');
         }
 
         // GET
@@ -101,8 +101,8 @@ class LanguageController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -119,7 +119,7 @@ class LanguageController extends Controller
         $form = $this->createForm(new LanguageType($em), $entity, array(
             'action' => $this->generateUrl('admin_language_create'),
             'method' => 'POST',
-            'allow_extra_fields'=>true,
+            'allow_extra_fields' => true,
 
         ));
 
@@ -138,17 +138,14 @@ class LanguageController extends Controller
     public function newAction(Request $request)
     {
         $entity = new Language();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
-
-
-
 
     /**
      * @Route("/{id}/reset", name="admin_language_reset", options={"expose"=true})
@@ -167,8 +164,7 @@ class LanguageController extends Controller
 
         $em = $this->get('doctrine')->getManager();
         $user = $em->getRepository('TigreboiteFunkylabBundle:User')->findByLanguage($entity);
-        foreach($user as $u)
-        {
+        foreach ($user as $u) {
             $u->setCgu(false);
             $em->persist($u);
         }
@@ -177,10 +173,9 @@ class LanguageController extends Controller
         return array(
             'user' => $user,
             'entity' => $entity,
-            'ajax'   => $request->isXmlHttpRequest()
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
-
 
     /**
      * Displays a form to edit an existing Language entity.
@@ -202,19 +197,19 @@ class LanguageController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
     /**
-    * Creates a form to edit a Language entity.
-    *
-    * @param Language $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Language entity.
+     *
+     * @param Language $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Language $entity)
     {
         $em = $this->get('doctrine')->getManager();
@@ -255,9 +250,9 @@ class LanguageController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
     /**
@@ -281,26 +276,23 @@ class LanguageController extends Controller
         return new Response('Deleted');
     }
     /**
-     * Upload files
+     * Upload files.
      *
      * @Route("/upload/pdfpayment", name="admin_language_upload", options={"expose"=true})
      */
     public function uploadAction(Request $request)
     {
-
         $dir_path = 'medias/pdf_payment/';
-        $data = array('success'=>false);
+        $data = array('success' => false);
         $uploadedFile = $request->files->get('images');
 
-        if ($uploadedFile)
-        {
+        if ($uploadedFile) {
             $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
-            if($file)
-            {
+            if ($file) {
                 $data = array(
-                  'success'=>true,
-                  'filename'=>$uploadedFile->getClientOriginalName(),
-                  'path'=>$dir_path.$uploadedFile->getClientOriginalName()
+                  'success' => true,
+                  'filename' => $uploadedFile->getClientOriginalName(),
+                  'path' => $dir_path.$uploadedFile->getClientOriginalName(),
                 );
             }
         }
@@ -308,31 +300,27 @@ class LanguageController extends Controller
         return new JsonResponse($data);
     }
     /**
-     * Upload files
+     * Upload files.
      *
      * @Route("/upload/image", name="admin_language_image_upload", options={"expose"=true})
      */
     public function uploadimageAction(Request $request)
     {
-
         $dir_path = 'medias/language/';
-        $data = array('success'=>false);
+        $data = array('success' => false);
         $uploadedFile = $request->files->get('images');
 
-        if ($uploadedFile)
-        {
+        if ($uploadedFile) {
             $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
-            if($file)
-            {
+            if ($file) {
                 $data = array(
-                  'success'=>true,
-                  'filename'=>$uploadedFile->getClientOriginalName(),
-                  'path'=>$dir_path.$uploadedFile->getClientOriginalName()
+                  'success' => true,
+                  'filename' => $uploadedFile->getClientOriginalName(),
+                  'path' => $dir_path.$uploadedFile->getClientOriginalName(),
                 );
             }
         }
 
         return new JsonResponse($data);
     }
-
 }

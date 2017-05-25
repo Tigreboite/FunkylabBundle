@@ -10,7 +10,7 @@ class PageType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,17 +20,17 @@ class PageType extends AbstractType
             ->add('parent')
             ->add('user')
             ->add('language')
-            ->add('image','hidden')
+            ->add('image', 'hidden')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Page'
+            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Page',
         ));
     }
 

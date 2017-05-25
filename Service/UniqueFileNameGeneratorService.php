@@ -4,12 +4,13 @@ namespace Tigreboite\FunkylabBundle\Service;
 
 use Cocur\Slugify\Slugify;
 
-class UniqueFileNameGeneratorService 
+class UniqueFileNameGeneratorService
 {
     private $slugify;
     private $original_filename;
 
-    function __construct(Slugify $slugify) {
+    public function __construct(Slugify $slugify)
+    {
         $this->slugify = $slugify;
     }
 
@@ -27,15 +28,16 @@ class UniqueFileNameGeneratorService
     private function autoGenerate($filename, $increment)
     {
         if (file_exists($filename)) {
-            $increment++;
+            ++$increment;
             $fileInfos = $this->getFileInfos($filename);
 
             $fileInfosOrigin = $this->getFileInfos($this->original_filename);
             $filename = $this->buildFullPath($fileInfos['dirname'], $fileInfosOrigin['filename_without_ext'].'_'.$increment, $fileInfos['extension']);
-            
+
             return $this->autoGenerate($filename, $increment);
+        } else {
+            return $filename;
         }
-        else return $filename;
     }
 
     private function getFileInfos($filename)
@@ -44,18 +46,18 @@ class UniqueFileNameGeneratorService
         $filename = basename($filename);
 
         $tmp = explode('.', $filename);
-        $ext = $tmp[count($tmp)-1];
+        $ext = $tmp[count($tmp) - 1];
 
-        $filename_without_ext = "";
+        $filename_without_ext = '';
 
-        for ($i=0; $i < count($tmp)-1; $i++) { 
+        for ($i = 0; $i < count($tmp) - 1; ++$i) {
             $filename_without_ext .= $tmp[$i];
         }
 
         return [
             'extension' => $ext,
             'filename_without_ext' => $filename_without_ext,
-            'dirname' => $dirname
+            'dirname' => $dirname,
         ];
     }
 

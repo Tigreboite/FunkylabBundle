@@ -9,11 +9,11 @@ namespace Tigreboite\FunkylabBundle\Annotation;
 class Menu
 {
     private $propertyName;
-    private $dataType   = 'string';
-    private $icon       = 'string';
-    private $route      = 'string';
-    private $groupe     = 'string';
-    private $order      = 0;
+    private $dataType = 'string';
+    private $icon = 'string';
+    private $route = 'string';
+    private $groupe = 'string';
+    private $order = 0;
 
     public function __construct($options)
     {

@@ -2,7 +2,7 @@
 
 namespace Tigreboite\FunkylabBundle\Generator;
 
-class SimpleformFormater extends Formater {
-
-    protected $type = "Simpleform";
+class SimpleformFormater extends Formater
+{
+    protected $type = 'Simpleform';
 }

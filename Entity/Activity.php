@@ -5,7 +5,7 @@ namespace Tigreboite\FunkylabBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * FaqCategory
+ * FaqCategory.
  *
  * @ORM\Table(name="flb_activity")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\BaseRepository")
@@ -13,13 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Activity
 {
-
-    const ACTION_DELETE              = "delete";
-    const ACTION_UPDATE              = "update";
-    const ACTION_CREATED             = "created";
+    const ACTION_DELETE = 'delete';
+    const ACTION_UPDATE = 'update';
+    const ACTION_CREATED = 'created';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -28,7 +27,7 @@ class Activity
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="entity_id", type="integer", nullable=false)
      */
@@ -62,16 +61,15 @@ class Activity
      */
     private $createdBy;
 
-
     public function __construct()
     {
-        $this->setCreatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -79,9 +77,9 @@ class Activity
     }
 
     /**
-     * Set entityId
+     * Set entityId.
      *
-     * @param integer $entityId
+     * @param int $entityId
      *
      * @return Activity
      */
@@ -93,9 +91,9 @@ class Activity
     }
 
     /**
-     * Get entityId
+     * Get entityId.
      *
-     * @return integer
+     * @return int
      */
     public function getEntityId()
     {
@@ -103,7 +101,7 @@ class Activity
     }
 
     /**
-     * Set entityType
+     * Set entityType.
      *
      * @param string $entityType
      *
@@ -117,7 +115,7 @@ class Activity
     }
 
     /**
-     * Get entityType
+     * Get entityType.
      *
      * @return string
      */
@@ -127,7 +125,7 @@ class Activity
     }
 
     /**
-     * Set action
+     * Set action.
      *
      * @param string $action
      *
@@ -141,7 +139,7 @@ class Activity
     }
 
     /**
-     * Get action
+     * Get action.
      *
      * @return string
      */
@@ -151,7 +149,7 @@ class Activity
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -165,7 +163,7 @@ class Activity
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -175,7 +173,7 @@ class Activity
     }
 
     /**
-     * Set createdBy
+     * Set createdBy.
      *
      * @return Activity
      */
@@ -187,7 +185,7 @@ class Activity
     }
 
     /**
-     * Get createdBy
+     * Get createdBy.
      *
      * @return string
      */

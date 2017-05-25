@@ -16,7 +16,7 @@ class FunkylabCollector extends DataCollector implements DataCollectorInterface
     protected $service;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param FunkylabService $service
      */
@@ -34,7 +34,7 @@ class FunkylabCollector extends DataCollector implements DataCollectorInterface
     }
 
     /**
-     * Returns profiled data
+     * Returns profiled data.
      *
      * @return array
      */

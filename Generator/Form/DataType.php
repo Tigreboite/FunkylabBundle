@@ -1,8 +1,9 @@
 <?php
 /**
  * Code by Cyril Pereira, Julien Hay
- * Extreme-Sensio 2015
+ * Extreme-Sensio 2015.
  */
+
 namespace Tigreboite\FunkylabBundle\Generator\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -13,11 +14,11 @@ class DataType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add("");
+        $builder->add('');
     }
 
     /**
@@ -26,7 +27,7 @@ class DataType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-          'data_class' => '%bundle_name%\Entity\%entity_name%'
+          'data_class' => '%bundle_name%\Entity\%entity_name%',
         ));
     }
 

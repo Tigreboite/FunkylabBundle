@@ -3,16 +3,11 @@
 namespace Tigreboite\FunkylabBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
 use Tigreboite\FunkylabBundle\Entity\User;
-use Tigreboite\FunkylabBundle\Form\UserType;
-use Tigreboite\FunkylabBundle\Tools;
-use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
@@ -22,9 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class TranslatorController extends Controller
 {
-
     /**
-     *
      * @Route("/download", name="admin_translator_download")
      * @Method("GET")
      * @Template()
@@ -32,35 +25,33 @@ class TranslatorController extends Controller
      */
     public function indexAction()
     {
-
         $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
-        $phpExcelObject->getProperties()->setCreator("Decathlon");
+        $phpExcelObject->getProperties()->setCreator('Decathlon');
 
         $phpExcelObject->setActiveSheetIndex(0);
 
         $em = $this->getDoctrine()->getManager();
-        $languages = $em->getRepository('TigreboiteFunkylabBundle:Language')->findBy(array('isenable'=>true),array('name'=>'ASC'));
+        $languages = $em->getRepository('TigreboiteFunkylabBundle:Language')->findBy(array('isenable' => true), array('name' => 'ASC'));
         $tab = 0;
-        foreach($languages as $k=>$language)
-        {
+        foreach ($languages as $k => $language) {
 
             //get All Translation from a language code
-            $translations = $em->getRepository('LexikTranslationBundle:Translation')->findBy(array('locale'=>$language->getCode()));
+            $translations = $em->getRepository('LexikTranslationBundle:Translation')->findBy(array('locale' => $language->getCode()));
             $content = array();
-            foreach($translations as $trans)
-            {
-                $content[$trans->getTransUnit()->getKey()]=array(
+            foreach ($translations as $trans) {
+                $content[$trans->getTransUnit()->getKey()] = array(
                   $trans->getTransUnit()->getKey(),
                   $trans->getTransUnit()->getDomain(),
-                  $trans->getContent()
+                  $trans->getContent(),
                 );
             }
 
             ksort($content);
 
             //Skip if no translation
-            if(count($content)==0)
+            if (count($content) == 0) {
                 continue;
+            }
 
             if (isset($active)) {
                 $phpExcelObject->createSheet();
@@ -74,14 +65,13 @@ class TranslatorController extends Controller
             $active->setCellValue('C1', 'Value');
 
             $line = 2;
-            foreach($content as $trans)
-            {
+            foreach ($content as $trans) {
                 $active->setCellValue('A'.$line, $trans[0]);
                 $active->setCellValue('B'.$line, $trans[1]);
                 $active->setCellValue('C'.$line, $trans[2]);
-                $line++;
+                ++$line;
             }
-            $tab++;
+            ++$tab;
         }
 
         $phpExcelObject->setActiveSheetIndex(0);
@@ -97,7 +87,7 @@ class TranslatorController extends Controller
           date('Y-m-d'),
         );
 
-        $filename = implode('-',$filename).".xls";
+        $filename = implode('-', $filename).'.xls';
 
         $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
         $response->headers->set('Content-Disposition', 'attachment;filename='.$filename);
@@ -108,5 +98,4 @@ class TranslatorController extends Controller
 
         return array();
     }
-
 }

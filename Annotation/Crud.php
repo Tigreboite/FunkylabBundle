@@ -9,10 +9,10 @@ namespace Tigreboite\FunkylabBundle\Annotation;
 class Crud
 {
     private $propertyName;
-    private $dataType   = 'string';
-    private $editable   = 'string';
-    private $visible    = 'string';
-    private $sortable   = 'string';
+    private $dataType = 'string';
+    private $editable = 'string';
+    private $visible = 'string';
+    private $sortable = 'string';
     private $searchable = 'string';
 
     public function __construct($options)
@@ -43,21 +43,21 @@ class Crud
 
     public function getVisible()
     {
-        return $this->visible=="true" ? true :false;
+        return $this->visible == 'true' ? true : false;
     }
 
     public function getEditable()
     {
-        return $this->editable=="true" ? true :false;
+        return $this->editable == 'true' ? true : false;
     }
 
     public function getSortable()
     {
-        return $this->sortable=="true" ? true :false;
+        return $this->sortable == 'true' ? true : false;
     }
 
     public function getSearchable()
     {
-        return $this->searchable=="true" ? true :false;
+        return $this->searchable == 'true' ? true : false;
     }
 }

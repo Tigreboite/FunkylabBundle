@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * FaqCategory
+ * FaqCategory.
  *
  * @ORM\Table(name="flb_newsletter")
  * @ORM\Entity
@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Newsletter
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -37,16 +37,15 @@ class Newsletter
      */
     private $createdAt;
 
-
     public function __construct()
     {
-        $this->setCreatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -54,9 +53,10 @@ class Newsletter
     }
 
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
+     *
      * @return Newsletter
      */
     public function setEmail($email)
@@ -67,9 +67,9 @@ class Newsletter
     }
 
     /**
-     * Get email
+     * Get email.
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -77,9 +77,10 @@ class Newsletter
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
+     *
      * @return FaqCategory
      */
     public function setCreatedAt($createdAt)
@@ -90,9 +91,9 @@ class Newsletter
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {

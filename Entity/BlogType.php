@@ -3,11 +3,10 @@
 namespace Tigreboite\FunkylabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Tigreboite\FunkylabBundle\Tools;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Brand
+ * Brand.
  *
  * @ORM\Table(name="flb_blog_type")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\BlogTypeRepository")
@@ -15,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class BlogType
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -46,15 +45,14 @@ class BlogType
      */
     private $createdAt;
 
-
     public function __construct()
     {
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -62,9 +60,10 @@ class BlogType
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Brand
      */
     public function setName($name)
@@ -75,9 +74,9 @@ class BlogType
     }
 
     /**
-     * Get name
+     * Get name.
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -85,9 +84,10 @@ class BlogType
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return Brand
      */
     public function setSlug($slug)
@@ -98,9 +98,9 @@ class BlogType
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -108,9 +108,10 @@ class BlogType
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
+     *
      * @return Brand
      */
     public function setCreatedAt($createdAt)
@@ -121,9 +122,9 @@ class BlogType
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {

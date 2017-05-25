@@ -21,7 +21,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class BlogController extends Controller
 {
-
     /**
      * Lists all Blog entities.
      *
@@ -51,10 +50,11 @@ class BlogController extends Controller
 
         return $this->redirect(
             $this->generateUrl('blog', array(
-                'slug' => $entity->getSlug()
+                'slug' => $entity->getSlug(),
             ))
         );
     }
+
     /**
      * Lists all.
      *
@@ -64,7 +64,7 @@ class BlogController extends Controller
     public function listAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw $this->createNotFoundException("Not found");
+            throw $this->createNotFoundException('Not found');
         }
 
         // GET
@@ -97,6 +97,7 @@ class BlogController extends Controller
 
         return new Response($serializer->serialize($data_to_return, 'json'));
     }
+
     /**
      * Creates a new Blog entity.
      *
@@ -121,12 +122,12 @@ class BlogController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_blog'));
-       }
+        }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -159,12 +160,12 @@ class BlogController extends Controller
     public function newAction(Request $request)
     {
         $entity = new Blog();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax'   => $request->isXmlHttpRequest(),
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -175,7 +176,7 @@ class BlogController extends Controller
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Blog:form.html.twig")
      */
-    public function editAction(Request $request,$id)
+    public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -188,19 +189,19 @@ class BlogController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
     /**
-    * Creates a form to edit a Blog entity.
-    *
-    * @param Blog $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Blog entity.
+     *
+     * @param Blog $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Blog $entity)
     {
         $form = $this->createForm(new BlogType(), $entity, array(
@@ -212,6 +213,7 @@ class BlogController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Blog entity.
      *
@@ -242,10 +244,11 @@ class BlogController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $editForm->createView(),
-            'ajax'   => $request->isXmlHttpRequest()
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
+
     /**
      * Deletes  entity.
      *
@@ -266,27 +269,25 @@ class BlogController extends Controller
 
         return new Response('Deleted');
     }
+
     /**
-     * Upload files
+     * Upload files.
      *
      * @Route("/upload/image", name="admin_blog_upload")
      */
     public function uploadAction(Request $request)
     {
-
         $dir_path = 'medias/blog/';
-        $data = array('success'=>false);
+        $data = array('success' => false);
         $uploadedFile = $request->files->get('images');
 
-        if ($uploadedFile)
-        {
+        if ($uploadedFile) {
             $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
-            if($file)
-            {
+            if ($file) {
                 $data = array(
-                  'success'=>true,
-                  'filename'=>$uploadedFile->getClientOriginalName(),
-                  'path'=>$dir_path.$uploadedFile->getClientOriginalName()
+                    'success' => true,
+                    'filename' => $uploadedFile->getClientOriginalName(),
+                    'path' => $dir_path.$uploadedFile->getClientOriginalName(),
                 );
             }
         }

@@ -1,22 +1,18 @@
 <?php
 /**
  * Code by Cyril Pereira, Julien Hay
- * Extreme-Sensio 2015
+ * Extreme-Sensio 2015.
  */
+
 namespace Tigreboite\FunkylabBundle\Generator\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Tigreboite\FunkylabBundle\Entity\Simpleform;
-use Tigreboite\FunkylabBundle\Form\SimpleformType;
-
 
 /**
  * Simpleform controller.
@@ -25,15 +21,14 @@ use Tigreboite\FunkylabBundle\Form\SimpleformType;
  */
 class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\SimpleformController
 {
-
     protected $entityName = '%bundle_name%\Entity\Simpleform';
-    protected $formType   = '%bundle_name%\Form\SimpleformType';
+    protected $formType = '%bundle_name%\Form\SimpleformType';
     protected $route_base = 'admin_simpleform';
     protected $repository = '%bundle_name%:%entity_name%';
-    protected $dir_path   = 'medias/%bundle_name%/';
+    protected $dir_path = 'medias/%bundle_name%/';
 
     /**
-     * Display a form to edit current entity
+     * Display a form to edit current entity.
      *
      * @Route("/", name="admin_simpleform")
      * @Method("GET")
@@ -95,7 +90,7 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
     }
 
     /**
-     * Upload files
+     * Upload files.
      *
      * @Route("/upload", name="admin_simpleform_upload")
      * @Method({"POST","PUT"})
@@ -104,5 +99,4 @@ class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\Simplef
     {
         return parent::uploadAction($request);
     }
-
 }

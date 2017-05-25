@@ -21,7 +21,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class PageController extends Controller
 {
-
     /**
      * Lists all Page entities.
      *
@@ -50,7 +49,7 @@ class PageController extends Controller
 
         return $this->redirect(
             $this->generateUrl('page', array(
-                'slug' => $entity->getSlug()
+                'slug' => $entity->getSlug(),
             ))
         );
     }
@@ -63,7 +62,7 @@ class PageController extends Controller
     public function listAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw $this->createNotFoundException("Not found");
+            throw $this->createNotFoundException('Not found');
         }
 
         // GET
@@ -115,12 +114,12 @@ class PageController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_page'));
-       }
+        }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -153,12 +152,12 @@ class PageController extends Controller
     public function newAction(Request $request)
     {
         $entity = new Page();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -169,7 +168,7 @@ class PageController extends Controller
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Page:form.html.twig")
      */
-    public function editAction(Request $request,$id)
+    public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -182,19 +181,19 @@ class PageController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
     /**
-    * Creates a form to edit a Page entity.
-    *
-    * @param Page $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Page entity.
+     *
+     * @param Page $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Page $entity)
     {
         $form = $this->createForm(new PageType(), $entity, array(
@@ -233,9 +232,9 @@ class PageController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
     /**
@@ -259,26 +258,23 @@ class PageController extends Controller
         return new Response('Deleted');
     }
     /**
-     * Upload files
+     * Upload files.
      *
      * @Route("/upload/image", name="admin_page_upload")
      */
     public function uploadAction(Request $request)
     {
-
         $dir_path = 'medias/page/';
-        $data = array('success'=>false);
+        $data = array('success' => false);
         $uploadedFile = $request->files->get('images');
 
-        if ($uploadedFile)
-        {
+        if ($uploadedFile) {
             $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
-            if($file)
-            {
+            if ($file) {
                 $data = array(
-                  'success'=>true,
-                  'filename'=>$uploadedFile->getClientOriginalName(),
-                  'path'=>$dir_path.$uploadedFile->getClientOriginalName()
+                  'success' => true,
+                  'filename' => $uploadedFile->getClientOriginalName(),
+                  'path' => $dir_path.$uploadedFile->getClientOriginalName(),
                 );
             }
         }

@@ -4,21 +4,18 @@ namespace Tigreboite\FunkylabBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query;
-
 use Gedmo\Translatable\TranslatableListener;
 
 class BaseRepository extends EntityRepository
 {
-
     /**
      * @var string Default locale
      */
     protected $defaultLocale;
 
     /**
-     * Sets default locale
+     * Sets default locale.
      *
      * @param string $locale
      */
@@ -27,9 +24,8 @@ class BaseRepository extends EntityRepository
         $this->defaultLocale = $locale;
     }
 
-
     /**
-     * Returns translated Doctrine query instance
+     * Returns translated Doctrine query instance.
      *
      * @param QueryBuilder $qb     A Doctrine query builder instance
      * @param string       $locale A locale name
@@ -53,10 +49,9 @@ class BaseRepository extends EntityRepository
         return $query;
     }
 
-
-    public function findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir, $where_spe = array(),$locale="en")
+    public function findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir, $where_spe = array(), $locale = 'en')
     {
-        $columuns_select = "";
+        $columuns_select = '';
         $first = true;
         $join = array();
 
@@ -64,29 +59,28 @@ class BaseRepository extends EntityRepository
 
         // Select columns
         foreach ($columns as &$col) {
-            if(!empty($col['name'])) {
-                if(!$first) $columuns_select .= ',';
+            if (!empty($col['name'])) {
+                if (!$first) {
+                    $columuns_select .= ',';
+                }
 
                 // Check join()
-                if(strpos($col['name'], '.') !== false) {
+                if (strpos($col['name'], '.') !== false) {
                     $cut = explode('.', $col['name']);
                     $table = $cut[0];
                     $field = $cut[1];
 
-                    if(!in_array($table,$join))
-                    {
-                        $join[]=$table;
+                    if (!in_array($table, $join)) {
+                        $join[] = $table;
                         $qb->leftJoin('d.'.$table, $table);
                     }
                     $qb->addSelect($table.'.'.$field.' as data_'.$col['data']);
 
                     $col['name'] = $table.'.'.$field;
-                }
-                elseif(!empty($col['spe']) && $col['spe'] == true) {
+                } elseif (!empty($col['spe']) && $col['spe'] == true) {
 
                     // SPE Count OneToMany
-                    if(isset($col['count_one_to_many']) && $col['count_one_to_many'])
-                    {
+                    if (isset($col['count_one_to_many']) && $col['count_one_to_many']) {
                         $qb->addSelect('COUNT('.ucfirst($col['name']).') as data_'.$col['data'])
                           ->leftJoin('d.'.$col['name'], ucfirst($col['name']))
                           ->addGroupBy('d.id');
@@ -96,8 +90,7 @@ class BaseRepository extends EntityRepository
                     }
 
                     // SPE OneToMany GROUP CONCAT
-                    if(isset($col['group_concat_one_to_many']) && $col['group_concat_one_to_many'])
-                    {
+                    if (isset($col['group_concat_one_to_many']) && $col['group_concat_one_to_many']) {
                         $field = ucfirst($col['table']).'.'.$col['field'];
                         $qb->addSelect('GROUP_CONCAT('.$field.') as data_'.$col['data'])
                           ->leftJoin('d.'.$col['table'], ucfirst($col['table']))
@@ -106,13 +99,10 @@ class BaseRepository extends EntityRepository
                         $col['name'] = 'data_'.$col['data'];
                         $col['nosearch'] = true;
                     }
-
-                }
-                elseif($col['name'] == '_action') {
+                } elseif ($col['name'] == '_action') {
                     $qb->addSelect('d.id');
                     $col['name'] = 'd.id';
-                }
-                else {
+                } else {
                     $qb->addSelect('d.'.$col['name'].' as data_'.$col['data']);
                     $col['name'] = 'd.'.$col['name'];
                 }
@@ -124,17 +114,17 @@ class BaseRepository extends EntityRepository
         $countAllDatas = count($qb->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY));
 
         // Search filter
-        if(!empty($search_string)) {
+        if (!empty($search_string)) {
             $parameters = array();
             $index = 0;
 
             foreach ($columns as $col) {
-                if(!empty($col['name']) && $col['name'] != 'action' && empty($col['nosearch'])) {
+                if (!empty($col['name']) && $col['name'] != 'action' && empty($col['nosearch'])) {
                     $qb->orWhere($col['name'].' LIKE ?'.$index);
 
                     $parameters[] = '%'.$search_string.'%';
 
-                    $index++;
+                    ++$index;
                 }
             }
 
@@ -142,7 +132,7 @@ class BaseRepository extends EntityRepository
         }
 
         // WHERE SPE
-        if(!empty($where_spe)) {
+        if (!empty($where_spe)) {
             foreach ($where_spe as $where) {
                 $qb->andWhere($where);
             }
@@ -151,7 +141,7 @@ class BaseRepository extends EntityRepository
         $countFiltered = count($qb->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY));
 
         // Order
-        if($columns[$order_column]['name'] != 'action') {
+        if ($columns[$order_column]['name'] != 'action') {
             $qb->orderBy($columns[$order_column]['name'], strtoupper($order_dir));
         }
 
@@ -166,8 +156,8 @@ class BaseRepository extends EntityRepository
             $index = 0;
             unset($data[0]);
             foreach ($data as $value) {
-                $tmp[$index] = (empty($value) ? "" : $value);
-                $index++;
+                $tmp[$index] = (empty($value) ? '' : $value);
+                ++$index;
             }
             $result[] = $tmp;
         }
@@ -184,14 +174,15 @@ class BaseRepository extends EntityRepository
      * @param $order
      * @param $limit
      * @param $offset
+     *
      * @return mixed
      */
-    public function findDataQuery($query,$orderby,$order,$limit,$offset)
+    public function findDataQuery($query, $orderby, $order, $limit, $offset)
     {
         $qb = $this->dataQuery($query);
 
         $qb->orderBy('i.'.$orderby, $order)
-          ->setFirstResult($offset*$limit)
+          ->setFirstResult($offset * $limit)
           ->setMaxResults($limit)
         ;
 
@@ -202,8 +193,7 @@ class BaseRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('i');
 
-        if($query)
-        {
+        if ($query) {
             $qb->andWhere('i.title like :query OR i.summary like :query')
               ->setParameter('query', '%'.$query.'%')
             ;
@@ -216,6 +206,7 @@ class BaseRepository extends EntityRepository
     {
         $qb = $this->dataQuery($query);
         $query = $qb->select('COUNT(i.id)')->getQuery();
+
         return $query->getSingleScalarResult();
     }
 }

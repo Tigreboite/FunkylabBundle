@@ -5,10 +5,9 @@ namespace Tigreboite\FunkylabBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Brand
+ * Brand.
  *
  * @ORM\Table(name="flb_page")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\PageRepository")
@@ -18,11 +17,11 @@ class Page
 {
     use Image;
 
-    public $IMAGE_DEFAULT = "images/illustrations/idea-img.jpg";
-    public $IMAGE_PATH    = "images/backgrounds/pages";
+    public $IMAGE_DEFAULT = 'images/illustrations/idea-img.jpg';
+    public $IMAGE_PATH = 'images/backgrounds/pages';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -108,16 +107,15 @@ class Page
      */
     public $file;
 
-
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -125,9 +123,10 @@ class Page
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Page
      */
     public function setTitle($title)
@@ -138,9 +137,9 @@ class Page
     }
 
     /**
-     * Get content
+     * Get content.
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -148,9 +147,10 @@ class Page
     }
 
     /**
-     * Set content
+     * Set content.
      *
      * @param string $content
+     *
      * @return Page
      */
     public function setContent($content)
@@ -161,7 +161,7 @@ class Page
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -171,9 +171,10 @@ class Page
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return Brand
      */
     public function setSlug($slug)
@@ -184,9 +185,9 @@ class Page
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -194,9 +195,10 @@ class Page
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
+     *
      * @return Brand
      */
     public function setCreatedAt($createdAt)
@@ -207,9 +209,9 @@ class Page
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -217,9 +219,10 @@ class Page
     }
 
     /**
-     * Set image
+     * Set image.
      *
      * @param string $slug
+     *
      * @return Sport
      */
     public function setImage($image)
@@ -230,7 +233,7 @@ class Page
     }
 
     /**
-     * Get image
+     * Get image.
      *
      * @return string
      */
@@ -240,9 +243,10 @@ class Page
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\User $user
+     *
      * @return Idea
      */
     public function setUser(\Tigreboite\FunkylabBundle\Entity\User $user = null)
@@ -253,7 +257,7 @@ class Page
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Tigreboite\FunkylabBundle\Entity\User
      */
@@ -263,9 +267,10 @@ class Page
     }
 
     /**
-     * Set parent
+     * Set parent.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Page $parent
+     *
      * @return Page
      */
     public function setParent(\Tigreboite\FunkylabBundle\Entity\Page $parent = null)
@@ -276,7 +281,7 @@ class Page
     }
 
     /**
-     * Get parent
+     * Get parent.
      *
      * @return \Tigreboite\FunkylabBundle\Entity\Page
      */
@@ -286,9 +291,10 @@ class Page
     }
 
     /**
-     * Add children
+     * Add children.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Page $children
+     *
      * @return Idea
      */
     public function addChildren(\Tigreboite\FunkylabBundle\Entity\Page $children)
@@ -299,7 +305,7 @@ class Page
     }
 
     /**
-     * Remove children
+     * Remove children.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Page $children
      */
@@ -309,9 +315,10 @@ class Page
     }
 
     /**
-     * Set language
+     * Set language.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Language $language
+     *
      * @return Idea
      */
     public function setLanguage(\Tigreboite\FunkylabBundle\Entity\Language $language = null)
@@ -322,7 +329,7 @@ class Page
     }
 
     /**
-     * Get language
+     * Get language.
      *
      * @return \Tigreboite\FunkylabBundle\Entity\Language
      */
@@ -337,9 +344,10 @@ class Page
     }
 
     /**
-     * Add children
+     * Add children.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Page $children
+     *
      * @return Page
      */
     public function addChild(\Tigreboite\FunkylabBundle\Entity\Page $children)
@@ -350,7 +358,7 @@ class Page
     }
 
     /**
-     * Remove children
+     * Remove children.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Page $children
      */
@@ -360,15 +368,12 @@ class Page
     }
 
     /**
-     * Get children
+     * Get children.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChildren()
     {
         return $this->children;
     }
-
-
-
 }

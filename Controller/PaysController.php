@@ -20,7 +20,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class PaysController extends Translator
 {
-
     /**
      * Lists all Pays entities.
      *
@@ -42,12 +41,11 @@ class PaysController extends Translator
      */
     public function listAction(Request $request)
     {
-
         $t = $this->container->get('translator');
         $locale = $t->getLocale();
 
         if (!$request->isXmlHttpRequest()) {
-            throw $this->createNotFoundException("Not found");
+            throw $this->createNotFoundException('Not found');
         }
 
         // GET
@@ -64,7 +62,7 @@ class PaysController extends Translator
 
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('TigreboiteFunkylabBundle:Pays')
-            ->findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir,array(),$locale);
+            ->findDataTable($columns, $start, $length, $search_string, $order_column, $order_dir, array(), $locale);
 
         $serializer = $this->get('jms_serializer');
 
@@ -89,13 +87,11 @@ class PaysController extends Translator
      */
     public function createAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $languages = $em->getRepository('TigreboiteFunkylabBundle:Language')->findAll();
 
-
-        $em         = $this->getDoctrine()->getManager();
-        $languages  = $em->getRepository('TigreboiteFunkylabBundle:Language')->findAll();
-
-        $entity     = new Pays();
-        $form       = $this->createCreateForm($entity);
+        $entity = new Pays();
+        $form = $this->createCreateForm($entity);
 
         $form->handleRequest($request);
 
@@ -110,9 +106,9 @@ class PaysController extends Translator
         }
 
         return array(
-            'entity'    => $entity,
-            'form'      => $form->createView(),
-            'ajax'      => $request->isXmlHttpRequest(),
+            'entity' => $entity,
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
             'languages' => $languages,
         );
     }
@@ -145,16 +141,16 @@ class PaysController extends Translator
      */
     public function newAction(Request $request)
     {
-        $em         = $this->getDoctrine()->getManager();
-        $languages  = $em->getRepository('TigreboiteFunkylabBundle:Language')->findAll();
-        $entity     = new Pays();
-        $form       = $this->createCreateForm($entity);
+        $em = $this->getDoctrine()->getManager();
+        $languages = $em->getRepository('TigreboiteFunkylabBundle:Language')->findAll();
+        $entity = new Pays();
+        $form = $this->createCreateForm($entity);
 
         return array(
-            'entity'    => $entity,
-            'form'      => $form->createView(),
-            'ajax'      => $request->isXmlHttpRequest(),
-            'languages' =>$languages,
+            'entity' => $entity,
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
+            'languages' => $languages,
         );
     }
 
@@ -184,21 +180,21 @@ class PaysController extends Translator
         $translations = $repository->findTranslations($entity);
 
         return array(
-            'entity'      => $entity,
-            'form'        => $editForm->createView(),
-            'ajax'        => $request->isXmlHttpRequest(),
-            'translations'=> $translations,
-            'languages'   => $em->getRepository('TigreboiteFunkylabBundle:Language')->findAll()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
+            'translations' => $translations,
+            'languages' => $em->getRepository('TigreboiteFunkylabBundle:Language')->findAll(),
         );
     }
 
     /**
-    * Creates a form to edit a Pays entity.
-    *
-    * @param Pays $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Pays entity.
+     *
+     * @param Pays $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Pays $entity)
     {
         $form = $this->createForm(new PaysType(), $entity, array(
@@ -231,16 +227,15 @@ class PaysController extends Translator
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-
             $this->updateLanguageEntity($entity);
 
             return $this->redirect($this->generateUrl('admin_pays_edit', array('id' => $id)));
         }
 
         return array(
-            'entity'    => $entity,
-            'form'      => $editForm->createView(),
-            'ajax'      => $request->isXmlHttpRequest(),
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest(),
             'languages' => $languages,
         );
     }

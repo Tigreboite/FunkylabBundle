@@ -4,8 +4,7 @@ namespace Tigreboite\FunkylabBundle\Generator\Field;
 
 class Date extends Base
 {
-
-    public  $type="date";
+    public $type = 'date';
 
     public function getHTML()
     {

@@ -4,16 +4,16 @@ namespace Tigreboite\FunkylabBundle\Generator\Field;
 
 class Base
 {
-    public  $type="base";
+    public $type = 'base';
     private $varname;
     private $name;
     private $options;
 
-    public function __construct($varname,$name,$options=array())
+    public function __construct($varname, $name, $options = array())
     {
-        $this->name     = $name;
-        $this->varname  = $varname;
-        $this->options  = $options;
+        $this->name = $name;
+        $this->varname = $varname;
+        $this->options = $options;
     }
 
     public function getVarname()
@@ -41,7 +41,7 @@ class Base
 
     public function getJS()
     {
-        return "";
+        return '';
     }
 
     public function getBuilder()

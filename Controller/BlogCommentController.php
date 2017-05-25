@@ -18,7 +18,6 @@ use Tigreboite\FunkylabBundle\Form\BlogCommentType;
  */
 class BlogCommentController extends Controller
 {
-
     /**
      * Lists all BlogComment entities.
      *
@@ -29,7 +28,7 @@ class BlogCommentController extends Controller
     public function indexAction($blog_id)
     {
         return array(
-            'blog_id' => $blog_id
+            'blog_id' => $blog_id,
         );
     }
 
@@ -42,7 +41,7 @@ class BlogCommentController extends Controller
     public function listAction(Request $request, $blog_id)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw $this->createNotFoundException("Not found");
+            throw $this->createNotFoundException('Not found');
         }
 
         // GET
@@ -64,8 +63,9 @@ class BlogCommentController extends Controller
         $serializer = $this->get('jms_serializer');
 
         foreach ($entities as $k => $v) {
-            if (is_array($v))
-                $entities[$k] = array_map("htmlentities", $v);
+            if (is_array($v)) {
+                $entities[$k] = array_map('htmlentities', $v);
+            }
         }
 
         // Construct JSON
@@ -105,7 +105,7 @@ class BlogCommentController extends Controller
         return array(
             'entity' => $entity,
             'form' => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -143,7 +143,7 @@ class BlogCommentController extends Controller
         return array(
             'entity' => $entity,
             'form' => $form->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -169,7 +169,7 @@ class BlogCommentController extends Controller
         return array(
             'entity' => $entity,
             'form' => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 
@@ -221,7 +221,7 @@ class BlogCommentController extends Controller
         return array(
             'entity' => $entity,
             'form' => $editForm->createView(),
-            'ajax' => $request->isXmlHttpRequest()
+            'ajax' => $request->isXmlHttpRequest(),
         );
     }
 

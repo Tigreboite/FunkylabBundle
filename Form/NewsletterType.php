@@ -10,11 +10,11 @@ class NewsletterType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-    	$builder
+        $builder
           ->add('email')
         ;
     }
@@ -26,7 +26,7 @@ class NewsletterType extends AbstractType
     {
         $resolver->setDefaults(array(
           'data_class' => 'Tigreboite\FunkylabBundle\Entity\Newsletter',
-          'csrf_protection'   => false,
+          'csrf_protection' => false,
         ));
     }
 

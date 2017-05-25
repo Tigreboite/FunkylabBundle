@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Brand
+ * Brand.
  *
  * @ORM\Table(name="flb_blog")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\BlogRepository")
@@ -16,15 +16,15 @@ class Blog
 {
     use Image;
 
-    public $IMAGE_PATH    = "medias/blog";
-    public $IMAGE_DEFAULT = "images/illustrations/illu_project_default.jpg";
+    public $IMAGE_PATH = 'medias/blog';
+    public $IMAGE_DEFAULT = 'images/illustrations/illu_project_default.jpg';
 
     const STATUS_UNPUBLISHED = 0;
     const STATUS_PUBLISHED = 1;
     const STATUS_ARCHIVED = 2;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -121,7 +121,7 @@ class Blog
     private $type;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="status", type="smallint", options={"default" = 1})
      */
@@ -153,9 +153,9 @@ class Blog
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -163,9 +163,10 @@ class Blog
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Blog
      */
     public function setTitle($title)
@@ -176,7 +177,7 @@ class Blog
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */
@@ -186,9 +187,10 @@ class Blog
     }
 
     /**
-     * Set content
+     * Set content.
      *
      * @param string $content
+     *
      * @return Blog
      */
     public function setContent($content)
@@ -199,7 +201,7 @@ class Blog
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -209,9 +211,10 @@ class Blog
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return Brand
      */
     public function setSlug($slug)
@@ -222,7 +225,7 @@ class Blog
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -232,9 +235,10 @@ class Blog
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
+     *
      * @return Brand
      */
     public function setCreatedAt($createdAt)
@@ -245,7 +249,7 @@ class Blog
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -254,12 +258,11 @@ class Blog
         return $this->createdAt;
     }
 
-
-
     /**
-     * Set image
+     * Set image.
      *
      * @param string $image
+     *
      * @return Blog
      */
     public function setImage($image)
@@ -270,7 +273,7 @@ class Blog
     }
 
     /**
-     * Get image
+     * Get image.
      *
      * @return string
      */
@@ -280,9 +283,10 @@ class Blog
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\User $user
+     *
      * @return Blog
      */
     public function setUser(\Tigreboite\FunkylabBundle\Entity\User $user = null)
@@ -293,7 +297,7 @@ class Blog
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Tigreboite\FunkylabBundle\Entity\User
      */
@@ -303,9 +307,10 @@ class Blog
     }
 
     /**
-     * Set parent
+     * Set parent.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Blog $parent
+     *
      * @return Blog
      */
     public function setParent(\Tigreboite\FunkylabBundle\Entity\Blog $parent = null)
@@ -316,7 +321,7 @@ class Blog
     }
 
     /**
-     * Get parent
+     * Get parent.
      *
      * @return \Tigreboite\FunkylabBundle\Entity\Blog
      */
@@ -326,9 +331,10 @@ class Blog
     }
 
     /**
-     * Add children
+     * Add children.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Blog $children
+     *
      * @return Blog
      */
     public function addChildren(\Tigreboite\FunkylabBundle\Entity\Blog $children)
@@ -339,7 +345,7 @@ class Blog
     }
 
     /**
-     * Remove children
+     * Remove children.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Blog $children
      */
@@ -349,9 +355,10 @@ class Blog
     }
 
     /**
-     * Set language
+     * Set language.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Language $language
+     *
      * @return Blog
      */
     public function setLanguage(\Tigreboite\FunkylabBundle\Entity\Language $language = null)
@@ -362,7 +369,7 @@ class Blog
     }
 
     /**
-     * Get language
+     * Get language.
      *
      * @return \Tigreboite\FunkylabBundle\Entity\Language
      */
@@ -372,9 +379,10 @@ class Blog
     }
 
     /**
-     * Set type
+     * Set type.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\BlogType $type
+     *
      * @return Blog
      */
     public function setType(\Tigreboite\FunkylabBundle\Entity\BlogType $type = null)
@@ -385,7 +393,7 @@ class Blog
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return \Tigreboite\FunkylabBundle\Entity\BlogType
      */
@@ -400,9 +408,10 @@ class Blog
     }
 
     /**
-     * Add children
+     * Add children.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Blog $children
+     *
      * @return Blog
      */
     public function addChild(\Tigreboite\FunkylabBundle\Entity\Blog $children)
@@ -413,7 +422,7 @@ class Blog
     }
 
     /**
-     * Remove children
+     * Remove children.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\Blog $children
      */
@@ -423,7 +432,7 @@ class Blog
     }
 
     /**
-     * Get children
+     * Get children.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -435,7 +444,7 @@ class Blog
     /**
      * Sets the value of status.
      *
-     * @param integer $status the status
+     * @param int $status the status
      *
      * @return self
      */
@@ -449,7 +458,7 @@ class Blog
     /**
      * Gets the value of status.
      *
-     * @return integer
+     * @return int
      */
     public function getStatus()
     {
@@ -505,9 +514,10 @@ class Blog
     }
 
     /**
-     * Add blogcomments
+     * Add blogcomments.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\BlogComment $blogcomments
+     *
      * @return Blog
      */
     public function addBlogcomment(\Tigreboite\FunkylabBundle\Entity\BlogComment $blogcomments)
@@ -518,7 +528,7 @@ class Blog
     }
 
     /**
-     * Remove blogcomments
+     * Remove blogcomments.
      *
      * @param \Tigreboite\FunkylabBundle\Entity\BlogComment $blogcomments
      */
@@ -528,7 +538,7 @@ class Blog
     }
 
     /**
-     * Get blogcomments
+     * Get blogcomments.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

@@ -4,10 +4,9 @@ namespace Tigreboite\FunkylabBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Translatable\Translatable;
 
 /**
- * Pays
+ * Pays.
  *
  * @ORM\Table(name="flb_pays")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\PaysRepository")
@@ -15,7 +14,7 @@ use Gedmo\Translatable\Translatable;
 class Pays
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -46,7 +45,7 @@ class Pays
     private $slug;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="isenable", type="boolean", nullable=true, options={"default" = 0})
      */
@@ -59,11 +58,10 @@ class Pays
      */
     private $locale;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -71,9 +69,10 @@ class Pays
     }
 
     /**
-     * Set code
+     * Set code.
      *
      * @param string $code
+     *
      * @return Pays
      */
     public function setCode($code)
@@ -84,9 +83,9 @@ class Pays
     }
 
     /**
-     * Get code
+     * Get code.
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -94,9 +93,10 @@ class Pays
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Pays
      */
     public function setName($name)
@@ -107,9 +107,9 @@ class Pays
     }
 
     /**
-     * Get name
+     * Get name.
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -117,9 +117,10 @@ class Pays
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return Pays
      */
     public function setSlug($slug)
@@ -130,9 +131,9 @@ class Pays
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -145,9 +146,10 @@ class Pays
     }
 
     /**
-     * Set isenable
+     * Set isenable.
      *
      * @param string $isenable
+     *
      * @return Language
      */
     public function setIsenable($isenable)
@@ -158,7 +160,7 @@ class Pays
     }
 
     /**
-     * Get isenable
+     * Get isenable.
      *
      * @return string
      */

@@ -4,8 +4,7 @@ namespace Tigreboite\FunkylabBundle\Generator\Field;
 
 class Html extends Base
 {
-
-    public  $type="html";
+    public $type = 'html';
 
     public function getHTML()
     {
@@ -15,4 +14,3 @@ class Html extends Base
                 </div>';
     }
 }
-

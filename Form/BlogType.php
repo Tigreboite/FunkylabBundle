@@ -10,7 +10,7 @@ class BlogType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,7 +21,7 @@ class BlogType extends AbstractType
             ->add('user')
             ->add('language')
             ->add('type')
-            ->add('image','hidden')
+            ->add('image', 'hidden')
             ->add('status', 'choice', array(
                 'choices' => array(
                     '0' => 'Dépublié',
@@ -31,15 +31,15 @@ class BlogType extends AbstractType
             ))
             ->add('datePublished', 'date', array(
                 'required' => false,
-                'widget'   => 'single_text',
-                'input'    => 'datetime',
-                'format'   => 'dd/MM/yyyy',
+                'widget' => 'single_text',
+                'input' => 'datetime',
+                'format' => 'dd/MM/yyyy',
             ))
             ->add('dateUnpublished', 'date', array(
                 'required' => false,
-                'widget'   => 'single_text',
-                'input'    => 'datetime',
-                'format'   => 'dd/MM/yyyy',
+                'widget' => 'single_text',
+                'input' => 'datetime',
+                'format' => 'dd/MM/yyyy',
             ))
         ;
     }
@@ -50,7 +50,7 @@ class BlogType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Blog'
+            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Blog',
         ));
     }
 

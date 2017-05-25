@@ -29,25 +29,24 @@ class CrudCommand extends ContainerAwareCommand
     {
         $timeStart = microtime(true);
 
-        $this->output       = $output;
-        $this->em           = $this->getContainer()->get('doctrine');
-        $this->verbose      = $input->getOption('verbose');
-        $type               = $input->getOption('type');
-        $entityClass        = $input->getOption('entity');
-        $entityClass        = str_replace('/','\\',$entityClass);
-        $bundle             = $input->getOption('bundle');
-        $dialog             = $this->getHelper('dialog');
+        $this->output = $output;
+        $this->em = $this->getContainer()->get('doctrine');
+        $this->verbose = $input->getOption('verbose');
+        $type = $input->getOption('type');
+        $entityClass = $input->getOption('entity');
+        $entityClass = str_replace('/', '\\', $entityClass);
+        $bundle = $input->getOption('bundle');
+        $dialog = $this->getHelper('dialog');
         // Get Entity
-        if(!$entityClass)
-        {
+        if (!$entityClass) {
             $entityClass = $dialog->askAndValidate(
               $output,
               '<question>Please enter the entity : </question>',
               function ($answer) {
-                  if(trim($answer)=="")
-                  {
-                      throw new \RuntimeException("You must set an entity");
+                  if (trim($answer) == '') {
+                      throw new \RuntimeException('You must set an entity');
                   }
+
                   return $answer;
               }
             );
@@ -61,15 +60,15 @@ class CrudCommand extends ContainerAwareCommand
         }
 
         // Get Bundle
-        if(!$bundle)
-        {
+        if (!$bundle) {
             $bundle = $dialog->askAndValidate(
               $output,
               '<question>Please enter the name of the bundle : </question>',
               function ($answer) {
-                  if ($answer=="" || 'Bundle' !== substr($answer, -6)) {
+                  if ($answer == '' || 'Bundle' !== substr($answer, -6)) {
                       throw new \RuntimeException('The name of the bundle should be suffixed with \'Bundle\'');
                   }
+
                   return $answer;
               }
             );
@@ -77,14 +76,12 @@ class CrudCommand extends ContainerAwareCommand
         }
 
         // Test Bundle
-        if(!array_key_exists($bundle,$this->getContainer()->getParameter('kernel.bundles')))
-        {
+        if (!array_key_exists($bundle, $this->getContainer()->getParameter('kernel.bundles'))) {
             throw new \RuntimeException("Bundle doesn't exist");
         }
 
         // Get Type to generate
-        if(!$type)
-        {
+        if (!$type) {
             $typeNames = array('datagrid', 'simpleform', 'sortable');
             $selected = $dialog->select(
               $output,
@@ -98,13 +95,13 @@ class CrudCommand extends ContainerAwareCommand
             $selectedColors = array_map(function ($c) use ($typeNames) {
                 return $typeNames[$c];
             }, $selected);
-            $output->writeln('You have just selected: ' . implode(', ', $selectedColors));
+            $output->writeln('You have just selected: '.implode(', ', $selectedColors));
             $type = implode(', ', $selectedColors);
         }
 
         // Generate CRUD
         $res = new GeneratorCrud($entityClass, $bundle, $type);
-        $this->output->writeln("<info>Files generated in</info> : ".$bundle);
+        $this->output->writeln('<info>Files generated in</info> : '.$bundle);
         $this->output->writeln($res->getFiles());
 
         // Display Timer
@@ -115,8 +112,6 @@ class CrudCommand extends ContainerAwareCommand
     {
         $timeEnd = microtime(true);
         $generationTime = $timeEnd - $timeStart;
-        $this->output->writeln('<info>Done in ' . date('i \m\i\n s \s\e\c', $generationTime) .'</info>');
+        $this->output->writeln('<info>Done in '.date('i \m\i\n s \s\e\c', $generationTime).'</info>');
     }
-
 }
-

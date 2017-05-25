@@ -2,8 +2,6 @@
 
 namespace Tigreboite\FunkylabBundle\Entity;
 
-use Tigreboite\FunkylabBundle\Entity\BaseRepository;
-
 class BlogRepository extends BaseRepository
 {
     /**
@@ -14,12 +12,13 @@ class BlogRepository extends BaseRepository
      * @param       $order_column
      * @param       $order_dir
      * @param array $where_spe
+     *
      * @return array
      */
-    public function findDataTableBlog($columns, $start, $length, $search_string, $order_column, $order_dir, $where_spe = array()) {
-
+    public function findDataTableBlog($columns, $start, $length, $search_string, $order_column, $order_dir, $where_spe = array())
+    {
         foreach ($columns as &$col) {
-            if(!empty($col['name']) && $col['name'] == 'nbcomment') {
+            if (!empty($col['name']) && $col['name'] == 'nbcomment') {
                 $col['spe'] = true;
                 $col['count_one_to_many'] = true;
                 $col['name'] = 'blogcomments';
@@ -37,19 +36,19 @@ class BlogRepository extends BaseRepository
      * @param $order
      * @param $limit
      * @param $offset
+     *
      * @return mixed
      */
-    public function findDataQuery($query,$orderby,$order,$limit,$offset)
+    public function findDataQuery($query, $orderby, $order, $limit, $offset)
     {
         $qb = $this->createQueryBuilder('i');
 
         $qb->orderBy('i.'.$orderby, $order)
-          ->setFirstResult($limit*$offset)
+          ->setFirstResult($limit * $offset)
           ->setMaxResults($limit)
         ;
 
-        if($query)
-        {
+        if ($query) {
             $qb->where('i.title like :query')
               ->orWhere('i.content like :query')
               ->setParameter('query', '%'.$query.'%')
@@ -59,19 +58,17 @@ class BlogRepository extends BaseRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getFilteredBlog($filter=false, $order="DESC", $limit=3,  $offset=0)
+    public function getFilteredBlog($filter = false, $order = 'DESC', $limit = 3,  $offset = 0)
     {
         $qb = $this->createQueryBuilder('i');
 
         $qb->orderBy('i.id', $order)
-          ->setFirstResult($limit*$offset)
+          ->setFirstResult($limit * $offset)
           ->setMaxResults($limit)
           ->andWhere('i.parent is null')
           ->andWhere('i.status = 1');
-        ;
 
-        if($filter)
-        {
+        if ($filter) {
             $qb->andWhere('i.type = :filter')
               ->setParameter('filter', $filter);
         }
@@ -104,18 +101,19 @@ class BlogRepository extends BaseRepository
     protected function getOneResult(\Doctrine\ORM\Query $query)
     {
         $result = $query->getResult();
+
         return isset($result[0]) ? $result[0] : null;
     }
 
-    public function getCountType(\Tigreboite\FunkylabBundle\Entity\BlogType $type=null)
+    public function getCountType(\Tigreboite\FunkylabBundle\Entity\BlogType $type = null)
     {
         $qb = $this->createQueryBuilder('b');
         $qb->select('count(b.id)');
-        if($type)
-        {
+        if ($type) {
             $qb->where('b.type = :type')
                 ->setParameter('type', $type);
         }
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -133,5 +131,3 @@ class BlogRepository extends BaseRepository
         return $qb->getQuery()->getResult();
     }
 }
-
-
