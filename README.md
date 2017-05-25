@@ -1,10 +1,12 @@
-##Author
+# Funkylab Bundle for Symfony
+
+## Author
 
 Cyril Pereira <cyril.pereira@gmail.com>
 
 ## Installation
 
-```
+```bash
 composer require tigreboite/funkylab-bundle dev-master
 ```
 
@@ -16,7 +18,9 @@ Then, add the new bundles into `symfony/app/AppKernel.php`:
 public function registerBundles()
 {
     $bundles = array(
+        
         ...
+        
         new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         new FOS\UserBundle\FOSUserBundle(),
         new Knp\Bundle\MenuBundle\KnpMenuBundle(),
@@ -67,7 +71,7 @@ tigreboite_funkylab:
       language: false
 ```
 
-###Medias
+### Medias
 
 create a directory images
 
@@ -75,13 +79,13 @@ create a directory images
 $ mkdir web/images
 $ chmod -R 777 web/images
 ```
-###AdminLTE JS/CSS
+### AdminLTE JS/CSS
 
 ```
 $ln -s vendor/almasaeed2010/adminlte/ web/bundles/adminlte
 ```
 
-##Console
+## Console
 
 ```
 $ php app/console assets:install web --symlink
@@ -89,16 +93,16 @@ $ php app/console d:s:u --force
 $ php app/console doctrine:fixtures:load
 ```
 
-#Start
+# Start
 
 http://yourwebsite.local/admin/login
 
 login : admin@admin.com
 pass  : admin
 
-#Documentation
+# Documentation
 
-##Role and menu
+## Role and menu
 
 To extend the admin, create a controller in your own bundle :
 
@@ -147,9 +151,9 @@ src/AppBundle/Resources/views/yourcontroller/action/index.html.twig
 
 or you can set your template name and path in annotation
 
-##Entity
+## Entity
 
-###Annotation
+### Annotation
 
 By default, visible and editable is true, but if you want set it
 edit you entity and add
@@ -170,7 +174,7 @@ and @Crud annotation to your property
 private $name;
 ```
 
-###Datagrid
+### Datagrid
 
 Add the repository Tigreboite\FunkylabBundle\Entity\BaseRepository to your entity
 
@@ -184,14 +188,14 @@ Add the repository Tigreboite\FunkylabBundle\Entity\BaseRepository to your entit
 class Car
 ```
 
-###Fields
+### Fields
 
 You can specify the kind of field you want to display
 date,file,html,image,number,string
 
 by default it's string.
 
-##Console
+## Console
 
 You can generate admin interface like form tree and datagrid.
 
