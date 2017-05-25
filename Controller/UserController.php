@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends DatagridController
 {
     protected $entityName = 'Tigreboite\FunkylabBundle\Entity\User';
-    protected $formType = 'Tigreboite\FunkylabBundle\Form\UserType';
+    protected $formType = 'Tigreboite\FunkylabBundle\Form\Type\UserType';
     protected $route_base = 'admin_user';
     protected $repository = 'TigreboiteFunkylabBundle:User';
     protected $dir_path = 'medias/user/';
