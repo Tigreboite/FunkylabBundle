@@ -7,8 +7,11 @@ services:
     # Main Menu
     tigreboitefunkylab.menu.main_menu:
         class: Knp\Menu\MenuItem
-        factory: ["tigreboitefunkylab.menu_builder", createMainMenu]
-        arguments: ["@request_stack", "@annotation_reader", "@service_container"]
+        factory: ["@tigreboitefunkylab.menu_builder", createMainMenu]
+        arguments:
+          - "@request_stack"
+          - "@annotation_reader"
+          - "@service_container"
         scope: request
         tags:
             - { name: knp_menu.menu, alias: main_menu }
@@ -16,8 +19,11 @@ services:
     # Breadcrumb
     tigreboitefunkylab.menu.breadcrumb:
         class: Knp\Menu\MenuItem
-        factory: ["tigreboitefunkylab.menu_builder",createBreadcrumbMenu]
-        arguments: ["@request_stack", "@annotation_reader", "@service_container"]
+        factory: ["@tigreboitefunkylab.menu_builder",createBreadcrumbMenu]
+        arguments:
+          - "@request_stack"
+          - "@annotation_reader"
+          - "@service_container"
         scope: request
         tags:
             - { name: knp_menu.menu, alias: breadcrumb }
