@@ -17,7 +17,7 @@ class PostPersistListener
 
     /**
      * @param TokenStorage $security
-     * @param Router       $router
+     * @param Router $router
      */
     public function __construct(TokenStorage $security, Router $router, RequestStack $request)
     {
@@ -36,34 +36,17 @@ class PostPersistListener
 
     /**
      * @param LifecycleEventArgs $args
-     */
-    public function preRemove(LifecycleEventArgs $args)
-    {
-        $this->createActivity($args, Activity::ACTION_DELETE);
-    }
-
-    /**
-     * @param LifecycleEventArgs $args
-     */
-    public function postPersist(LifecycleEventArgs $args)
-    {
-        $this->createActivity($args, Activity::ACTION_CREATED);
-    }
-
-    /**
-     * @param LifecycleEventArgs $args
      * @param                    $action
      */
     private function createActivity(LifecycleEventArgs $args, $action)
     {
-        // $route = $this->router->match($this->request->getPathInfo());
         $entity = $args->getEntity();
         $entityManager = $args->getEntityManager();
         $this->user = $this->getLoggedUser();
         if ($this->request) {
             $path = $this->request->getPathInfo();
-            if ($this->str_starts_with($path, '/admin')) {
-                if (!($entity instanceof Activity) &&  $this->user) {
+            if ($this->strStartsWith($path, '/admin')) {
+                if (!($entity instanceof Activity) && $this->user) {
                     /*$activity = new Activity();
                     $activity->setCreatedBy($this->user->getFirstname()." ".$this->user->getLastname());
                     $activity->setAction($action);
@@ -91,8 +74,24 @@ class PostPersistListener
         }
     }
 
-    public function str_starts_with($haystack, $needle)
+    public function strStartsWith($haystack, $needle)
     {
         return strpos($haystack, $needle) === 0;
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     */
+    public function preRemove(LifecycleEventArgs $args)
+    {
+        $this->createActivity($args, Activity::ACTION_DELETE);
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     */
+    public function postPersist(LifecycleEventArgs $args)
+    {
+        $this->createActivity($args, Activity::ACTION_CREATED);
     }
 }

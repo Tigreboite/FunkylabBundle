@@ -35,7 +35,6 @@ trait Image
         }
 
         $extensions = array('png', 'jpg', 'jpeg', 'gif', 'bmp');
-//        $ext  = $this->getFile()->guessExtension();
         $ext = $this->getFile()->getClientOriginalExtension();
         if (!in_array($ext, $extensions)) {
             return;

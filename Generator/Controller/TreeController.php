@@ -16,8 +16,6 @@ use Tigreboite\FunkylabBundle\Entity\Sortable;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-//use Tigreboite\FunkylabBundle\Form\SortableType;
-
 /**
  * Sortable controller.
  *
