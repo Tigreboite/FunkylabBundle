@@ -1,6 +1,6 @@
 # Funkylab Bundle for Symfony
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/c984641e-7cd9-46fc-95b9-1ce74bea62d4/big.png)](https://insight.sensiolabs.com/projects/c984641e-7cd9-46fc-95b9-1ce74bea62d4)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/c984641e-7cd9-46fc-95b9-1ce74bea62d4/mini.png)](https://insight.sensiolabs.com/projects/c984641e-7cd9-46fc-95b9-1ce74bea62d4)
 
 ## Author
 
