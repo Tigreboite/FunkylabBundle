@@ -69,7 +69,7 @@ abstract class Formater
      */
     public function getController()
     {
-        $code = $this->path.'/Controller/'.$this->type.'Controller.php');
+        $code = $this->path.'/Controller/'.$this->type.'Controller.php';
         $code = $this->cleanController($code);
 
         return $code;
@@ -96,7 +96,7 @@ abstract class Formater
      */
     public function getFormType()
     {
-        $code = $this->path.'/Form/DataType.php');
+        $code = $this->path.'/Form/DataType.php';
         $code = $this->cleanFormType($code);
 
         $fields = '';
