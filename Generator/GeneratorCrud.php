@@ -12,8 +12,10 @@ class GeneratorCrud
         $this->bundle = $bundle;
         $this->entityName = explode('\\', $entity);
         $this->entityName = end($this->entityName);
-        $path = explode('vendor', dirname(__FILE__));
-        $path = $path[0].'src/'.$bundle.'/';
+
+        $basePath = dirname($this->get('kernel')->getRootDir()."/../");
+        $path = $basePath.'/src/'.$bundle.'/';
+
         $this->files = array();
         $className = 'Tigreboite\\FunkylabBundle\\Generator\\'.$type.'Formater';
         if (class_exists($className)) {

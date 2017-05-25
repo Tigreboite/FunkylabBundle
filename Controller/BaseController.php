@@ -60,7 +60,7 @@ class BaseController extends Controller
         return $form;
     }
 
-    public static function getErrorMessages(\Symfony\Component\Form\Form $form)
+    protected static function getErrorMessages(\Symfony\Component\Form\Form $form)
     {
         $errors = array();
 
