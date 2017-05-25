@@ -96,6 +96,5 @@ class TranslatorController extends Controller
 
         return $response;
 
-        return array();
     }
 }

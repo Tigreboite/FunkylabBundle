@@ -192,8 +192,6 @@ class BaseController extends Controller
         return new JsonResponse($data);
     }
 
-    //TODO : JMS SERIALIZER
-
     public function ajaxAction(Request $request)
     {
         $query = $request->get('q', '');

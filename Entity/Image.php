@@ -20,7 +20,6 @@ trait Image
         if (null !== $this->getFile()) {
             // do whatever you want to generate a unique name
             $filename = sha1(time().uniqid(mt_rand(), true));
-//            $this->image = $filename.'.'.$this->getFile()->guessExtension();
             $this->image = $filename.'.'.$this->getFile()->getClientOriginalExtension();
         }
     }
@@ -101,7 +100,7 @@ trait Image
             ? null
             : $this->getUploadDir().'/'.$this->image;
 
-        $fileFullPath = ($file != null) ?  $this->getUploadRootDir().'/'.$this->image : null;
+        $fileFullPath = ($file !== null) ?  $this->getUploadRootDir().'/'.$this->image : null;
 
         if ((null === $file || !file_exists($fileFullPath)) || is_dir($fileFullPath)) {
             return $this->IMAGE_DEFAULT;

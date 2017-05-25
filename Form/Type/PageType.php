@@ -1,12 +1,12 @@
 <?php
 
-namespace Tigreboite\FunkylabBundle\Form;
+namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class NewsletterType extends AbstractType
+class PageType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,7 +15,12 @@ class NewsletterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('email')
+            ->add('title')
+            ->add('content')
+            ->add('parent')
+            ->add('user')
+            ->add('language')
+            ->add('image', 'hidden')
         ;
     }
 
@@ -25,21 +30,15 @@ class NewsletterType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-          'data_class' => 'Tigreboite\FunkylabBundle\Entity\Newsletter',
-          'csrf_protection' => false,
+            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Page',
         ));
     }
 
-    public function getDefaultOptions(array $options)
-    {
-        $options = parent::getDefaultOptions($options);
-        $options['csrf_protection'] = false;
-
-        return $options;
-    }
-
+    /**
+     * @return string
+     */
     public function getName()
     {
-        return 'tigreboite_funkylabbundle_newsletter';
+        return 'tigreboite_funkylabbundle_page';
     }
 }

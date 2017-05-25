@@ -38,12 +38,6 @@ class BaseRepository extends EntityRepository
 
         $query = $qb->getQuery();
 
-        // TODO : Used ??
-        // $query->setHint(
-        //   Query::HINT_CUSTOM_OUTPUT_WALKER,
-        //   'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-        // );
-
         $query->setHint(TranslatableListener::HINT_TRANSLATABLE_LOCALE, $locale);
 
         return $query;
@@ -77,7 +71,7 @@ class BaseRepository extends EntityRepository
                     $qb->addSelect($table.'.'.$field.' as data_'.$col['data']);
 
                     $col['name'] = $table.'.'.$field;
-                } elseif (!empty($col['spe']) && $col['spe'] == true) {
+                } elseif (!empty($col['spe']) && $col['spe'] === true) {
 
                     // SPE Count OneToMany
                     if (isset($col['count_one_to_many']) && $col['count_one_to_many']) {

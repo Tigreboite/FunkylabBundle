@@ -167,7 +167,6 @@ class UserController extends DatagridController
           ->iterate();
 
         $handle = fopen('php://memory', 'r+');
-        $header = array();
 
         fputcsv($handle, array(
           'ref cust',

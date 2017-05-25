@@ -1,12 +1,12 @@
 <?php
 
-namespace Tigreboite\FunkylabBundle\Form;
+namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PageType extends AbstractType
+class BlogTypeType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,12 +15,7 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('content')
-            ->add('parent')
-            ->add('user')
-            ->add('language')
-            ->add('image', 'hidden')
+            ->add('name')
         ;
     }
 
@@ -30,7 +25,7 @@ class PageType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Page',
+            'data_class' => 'Tigreboite\FunkylabBundle\Entity\BlogType',
         ));
     }
 
@@ -39,6 +34,6 @@ class PageType extends AbstractType
      */
     public function getName()
     {
-        return 'tigreboite_funkylabbundle_page';
+        return 'tigreboite_funkylabbundle_blogtype';
     }
 }

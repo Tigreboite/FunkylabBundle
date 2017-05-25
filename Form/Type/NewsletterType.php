@@ -1,12 +1,12 @@
 <?php
 
-namespace Tigreboite\FunkylabBundle\Form;
+namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class BlogCommentType extends AbstractType
+class NewsletterType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,11 +15,7 @@ class BlogCommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comment')
-            ->add('createdAt')
-            ->add('blog')
-            ->add('language')
-            ->add('user')
+          ->add('email')
         ;
     }
 
@@ -29,15 +25,21 @@ class BlogCommentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tigreboite\FunkylabBundle\Entity\BlogComment',
+          'data_class' => 'Tigreboite\FunkylabBundle\Entity\Newsletter',
+          'csrf_protection' => false,
         ));
     }
 
-    /**
-     * @return string
-     */
+    public function getDefaultOptions(array $options)
+    {
+        $options = parent::getDefaultOptions($options);
+        $options['csrf_protection'] = false;
+
+        return $options;
+    }
+
     public function getName()
     {
-        return 'tigreboite_funkylabbundle_blogcomment';
+        return 'tigreboite_funkylabbundle_newsletter';
     }
 }

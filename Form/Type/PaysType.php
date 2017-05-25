@@ -1,12 +1,12 @@
 <?php
 
-namespace Tigreboite\FunkylabBundle\Form;
+namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class BlogTypeType extends AbstractType
+class PaysType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,6 +16,7 @@ class BlogTypeType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('isenable')
         ;
     }
 
@@ -25,7 +26,7 @@ class BlogTypeType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tigreboite\FunkylabBundle\Entity\BlogType',
+            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Pays',
         ));
     }
 
@@ -34,6 +35,6 @@ class BlogTypeType extends AbstractType
      */
     public function getName()
     {
-        return 'tigreboite_funkylabbundle_blogtype';
+        return 'tigreboite_funkylabbundle_pays';
     }
 }
