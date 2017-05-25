@@ -13,10 +13,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class BaseController extends Controller
 {
     protected $entityName = 'Base';
-    protected $formType   = 'BaseType';
+    protected $formType = 'BaseType';
     protected $route_base = 'admin_Base';
     protected $repository = 'Tigreboite:Base';
-    protected $dir_path   = 'medias/Base/';
+    protected $dir_path = 'medias/Base/';
 
     public function indexAction()
     {
@@ -39,23 +39,66 @@ class BaseController extends Controller
         }
 
         return array(
-          'error'  => self::getErrorMessages($form),
-          'entity' => $entity,
-          'form'   => $form->createView(),
-          'ajax'   => $request->isXmlHttpRequest()
+            'error' => self::getErrorMessages($form),
+            'entity' => $entity,
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest()
         );
+    }
+
+    protected function createCreateForm($entity)
+    {
+        $form = $this->createForm(new $this->formType(), $entity, array(
+            'action' => $this->generateUrl($this->route_base . '_create'),
+            'method' => 'POST',
+            'allow_extra_fields' => true,
+        ));
+
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+
+    static public function getErrorMessages(\Symfony\Component\Form\Form $form)
+    {
+        $errors = array();
+
+        foreach ($form->getErrors() as $key => $error) {
+            if ($form->isRoot()) {
+                $errors['#'][] = $error->getMessage();
+            } else {
+                $errors[] = $error->getMessage();
+            }
+        }
+
+        foreach ($form->all() as $child) {
+            if (!$child->isValid()) {
+                $err = self::getErrorMessages($child);
+                if (!empty($err)) {
+                    $errors[$child->getName()] = $err;
+                }
+            }
+        }
+        $checkError = current($errors);
+        if (!empty($checkError)) {
+            return $errors;
+        } else {
+            return;
+        }
+
     }
 
     public function newAction(Request $request)
     {
         $entity = new $this->entityName();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
-          'error'  => self::getErrorMessages($form),
-          'entity' => $entity,
-          'form'   => $form->createView(),
-          'ajax'   => $request->isXmlHttpRequest()
+            'error' => self::getErrorMessages($form),
+            'entity' => $entity,
+            'form' => $form->createView(),
+            'ajax' => $request->isXmlHttpRequest()
         );
     }
 
@@ -72,31 +115,17 @@ class BaseController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
-          'entity'  => $entity,
-          'form'    => $editForm->createView(),
-          'ajax'    => $request->isXmlHttpRequest()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest()
         );
-    }
-
-    protected function createCreateForm($entity)
-    {
-        $form = $this->createForm(new $this->formType(), $entity, array(
-          'action' => $this->generateUrl($this->route_base.'_create'),
-          'method' => 'POST',
-          'allow_extra_fields'=>true,
-        ));
-
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
     }
 
     protected function createEditForm($entity)
     {
         $form = $this->createForm(new $this->formType(), $entity, array(
-          'action' => $this->generateUrl($this->route_base.'_update', array('id' => $entity->getId())),
-          'method' => 'PUT',
+            'action' => $this->generateUrl($this->route_base . '_update', array('id' => $entity->getId())),
+            'method' => 'PUT',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
@@ -120,13 +149,13 @@ class BaseController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl($this->route_base.'_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl($this->route_base . '_edit', array('id' => $id)));
         }
 
         return array(
-          'entity'      => $entity,
-          'form'   => $editForm->createView(),
-          'ajax' => $request->isXmlHttpRequest()
+            'entity' => $entity,
+            'form' => $editForm->createView(),
+            'ajax' => $request->isXmlHttpRequest()
         );
     }
 
@@ -147,18 +176,16 @@ class BaseController extends Controller
 
     public function uploadAction(Request $request)
     {
-        $data = array('success'=>false);
+        $data = array('success' => false);
         $uploadedFile = $request->files->get('file');
 
-        if ($uploadedFile)
-        {
-            $file = $uploadedFile->move('../web/'.$this->dir_path, $uploadedFile->getClientOriginalName());
-            if($file)
-            {
+        if ($uploadedFile) {
+            $file = $uploadedFile->move('../web/' . $this->dir_path, $uploadedFile->getClientOriginalName());
+            if ($file) {
                 $data = array(
-                  'success'=>true,
-                  'filename'=>$uploadedFile->getClientOriginalName(),
-                  'path'=>$this->dir_path.$uploadedFile->getClientOriginalName()
+                    'success' => true,
+                    'filename' => $uploadedFile->getClientOriginalName(),
+                    'path' => $this->dir_path . $uploadedFile->getClientOriginalName()
                 );
             }
         }
@@ -166,37 +193,8 @@ class BaseController extends Controller
         return new JsonResponse($data);
     }
 
-    static public function getErrorMessages(\Symfony\Component\Form\Form $form) {
-        $errors = array();
-
-        foreach ($form->getErrors() as $key => $error) {
-            if ($form->isRoot()) {
-                $errors['#'][] = $error->getMessage();
-            } else {
-                $errors[] = $error->getMessage();
-            }
-        }
-
-        foreach ($form->all() as $child) {
-            if (!$child->isValid()) {
-                $err = self::getErrorMessages($child);
-                if(!empty($err))
-                {
-                    $errors[$child->getName()] = $err;
-                }
-            }
-        }
-        $checkError = current($errors);
-        if(!empty($checkError))
-        {
-            return $errors;
-        }else{
-            return;
-        }
-
-    }
-
     //TODO : JMS SERIALIZER
+
     public function ajaxAction(Request $request)
     {
         $query = $request->get('q', '');
@@ -215,18 +213,18 @@ class BaseController extends Controller
 
         foreach ($entities as $entity) {
             $items[] = array(
-              'id' => $entity->getId(),
-              'title' => $entity->getTitle(),
-              'summary' => $entity->getSummary(),
+                'id' => $entity->getId(),
+                'title' => $entity->getTitle(),
+                'summary' => $entity->getSummary(),
             );
         }
 
         $data = array(
-          'q' => $query,
-          'term' => $query,
-          'page' => $page + 1,
-          'items' => $items,
-          'total_count' => $repo->countDataQuery($query),
+            'q' => $query,
+            'term' => $query,
+            'page' => $page + 1,
+            'items' => $items,
+            'total_count' => $repo->countDataQuery($query),
         );
 
         return new JsonResponse($data);

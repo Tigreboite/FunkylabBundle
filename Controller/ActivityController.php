@@ -35,9 +35,9 @@ class ActivityController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function indexAction()
-{
-    return parent::indexAction();
-}
+    {
+        return parent::indexAction();
+    }
 
     /**
      * Get all entities.
@@ -46,9 +46,9 @@ class ActivityController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * @Method("GET")
      */
     public function listAction(Request $request)
-{
-    return parent::listAction($request);
-}
+    {
+        return parent::listAction($request);
+    }
 
     /**
      * Create entity.
@@ -58,9 +58,9 @@ class ActivityController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * @Template("AdminBundle:Activity:form.html.twig")
      */
     public function createAction(Request $request)
-{
-    return parent::createAction($request);
-}
+    {
+        return parent::createAction($request);
+    }
 
     /**
      * Displays a form to create a new entity.
@@ -70,9 +70,9 @@ class ActivityController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * @Template("AdminBundle:Activity:form.html.twig")
      */
     public function newAction(Request $request)
-{
-    return parent::newAction($request);
-}
+    {
+        return parent::newAction($request);
+    }
 
     /**
      * Displays a form to edit an existing entity.
@@ -82,9 +82,9 @@ class ActivityController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * @Template("AdminBundle:Activity:form.html.twig")
      */
     public function editAction(Request $request, $id)
-{
-    return parent::editAction($request, $id);
-}
+    {
+        return parent::editAction($request, $id);
+    }
 
     /**
      * Edits an existing entity.
@@ -93,9 +93,9 @@ class ActivityController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * @Template("AdminBundle:Activity:form.html.twig")
      */
     public function updateAction(Request $request, $id)
-{
-    return parent::updateAction($request, $id);
-}
+    {
+        return parent::updateAction($request, $id);
+    }
 
     /**
      * Delete an entity.
@@ -104,9 +104,9 @@ class ActivityController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
-{
-    return parent::deleteAction($request, $id);
-}
+    {
+        return parent::deleteAction($request, $id);
+    }
 
     /**
      * Upload files.
@@ -114,46 +114,46 @@ class ActivityController extends \Tigreboite\FunkylabBundle\Controller\DatagridC
      * @Route("/upload", name="admin_activity_upload")
      */
     public function uploadAction(Request $request)
-{
-    return parent::uploadAction($request);
-}
+    {
+        return parent::uploadAction($request);
+    }
 
     /**
      * @Route("/autocomplete/request", name="admin_activity_autocomplete_request", options={"expose"=true})
      * @Method("GET")
      */
     public function ideaajaxAction(Request $request)
-{
-    $query = $request->get('q', '');
-    $orderby = $request->get('orderyby', 'title');
-    $order = $request->get('order', 'ASC');
-    $limit = $request->get('limit', '10');
-    $page = $request->get('page', '1') - 1;
-    if ($page < 0) {
-        $page = 1;
-    }
+    {
+        $query = $request->get('q', '');
+        $orderby = $request->get('orderyby', 'title');
+        $order = $request->get('order', 'ASC');
+        $limit = $request->get('limit', '10');
+        $page = $request->get('page', '1') - 1;
+        if ($page < 0) {
+            $page = 1;
+        }
 
-    $em = $this->getDoctrine()->getManager();
-    $repo = $em->getRepository($this->repository);
-    $entities = $repo->findDataQuery($query, $orderby, $order, $limit, $page);
-    $items = array();
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository($this->repository);
+        $entities = $repo->findDataQuery($query, $orderby, $order, $limit, $page);
+        $items = array();
 
-    foreach ($entities as $entity) {
-        $items[] = array(
-          'id' => $entity->getId(),
-          'title' => $entity->getTitle(),
-          'summary' => $entity->getSummary(),
+        foreach ($entities as $entity) {
+            $items[] = array(
+                'id' => $entity->getId(),
+                'title' => $entity->getTitle(),
+                'summary' => $entity->getSummary(),
+            );
+        }
+
+        $data = array(
+            'q' => $query,
+            'term' => $query,
+            'page' => $page + 1,
+            'items' => $items,
+            'total_count' => $repo->countDataQuery($query),
         );
+
+        return new JsonResponse($data);
     }
-
-    $data = array(
-      'q' => $query,
-      'term' => $query,
-      'page' => $page + 1,
-      'items' => $items,
-      'total_count' => $repo->countDataQuery($query),
-    );
-
-    return new JsonResponse($data);
-}
 }

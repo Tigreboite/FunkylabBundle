@@ -32,6 +32,7 @@ class BlogCommentController extends Controller
             'blog_id' => $blog_id
         );
     }
+
     /**
      * Lists all.
      *
@@ -62,9 +63,8 @@ class BlogCommentController extends Controller
 
         $serializer = $this->get('jms_serializer');
 
-        foreach($entities as $k=>$v)
-        {
-            if(is_array($v))
+        foreach ($entities as $k => $v) {
+            if (is_array($v))
                 $entities[$k] = array_map("htmlentities", $v);
         }
 
@@ -80,6 +80,7 @@ class BlogCommentController extends Controller
 
         return new Response($serializer->serialize($data_to_return, 'json'));
     }
+
     /**
      * Creates a new BlogComment entity.
      *
@@ -99,11 +100,11 @@ class BlogCommentController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_blogcomment'));
-       }
+        }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
             'ajax' => $request->isXmlHttpRequest()
         );
     }
@@ -137,11 +138,11 @@ class BlogCommentController extends Controller
     public function newAction(Request $request)
     {
         $entity = new BlogComment();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
             'ajax' => $request->isXmlHttpRequest()
         );
     }
@@ -151,7 +152,7 @@ class BlogCommentController extends Controller
      *
      * @Route("/{id}/edit", name="admin_blogcomment_edit", options={"expose"=true})
      * @Method("GET")
-          * @Template("TigreboiteFunkylabBundle:BlogComment:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:BlogComment:form.html.twig")
      */
     public function editAction(Request $request, $id)
     {
@@ -166,19 +167,19 @@ class BlogCommentController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
+            'entity' => $entity,
+            'form' => $editForm->createView(),
             'ajax' => $request->isXmlHttpRequest()
         );
     }
 
     /**
-    * Creates a form to edit a BlogComment entity.
-    *
-    * @param BlogComment $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a BlogComment entity.
+     *
+     * @param BlogComment $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(BlogComment $entity)
     {
         $form = $this->createForm(new BlogCommentType(), $entity, array(
@@ -190,6 +191,7 @@ class BlogCommentController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing BlogComment entity.
      *
@@ -217,11 +219,12 @@ class BlogCommentController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
+            'entity' => $entity,
+            'form' => $editForm->createView(),
             'ajax' => $request->isXmlHttpRequest()
         );
     }
+
     /**
      * Deletes  entity.
      *
