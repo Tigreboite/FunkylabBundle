@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Tigreboite\FunkylabBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/user")
