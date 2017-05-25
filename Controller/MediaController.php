@@ -29,7 +29,8 @@ class MediaController extends Controller
         $dir = $request->get('dir');
         $dir_image = 'medias/'.$dir;
         $data = array();
-        $path = realpath(dirname(__FILE__).'/../../../../web/'.$dir_image);
+
+        $path = $request->getBasePath()."/".$dir_image);
 
         foreach (glob($path.'/*.*') as $filename) {
             $data[] = '/'.$dir_image.'/'.basename($filename);
