@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tigreboite\FunkylabBundle\Entity\BlogComment;
-use Tigreboite\FunkylabBundle\Form\BlogCommentType;
+use Tigreboite\FunkylabBundle\Form\Type\BlogCommentType;
 
 /**
  * BlogComment controller.
