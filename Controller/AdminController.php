@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\VarDumper\VarDumper;
 
 class AdminController extends Controller
 {
@@ -33,7 +35,7 @@ class AdminController extends Controller
         $logger->info('Funkylab : call Login form');
 
         return $this->render('TigreboiteFunkylabBundle:Admin:login.html.twig', array(
-            'csrf_token' => $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate'),
+            'csrf_token' => $this->get('security.csrf.token_manager')->getToken('authenticate'),
         ));
     }
 
@@ -43,6 +45,19 @@ class AdminController extends Controller
      */
     public function loginCheckAction()
     {
+        /*VarDumper::dump($_POST); exit;
+
+        $this->get('manager')->
+
+        if($this->getLoggedUser()!==false){
+            $logout = $this->generateUrl('funkylab_home');
+        }else{
+            $logout = $this->generateUrl('funkylab_login');
+        }
+        */
+
+        $logout = $this->generateUrl('fos_user_security_login');
+        return $this->redirect($logout);
     }
 
     /**

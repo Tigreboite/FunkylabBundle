@@ -12,11 +12,9 @@ security:
             pattern:   ^/(_(profiler|wdt)|css|images|js)/
             security:  false
             anonymous: true
-#            host: host
 
         secured_area:
             pattern:    ^/
-#            host: host
             form_login:
                 provider:   user_db
                 check_path: fos_user_security_check
@@ -26,7 +24,6 @@ security:
             logout:
                 path:   fos_user_security_logout
                 target: funkylab_home
-#                success_handler: app_bundle.handler.logout_success_handler
             anonymous:  true
 
     access_control:
