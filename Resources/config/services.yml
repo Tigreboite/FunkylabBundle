@@ -54,3 +54,13 @@ services:
         tags:
             - { name: doctrine.event_listener, event: preRemove }
 
+    funkylab.service:
+        class: Tigreboite\FunkylabBundl\Service\FunkylabService
+        arguments: ["@session"]
+
+    funkylab.collector:
+        class: Tigreboite\FunkylabBundle\DataCollector\FunkylaboCollector
+        arguments: ["@tagco.service"]
+        public: false
+        tags:
+            - { name: data_collector, id: funkylab.collector, template: TigreboiteFunkylabBundle:Collector:funkylab }
