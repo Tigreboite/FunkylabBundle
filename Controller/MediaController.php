@@ -30,7 +30,7 @@ class MediaController extends Controller
         $dir_image = 'medias/'.$dir;
         $data = array();
 
-        $path = $request->getBasePath()."/".$dir_image);
+        $path = $request->getBasePath()."/".$dir_image;
 
         foreach (glob($path.'/*.*') as $filename) {
             $data[] = '/'.$dir_image.'/'.basename($filename);
