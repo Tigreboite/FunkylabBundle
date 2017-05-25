@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Abuse controller.
@@ -56,7 +57,7 @@ class MediaController extends Controller
             throw $this->createNotFoundException('bad request');
         }
 
-        $path = realpath(dirname(__FILE__).'/../../../../web');
+        $path = $request->getBasePath();
 
         if (file_exists($path.$src)) {
             unlink($path.$src);
