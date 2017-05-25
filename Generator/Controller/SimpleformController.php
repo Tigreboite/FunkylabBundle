@@ -7,12 +7,10 @@
 namespace Tigreboite\FunkylabBundle\Generator\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
-use Tigreboite\FunkylabBundle\Entity\Simpleform;
 
 /**
  * Simpleform controller.
