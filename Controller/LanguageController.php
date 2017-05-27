@@ -222,7 +222,6 @@ class LanguageController extends Controller
     private function createEditForm(Language $entity)
     {
         $em = $this->get('doctrine')->getManager();
-        $em = $this->get('doctrine')->getManager();
         $form = $this->createForm(LanguageType::class, $entity, array(
             'action' => $this->generateUrl('admin_language_update', array('id' => $entity->getId())),
             'method' => 'PUT',

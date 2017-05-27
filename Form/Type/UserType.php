@@ -3,7 +3,12 @@
 namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
 use Tigreboite\FunkylabBundle\Entity\User;
@@ -26,7 +31,7 @@ class UserType extends AbstractType
                     new \Symfony\Component\Validator\Constraints\NotBlank(),
                 ),
             ))
-            ->add('roles', 'choice', array(
+            ->add('roles', ChoiceType::class, array(
                 'choices' => array(
                     User::ROLE_BRAND => User::ROLE_BRAND,
                     User::ROLE_MODERATOR => User::ROLE_MODERATOR,
@@ -36,18 +41,18 @@ class UserType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false,
-                'empty_value' => false,
+                'empty_data' => false,
                 'attr' => array(
                     'class' => 'form-control',
                 ),
             ))
-            ->add('dob', 'date', array(
+            ->add('dob', DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
                 'attr' => array('class' => 'date form-control'),
                 'label' => 'Date of birth',
             ))
-            ->add('civility', 'choice', array(
+            ->add('civility', ChoiceType::class, array(
                 'choices' => array(
                     'Mlle' => 'Mlle',
                     'Mme' => 'Mme',
@@ -56,7 +61,7 @@ class UserType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
                 'required' => false,
-                'empty_value' => false,
+                'empty_data' => false,
                 'attr' => array(
                     'class' => 'form-control',
                 ),
@@ -71,7 +76,7 @@ class UserType extends AbstractType
                     'class' => 'form-control',
                 ),
             ))
-            ->add('plainpassword', 'password', array(
+            ->add('plainpassword', PasswordType::class, array(
                 'required' => false,
                 'attr' => array(
                     'class' => 'form-control',
@@ -111,10 +116,20 @@ class UserType extends AbstractType
                     'class' => 'form-control',
                 ),
             ))
-            ->add('image', 'hidden');
+            ->add('image', HiddenType::class);
     }
 
-    private function getOrderLanguageList($er)
+
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'entityManager' => null,
+            'data_class' => 'Tigreboite\FunkylabBundle\Entity\User',
+        ]);
+    }
+
+    private function getOrderLanguageList(EntityRepository $er)
     {
         $languages = $er->createQueryBuilder('u')
             ->where('u.isenable = 1')
@@ -123,15 +138,6 @@ class UserType extends AbstractType
         return $languages;
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'Tigreboite\FunkylabBundle\Entity\User',
-        ));
-    }
 
     /**
      * @return string

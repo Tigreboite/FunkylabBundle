@@ -6,6 +6,7 @@
 
 namespace Tigreboite\FunkylabBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -49,13 +50,16 @@ class BaseController extends Controller
 
     protected function createCreateForm($entity)
     {
-        $form = $this->createForm(new $this->formType(), $entity, array(
+
+        $em = $this->get('doctrine')->getManager();
+        $form = $this->createForm($this->formType, $entity, array(
             'action' => $this->generateUrl($this->route_base.'_create'),
             'method' => 'POST',
             'allow_extra_fields' => true,
+            'entityManager'=>$em
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -122,13 +126,14 @@ class BaseController extends Controller
 
     protected function createEditForm($entity)
     {
-        $form = $this->createForm(new $this->formType(), $entity, array(
+        $em = $this->get('doctrine')->getManager();
+        $form = $this->createForm($this->formType, $entity, array(
             'action' => $this->generateUrl($this->route_base.'_update', array('id' => $entity->getId())),
             'method' => 'PUT',
+            'entityManager'=>$em
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
         return $form;
     }
 

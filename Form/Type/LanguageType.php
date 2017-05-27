@@ -24,7 +24,6 @@ class LanguageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $choice_countries = array();
         if ($options['entityManager']) {
             $pays = $options['entityManager']->getRepository('TigreboiteFunkylabBundle:Pays')->findAll();
@@ -41,7 +40,7 @@ class LanguageType extends AbstractType
                 )
             )
             ->add('image', HiddenType::class)
-            ->add('isenable', RadioType::class);
+            ->add('isenable', CheckboxType::class);
     }
 
     /**
