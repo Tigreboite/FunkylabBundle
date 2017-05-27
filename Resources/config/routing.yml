@@ -16,6 +16,3 @@ fos_user_resetting:
 fos_user_profile_show:
     path: /account
 
-lexik_translation_edition:
-    resource: "@LexikTranslationBundle/Resources/config/routing.yml"
-    prefix:   /admin/translator/

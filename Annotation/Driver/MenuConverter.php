@@ -27,13 +27,7 @@ class MenuConverter
     public function getFunkylabConfiguration()
     {
         $config = array(
-          'blog' => false,
           'user' => false,
-          'page' => false,
-          'country' => false,
-          'language' => false,
-          'translator' => false,
-          'activity' => false,
         );
         foreach ($config as $k => $v) {
             $config[$k] = $this->container->getParameter('tigreboite_funkylab.default_menu.'.$k);

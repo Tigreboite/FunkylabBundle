@@ -37,25 +37,9 @@ class MenuBuilder
 
         foreach ($list as $k => $l) {
             if (isset($l['children'])) {
-                if ($l['children'][0]['route'] == 'admin_activity' && !$this->config['activity']) {
-                    continue;
-                }
                 if ($l['children'][0]['route'] == 'admin_user' && !$this->config['user']) {
                     continue;
                 }
-                if ($l['children'][0]['route'] == 'admin_blog' && !$this->config['blog']) {
-                    continue;
-                }
-                if ($l['children'][0]['route'] == 'admin_language' && !$this->config['language']) {
-                    continue;
-                }
-                if ($l['children'][0]['route'] == 'admin_pays' && !$this->config['country']) {
-                    continue;
-                }
-                if ($l['children'][0]['route'] == 'admin_page' && !$this->config['page']) {
-                    continue;
-                }
-
                 $i = $menu->addChild($k, array(
                     'route' => $l['children'][0]['route'],
                     'extras' => array('treeview' => true, 'class_icon' => 'fa ' . $l['children'][0]['menu']->getIcon()),
@@ -71,22 +55,7 @@ class MenuBuilder
                         $i->setCurrent(true);
                     }
 
-                    if ($m['route'] == 'admin_activity' && !$this->config['activity']) {
-                        continue;
-                    }
                     if ($m['route'] == 'admin_user' && !$this->config['user']) {
-                        continue;
-                    }
-                    if ($m['route'] == 'admin_blog' && !$this->config['blog']) {
-                        continue;
-                    }
-                    if ($m['route'] == 'admin_language' && !$this->config['language']) {
-                        continue;
-                    }
-                    if ($m['route'] == 'admin_pays' && !$this->config['country']) {
-                        continue;
-                    }
-                    if ($m['route'] == 'admin_page' && !$this->config['page']) {
                         continue;
                     }
 
@@ -98,26 +67,6 @@ class MenuBuilder
                     $menuData[$k][] = $m['menu']->getPropertyName();
                 }
 
-                if ($k == 'CMS') {
-                    if ($this->config['translator']) {
-                        if ($request->get('_route') == 'lexik_translation_grid') {
-                            $i->setCurrent(true);
-                        }
-
-                        $i->addChild('Translator', array(
-                            'route' => 'lexik_translation_grid',
-                            'extras' => array('class_icon' => 'fa fa-globe'),
-
-                        ));
-                        $i->addChild('Translator download', array(
-                            'route' => 'admin_translator_download',
-                            'extras' => array('class_icon' => 'fa fa-download'),
-                        ));
-
-                        $menuData[$k][] = "Translator";
-                        $menuData[$k][] = "Translator download";
-                    }
-                }
             } else {
                 $menu->addChild($l['menu']->getName(), array(
                     'route' => $l['route'],
