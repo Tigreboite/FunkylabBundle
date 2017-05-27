@@ -41,7 +41,6 @@ class CrudCommand extends ContainerAwareCommand
         $entityClass = $input->getOption('entity');
         $entityClass = str_replace('/', '\\', $entityClass);
         $bundle = $input->getOption('bundle');
-        $dialog = $this->getHelper('question');
 
         // Get Entity
         if (!$entityClass) {
@@ -82,13 +81,13 @@ class CrudCommand extends ContainerAwareCommand
 
                 return $value;
             });
-            $selectedColors = $helper->ask($this->input, $this->output, $question);
+            $type = $helper->ask($this->input, $this->output, $question);
 
-            $output->writeln('You have just selected: ' . $selectedColors);
+            $output->writeln('You have just selected: ' . $type);
         }
 
         // Generate CRUD
-        $res = new GeneratorCrud($entityClass, $bundle, $selectedColors);
+        $res = new GeneratorCrud($entityClass, $bundle, $type);
         $this->output->writeln('<info>Files generated in</info> : ' . $bundle);
         $this->output->writeln($res->getFiles());
 

@@ -2,12 +2,21 @@
 
 namespace Tigreboite\FunkylabBundle\Generator;
 
+use Symfony\Component\VarDumper\VarDumper;
+
 class GeneratorCrud
 {
     private $files = array();
 
     public function __construct($entity, $bundle, $type)
     {
+
+        VarDumper::dump($entity);
+        VarDumper::dump($bundle);
+        VarDumper::dump($type);
+        exit;
+
+
         $type = UCFirst(strtolower($type));
         $this->bundle = $bundle;
         $this->entityName = explode('\\', $entity);
