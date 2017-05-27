@@ -2,14 +2,14 @@
 
 namespace Tigreboite\FunkylabBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Tigreboite\FunkylabBundle\Entity\BlogType;
-use Tigreboite\FunkylabBundle\Form\BlogTypeType;
+use Tigreboite\FunkylabBundle\Form\Type\BlogType;
 
 /**
  * BlogType controller.
@@ -29,6 +29,7 @@ class BlogTypeController extends Controller
     {
         return array();
     }
+
     /**
      * Lists all.
      *
@@ -71,6 +72,7 @@ class BlogTypeController extends Controller
 
         return new Response($serializer->serialize($data_to_return, 'json'));
     }
+
     /**
      * Creates a new BlogType entity.
      *
@@ -108,12 +110,12 @@ class BlogTypeController extends Controller
      */
     private function createCreateForm(BlogType $entity)
     {
-        $form = $this->createForm(new BlogTypeType(), $entity, array(
+        $form = $this->createForm(BlogType::class, $entity, array(
             'action' => $this->generateUrl('admin_blogtype_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -172,15 +174,16 @@ class BlogTypeController extends Controller
      */
     private function createEditForm(BlogType $entity)
     {
-        $form = $this->createForm(new BlogTypeType(), $entity, array(
+        $form = $this->createForm(BlogType::class, $entity, array(
             'action' => $this->generateUrl('admin_blogtype_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing BlogType entity.
      *
@@ -213,6 +216,7 @@ class BlogTypeController extends Controller
             'ajax' => $request->isXmlHttpRequest(),
         );
     }
+
     /**
      * Deletes  entity.
      *

@@ -13,6 +13,7 @@ use Tigreboite\FunkylabBundle\Form\Type\PageType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Page controller.
@@ -34,6 +35,7 @@ class PageController extends Controller
     {
         return array();
     }
+
     /**
      * @Route("/redirect/{id}", name="admin_page_redirection_front", options={"expose"=true})
      */
@@ -53,6 +55,7 @@ class PageController extends Controller
             ))
         );
     }
+
     /**
      * Lists all.
      *
@@ -95,6 +98,7 @@ class PageController extends Controller
 
         return new Response($serializer->serialize($data_to_return, 'json'));
     }
+
     /**
      * Creates a new Page entity.
      *
@@ -132,12 +136,12 @@ class PageController extends Controller
      */
     private function createCreateForm(Page $entity)
     {
-        $form = $this->createForm(new PageType(), $entity, array(
+        $form = $this->createForm(PageType::class, $entity, array(
             'action' => $this->generateUrl('admin_page_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -196,15 +200,16 @@ class PageController extends Controller
      */
     private function createEditForm(Page $entity)
     {
-        $form = $this->createForm(new PageType(), $entity, array(
+        $form = $this->createForm(PageType::class, $entity, array(
             'action' => $this->generateUrl('admin_page_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing Page entity.
      *
@@ -237,6 +242,7 @@ class PageController extends Controller
             'ajax' => $request->isXmlHttpRequest(),
         );
     }
+
     /**
      * Deletes  entity.
      *
@@ -257,6 +263,7 @@ class PageController extends Controller
 
         return new Response('Deleted');
     }
+
     /**
      * Upload files.
      *
@@ -269,12 +276,12 @@ class PageController extends Controller
         $uploadedFile = $request->files->get('images');
 
         if ($uploadedFile) {
-            $file = $uploadedFile->move('../web/'.$dir_path, $uploadedFile->getClientOriginalName());
+            $file = $uploadedFile->move('../web/' . $dir_path, $uploadedFile->getClientOriginalName());
             if ($file) {
                 $data = array(
-                  'success' => true,
-                  'filename' => $uploadedFile->getClientOriginalName(),
-                  'path' => $dir_path.$uploadedFile->getClientOriginalName(),
+                    'success' => true,
+                    'filename' => $uploadedFile->getClientOriginalName(),
+                    'path' => $dir_path . $uploadedFile->getClientOriginalName(),
                 );
             }
         }

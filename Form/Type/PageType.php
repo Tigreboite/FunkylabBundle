@@ -3,7 +3,9 @@
 namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PageType extends AbstractType
@@ -20,14 +22,11 @@ class PageType extends AbstractType
             ->add('parent')
             ->add('user')
             ->add('language')
-            ->add('image', 'hidden')
+            ->add('image', HiddenType::class)
         ;
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Tigreboite\FunkylabBundle\Entity\Page',

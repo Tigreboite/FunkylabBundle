@@ -13,6 +13,7 @@ use Tigreboite\FunkylabBundle\Form\Type\BlogType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Blog controller.
@@ -140,12 +141,12 @@ class BlogController extends Controller
      */
     private function createCreateForm(Blog $entity)
     {
-        $form = $this->createForm(new BlogType(), $entity, array(
+        $form = $this->createForm(BlogType::class, $entity, array(
             'action' => $this->generateUrl('admin_blog_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -204,12 +205,12 @@ class BlogController extends Controller
      */
     private function createEditForm(Blog $entity)
     {
-        $form = $this->createForm(new BlogType(), $entity, array(
+        $form = $this->createForm(BlogType::class, $entity, array(
             'action' => $this->generateUrl('admin_blog_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }

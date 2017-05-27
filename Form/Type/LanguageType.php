@@ -28,7 +28,7 @@ class LanguageType extends AbstractType
         if ($options['entityManager']) {
             $pays = $options['entityManager']->getRepository('TigreboiteFunkylabBundle:Pays')->findAll();
             foreach ($pays as $p) {
-                $choice_countries[strtolower($p->getCode())] = $p->getName().' ('.$p->getCode().')';
+                $choice_countries[strtolower($p->getCode())] = $p->getName() . ' (' . $p->getCode() . ')';
             }
         }
 
@@ -56,6 +56,7 @@ class LanguageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Language',
             'entityManager' => null,
         ]);
     }

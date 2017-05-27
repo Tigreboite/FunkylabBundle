@@ -3,7 +3,11 @@
 namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class BlogType extends AbstractType
@@ -21,21 +25,21 @@ class BlogType extends AbstractType
             ->add('user')
             ->add('language')
             ->add('type')
-            ->add('image', 'hidden')
-            ->add('status', 'choice', array(
+            ->add('image', HiddenType::class)
+            ->add('status', ChoiceType::class, array(
                 'choices' => array(
                     '0' => 'Dépublié',
                     '1' => 'Publié',
                     '2' => 'Archivé',
                 ),
             ))
-            ->add('datePublished', 'date', array(
+            ->add('datePublished', DateType::class, array(
                 'required' => false,
                 'widget' => 'single_text',
                 'input' => 'datetime',
                 'format' => 'dd/MM/yyyy',
             ))
-            ->add('dateUnpublished', 'date', array(
+            ->add('dateUnpublished', DateType::class, array(
                 'required' => false,
                 'widget' => 'single_text',
                 'input' => 'datetime',
@@ -45,9 +49,9 @@ class BlogType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Tigreboite\FunkylabBundle\Entity\Blog',

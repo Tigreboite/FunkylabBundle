@@ -2,6 +2,8 @@
 
 namespace Tigreboite\FunkylabBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Tests\Extension\Core\Type\SubmitTypeTest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -121,12 +123,12 @@ class PaysController extends Translator
      */
     private function createCreateForm(Pays $entity)
     {
-        $form = $this->createForm(new PaysType(), $entity, array(
+        $form = $this->createForm(PaysType::class, $entity, array(
             'action' => $this->generateUrl('admin_pays_create'),
-            'method' => 'POST',
+            'method' => 'POST'
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -196,12 +198,12 @@ class PaysController extends Translator
      */
     private function createEditForm(Pays $entity)
     {
-        $form = $this->createForm(new PaysType(), $entity, array(
+        $form = $this->createForm(PaysType::class, $entity, array(
             'action' => $this->generateUrl('admin_pays_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
