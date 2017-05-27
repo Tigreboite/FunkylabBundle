@@ -27,6 +27,8 @@ class TigreboiteFunkylabExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('events.yml');
+        $loader->load('managers.yml');
 
         foreach ($config as $k1 => $v1) {
             if (is_array($v1)) {

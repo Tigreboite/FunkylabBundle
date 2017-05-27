@@ -1,0 +1,6 @@
+services:
+
+    funkylab.manager.user:
+        class: Tigreboite\FunkylabBundle\Manager\UserManager
+        arguments: ["@doctrine.orm.entity_manager", Tigreboite\FunkylabBundle\Entity\User]
+

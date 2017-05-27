@@ -12,7 +12,6 @@ services:
           - "@request_stack"
           - "@annotation_reader"
           - "@service_container"
-        scope: request
         tags:
             - { name: knp_menu.menu, alias: main_menu }
 
@@ -24,7 +23,6 @@ services:
           - "@request_stack"
           - "@annotation_reader"
           - "@service_container"
-        scope: request
         tags:
             - { name: knp_menu.menu, alias: breadcrumb }
 
@@ -39,25 +37,6 @@ services:
         class: Tigreboite\FunkylabBundle\Service\UniqueFileNameGeneratorService
         arguments:
             - "@cocur_slugify"
-
-    tigreboitefunkylab.listener.post_persist_listner:
-        class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
-        arguments: ["@security.token_storage", "@router", "@request_stack"]
-        tags:
-            - { name: doctrine.event_listener, event: postPersist }
-
-    tigreboitefunkylab.listener.post_update_listner:
-        class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
-        arguments: ["@security.token_storage", "@router", "@request_stack"]
-        tags:
-            - { name: doctrine.event_listener, event: postUpdate }
-
-    tigreboitefunkylab.listener.post_delete_listner:
-        class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
-        arguments: ["@security.token_storage", "@router", "@request_stack"]
-        tags:
-            - { name: doctrine.event_listener, event: preRemove }
-
     funkylab.service:
         class: Tigreboite\FunkylabBundle\Service\FunkylabService
         arguments: ["@session"]

@@ -23,16 +23,3 @@ stof_doctrine_extensions:
             translatable: true
             timestampable: true
 
-# app/config/config.yml
-lexik_translation:
-    fallback_locale: "%locale%"      # (required) default locale to use
-    managed_locales: "%locales%"    # (required) locales that the bundle have to manage
-    base_layout:     "TigreboiteFunkylabBundle::layout.html.twig" # layout used with the translation edition template
-    grid_input_type: text     # define field type used in the grid (text|textarea)
-    storage:
-        type: orm                   # where to store translations: "orm", "mongodb" or "propel"
-        object_manager: default    # The name of the entity / document manager which uses different connection (see: http://symfony.com/doc/current/cookbook/doctrine/multiple_entity_managers.html)
-    resources_registration:
-        type:                 all     # resources type to register: "all", "files" or "database"
-        managed_locales_only: true    # will only load resources for managed locales
-

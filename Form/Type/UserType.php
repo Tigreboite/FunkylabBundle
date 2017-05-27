@@ -103,19 +103,6 @@ class UserType extends AbstractType
                     'class' => 'form-control',
                 ),
             ))
-            ->add('country', null, array(
-                'attr' => array(
-                    'class' => 'form-control',
-                ),
-            ))
-            ->add('language', null, array(
-                'query_builder' => function (EntityRepository $er) {
-                    return $this->getOrderLanguageList($er);
-                },
-                'attr' => array(
-                    'class' => 'form-control',
-                ),
-            ))
             ->add('image', HiddenType::class);
     }
 

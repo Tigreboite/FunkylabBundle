@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * User.
  *
- * @ORM\Table(name="flb_user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_7D93D64992FC23A8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="UNIQ_7D93D649A0D96FBF", columns={"email_canonical"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})}, indexes={@ORM\Index(name="fk_user_languages1_idx", columns={"language_id"})})
+ * @ORM\Table(name="flb_user")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\UserRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(
@@ -20,6 +20,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * )
  * @UniqueEntity("username")
  */
+
 class User extends BaseUser
 {
     const ROLE_MODERATOR = 'ROLE_MODERATOR';
@@ -121,26 +122,6 @@ class User extends BaseUser
      * @ORM\Column(name="connected_at", type="datetime", nullable=true)
      */
     protected $connectedAt;
-
-    /**
-     * @var Pays
-     *
-     * @ORM\ManyToOne(targetEntity="Pays")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="country_id", referencedColumnName="id")
-     * })
-     */
-    protected $country;
-
-    /**
-     * @var Language
-     *
-     * @ORM\ManyToOne(targetEntity="Language")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="language_id", referencedColumnName="id", onDelete="CASCADE")
-     * })
-     */
-    protected $language;
 
     /**
      * @var string
@@ -519,54 +500,6 @@ class User extends BaseUser
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set country.
-     *
-     * @param \Tigreboite\FunkylabBundle\Entity\Pays $country
-     *
-     * @return User
-     */
-    public function setCountry(\Tigreboite\FunkylabBundle\Entity\Pays $country = null)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country.
-     *
-     * @return \Tigreboite\FunkylabBundle\Entity\Pays
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * Set language.
-     *
-     * @param \Tigreboite\FunkylabBundle\Entity\Language $language
-     *
-     * @return User
-     */
-    public function setLanguage(\Tigreboite\FunkylabBundle\Entity\Language $language = null)
-    {
-        $this->language = $language;
-
-        return $this;
-    }
-
-    /**
-     * Get language.
-     *
-     * @return \Tigreboite\FunkylabBundle\Entity\Language
-     */
-    public function getLanguage()
-    {
-        return $this->language;
     }
 
     /**

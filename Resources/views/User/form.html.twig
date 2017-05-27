@@ -61,11 +61,6 @@
                                     {{ form_widget(form.plainpassword) }}
                                     {{ form_errors(form.plainpassword) }}
                                 </div>
-                                <div class="form-group">
-                                    <label for="{{ form.language.vars.id }}">{{ form_label(form.language) }}</label>
-                                    {{ form_widget(form.language) }}
-                                    {{ form_errors(form.language) }}
-                                </div>
                                 <div class="form-group">  <label for="id-loader-image">Image</label>  {{ form_widget(form.image) }}  <div id="{{ form.image.vars.id }}-preview">    {% if entity.image %}    <img src="/{{ entity.image }}" style="max-width:128px" />    {% endif %}  </div>  <input type="file" id="id-loader-image" data-after="{{ form.image.vars.id }}" name="file" class="file-loader-image" data-url="{{ path('admin_user_upload') }}" /></div>
                             </div>
                         </div>
@@ -102,11 +97,6 @@
                                     <label for="{{ form.city.vars.id }}">{{ form_label(form.city) }}</label>
                                     {{ form_widget(form.city) }}
                                     {{ form_errors(form.city) }}
-                                </div>
-                                <div class="form-group">
-                                    <label for="{{ form.country.vars.id }}">{{ form_label(form.country) }}</label>
-                                    {{ form_widget(form.country) }}
-                                    {{ form_errors(form.country) }}
                                 </div>
                             </div>
                         </div>

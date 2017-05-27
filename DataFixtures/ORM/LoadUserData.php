@@ -45,8 +45,6 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
             ),
         );
 
-        $lang_en = $manager->getRepository('TigreboiteFunkylabBundle:Language', 'default')->findOneByCode('en');
-
         $userManager = $this->container->get('fos_user.user_manager');
 
         foreach ($users as $k => $user) {
@@ -56,7 +54,6 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
             $entity->setUsername($user['username']);
             $entity->setPlainPassword($user['password']);
             $entity->setEnabled(true);
-            $entity->setLanguage($lang_en);
 
             $entity->setFirstName($user['firstName']);
             $entity->setLastName($user['lastName']);

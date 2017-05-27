@@ -13,7 +13,6 @@ class PostPersistListener
     private $security;
     private $router;
     private $request;
-    private $user;
 
     /**
      * @param TokenStorage $security
@@ -31,60 +30,16 @@ class PostPersistListener
      */
     public function postUpdate(LifecycleEventArgs $args)
     {
-        $this->createActivity($args, Activity::ACTION_UPDATE);
+//        $this->createActivity($args, Activity::ACTION_UPDATE);
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     * @param                    $action
-     */
-    private function createActivity(LifecycleEventArgs $args, $action)
-    {
-        $entity = $args->getEntity();
-        $entityManager = $args->getEntityManager();
-        $this->user = $this->getLoggedUser();
-        if ($this->request) {
-            $path = $this->request->getPathInfo();
-            if ($this->strStartsWith($path, '/admin')) {
-                if (!($entity instanceof Activity) && $this->user) {
-                    /*$activity = new Activity();
-                    $activity->setCreatedBy($this->user->getFirstname()." ".$this->user->getLastname());
-                    $activity->setAction($action);
-                    $activity->setEntityId($entity->getId());
-                    $activity->setEntityType(get_class($entity));
-                    $entityManager->persist($activity);
-                    $entityManager->flush();*/
-                }
-            }
-        }
-    }
-
-    /**
-     * @return bool
-     */
-    public function getLoggedUser()
-    {
-        $token = $this->security->getToken();
-        if ($token) {
-            $user = $token->getUser();
-
-            return $user && $user != 'anon.' ? $user : false;
-        } else {
-            return false;
-        }
-    }
-
-    public function strStartsWith($haystack, $needle)
-    {
-        return strpos($haystack, $needle) === 0;
-    }
 
     /**
      * @param LifecycleEventArgs $args
      */
     public function preRemove(LifecycleEventArgs $args)
     {
-        $this->createActivity($args, Activity::ACTION_DELETE);
+//        $this->createActivity($args, Activity::ACTION_DELETE);
     }
 
     /**
@@ -92,6 +47,6 @@ class PostPersistListener
      */
     public function postPersist(LifecycleEventArgs $args)
     {
-        $this->createActivity($args, Activity::ACTION_CREATED);
+//        $this->createActivity($args, Activity::ACTION_CREATED);
     }
 }
