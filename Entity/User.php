@@ -20,7 +20,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * )
  * @UniqueEntity("username")
  */
-
 class User extends BaseUser
 {
     const ROLE_MODERATOR = 'ROLE_MODERATOR';

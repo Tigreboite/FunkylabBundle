@@ -123,7 +123,6 @@ class UserCommand extends ContainerAwareCommand
 
     private function askRoles()
     {
-
         $helper = $this->getHelper('question');
         $question = new ChoiceQuestion(
             'Please select a role',
