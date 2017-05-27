@@ -31,6 +31,7 @@ class CrudCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
         $timeStart = microtime(true);
 
         $this->input = $input;

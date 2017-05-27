@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Simpleform controller.

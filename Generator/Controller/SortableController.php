@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Sortable controller.
@@ -76,26 +77,6 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     }
 
     /**
-     * Creates a form to create a entity.
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    protected function createCreateForm($entity)
-    {
-        return parent::createCreateForm($entity);
-    }
-
-    /**
-     * Creates a form to edit a entity.
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    protected function createEditForm($entity)
-    {
-        return parent::createEditForm($entity);
-    }
-
-    /**
      * Edits an existing entity.
      *
      * @Route("/update/{id}", name="admin_sortable_update")
@@ -106,6 +87,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     {
         return parent::updateAction($request, $id);
     }
+
     /**
      * Deletes an entity.
      *
@@ -149,5 +131,25 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
     public function orderAction()
     {
         return parent::orderAction();
+    }
+
+    /**
+     * Creates a form to create a entity.
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    protected function createCreateForm($entity)
+    {
+        return parent::createCreateForm($entity);
+    }
+
+    /**
+     * Creates a form to edit a entity.
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    protected function createEditForm($entity)
+    {
+        return parent::createEditForm($entity);
     }
 }

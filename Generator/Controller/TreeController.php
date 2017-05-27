@@ -124,7 +124,7 @@ class TreeController extends Controller
     {
         $em = $this->get('doctrine')->getManager();
         $form = $this->createForm(new $this->formType($em), $entity, array(
-            'action' => $this->generateUrl($this->route_base.'_create'),
+            'action' => $this->generateUrl($this->route_base . '_create'),
             'method' => 'POST',
             'allow_extra_fields' => true,
 
@@ -200,6 +200,7 @@ class TreeController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Sortable entity.
      *
@@ -223,7 +224,7 @@ class TreeController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl($this->route_base.'_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl($this->route_base . '_edit', array('id' => $id)));
         }
 
         return array(
@@ -232,6 +233,7 @@ class TreeController extends Controller
             'ajax' => $request->isXmlHttpRequest(),
         );
     }
+
     /**
      * Deletes a Datagrid entity.
      *

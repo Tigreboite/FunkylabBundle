@@ -10,19 +10,12 @@ class GeneratorCrud
 
     public function __construct($entity, $bundle, $type)
     {
-
-        VarDumper::dump($entity);
-        VarDumper::dump($bundle);
-        VarDumper::dump($type);
-        exit;
-
-
         $type = UCFirst(strtolower($type));
         $this->bundle = $bundle;
         $this->entityName = explode('\\', $entity);
         $this->entityName = end($this->entityName);
 
-        $basePath = dirname($this->get('kernel')->getRootDir()."/../");
+        $basePath = getcwd();
         $path = $basePath.'/src/'.$bundle.'/';
 
         $this->files = array();
@@ -32,6 +25,7 @@ class GeneratorCrud
 
             //Process Controller
             $code_controller = $formater->getController($type);
+
             $filename = $path.'Controller/'.$this->entityName.'Controller.php';
             file_put_contents($filename, $code_controller);
             $this->addFile($filename);
@@ -40,15 +34,28 @@ class GeneratorCrud
             $code_type = $formater->getFormType($type);
             if (!is_dir($path.'Form')) {
                 mkdir($path.'Form');
+                if (!is_dir($path.'Form/Type')) {
+                    mkdir($path.'Form/Type');
+                }
             }
-            $filename = $path.'Form/'.$this->entityName.'Type.php';
+            $filename = $path.'Form/Type/'.$this->entityName.'Type.php';
             file_put_contents($filename, $code_type);
             $this->addFile($filename);
 
             //Process Views
             $code_views = $formater->getViews($type);
             if (is_array($code_views)) {
+
+                if (!is_dir($path.'Resources')) {
+                    mkdir($path.'Resources');
+                    if (!is_dir($path.'Resources/views')) {
+                        mkdir($path.'Resources/views');
+                    }
+                }
+
+
                 foreach ($code_views as $filename => $body) {
+                    VarDumper::dump($path.'Resources/views/'.$this->entityName);
                     if (!is_dir($path.'Resources/views/'.$this->entityName)) {
                         mkdir($path.'Resources/views/'.$this->entityName);
                     }
