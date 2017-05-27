@@ -29,16 +29,7 @@
                             <label for="{{ form.flag.vars.id }}">Linked to country (code country)</label>
                             {{ form_widget(form.flag, {'attr':{'class': 'form-control'}}) }}
                         </div>
-                        <div class="form-group pdf-loader">
-                            <label for="picto_loader">PDF Payment</label>
-                            {{ form_widget(form.pdf_payment) }}
-                            <div id="{{ form.pdf_payment.vars.id }}-preview">
-                                {% if  entity.pdf_payment %}
-                                    <a href="/{{ entity.pdf_payment }}" target="blank" class="btn btn-default">Show file</a>
-                                {% endif %}
-                            </div>
-                            <input type="file" data-after="{{ form.pdf_payment.vars.id }}" id="picto_loader" name="images" class="input-file" data-url="{{ path('admin_language_upload') }}" />
-                        </div>
+
                         <div class="form-group img-loader">
                             <label for="picto_loader">Image</label>
                             {{ form_widget(form.image) }}

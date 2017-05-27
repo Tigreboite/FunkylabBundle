@@ -2,6 +2,7 @@
 
 namespace Tigreboite\FunkylabBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -38,8 +39,10 @@ class LanguageController extends Controller
     /**
      * Lists all Language entities.
      *
+     * @param Request $request
      * @Route("/list", name="admin_language_list", options={"expose"=true})
      * @Method("GET")
+     * @return Response
      */
     public function listAction(Request $request)
     {
@@ -79,10 +82,11 @@ class LanguageController extends Controller
     }
     /**
      * Creates a new Language entity.
-     *
+     * @param Request $request
      * @Route("/", name="admin_language_create")
      * @Method("POST")
      * @Template("TigreboiteFunkylabBundle:Language:form.html.twig")
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function createAction(Request $request)
     {
@@ -116,14 +120,14 @@ class LanguageController extends Controller
     private function createCreateForm(Language $entity)
     {
         $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new LanguageType($em), $entity, array(
+        $form = $this->createForm(LanguageType::class, $entity, array(
             'action' => $this->generateUrl('admin_language_create'),
             'method' => 'POST',
             'allow_extra_fields' => true,
-
+            'entityManager'=>$em
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -148,9 +152,12 @@ class LanguageController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param $id
      * @Route("/{id}/reset", name="admin_language_reset", options={"expose"=true})
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Language:reset.html.twig")
+     * @return array
      */
     public function resetAction(Request $request, $id)
     {
@@ -179,10 +186,12 @@ class LanguageController extends Controller
 
     /**
      * Displays a form to edit an existing Language entity.
-     *
+     * @param Request $request
+     * @param $id
      * @Route("/{id}/edit", name="admin_language_edit", options={"expose"=true})
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Language:form.html.twig")
+     * @return array
      */
     public function editAction(Request $request, $id)
     {
@@ -213,22 +222,25 @@ class LanguageController extends Controller
     private function createEditForm(Language $entity)
     {
         $em = $this->get('doctrine')->getManager();
-        $form = $this->createForm(new LanguageType($em), $entity, array(
+        $em = $this->get('doctrine')->getManager();
+        $form = $this->createForm(LanguageType::class, $entity, array(
             'action' => $this->generateUrl('admin_language_update', array('id' => $entity->getId())),
             'method' => 'PUT',
-
+            'entityManager'=>$em
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
     /**
      * Edits an existing Language entity.
-     *
+     * @param Request $request
+     * @param $id
      * @Route("/{id}", name="admin_language_update")
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Language:form.html.twig")
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function updateAction(Request $request, $id)
     {
@@ -257,9 +269,11 @@ class LanguageController extends Controller
     }
     /**
      * Deletes a Language entity.
-     *
+     * @param Request $request
+     * @param $id
      * @Route("/{id}", name="admin_language_delete", options={"expose"=true})
      * @Method("DELETE")
+     * @return Response
      */
     public function deleteAction(Request $request, $id)
     {
@@ -277,8 +291,9 @@ class LanguageController extends Controller
     }
     /**
      * Upload files.
-     *
+     * @param Request $request
      * @Route("/upload/pdfpayment", name="admin_language_upload", options={"expose"=true})
+     * @return JsonResponse
      */
     public function uploadAction(Request $request)
     {
@@ -301,8 +316,9 @@ class LanguageController extends Controller
     }
     /**
      * Upload files.
-     *
+     * @param Request $request
      * @Route("/upload/image", name="admin_language_image_upload", options={"expose"=true})
+     * @return JsonResponse
      */
     public function uploadimageAction(Request $request)
     {

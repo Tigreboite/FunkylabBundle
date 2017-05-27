@@ -148,7 +148,7 @@ class Language
     /**
      * Set isenable.
      *
-     * @param string $isenable
+     * @param boolean $isenable
      *
      * @return Language
      */
@@ -162,7 +162,7 @@ class Language
     /**
      * Get isenable.
      *
-     * @return string
+     * @return boolean
      */
     public function getIsenable()
     {
