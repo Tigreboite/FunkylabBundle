@@ -1,7 +1,6 @@
 <?php
 /**
- * Code by Cyril Pereira
- * Extreme-Sensio 2015.
+ * Generated with funkylab
  */
 
 namespace Tigreboite\FunkylabBundle\Generator\Controller;

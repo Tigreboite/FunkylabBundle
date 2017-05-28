@@ -1,7 +1,7 @@
 # Installation
 
 ```bash
-composer require tigreboite/funkylab-bundle dev-master
+composer require tigreboite/funkylab-bundle 
 ```
 
 And do a composer update

@@ -1,8 +1,4 @@
 <?php
-/**
- * Code by Cyril Pereira, Julien Hay
- * Extreme-Sensio 2015.
- */
 
 namespace Tigreboite\FunkylabBundle\Controller;
 
@@ -31,7 +27,7 @@ class UserController extends DatagridController
      * @Route("/", name="admin_user")
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:User:index.html.twig")
-     * @Menu("User", dataType="string",icon="fa-user",groupe="CMS")
+     * @Menu("User", icon="fa-user",groupe="CMS")
      * @Security("has_role('ROLE_SUPER_ADMIN') || has_role('ROLE_MODERATOR')")
      */
     public function indexAction()

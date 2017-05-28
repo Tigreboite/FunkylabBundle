@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * Abuse controller.
  *
@@ -20,6 +21,7 @@ class MediaController extends Controller
      * @Route("/list", name="admin_media_list", options={"expose"=true})
      * @Method("GET")
      * @Template()
+     * @return JsonResponse
      */
     public function listAction()
     {
@@ -39,6 +41,7 @@ class MediaController extends Controller
      * @Route("/delete", name="admin_media_delete", options={"expose"=true})
      * @Method("POST")
      * @Template()
+     * @return JsonResponse
      */
     public function deleteAction()
     {

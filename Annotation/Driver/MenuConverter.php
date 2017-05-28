@@ -48,6 +48,10 @@ class MenuConverter
         }
     }
 
+    /**
+     * @param FilterControllerEvent $event
+     * @return array
+     */
     public function onKernel(FilterControllerEvent $event)
     {
         $menu = $this->getControllersWithAnnotationModules();
@@ -142,7 +146,14 @@ class MenuConverter
         return $processedMenu;
     }
 
-    public function addAnnotation($array, $offset, $type, $annotation)
+    /**
+     * @param array $array
+     * @param $offset
+     * @param $type
+     * @param $annotation
+     * @return array
+     */
+    public function addAnnotation($array = [], $offset, $type, $annotation)
     {
         if (!isset($array[$offset])) {
             $array[$offset] = array();
@@ -152,6 +163,10 @@ class MenuConverter
         return $array;
     }
 
+    /**
+     * @param $children
+     * @return array
+     */
     public function sortMenu($children)
     {
         $arrayTmp = array();
