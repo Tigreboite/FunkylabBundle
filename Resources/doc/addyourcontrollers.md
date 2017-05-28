@@ -1,15 +1,15 @@
-####################
-Add your controllers
-####################
+#  Add your controllers
 
 To extend the admin, create a controller in your own bundle :
 
-
+```php
   use Tigreboite\FunkylabBundle\Annotation\Menu;
   use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+```
 
 Configure with annotation your action's controller
 
+```php
   /**
    * Lists all Language entities.
    *
@@ -29,15 +29,18 @@ Security : Role ROLE_MODERATOR, ROLE_BRAND, ROLE_USER, ROLE_ADMIN
 
 don't forget to add the global route to your controller to be included in the admin.
 
+```php
   /**
    * Language controller.
    *
    * @Route("/admin/language")
    */
   class LanguageController extends Controller
+```
 
 By default the template twig need to be in
 
-  src/AppBundle/Resources/views/yourcontroller/action/index.html.twig
+
+`src/AppBundle/Resources/views/yourcontroller/action/index.html.twig`
 
 or you can set your template name and path in annotation
