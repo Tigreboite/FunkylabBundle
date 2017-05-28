@@ -1,15 +1,17 @@
 {% extends ajax
-    ? 'TigreboiteFunkylabBundle::popin.html.twig' 
+    ? 'TigreboiteFunkylabBundle::popin.html.twig'
     : 'TigreboiteFunkylabBundle::layout.html.twig' %}
 
 {% block content -%}
-	<div class="modal-body">
-            <div class="row">
-                <form method="post" action="{% if app.request.get('_route') == "%admin_entity_path%_edit" %}{{ path('%admin_entity_path%_update',{'id':entity.id}) }}{% else %}{{ path('%admin_entity_path%_create') }}{% endif %}" role="form" enctype="multipart/form-data">
+    <div class="modal-body">
+        <div class="row">
+            <form method="post"
+                  action="{% if app.request.get('_route') == "%admin_entity_path%_edit" %}{{ path('%admin_entity_path%_update',{'id':entity.id}) }}{% else %}{{ path('%admin_entity_path%_create') }}{% endif %}"
+                  role="form" enctype="multipart/form-data">
 
-        		{% if app.request.get('_route') == "%admin_entity_path%_edit" %}
-        			<input type="hidden" name="_method" value="PUT">
-        		{% endif %}
+                {% if app.request.get('_route') == "%admin_entity_path%_edit" %}
+                    <input type="hidden" name="_method" value="PUT">
+                {% endif %}
                 <div class="box box-primary">
                     <div class="box-body">
                         %editable_fields%
@@ -31,7 +33,7 @@
     <script type="text/javascript">
         function callBackAfterSubmit()
         {
-            table.draw();
+//            table.draw();
         }
         $(function () {
 
@@ -43,7 +45,7 @@
                 yearRange: "-1:+2"
             });
 
-            $('.wysiwyg').editable({
+            /*$('.wysiwyg').editable({
                 inlineMode: false,
                 buttons: ["bold", "italic", "underline", "formatBlock", "sep", "insertUnorderedList", "sep", "createLink", "insertImage", "insertVideo", "sep", "undo", "redo", "html"],
                 imagesLoadURL:Routing.generate('admin_media_list')+"?dir=page",
@@ -58,7 +60,7 @@
                 defaultVideoAlignment: "left",
                 imageUploadURL: Routing.generate('upload_image_wysiwyg'),
                 imageUploadParams: {id: "my_editor"}
-            });
+            });*/
 
             %javascript%
         });

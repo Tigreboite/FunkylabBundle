@@ -108,7 +108,7 @@ abstract class Formater
             }
         }
 
-        $code = str_replace('$builder->add("");', $fields, $code);
+        $code = str_replace('$builder->add(\'\');', $fields, $code);
 
         return $code;
     }
@@ -165,7 +165,7 @@ abstract class Formater
                     $field['sortable'] = $annotation->getSortable();
                     $field['editable'] = $annotation->getEditable();
                     $field['searchable'] = $annotation->getSearchable();
-                    $field['dataType'] = $annotation->getDataType();
+                    $field['dataType'] = $annotation->getDataType()=="string" ? "text" : $annotation->getDataType();
                 }
                 if (get_class($annotation) == 'Doctrine\\ORM\\Mapping\\Column') {
                     $field['varname'] = $this->annotations['variables'][$k]->name;

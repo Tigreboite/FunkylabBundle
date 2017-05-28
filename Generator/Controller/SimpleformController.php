@@ -12,13 +12,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Tigreboite\FunkylabBundle\Controller\SimpleformController as BaseController;
 
 /**
  * Simpleform controller.
  *
  * @Route("/admin/simpleform")
  */
-class SimpleformController extends \Tigreboite\FunkylabBundle\Controller\SimpleformController
+class SimpleformController extends BaseController
 {
     protected $entityName = '%bundle_name%\Entity\Simpleform';
     protected $formType = '%bundle_name%\Form\SimpleformType';

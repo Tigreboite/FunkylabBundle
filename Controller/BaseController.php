@@ -50,13 +50,10 @@ class BaseController extends Controller
 
     protected function createCreateForm($entity)
     {
-
-        $em = $this->get('doctrine')->getManager();
         $form = $this->createForm($this->formType, $entity, array(
             'action' => $this->generateUrl($this->route_base.'_create'),
             'method' => 'POST',
             'allow_extra_fields' => true,
-            'entityManager'=>$em
         ));
 
         $form->add('submit', SubmitType::class, array('label' => 'Create'));
@@ -126,11 +123,9 @@ class BaseController extends Controller
 
     protected function createEditForm($entity)
     {
-        $em = $this->get('doctrine')->getManager();
         $form = $this->createForm($this->formType, $entity, array(
             'action' => $this->generateUrl($this->route_base.'_update', array('id' => $entity->getId())),
             'method' => 'PUT',
-            'entityManager'=>$em
         ));
 
         $form->add('submit', SubmitType::class, array('label' => 'Update'));

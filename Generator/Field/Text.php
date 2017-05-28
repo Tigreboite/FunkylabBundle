@@ -2,8 +2,8 @@
 
 namespace Tigreboite\FunkylabBundle\Generator\Field;
 
-class String extends Base
+class Text extends Base
 {
-    public  $type="string";
+    public $type="text";
 
 }

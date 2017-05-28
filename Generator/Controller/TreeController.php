@@ -23,9 +23,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class TreeController extends Controller
 {
-    protected $formType = 'DatagridType';
+    protected $formType = 'TreeType';
     protected $route_base = 'admin_datagrid';
-    protected $repository = 'TigreboiteFunkylabBundle:Sortable';
+    protected $repository = 'TigreboiteFunkylabBundle:Tree';
 
     /**
      * Lists all Sortable entities.
