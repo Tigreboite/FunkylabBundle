@@ -16,7 +16,7 @@ abstract class Formater
 
     public function __construct($bundle, $entity)
     {
-        $this->path = getcwd()."/vendor/tigreboite/funkylab-bundle/Tigreboite/FunkylabBundle/Generator";
+        $this->path = getcwd()."/vendor/tigreboite/funkylab-bundle/Generator";
         $this->bundle = $bundle;
         $this->entity = $entity;
         $this->entityName = explode('\\', $entity);

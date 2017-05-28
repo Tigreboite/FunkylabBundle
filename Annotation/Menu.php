@@ -9,7 +9,6 @@ namespace Tigreboite\FunkylabBundle\Annotation;
 class Menu
 {
     private $propertyName;
-    private $dataType = 'string';
     private $icon = 'string';
     private $route = 'string';
     private $groupe = 'string';
@@ -34,11 +33,6 @@ class Menu
     public function getPropertyName()
     {
         return $this->propertyName;
-    }
-
-    public function getDataType()
-    {
-        return $this->dataType;
     }
 
     public function getIcon()

@@ -33,7 +33,7 @@ class SimpleformController extends BaseController
      * @Route("/", name="admin_simpleform")
      * @Method("GET")
      * @Template()
-     * @Menu("Simpleform", dataType="string",icon="fa-flag",groupe="CMS")
+     * @Menu("Simpleform", icon="fa-flag", groupe="CMS")
      * %security_roles%
      */
     public function indexAction()

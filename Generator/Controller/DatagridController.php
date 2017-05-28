@@ -33,7 +33,7 @@ class DatagridController extends BaseController
      * @Route("/", name="admin_datagrid")
      * @Method("GET")
      * @Template()
-     * @Menu("Datagrid", dataType="string",icon="fa-flag",groupe="CMS")
+     * @Menu("Datagrid", icon="fa-flag" ,groupe="CMS")
      * %security_roles%
      */
     public function indexAction()

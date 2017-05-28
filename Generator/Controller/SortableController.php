@@ -32,7 +32,7 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
      * @Route("/", name="admin_sortable")
      * @Method("GET")
      * @Template()
-     * @Menu("Sortable", dataType="string",icon="fa-flag",groupe="CMS")
+     * @Menu("Sortable", icon="fa-flag", groupe="CMS")
      * %security_roles%
      */
     public function indexAction()

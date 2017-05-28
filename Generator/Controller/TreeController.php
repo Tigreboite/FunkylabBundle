@@ -33,7 +33,7 @@ class TreeController extends Controller
      * @Route("/", name="admin_datagrid")
      * @Method("GET")
      * @Template()
-     * @Menu("Datagrid", dataType="string",icon="fa-flag",groupe="CMS")
+     * @Menu("Datagrid", icon="fa-flag", groupe="CMS")
      * @Security("has_role('ROLE_SUPER_ADMIN') || has_role('ROLE_MODERATOR')")
      */
     public function indexAction()
