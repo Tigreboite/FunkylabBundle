@@ -74,9 +74,11 @@ ln -s vendor/almasaeed2010/adminlte/ web/bundles/adminlte
 
 ## Console
 
-  $ php app/console assets:install web --symlink
-  $ php app/console d:s:u --force
-  $ php app/console doctrine:fixtures:load
+```bash
+php app/console assets:install web --symlink
+php app/console d:s:u --force
+php app/console doctrine:fixtures:load
+```
 
 ## Start
 
