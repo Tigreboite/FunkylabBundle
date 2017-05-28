@@ -18,8 +18,6 @@ public function registerBundles()
       new Knp\Bundle\MenuBundle\KnpMenuBundle(),
       new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
       new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-      new Lexik\Bundle\TranslationBundle\LexikTranslationBundle(),
-      new Liuggio\ExcelBundle\LiuggioExcelBundle(),
       new JMS\SerializerBundle\JMSSerializerBundle(),
       new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
       new Tigreboite\FunkylabBundle\TigreboiteFunkylabBundle(),
