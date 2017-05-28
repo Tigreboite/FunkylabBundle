@@ -25,9 +25,9 @@ class MediaController extends Controller
     {
         $request = $this->get('request');
         $dir = $request->get('dir');
-        $dir_image = "medias/".$dir;
+        $dir_image = "/medias/".$dir;
         $data=array();
-        $path = realpath(dirname(__FILE__)."/../../../../web/".$dir_image);
+        $path = getcwd().$dir_image;
         foreach (glob($path."/*.*") as $filename) {
             $data[]="/".$dir_image."/".basename($filename);
         }
@@ -48,7 +48,7 @@ class MediaController extends Controller
         if(!$dir || !$src) {
             throw $this->createNotFoundException("bad request");
         }
-        $path = realpath(dirname(__FILE__)."/../../../../web");
+        $path = getcwd()."/web";
         if(file_exists($path.$src))
         {
             unlink($path.$src);
