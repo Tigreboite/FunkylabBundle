@@ -1,8 +1,8 @@
 {
   "name": "tigreboite/funkylab-bundle",
   "description": "The Most Funky CMS",
-  "keywords": ["extreme-sensio","tigreboite","bundle","symfony","funkylab"],
-  "homepage": "https://github.com/Tigreboite/FunkylabBundle",
+  "keywords": ["tigreboite","bundle","symfony","funkylab"],
+  "homepage": "https://github.com/funkymed/FunkylabBundle",
   "type": "library",
   "license": "MIT",
   "authors": [
