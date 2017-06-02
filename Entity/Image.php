@@ -7,10 +7,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 trait Image
 {
-    //public $IMAGE_DEFAULT = "images/illustrations/idea-img.jpg";
-    //public $IMAGE_PATH    = "medias";
-    //public $image = "";
-
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()

@@ -3,37 +3,77 @@
 namespace Tigreboite\FunkylabBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Repository\RepositoryFactory;
+use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class BaseManager.
+ */
 class BaseManager
 {
     /**
-     * @var EntityManager
+     * @var \Doctrine\ORM\EntityManager
      */
-    protected $entityManager;
+    protected $em;
 
     /**
-     * @var RepositoryFactory
+     * @var EntityRepository
      */
     protected $repository;
 
-    protected $className;
+    /**
+     * @var string Class name
+     */
+    protected $class;
 
     /**
-     * BaseManager constructor.
+     * Constructor.
      *
-     * @param EntityManager $entityManager
-     * @param $className
+     * @param EntityManager $em    Entity manager
+     * @param string        $class Class name
      */
-    public function __construct(EntityManager $entityManager, $className)
+    public function __construct(EntityManager $em, $class)
     {
-        $this->entityManager = $entityManager;
-        $this->className = $className;
-        $this->repository = $entityManager->getRepository($this->className);
+        $this->class = $class;
+        $this->em = $em;
+        $this->repository = $em->getRepository($this->class);
     }
 
     /**
-     * Return all entity of the class.
+     * Returns a new non-managed entity.
+     *
+     * @return mixed
+     */
+    public function create()
+    {
+        return new $this->class();
+    }
+
+    /**
+     * Returns a "fresh" entity by identifier.
+     *
+     * @param int $id Entity identifier
+     *
+     * @return object
+     */
+    public function find($id)
+    {
+        return $this->repository->findOneById($id);
+    }
+
+    /**
+     * Returns an entity by id.
+     *
+     * @param int $id Entity id
+     *
+     * @return object
+     */
+    public function findOneById($id)
+    {
+        return $this->repository->findOneById($id);
+    }
+
+    /**
+     * Returns all entities of the child class.
      *
      * @return array
      */
@@ -43,11 +83,11 @@ class BaseManager
     }
 
     /**
-     * Returns all entities for given criteria.
+     * Returns entities found for given criteria.
      *
      * @param array $criteria
      *
-     * @return array
+     * @return object
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
@@ -55,11 +95,11 @@ class BaseManager
     }
 
     /**
-     * Returns all entities for given criteria.
+     * Returns entity found for given criteria.
      *
      * @param array $criteria
      *
-     * @return array
+     * @return object
      */
     public function findOneBy(array $criteria)
     {
@@ -67,21 +107,42 @@ class BaseManager
     }
 
     /**
-     * Persist the entity.
+     * Flush persisted entities.
+     */
+    public function flush()
+    {
+        $this->em->flush();
+    }
+
+    /**
+     * Refresh persisted entities.
+     */
+    public function refresh($entity)
+    {
+        $this->em->refresh($entity);
+    }
+
+    /**
+     * Clears the repository, causing all managed entities to become detached.
+     */
+    public function clear()
+    {
+        $this->em->clear();
+    }
+
+    /**
+     * Persist the given entity.
      *
-     * @param $entity
-     * @param bool $doFlush
-     *
-     * @return mixed
+     * @param mixed $entity  An entity instance
+     * @param bool  $doFlush Also flush  entity manager?
      */
     public function save($entity, $doFlush = true)
     {
-        $this->entityManager->persist($entity);
-        if ($doFlush) {
-            $this->entityManager->flush();
-        }
+        $this->em->persist($entity);
 
-        return $entity;
+        if ($doFlush) {
+            $this->em->flush();
+        }
     }
 
     /**
@@ -91,46 +152,25 @@ class BaseManager
      */
     public function remove($entity)
     {
-        $this->entityManager->remove($entity);
-        $this->entityManager->flush();
+        $this->em->remove($entity);
+        $this->em->flush();
     }
 
     /**
-     * Return one entity by id.
+     * Returns entity repository.
      *
-     * @param $id
-     *
-     * @return null|object
+     * @return \Doctrine\ORM\EntityRepository|EntityRepository
      */
-    public function findOneById($id)
-    {
-        return $this->repository->findOneBy(['id' => $id]);
-    }
-
     public function getRepository()
     {
         return $this->repository;
     }
 
     /**
-     * Flush persisted entities.
+     * @return EntityManager
      */
-    public function flush()
+    public function getEntityManager()
     {
-        $this->entityManager->flush();
-    }
-    /**
-     * Refresh persisted entities.
-     */
-    public function refresh($entity)
-    {
-        $this->entityManager->refresh($entity);
-    }
-    /**
-     * Clears the repository, causing all managed entities to become detached.
-     */
-    public function clear()
-    {
-        $this->entityManager->clear();
+        return $this->em;
     }
 }

@@ -5,24 +5,30 @@ namespace Tigreboite\FunkylabBundle\Listener;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Routing\Router;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Tigreboite\FunkylabBundle\Entity\Activity;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Tigreboite\FunkylabBundle\Event\EntityEvent;
+use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
 
 class PostPersistListener
 {
     private $security;
     private $router;
     private $request;
+    private $dispatcher;
 
     /**
+     * PostPersistListener constructor.
      * @param TokenStorage $security
      * @param Router $router
+     * @param RequestStack $request
      */
     public function __construct(TokenStorage $security, Router $router, RequestStack $request)
     {
         $this->security = $security;
         $this->request = $request->getCurrentRequest();
         $this->router = $router;
+        $this->dispatcher = new EventDispatcher();
     }
 
     /**
@@ -30,7 +36,8 @@ class PostPersistListener
      */
     public function postUpdate(LifecycleEventArgs $args)
     {
-//        $this->createActivity($args, Activity::ACTION_UPDATE);
+        $event = new EntityEvent($args->getObject());
+        $this->dispatcher->dispatch(TigreboiteFunkylabEvent::ENTITY_UPDATED, $event);
     }
 
 
@@ -39,7 +46,8 @@ class PostPersistListener
      */
     public function preRemove(LifecycleEventArgs $args)
     {
-//        $this->createActivity($args, Activity::ACTION_DELETE);
+        $event = new EntityEvent(null);
+        $this->dispatcher->dispatch(TigreboiteFunkylabEvent::ENTITY_DELETED, $event);
     }
 
     /**
@@ -47,6 +55,7 @@ class PostPersistListener
      */
     public function postPersist(LifecycleEventArgs $args)
     {
-//        $this->createActivity($args, Activity::ACTION_CREATED);
+        $event = new EntityEvent($args->getObject());
+        $this->dispatcher->dispatch(TigreboiteFunkylabEvent::ENTITY_CREATED, $event);
     }
 }

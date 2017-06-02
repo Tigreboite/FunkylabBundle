@@ -8,17 +8,17 @@ namespace Tigreboite\FunkylabBundle;
 class TigreboiteFunkylabEvent
 {
     /**
-     * @Event("Tigreboite\FunkylabBundle\Event\PageEvent")
+     * @Event("Tigreboite\FunkylabBundle\Event\EntityEvent")
      */
-    const PAGE_CREATED = 'funkylab.page_created';
+    const ENTITY_CREATED = 'funkylab.entity_created';
 
     /**
-     * @Event("Tigreboite\FunkylabBundle\Event\PageEvent")
+     * @Event("Tigreboite\FunkylabBundle\Event\EntityEvent")
      */
-    const PAGE_UPDATED = 'funkylab.page_updated';
+    const ENTITY_UPDATED = 'funkylab.entity_updated';
 
     /**
-     * @Event("Tigreboite\FunkylabBundle\Event\PageEvent")
+     * @Event("Tigreboite\FunkylabBundle\Event\EntityEvent")
      */
-    const PAGE_DELETED = 'funkylab.page_deleted';
+    const ENTITY_DELETED = 'funkylab.entity_deleted';
 }

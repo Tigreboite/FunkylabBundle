@@ -4,3 +4,15 @@ services:
         class: Tigreboite\FunkylabBundle\Manager\UserManager
         arguments: ["@doctrine.orm.entity_manager", Tigreboite\FunkylabBundle\Entity\User]
 
+    funkylab.manager.bloc:
+        class: Tigreboite\FunkylabBundle\Manager\BlocManager
+        arguments: ["@doctrine.orm.entity_manager", Tigreboite\FunkylabBundle\Entity\Bloc, "@funkylab.factory.bloc"]
+
+    funkylab.manager.page:
+        class: Tigreboite\FunkylabBundle\Manager\PageManager
+        arguments: ["@doctrine.orm.entity_manager", Tigreboite\FunkylabBundle\Entity\Page]
+
+    funkylab.manager.actuality:
+        class: Tigreboite\FunkylabBundle\Manager\ActualityManager
+        arguments: ["@doctrine.orm.entity_manager", Tigreboite\FunkylabBundle\Entity\Actuality]
+

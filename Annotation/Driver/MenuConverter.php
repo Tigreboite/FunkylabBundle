@@ -5,6 +5,7 @@ namespace Tigreboite\FunkylabBundle\Annotation\Driver;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -16,12 +17,14 @@ class MenuConverter
     private $reader;
     private $container;
     private $user;
+    private $collector;
 
     public function __construct(Reader $reader, ContainerInterface $container)
     {
         $this->reader = $reader;
         $this->container = $container;
         $this->user = $this->getLoggedUser();
+        $this->collector = $container->get('funkylab.service');
     }
 
     public function getFunkylabConfiguration()
@@ -87,8 +90,13 @@ class MenuConverter
                     continue;
                 }
 
-                foreach ($annotations as $annotation) {
+                foreach ($annotations as $key=>$annotation) {
                     $k = $ka.'\\'.$m->getName();
+
+                    $collector[$key]=array(
+                        'name'=>$k,
+                    );
+
                     if ($annotation instanceof Route && !isset($controllersWithModules[$k]['route'])) {
                         $controllersWithModules = $this->addAnnotation($controllersWithModules, $k, 'route', $annotation->getName());
                     }
@@ -102,6 +110,7 @@ class MenuConverter
 
                 if (isset($controllersWithModules[$k]) && !isset($controllersWithModules[$k]['menu'])) {
                     unset($controllersWithModules[$k]);
+                    unset($collector[$key]);
                 }
             }
         }

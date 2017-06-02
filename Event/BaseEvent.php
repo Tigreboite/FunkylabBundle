@@ -17,10 +17,8 @@ class BaseEvent extends Event
      *
      * @param Container $container
      */
-    public function __construct(Container $container)
+    public function __construct()
     {
-        $this->container = $container;
-        $this->request = $container->get('request_stack')->getCurrentRequest();
         $this->name = '';
     }
 

@@ -47,3 +47,7 @@ services:
         public: false
         tags:
             - { name: data_collector, id: funkylab.collector, template: TigreboiteFunkylabBundle:Collector:funkylab }
+
+    funkylab.factory.bloc:
+        class: Tigreboite\FunkylabBundle\Factory\BlocFactory
+        arguments: ["@funkylab.manager.actuality","@funkylab.manager.page"]

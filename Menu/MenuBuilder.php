@@ -47,9 +47,6 @@ class MenuBuilder
                     'childrenAttributes' => array('class' => 'treeview-menu'),
                 ));
 
-
-                $menuData[$k] = array();
-
                 foreach ($l['children'] as $m) {
                     if ($request->get('_route') == $m['route']) {
                         $i->setCurrent(true);
@@ -64,7 +61,7 @@ class MenuBuilder
                         'extras' => array('class_icon' => 'fa ' . $m['menu']->getIcon()),
                     ));
 
-                    $menuData[$k][] = $m['menu']->getPropertyName();
+                    $menuData[] = $k."/".$m['menu']->getPropertyName();
                 }
 
             } else {
@@ -72,10 +69,9 @@ class MenuBuilder
                     'route' => $l['route'],
                     'extras' => array('class_icon' => 'fa ' . $l['menu']->getIcon()),
                 ));
-                $menuData[$k][] = $l['menu']->getName();
+                $menuData[] = $k."/".$l['menu']->getName();
             }
         }
-        VarDumper:dump($menuData);
         $container->get('funkylab.service')->set("menu", $menuData);
         return $menu;
     }
@@ -99,8 +95,6 @@ class MenuBuilder
 
         $list = $menuConverter->getControllersWithAnnotationModules();
 
-        $breadCrumbData = array();
-
         foreach ($list as $k => $l) {
             if (isset($l['children'])) {
                 foreach ($l['children'] as $m) {
@@ -115,13 +109,12 @@ class MenuBuilder
                             'route' => $m['route'],
                             'extras' => array('class_icon' => 'fa ' . $l['children'][0]['menu']->getIcon()),
                         ));
-                        $breadCrumbData[] = $k;
+
                         if ($request->get('_route') == $m['route']) {
                             $menu->addChild($mainSection, array(
                                 'route' => $m['route'],
                                 'extras' => array('class_icon' => 'fa ' . $m['menu']->getIcon()),
                             ));
-                            $breadCrumbData[] = $mainSection;
                         }
                     }
                 }
@@ -142,7 +135,6 @@ class MenuBuilder
                             'route' => $m['route'],
                             'extras' => array('class_icon' => 'fa ' . $m['menu']->getIcon()),
                         ));
-                        $breadCrumbData[] = $mainSection;
                     }
                 }
             }
@@ -170,11 +162,6 @@ class MenuBuilder
             'subSection' => $subSection,
             'title' => $mainSection . ' - ' . $subSection,
         ));
-
-
-        VarDumper:dump($breadCrumbData);
-
-        $container->get('funkylab.service')->set("breadCrumb", $breadCrumbData);
 
         return $menu;
     }
