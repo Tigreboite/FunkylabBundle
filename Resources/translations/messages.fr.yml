@@ -1,6 +1,27 @@
 funkylab.logout: "Logout"
-activity.action: "Action"
-activity.entityId: "Type Id"
-activity.entityType: "Type"
-activity.createdAt: "Le"
-activity.createdBy: "Par"
+
+funkylab.btn:
+  add: Ajouter
+  edit: Editer
+  delete: Effacer
+  view: Voir
+
+funkylab.page:
+  title: Titre
+  slug: Slug
+  date:
+      published: Date de publication
+      created: Date de création
+      updated: Date de mise a jour
+
+funkylab.news:
+  title: Titre
+  category: Catégorie
+  tags: Tags
+  slug: Slug
+  first: Mea
+  url: Url
+  date:
+    published: Date de publication
+    created: Date de création
+    updated: Date de mise a jour
