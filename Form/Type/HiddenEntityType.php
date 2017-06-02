@@ -1,12 +1,11 @@
 <?php
 
-namespace AdminBundle\Form\Type;
+namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class HiddenEntityType.
@@ -50,7 +49,7 @@ class HiddenEntityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'transformer' => 'AdminBundle\Form\DataTransformer\EntityToIdentifierTransformer',
+            'transformer' => 'Tigreboite\FunkylabBundle\Form\DataTransformer\EntityToIdentifierTransformer',
         ));
         $resolver->setRequired(
             array(
@@ -62,28 +61,23 @@ class HiddenEntityType extends AbstractType
     /**
      * Require the entity repository option to be set on the field.
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $this->configureOptions($resolver);
     }
 
-    /**
-     * Set the parent form type to hidden.
-     *
-     * @return string
-     */
-    public function getParent()
+    public function getBlockPrefix()
     {
-        return 'hidden';
+        return 'hidden_entity';
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getName()
+    public function getParent()
     {
-        return 'hidden_entity';
+        return 'Symfony\Component\Form\Extension\Core\Type\HiddenType';
     }
 }

@@ -3,7 +3,6 @@
 namespace Tigreboite\FunkylabBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Tigreboite\FunkylabBundle\Entity\BaseRepository;
 
 /**
  * ActualityRepository.

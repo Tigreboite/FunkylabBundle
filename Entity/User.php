@@ -9,10 +9,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * User.
- *
  * @ORM\Table(name="flb_user")
- * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\UserRepository")
+ * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(
  *     fields={"email"},
@@ -110,10 +108,17 @@ class User extends BaseUser
 
     /**
      * @var \DateTime
-     *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     protected $createdAt;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    protected $updatedAt;
 
     /**
      * @var \DateTime
@@ -176,7 +181,6 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->setEnabled(true);
-        $this->setCreatedAt(new \DateTime());
     }
 
     /**
@@ -478,30 +482,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return User
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
      * Set email.
      *
      * @param string $email
@@ -694,8 +674,19 @@ class User extends BaseUser
         return $this->phone;
     }
 
-    public function getCSVData()
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
     {
-        return array();
+        return $this->createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

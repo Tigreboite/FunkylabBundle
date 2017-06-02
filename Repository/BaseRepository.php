@@ -1,6 +1,6 @@
 <?php
 
-namespace Tigreboite\FunkylabBundle\Entity;
+namespace Tigreboite\FunkylabBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;

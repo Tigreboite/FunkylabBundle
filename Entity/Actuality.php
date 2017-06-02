@@ -4,8 +4,9 @@ namespace Tigreboite\FunkylabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
-use  Tigreboite\FunkylabBundle\Traits\Blameable;
+use Tigreboite\FunkylabBundle\Traits\Blameable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Tigreboite\FunkylabBundle\Traits\Publishable;
 
 /**
  * @ORM\Table(name="flb_actuality")
@@ -13,16 +14,25 @@ use  Tigreboite\FunkylabBundle\Traits\Blameable;
  */
 class Actuality
 {
-    use TimestampableEntity, Blameable;
+    use Blameable, Publishable;
 
     public $categories = array(
-      'articles' => 'Articles',
-      'etudes' => 'Etudes',
-      'interviews' => 'Interviews',
-      'case-studies' => 'Case studies',
-      'news' => 'News',
+        'news' => 'News',
+        'study' => 'Study',
+        'discover' => 'Discover'
     );
-
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    protected $createdAt;
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    protected $updatedAt;
     /**
      * @var int
      *
@@ -31,32 +41,26 @@ class Actuality
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @ORM\Column(name="title", type="string", nullable=true)
      */
     private $title;
-
     /**
      * @ORM\Column(name="summary", type="text", nullable=true)
      */
     private $summary;
-
     /**
      * @ORM\Column(name="mea", type="boolean", nullable=true)
      */
     private $mea;
-
     /**
      * @ORM\Column(name="date_start", type="datetime", nullable=true)
      */
     private $dateStart;
-
     /**
      * @ORM\Column(name="date_end", type="datetime", nullable=true)
      */
     private $dateEnd;
-
     /**
      * @var string
      *
@@ -64,7 +68,6 @@ class Actuality
      * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -72,37 +75,26 @@ class Actuality
      * @ORM\OrderBy({"ordre" = "ASC"})
      */
     private $blocs;
-
-    /**
-     * @ORM\Column(name="cta", type="string", nullable=true)
-     */
-    private $cta;
-
     /**
      * @ORM\Column(name="image", type="string", nullable=true)
      */
     private $image;
-
     /**
      * @ORM\Column(name="category", type="string", nullable=true)
      */
     private $category;
-
     /**
      * @ORM\Column(name="meta_title", type="string", nullable=true)
      */
     private $metaTitle;
-
     /**
      * @ORM\Column(name="meta_summary", type="string", nullable=true)
      */
     private $metaSummary;
-
     /**
      * @ORM\Column(name="meta_keywords", type="string", nullable=true)
      */
     private $metaKeywords;
-
     /**
      * @ORM\Column(name="tags", type="string", nullable=true)
      */
@@ -113,7 +105,7 @@ class Actuality
      */
     public function __construct()
     {
-        $this->blocs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->blocs = new ArrayCollection();
         $this->dateStart = new \DateTime();
     }
 
@@ -123,13 +115,13 @@ class Actuality
     }
 
     /**
-     * Get id.
+     * Get title.
      *
-     * @return int
+     * @return string
      */
-    public function getId()
+    public function getTitle()
     {
-        return $this->id;
+        return $this->title;
     }
 
     /**
@@ -147,13 +139,23 @@ class Actuality
     }
 
     /**
-     * Get title.
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get summary.
      *
      * @return string
      */
-    public function getTitle()
+    public function getSummary()
     {
-        return $this->title;
+        return $this->summary;
     }
 
     /**
@@ -171,13 +173,13 @@ class Actuality
     }
 
     /**
-     * Get summary.
+     * Get slug.
      *
      * @return string
      */
-    public function getSummary()
+    public function getSlug()
     {
-        return $this->summary;
+        return $this->slug;
     }
 
     /**
@@ -192,16 +194,6 @@ class Actuality
         $this->slug = $slug;
 
         return $this;
-    }
-
-    /**
-     * Get slug.
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -240,6 +232,16 @@ class Actuality
     }
 
     /**
+     * Get metaTitle.
+     *
+     * @return string
+     */
+    public function getMetaTitle()
+    {
+        return $this->metaTitle;
+    }
+
+    /**
      * Set metaTitle.
      *
      * @param string $metaTitle
@@ -254,13 +256,13 @@ class Actuality
     }
 
     /**
-     * Get metaTitle.
+     * Get metaSummary.
      *
      * @return string
      */
-    public function getMetaTitle()
+    public function getMetaSummary()
     {
-        return $this->metaTitle;
+        return $this->metaSummary;
     }
 
     /**
@@ -278,37 +280,13 @@ class Actuality
     }
 
     /**
-     * Get metaSummary.
+     * Get category.
      *
      * @return string
      */
-    public function getMetaSummary()
+    public function getCategory()
     {
-        return $this->metaSummary;
-    }
-
-    /**
-     * Set cta.
-     *
-     * @param string $cta
-     *
-     * @return Actuality
-     */
-    public function setCta($cta)
-    {
-        $this->cta = $cta;
-
-        return $this;
-    }
-
-    /**
-     * Get cta.
-     *
-     * @return string
-     */
-    public function getCta()
-    {
-        return $this->cta;
+        return $this->category;
     }
 
     /**
@@ -323,26 +301,6 @@ class Actuality
         $this->category = $category;
 
         return $this;
-    }
-
-    /**
-     * Get category.
-     *
-     * @return string
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * Get category.
-     *
-     * @return string
-     */
-    public function getCategoryText()
-    {
-        return isset($this->categories[$this->category]) ? $this->categories[$this->category] : '-';
     }
 
     public function getSplittedCategory()
@@ -369,9 +327,29 @@ class Actuality
      *
      * @return string
      */
+    public function getCategoryText()
+    {
+        return isset($this->categories[$this->category]) ? $this->categories[$this->category] : '-';
+    }
+
+    /**
+     * Get category.
+     *
+     * @return string
+     */
     public function getCategoryHtml()
     {
         return isset($this->categories[$this->category]) ? $this->categories[$this->category] : '-';
+    }
+
+    /**
+     * Get image.
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 
     /**
@@ -389,13 +367,13 @@ class Actuality
     }
 
     /**
-     * Get image.
+     * Get dateStart.
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getImage()
+    public function getDateStart()
     {
-        return $this->image;
+        return $this->dateStart;
     }
 
     /**
@@ -413,13 +391,13 @@ class Actuality
     }
 
     /**
-     * Get dateStart.
+     * Get dateEnd.
      *
      * @return \DateTime
      */
-    public function getDateStart()
+    public function getDateEnd()
     {
-        return $this->dateStart;
+        return $this->dateEnd;
     }
 
     /**
@@ -437,13 +415,13 @@ class Actuality
     }
 
     /**
-     * Get dateEnd.
+     * Get tags.
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getDateEnd()
+    public function getTags()
     {
-        return $this->dateEnd;
+        return $this->tags;
     }
 
     /**
@@ -451,7 +429,7 @@ class Actuality
      *
      * @param string $tags
      *
-     * @return Advice
+     * @return Actuality
      */
     public function setTags($tags)
     {
@@ -461,13 +439,13 @@ class Actuality
     }
 
     /**
-     * Get tags.
+     * Get mea.
      *
-     * @return string
+     * @return bool
      */
-    public function getTags()
+    public function getMea()
     {
-        return $this->tags;
+        return $this->mea;
     }
 
     /**
@@ -489,19 +467,19 @@ class Actuality
      *
      * @return bool
      */
-    public function getMea()
+    public function isMea()
     {
         return $this->mea;
     }
 
     /**
-     * Get mea.
+     * Get metaKeywords.
      *
-     * @return bool
+     * @return string
      */
-    public function isMea()
+    public function getMetaKeywords()
     {
-        return $this->mea;
+        return $this->metaKeywords;
     }
 
     /**
@@ -519,12 +497,18 @@ class Actuality
     }
 
     /**
-     * Get metaKeywords.
-     *
-     * @return string
+     * @return \DateTime
      */
-    public function getMetaKeywords()
+    public function getCreatedAt()
     {
-        return $this->metaKeywords;
+        return $this->createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

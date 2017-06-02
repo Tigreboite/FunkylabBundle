@@ -3,16 +3,17 @@
 namespace Tigreboite\FunkylabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Tigreboite\FunkylabBundle\Traits\Blameable;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Table(name="flb_page")
- * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Entity\BaseRepository")
+ * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Repository\BaseRepository")
  */
 class Page
 {
-    use TimestampableEntity, Blameable;
+    use Blameable;
 
     /**
      * @var int
@@ -34,7 +35,8 @@ class Page
     private $summary;
 
     /**
-     * @ORM\Column(name="slug", type="string", nullable=true)
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
      */
     private $slug;
 
@@ -67,11 +69,25 @@ class Page
     private $blocs;
 
     /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    protected $updatedAt;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->blocs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->blocs = new ArrayCollection();
     }
 
     /**
@@ -130,20 +146,6 @@ class Page
     public function getSummary()
     {
         return $this->summary;
-    }
-
-    /**
-     * Set slug.
-     *
-     * @param string $slug
-     *
-     * @return Page
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 
     /**
@@ -261,7 +263,7 @@ class Page
      */
     public function addBloc(Bloc $bloc)
     {
-        $bloc->setAdvice($this);
+        $bloc->setPage($this);
         $this->blocs->add($bloc);
 
         return $this;
@@ -287,8 +289,19 @@ class Page
         return $this->blocs;
     }
 
-    public function hasManager()
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
     {
-        return false;
+        return $this->createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

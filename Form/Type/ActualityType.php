@@ -4,12 +4,16 @@
  * Extreme-Sensio 2015.
  */
 
-namespace AdminBundle\Form\Type;
+namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use AppBundle\Entity\Actuality;
+use Tigreboite\FunkylabBundle\Entity\Actuality;
 
 class ActualityType extends AbstractType
 {
@@ -20,13 +24,14 @@ class ActualityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $actuality = new Actuality();
+
         $builder->add('title');
         $builder->add('summary');
         $builder->add('metaTitle');
         $builder->add('metaSummary');
         $builder->add('metaKeywords');
         $builder->add('tags');
-        $builder->add('published', 'choice', [
+        $builder->add('published', ChoiceType::class, [
           'choices' => [
               'Non',
               'Oui',
@@ -34,7 +39,7 @@ class ActualityType extends AbstractType
           'expanded' => false,
           'multiple' => false,
         ]);
-        $builder->add('mea', 'choice', [
+        $builder->add('mea', ChoiceType::class, [
           'choices' => [
               'Non',
               'Oui',
@@ -42,48 +47,36 @@ class ActualityType extends AbstractType
           'expanded' => false,
           'multiple' => false,
         ]);
-        $builder->add('dateStart', 'date', array(
+        $builder->add('dateStart', DateType::class, array(
           'required' => false,
           'widget' => 'single_text',
           'input' => 'datetime',
           'format' => 'dd/MM/yyyy', )
         );
-        $builder->add('dateEnd', 'date', array(
+        $builder->add('dateEnd', DateType::class, array(
           'required' => false,
           'widget' => 'single_text',
           'input' => 'datetime',
           'format' => 'dd/MM/yyyy', )
         );
         $builder->add('cta');
-        $builder->add('image', 'hidden');
+        $builder->add('image', HiddenType::class);
 
-        $builder->add('category', 'choice', [
+        $builder->add('category', ChoiceType::class, [
           'choices' => $actuality->categories,
           'expanded' => false,
           'multiple' => false,
         ]);
 
-        //Manager
-        $builder->add('managerImage', 'hidden');
-        $builder->add('managerName');
-        $builder->add('managerPhone');
-        $builder->add('managerEmail');
-        $builder->add('managerPosition');
-        $builder->add('managerCta');
-        $builder->add('managerForm', 'choice', [
-            'choices' => $actuality->managerForms,
-            'expanded' => false,
-            'multiple' => false,
-        ]);
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-          'data_class' => 'AppBundle\Entity\Actuality',
+          'data_class' => 'Tigreboite\FunkylabBundle\Entity\Actuality',
         ));
     }
 
@@ -92,6 +85,6 @@ class ActualityType extends AbstractType
      */
     public function getName()
     {
-        return 'adminbundle_actuality';
+        return 'tigreboite_funkylabbundle_actuality';
     }
 }

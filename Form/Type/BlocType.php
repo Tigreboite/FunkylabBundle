@@ -4,12 +4,15 @@
  * Extreme-Sensio 2015.
  */
 
-namespace AdminBundle\Form\Type;
+namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use AppBundle\Entity\Bloc;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Tigreboite\FunkylabBundle\Entity\Bloc;
 
 class BlocType extends AbstractType
 {
@@ -23,37 +26,31 @@ class BlocType extends AbstractType
 
         $builder->add('title')
             ->add('body')
-            ->add('layout', 'choice', array(
+            ->add('layout', ChoiceType::class, array(
               'choices' => $bloc->layouts,
             ))
-            ->add('onsidebar', 'checkbox', array(
+            ->add('onsidebar', CheckboxType::class, array(
                 'label' => 'Greffé à la sticky ?',
                 'required' => false,
             ))
-            ->add('file', 'hidden')
-            ->add('type', 'hidden')
-            ->add('actuality', 'hidden_entity', array(
-                'class' => 'AppBundle\\Entity\\Actuality',
+            ->add('file', HiddenType::class)
+            ->add('type', HiddenType::class)
+            ->add('actuality', HiddenEntityType::class, array(
+                'class' => 'Tigreboite\\FunkylabBundle\\Entity\\Actuality',
             ))
-            ->add('rh', 'hidden_entity', array(
-                'class' => 'AppBundle\\Entity\\Rh',
+            ->add('page', HiddenEntityType::class, array(
+                'class' => 'Tigreboite\\FunkylabBundle\\Entity\\Page',
             ))
-            ->add('advice', 'hidden_entity', array(
-                'class' => 'AppBundle\\Entity\\Advice',
-            ))
-            ->add('page', 'hidden_entity', array(
-                'class' => 'AppBundle\\Entity\\Page',
-            ))
-            ->add('ordre', 'hidden');
+            ->add('ordre', HiddenType::class);
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-          'data_class' => 'AppBundle\Entity\Bloc',
+            'data_class' => 'Tigreboite\FunkylabBundle\Entity\Bloc',
         ));
     }
 
@@ -62,6 +59,6 @@ class BlocType extends AbstractType
      */
     public function getName()
     {
-        return 'adminbundle_bloc';
+        return 'tigreboite_funkylabbundle_bloc';
     }
 }

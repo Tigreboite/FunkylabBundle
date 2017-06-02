@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Bloc controller.
  *
- * @Route("/admin/bloc")
+ * @Route("/bloc")
  */
 class BlocController extends SortableController
 {

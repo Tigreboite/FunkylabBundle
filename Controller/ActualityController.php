@@ -14,18 +14,22 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
+use Tigreboite\FunkylabBundle\Traits\Publishable;
 
 /**
  * Actuality controller.
  *
- * @Route("/admin/actuality")
+ * @Route("/actuality")
  */
 class ActualityController extends DatagridController
 {
+
+    use Publishable;
+
     protected $entityName = 'Tigreboite\FunkylabBundle\Entity\Actuality';
     protected $formType = 'Tigreboite\FunkylabBundle\Form\Type\ActualityType';
     protected $route_base = 'admin_actuality';
-    protected $repository = 'AppBundle:Actuality';
+    protected $repository = 'TigreboiteFunkylabBundle:Actuality';
     protected $dir_path = 'medias/news/';
 
     /**
@@ -34,8 +38,8 @@ class ActualityController extends DatagridController
      * @Route("/", name="admin_actuality")
      * @Method("GET")
      * @Template()
-     * @Menu("Actualités", icon="fa-flag", groupe="Nexity", order=1)
-     * @Security("has_role('ROLE_ETUDE')")
+     * @Menu("Actuality", icon="fa-flag", groupe="CMS")
+     * @Security("has_role('ROLE_SUPER_ADMIN') || has_role('ROLE_MODERATOR')")
      */
     public function indexAction()
     {
@@ -120,17 +124,6 @@ class ActualityController extends DatagridController
         $blocs = $entity->getBlocs();
         foreach ($blocs as $bloc) {
             $em->remove($bloc);
-        }
-
-        //Check and remove if actuality is on home
-        $homeManager = $this->get('appbundle.manager.home');
-        $home = $homeManager->findOneBy(array(), array('id' => 'DESC'));
-        if ($home) {
-            $actu = $home->getActuality();
-            if ($actu && $actu->getId() == $entity->getId()) {
-                $home->setActuality(null);
-                $em->persist($home);
-            }
         }
 
         $em->remove($entity);

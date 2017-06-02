@@ -19,24 +19,24 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Page controller.
  *
- * @Route("/admin/page")
+ * @Route("/page")
  */
 class PageController extends DatagridController
 {
     protected $entityName = 'Tigreboite\FunkylabBundle\Entity\Page';
     protected $formType = 'Tigreboite\FunkylabBundle\Form\Type\PageType';
-    protected $route_base = 'admin_nexity_page';
-    protected $repository = 'AppBundle:Page';
+    protected $route_base = 'admin_page';
+    protected $repository = 'TigreboiteFunkylabBundle:Page';
     protected $dir_path = 'medias/page/';
 
     /**
      * Lists all entities.
      *
-     * @Route("/", name="admin_nexity_page")
+     * @Route("/", name="admin_page")
      * @Method("GET")
      * @Template()
-     * @Menu("Pages", icon="fa-flag",groupe="Nexity", order=5)
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Menu("Pages", icon="fa-flag",groupe="CMS")
+     * @Security("has_role('ROLE_SUPER_ADMIN') || has_role('ROLE_MODERATOR')")
      */
     public function indexAction()
     {
@@ -46,7 +46,7 @@ class PageController extends DatagridController
     /**
      * Get all entities.
      *
-     * @Route("/list", name="admin_nexity_page_list", options={"expose"=true})
+     * @Route("/list", name="admin_page_list", options={"expose"=true})
      * @Method("GET")
      */
     public function listAction(Request $request)
@@ -57,9 +57,9 @@ class PageController extends DatagridController
     /**
      * Create entity.
      *
-     * @Route("/", name="admin_nexity_page_create")
+     * @Route("/", name="admin_page_create")
      * @Method("POST")
-     * @Template("AdminBundle:Page:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Page:form.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -69,9 +69,9 @@ class PageController extends DatagridController
     /**
      * Displays a form to create a new entity.
      *
-     * @Route("/new", name="admin_nexity_page_new")
+     * @Route("/new", name="admin_page_new")
      * @Method("GET")
-     * @Template("AdminBundle:Page:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Page:form.html.twig")
      */
     public function newAction(Request $request)
     {
@@ -81,9 +81,9 @@ class PageController extends DatagridController
     /**
      * Displays a form to edit an existing entity.
      *
-     * @Route("/{id}/edit", name="admin_nexity_page_edit", options={"expose"=true})
+     * @Route("/{id}/edit", name="admin_page_edit", options={"expose"=true})
      * @Method("GET")
-     * @Template("AdminBundle:Page:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Page:form.html.twig")
      */
     public function editAction(Request $request, $id)
     {
@@ -93,9 +93,9 @@ class PageController extends DatagridController
     /**
      * Edits an existing entity.
      *
-     * @Route("/update/{id}", name="admin_nexity_page_update")
+     * @Route("/update/{id}", name="admin_page_update")
      * @Method("PUT")
-     * @Template("AdminBundle:Page:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Page:form.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -105,7 +105,7 @@ class PageController extends DatagridController
     /**
      * Delete an entity.
      *
-     * @Route("/{id}", name="admin_nexity_page_delete", options={"expose"=true})
+     * @Route("/{id}", name="admin_page_delete", options={"expose"=true})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -132,7 +132,7 @@ class PageController extends DatagridController
     /**
      * Upload files.
      *
-     * @Route("/upload", name="admin_nexity_page_upload")
+     * @Route("/upload", name="admin_page_upload")
      * @Method({"POST","PUT"})
      */
     public function uploadAction(Request $request)
@@ -141,7 +141,7 @@ class PageController extends DatagridController
     }
 
     /**
-     * @Route("/autocomplete/request", name="admin_nexity_page_autocomplete_request", options={"expose"=true})
+     * @Route("/autocomplete/request", name="admin_page_autocomplete_request", options={"expose"=true})
      * @Method("GET")
      */
     public function ajaxAction(Request $request)

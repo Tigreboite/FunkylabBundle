@@ -1,6 +1,6 @@
 <?php
 
-namespace Tigreboite\FunkylabBundle\Entity;
+namespace Tigreboite\FunkylabBundle\Repository;
 
 class UserRepository extends BaseRepository
 {

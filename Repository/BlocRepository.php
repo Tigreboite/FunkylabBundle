@@ -2,8 +2,6 @@
 
 namespace Tigreboite\FunkylabBundle\Repository;
 
-use Tigreboite\FunkylabBundle\Entity\BaseRepository;
-
 /**
  * BlocRepository.
  */

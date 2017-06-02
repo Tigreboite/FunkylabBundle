@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminBundle\Form\DataTransformer;
+namespace Tigreboite\FunkylabBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;

@@ -4,15 +4,37 @@ namespace Tigreboite\FunkylabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Tigreboite\FunkylabBundle\Traits\Blameable;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Bloc.
- *
  * @ORM\Table(name="flb_bloc")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Repository\BlocRepository")
  */
 class Bloc
 {
+    use Blameable;
+
+    public $layouts = array(
+        'bloc-wysiwyg' => 'WYSIWYG',
+        'bloc-quote' => 'Quote',
+        'bloc-h2' => 'H2',
+        'bloc-file' => 'File',
+        'bloc-image' => 'Wide image',
+        'bloc-bref' => 'En bref',
+    );
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    protected $createdAt;
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    protected $updatedAt;
     /**
      * @var int
      *
@@ -21,30 +43,18 @@ class Bloc
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    public $layouts = array(
-      'bloc-wysiwyg' => 'WYSIWYG',
-      'bloc-quote' => 'Quote',
-      'bloc-h2' => 'H2',
-      'bloc-file' => 'File',
-      'bloc-image' => 'Wide image',
-      'bloc-bref' => 'En bref',
-    );
-
     /**
      * @var string
      *
      * @ORM\Column(name="layout", type="string", length=255, nullable=true)
      */
     private $layout;
-
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", nullable=true)
      */
     private $title;
-
     /**
      * @var string
      *
@@ -52,45 +62,38 @@ class Bloc
      * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
-
     /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", nullable=true)
      */
     private $type;
-
     /**
      * @ORM\Column(name="is_onsidebar", type="boolean", nullable=true)
      */
     private $onsidebar;
-
     /**
      * @ORM\ManyToOne(targetEntity="Actuality", inversedBy="blocs")
      * @ORM\JoinColumn(name="actuality_id", referencedColumnName="id")
      */
     private $actuality;
-
     /**
      * @ORM\ManyToOne(targetEntity="Page", inversedBy="blocs")
      * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
      */
     private $page;
-
     /**
      * @var int
      *
      * @ORM\Column(name="ordre", type="integer", nullable=true)
      */
     private $ordre = '999';
-
     /**
      * @var string
      *
      * @ORM\Column(name="body", type="text", nullable=true)
      */
     private $body;
-
     /**
      * @var string
      *
@@ -104,7 +107,7 @@ class Bloc
     public function __construct()
     {
         $this->ordre = 999;
-        $this->media = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->media = new ArrayCollection();
     }
 
     public function __toString()
@@ -201,6 +204,16 @@ class Bloc
     }
 
     /**
+     * Get type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
      * Set type.
      *
      * @param string $type
@@ -212,16 +225,6 @@ class Bloc
         $this->type = $type;
 
         return $this;
-    }
-
-    /**
-     * Get type.
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**
@@ -286,5 +289,21 @@ class Bloc
     public function setOnsidebar($onsidebar)
     {
         $this->onsidebar = $onsidebar;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
