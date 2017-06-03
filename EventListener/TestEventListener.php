@@ -13,23 +13,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class TestEventListener implements EventSubscriberInterface
 {
 
-    private $security;
-    private $router;
-    private $request;
-    private $dispatcher;
-
-    /**
-     * @param TokenStorage $security
-     * @param Router $router
-     */
-    public function __construct(TokenStorage $security, Router $router, RequestStack $request)
-    {
-        $this->security = $security;
-        $this->request = $request->getCurrentRequest();
-        $this->router = $router;
-    }
-
-
     public static function getSubscribedEvents()
     {
         return [

@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Doctrine\ORM\EntityRepository;
 use Tigreboite\FunkylabBundle\Entity\User;
 
 class UserType extends AbstractType
@@ -114,16 +113,6 @@ class UserType extends AbstractType
             'data_class' => 'Tigreboite\FunkylabBundle\Entity\User',
         ]);
     }
-
-    private function getOrderLanguageList(EntityRepository $er)
-    {
-        $languages = $er->createQueryBuilder('u')
-            ->where('u.isenable = 1')
-            ->orderBy('u.name', 'ASC');
-
-        return $languages;
-    }
-
 
     /**
      * @return string

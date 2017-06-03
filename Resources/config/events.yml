@@ -2,24 +2,20 @@ services:
 
     tigreboitefunkylab.listener.post_persist_listner:
         class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
-        arguments: ["@security.token_storage", "@router", "@request_stack"]
         tags:
             - { name: doctrine.event_listener, event: postPersist }
 
     tigreboitefunkylab.listener.post_update_listner:
         class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
-        arguments: ["@security.token_storage", "@router", "@request_stack"]
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
 
     tigreboitefunkylab.listener.post_delete_listner:
         class: Tigreboite\FunkylabBundle\Listener\PostPersistListener
-        arguments: ["@security.token_storage", "@router", "@request_stack"]
         tags:
             - { name: doctrine.event_listener, event: preRemove }
 
     tigreboitefunkylab.test.listener:
         class: Tigreboite\FunkylabBundle\EventListener\TestEventListener
-        arguments: ["@security.token_storage", "@router", "@request_stack"]
         tags:
             - { name: kernel.event_subscriber }

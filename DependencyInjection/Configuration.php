@@ -20,8 +20,6 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('tigreboite_funkylab');
 
-        $theme = array('yellow', 'yellow-light', 'green', 'green-light', 'red', 'red-light');
-
         $rootNode
           ->addDefaultsIfNotSet()
           ->children()

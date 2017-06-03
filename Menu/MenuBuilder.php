@@ -128,7 +128,6 @@ class MenuBuilder
                         'route' => $m['route'],
                         'extras' => array('class_icon' => 'fa ' . $l['children'][0]['menu']->getIcon()),
                     ));
-                    $breadCrumbData[] = $k;
                     if ($request->get('_route') == $m['route']) {
                         $menu->addChild($mainSection, array(
                             'route' => $m['route'],

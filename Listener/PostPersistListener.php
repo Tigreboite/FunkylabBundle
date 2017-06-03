@@ -12,22 +12,13 @@ use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
 
 class PostPersistListener
 {
-    private $security;
-    private $router;
-    private $request;
     private $dispatcher;
 
     /**
      * PostPersistListener constructor.
-     * @param TokenStorage $security
-     * @param Router $router
-     * @param RequestStack $request
      */
-    public function __construct(TokenStorage $security, Router $router, RequestStack $request)
+    public function __construct()
     {
-        $this->security = $security;
-        $this->request = $request->getCurrentRequest();
-        $this->router = $router;
         $this->dispatcher = new EventDispatcher();
     }
 
@@ -46,7 +37,7 @@ class PostPersistListener
      */
     public function preRemove(LifecycleEventArgs $args)
     {
-        $event = new EntityEvent(null);
+        $event = new EntityEvent($args);
         $this->dispatcher->dispatch(TigreboiteFunkylabEvent::ENTITY_DELETED, $event);
     }
 
