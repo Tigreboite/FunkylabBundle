@@ -4,9 +4,11 @@ namespace Tigreboite\FunkylabBundle\Menu;
 
 use Doctrine\Common\Annotations\Reader;
 use Knp\Menu\FactoryInterface;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Tigreboite\FunkylabBundle\Annotation\Driver\MenuConverter;
+use Tigreboite\FunkylabBundle\Service\FunkylabService;
 
 class MenuBuilder
 {
@@ -21,10 +23,11 @@ class MenuBuilder
         $this->factory = $factory;
     }
 
-    public function createMainMenu(RequestStack $requestStack, Reader $reader, ContainerInterface $container)
+    public function createMainMenu($tigreboite_funkylab_param, FunkylabService $funkylabService, RequestStack $requestStack, Reader $reader, AuthorizationChecker $authorizationChecker, Router $router)
     {
+
         $request = $requestStack->getCurrentRequest();
-        $menuConverter = new MenuConverter($reader, $container);
+        $menuConverter = new MenuConverter($reader, $router, $authorizationChecker, $tigreboite_funkylab_param);
         $this->config = $menuConverter->getFunkylabConfiguration();
         $list = $menuConverter->getControllersWithAnnotationModules();
 
@@ -39,6 +42,7 @@ class MenuBuilder
                 if ($l['children'][0]['route'] == 'admin_user' && !$this->config['user']) {
                     continue;
                 }
+
                 $i = $menu->addChild($k, array(
                     'route' => $l['children'][0]['route'],
                     'extras' => array('treeview' => true, 'class_icon' => 'fa ' . $l['children'][0]['menu']->getIcon()),
@@ -60,7 +64,7 @@ class MenuBuilder
                         'extras' => array('class_icon' => 'fa ' . $m['menu']->getIcon()),
                     ));
 
-                    $menuData[] = $k."/".$m['menu']->getPropertyName();
+                    $menuData[] = $k . "/" . $m['menu']->getPropertyName();
                 }
 
             } else {
@@ -68,14 +72,14 @@ class MenuBuilder
                     'route' => $l['route'],
                     'extras' => array('class_icon' => 'fa ' . $l['menu']->getIcon()),
                 ));
-                $menuData[] = $k."/".$l['menu']->getName();
+                $menuData[] = $k . "/" . $l['menu']->getName();
             }
         }
-        $container->get('funkylab.service')->set("menu", $menuData);
+        $funkylabService->set("menu", $menuData);
         return $menu;
     }
 
-    public function createBreadcrumbMenu(RequestStack $requestStack, Reader $reader, ContainerInterface $container)
+    public function createBreadcrumbMenu($tigreboite_funkylab_param, FunkylabService $funkylabService, RequestStack $requestStack, Reader $reader, AuthorizationChecker $authorizationChecker, Router $router)
     {
         $request = $requestStack->getCurrentRequest();
         $menu = $this->factory->createItem('root', array(
@@ -90,7 +94,7 @@ class MenuBuilder
         $section = $route_root[1];
         $action = (!empty($route_root[2]) ? $route_root[2] : '');
 
-        $menuConverter = new MenuConverter($reader, $container);
+        $menuConverter = new MenuConverter($reader, $router, $authorizationChecker, $tigreboite_funkylab_param);
 
         $list = $menuConverter->getControllersWithAnnotationModules();
 

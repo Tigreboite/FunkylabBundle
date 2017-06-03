@@ -3,7 +3,8 @@
 namespace Tigreboite\FunkylabBundle\Annotation\Driver;
 
 use Doctrine\Common\Annotations\Reader;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -13,38 +14,30 @@ use Symfony\Component\ExpressionLanguage\Expression;
 class MenuConverter
 {
     private $reader;
-    private $container;
-    private $user;
+    private $param;
+    private $router;
+    private $authorizationChecker;
 
-    public function __construct(Reader $reader, ContainerInterface $container)
+    public function __construct(Reader $reader, Router $router, AuthorizationChecker $authorizationChecker, $param)
     {
         $this->reader = $reader;
-        $this->container = $container;
-        $this->user = $this->getLoggedUser();
+        $this->router = $router;
+        $this->param = $param;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function getFunkylabConfiguration()
     {
         $config = array(
-          'user' => false,
+            'user' => false,
         );
-        foreach ($config as $k => $v) {
-            $config[$k] = $this->container->getParameter('tigreboite_funkylab.default_menu.'.$k);
+        if ($this->param['tigreboite_funkylab'] && isset($this->param['tigreboite_funkylab']['default_menu'])) {
+            foreach ($config as $k => $v) {
+                $config[$k] = $this->param['tigreboite_funkylab']['default_menu'][$k];
+            }
         }
 
         return $config;
-    }
-
-    public function getLoggedUser()
-    {
-        $token = $this->container->get('security.token_storage')->getToken();
-        if ($token) {
-            $user = $token->getUser();
-
-            return $user && $user != 'anon.' ? $user : false;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -66,7 +59,7 @@ class MenuConverter
     public function getControllersWithAnnotationModules()
     {
         $controllers = array();
-        foreach ($this->container->get('router')->getRouteCollection()->all() as $route) {
+        foreach ($this->router->getRouteCollection()->all() as $route) {
             $defaults = $route->getDefaults();
             if (isset($defaults['_controller'])) {
                 $controllerAction = explode(':', $defaults['_controller']);
@@ -86,11 +79,11 @@ class MenuConverter
                     continue;
                 }
 
-                foreach ($annotations as $key=>$annotation) {
-                    $k = $ka.'\\'.$m->getName();
+                foreach ($annotations as $key => $annotation) {
+                    $k = $ka . '\\' . $m->getName();
 
-                    $collector[$key]=array(
-                        'name'=>$k,
+                    $collector[$key] = array(
+                        'name' => $k,
                     );
 
                     if ($annotation instanceof Route && !isset($controllersWithModules[$k]['route'])) {
@@ -111,7 +104,7 @@ class MenuConverter
             }
         }
 
-        $ac = $this->container->get('security.authorization_checker');
+        $ac = $this->authorizationChecker;
         $processedMenu = array();
         foreach ($controllersWithModules as $m) {
             $granted = $ac->isGranted(new Expression($m['security']->getExpression()));
@@ -128,7 +121,7 @@ class MenuConverter
                 if ($m['menu']->getOrder() >= 0) {
                     $order = $m['menu']->getOrder();
                     if (!isset($processedMenu[$groupe]['children'][$order])) {
-                        $processedMenu[$groupe]['children'][(integer) $order] = $m;
+                        $processedMenu[$groupe]['children'][(integer)$order] = $m;
                     } else {
                         $processedMenu[$groupe]['children'][] = $m;
                     }

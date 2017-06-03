@@ -9,9 +9,12 @@ services:
         class: Knp\Menu\MenuItem
         factory: ["@tigreboitefunkylab.menu_builder", createMainMenu]
         arguments:
+          - "%tigreboite_funkylab%"
+          - "@funkylab.service"
           - "@request_stack"
           - "@annotation_reader"
-          - "@service_container"
+          - "@security.authorization_checker"
+          - "@router"
         tags:
             - { name: knp_menu.menu, alias: main_menu }
 
@@ -20,9 +23,12 @@ services:
         class: Knp\Menu\MenuItem
         factory: ["@tigreboitefunkylab.menu_builder",createBreadcrumbMenu]
         arguments:
+          - "%tigreboite_funkylab%"
+          - "@funkylab.service"
           - "@request_stack"
           - "@annotation_reader"
-          - "@service_container"
+          - "@security.authorization_checker"
+          - "@router"
         tags:
             - { name: knp_menu.menu, alias: breadcrumb }
 
