@@ -1,6 +1,7 @@
 funkylab.logout: "Logout"
 funkylab.login.success: "Vous êtes maintenant connecté !"
 funkylab.login.badrequest: "Mauvaise requête"
+funkylab.confirm.delete: "Êtes vous sur ?"
 funkylab.btn:
   add: Ajouter
   edit: Editer
@@ -21,6 +22,7 @@ funkylab.news:
   tags: Tags
   slug: Slug
   first: Mea
+  published: Publié
   url: Url
   date:
     published: Date de publication
