@@ -80,6 +80,7 @@ class Actuality
      */
     private $image;
     /**
+     * @ORM\ManyToOne(targetEntity="Tigreboite\FunkylabBundle\Entity\ActualityCategory", inversedBy="actuality")
      * @ORM\Column(name="category", type="string", nullable=true)
      */
     private $category;
@@ -280,9 +281,7 @@ class Actuality
     }
 
     /**
-     * Get category.
-     *
-     * @return string
+     * @return mixed
      */
     public function getCategory()
     {
@@ -290,56 +289,12 @@ class Actuality
     }
 
     /**
-     * Set category.
-     *
-     * @param string $category
-     *
-     * @return Actuality
+     * @param ActualityCategory $category
      */
-    public function setCategory($category)
+    public function setCategory(ActualityCategory $category)
     {
+        $category->addActuality($this);
         $this->category = $category;
-
-        return $this;
-    }
-
-    public function getSplittedCategory()
-    {
-        $category = $this->getCategoryText();
-        $spacepos = strpos($category, ' ');
-
-        $first = $category;
-        $second = '';
-
-        if ($spacepos !== false) {
-            $first = substr($category, 0, $spacepos);
-            $second = trim(substr($category, $spacepos));
-        }
-
-        return array(
-            'first' => $first,
-            'second' => $second,
-        );
-    }
-
-    /**
-     * Get category.
-     *
-     * @return string
-     */
-    public function getCategoryText()
-    {
-        return isset($this->categories[$this->category]) ? $this->categories[$this->category] : '-';
-    }
-
-    /**
-     * Get category.
-     *
-     * @return string
-     */
-    public function getCategoryHtml()
-    {
-        return isset($this->categories[$this->category]) ? $this->categories[$this->category] : '-';
     }
 
     /**
