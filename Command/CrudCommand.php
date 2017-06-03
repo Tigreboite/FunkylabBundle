@@ -7,9 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Generator\GeneratorCrud;
 
 class CrudCommand extends ContainerAwareCommand

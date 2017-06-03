@@ -3,9 +3,7 @@
 namespace Tigreboite\FunkylabBundle\Annotation\Driver;
 
 use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\DependencyInjection\ContainerInterface;

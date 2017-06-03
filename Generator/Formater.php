@@ -3,7 +3,6 @@
 namespace Tigreboite\FunkylabBundle\Generator;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Generator\Field\Field;
 
 abstract class Formater

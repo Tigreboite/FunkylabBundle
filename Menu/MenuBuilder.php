@@ -6,7 +6,6 @@ use Doctrine\Common\Annotations\Reader;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Annotation\Driver\MenuConverter;
 
 class MenuBuilder
