@@ -51,3 +51,7 @@ services:
     funkylab.factory.bloc:
         class: Tigreboite\FunkylabBundle\Factory\BlocFactory
         arguments: ["@funkylab.manager.actuality","@funkylab.manager.page"]
+
+    funkylab.handler.authentication:
+        class: Tigreboite\FunkylabBundle\Handler\AuthenticationHandler
+        arguments: ["@translator"]

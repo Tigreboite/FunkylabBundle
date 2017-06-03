@@ -1,5 +1,6 @@
 funkylab.logout: "Logout"
-
+funkylab.login.success: "Vous êtes maintenant connecté !"
+funkylab.login.badrequest: "Mauvaise requête"
 funkylab.btn:
   add: Ajouter
   edit: Editer
