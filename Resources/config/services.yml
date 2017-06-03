@@ -24,7 +24,6 @@ services:
         factory: ["@tigreboitefunkylab.menu_builder",createBreadcrumbMenu]
         arguments:
           - "%tigreboite_funkylab%"
-          - "@funkylab.service"
           - "@request_stack"
           - "@annotation_reader"
           - "@security.authorization_checker"

@@ -79,7 +79,7 @@ class MenuBuilder
         return $menu;
     }
 
-    public function createBreadcrumbMenu($tigreboite_funkylab_param, FunkylabService $funkylabService, RequestStack $requestStack, Reader $reader, AuthorizationChecker $authorizationChecker, Router $router)
+    public function createBreadcrumbMenu($tigreboite_funkylab_param, RequestStack $requestStack, Reader $reader, AuthorizationChecker $authorizationChecker, Router $router)
     {
         $request = $requestStack->getCurrentRequest();
         $menu = $this->factory->createItem('root', array(
