@@ -2,10 +2,7 @@
 
 namespace Tigreboite\FunkylabBundle\Listener;
 
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Symfony\Component\Routing\Router;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Tigreboite\FunkylabBundle\Event\EntityEvent;
 use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;

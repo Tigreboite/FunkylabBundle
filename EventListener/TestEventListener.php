@@ -6,9 +6,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Event\EntityEvent;
 use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Symfony\Component\Routing\Router;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class TestEventListener implements EventSubscriberInterface
 {

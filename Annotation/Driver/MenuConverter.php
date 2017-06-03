@@ -48,11 +48,11 @@ class MenuConverter
     }
 
     /**
-     * @param FilterControllerEvent $event
      * @return array
      */
-    public function onKernel(FilterControllerEvent $event)
+    public function onKernel()
     {
+
         $menu = $this->getControllersWithAnnotationModules();
 
         return $menu;
