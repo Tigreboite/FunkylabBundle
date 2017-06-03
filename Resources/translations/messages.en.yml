@@ -1,27 +1,27 @@
 funkylab.logout: "Logout"
 
 funkylab.btn:
-  add: Add
-  edit: Edit
-  delete: Delete
-  view: View
+    add: Add
+    edit: Edit
+    delete: Delete
+    view: View
 
 funkylab.page:
-  title: Title
-  slug: Slug
-  date:
-      published: Published
-      created: Created at
-      updated: Updated at
+    title: Title
+    slug: Slug
+    date:
+        published: Published
+        created: Created at
+        updated: Updated at
 
 funkylab.news:
-  title: Title
-  category: Category
-  tags: Tags
-  slug: Slug
-  first: First
-  url: Url
-  date:
-    published: Published
-    created: Created at
-    updated: Updated at
+    title: Title
+    category: Category
+    tags: Tags
+    slug: Slug
+    first: First
+    url: Url
+    date:
+        published: Published
+        created: Created at
+        updated: Updated at
