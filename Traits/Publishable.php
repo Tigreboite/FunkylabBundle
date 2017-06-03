@@ -2,6 +2,8 @@
 
 namespace Tigreboite\FunkylabBundle\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait Publishable
 {
     /**

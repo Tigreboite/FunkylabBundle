@@ -4,6 +4,8 @@ namespace Tigreboite\FunkylabBundle\Traits;
 
 use Tigreboite\FunkylabBundle\Entity\User as User;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait Blameable
 {
     /**
