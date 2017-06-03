@@ -12,8 +12,6 @@ use Tigreboite\FunkylabBundle\Generator\GeneratorCrud;
 
 class CrudCommand extends ContainerAwareCommand
 {
-    private $em;
-    private $verbose;
     private $output;
     private $input;
 
@@ -34,8 +32,6 @@ class CrudCommand extends ContainerAwareCommand
 
         $this->input = $input;
         $this->output = $output;
-        $this->em = $this->getContainer()->get('doctrine');
-        $this->verbose = $input->getOption('verbose');
         $type = $input->getOption('type');
         $entityClass = $input->getOption('entity');
         $entityClass = str_replace('/', '\\', $entityClass);
