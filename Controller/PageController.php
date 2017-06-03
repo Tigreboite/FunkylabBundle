@@ -13,7 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Tigreboite\FunkylabBundle\Entity\Page;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

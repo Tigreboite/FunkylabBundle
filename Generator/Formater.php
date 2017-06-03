@@ -53,7 +53,7 @@ abstract class Formater
         $code = str_replace('%class_name%', strtolower($this->entityName), $code);
         $code = str_replace('%bundle_name%', $this->bundle, $code);
         $code = str_replace('%entity_path_file%', strtolower($this->entityName), $code);
-        $code = str_replace('%security_roles%', '@Security("has_role(\'ROLE_SUPER_ADMIN\')")', $code);
+        $code = str_replace('%security_roles%', '@Sensio\Bundle\FrameworkExtraBundle\Configuration\Security("has_role(\'ROLE_SUPER_ADMIN\')")', $code);
         $code = str_replace('\\Controller\\'.$this->type.'Controller', '#tmpController#', $code);
         $code = str_replace($this->type, $this->entityName, $code);
         $code = str_replace('#tmpController#', '\\Controller\\'.$this->type.'Controller', $code);

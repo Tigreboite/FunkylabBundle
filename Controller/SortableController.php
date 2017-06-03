@@ -2,7 +2,6 @@
 
 namespace Tigreboite\FunkylabBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SortableController extends BaseController
