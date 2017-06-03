@@ -81,9 +81,15 @@ class Actuality
     private $image;
     /**
      * @ORM\ManyToOne(targetEntity="Tigreboite\FunkylabBundle\Entity\ActualityCategory", inversedBy="actuality")
-     * @ORM\Column(name="category", type="string", nullable=true)
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tigreboite\FunkylabBundle\Entity\ActualityComment", mappedBy="actuality")
+     */
+    private $comments;
+
     /**
      * @ORM\Column(name="meta_title", type="string", nullable=true)
      */
@@ -107,6 +113,7 @@ class Actuality
     public function __construct()
     {
         $this->blocs = new ArrayCollection();
+        $this->comments = new ArrayCollection();
         $this->dateStart = new \DateTime();
     }
 
@@ -465,5 +472,31 @@ class Actuality
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ActualityComment $comments
+     */
+    public function addActuality(ActualityComment $comments)
+    {
+        $this->comments->add($comments);
+        $comments->setActuality($this);
+    }
+
+    /**
+     * @param ActualityComment $comments
+     */
+    public function removeActuality(ActualityComment $comments)
+    {
+        $this->comments->remove($comments);
+        $comments->setActuality(null);
     }
 }
