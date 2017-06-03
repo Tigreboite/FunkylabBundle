@@ -7,6 +7,9 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Tigreboite\FunkylabBundle\Entity\User
+    from_email:
+        address:     no-reply@funkylab.info
+        sender_name: Funkylab
 
 knp_menu:
     twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
@@ -23,3 +26,40 @@ stof_doctrine_extensions:
             translatable: true
             timestampable: true
 
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: layouts/partials/pagination.html.twig
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path:
+            cache_prefix: medias/cache
+    filter_sets:
+        cache: ~
+        gestionnaire_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [125, 125], mode: outbound }
+vich_uploader:
+    db_driver: orm
+    mappings:
+        apply_file:
+            uri_prefix:         /medias/documents
+            upload_destination: %kernel.root_dir%/../web/medias/documents
+
+stof_doctrine_extensions:
+    default_locale: "%locale%"
+    translation_fallback: true
+    orm:
+        default:
+            sluggable: true
+            translatable: true
+            timestampable: true
