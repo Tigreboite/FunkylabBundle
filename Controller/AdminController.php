@@ -43,18 +43,12 @@ class AdminController extends Controller
      */
     public function loginCheckAction()
     {
-        /*VarDumper::dump($_POST); exit;
-
-        $this->get('manager')->
-
         if($this->getLoggedUser()!==false){
             $logout = $this->generateUrl('funkylab_home');
         }else{
             $logout = $this->generateUrl('funkylab_login');
         }
-        */
 
-        $logout = $this->generateUrl('fos_user_security_login');
         return $this->redirect($logout);
     }
 

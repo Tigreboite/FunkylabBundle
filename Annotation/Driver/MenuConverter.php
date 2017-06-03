@@ -15,14 +15,12 @@ class MenuConverter
     private $reader;
     private $container;
     private $user;
-    private $collector;
 
     public function __construct(Reader $reader, ContainerInterface $container)
     {
         $this->reader = $reader;
         $this->container = $container;
         $this->user = $this->getLoggedUser();
-        $this->collector = $container->get('funkylab.service');
     }
 
     public function getFunkylabConfiguration()

@@ -1,31 +1,32 @@
-funkylab.logout: "Logout"
-funkylab.login.success: "Vous êtes maintenant connecté !"
-funkylab.login.badrequest: "Mauvaise requête"
-funkylab.confirm.delete: "Êtes vous sur ?"
-funkylab.btn:
-  add: Ajouter
-  edit: Editer
-  delete: Effacer
-  view: Voir
+funkylab:
+  logout: "Logout"
+  login.success: "Vous êtes maintenant connecté !"
+  login.badrequest: "Mauvaise requête"
+  confirm.delete: "Êtes vous sur ?"
 
-funkylab.page:
-  title: Titre
-  slug: Slug
-  date:
+  btn:
+    add: Ajouter
+    edit: Editer
+    delete: Effacer
+    view: Voir
+  
+  page:
+    title: Titre
+    slug: Slug
+    date:
       published: Date de publication
       created: Date de création
       updated: Date de mise a jour
-
-funkylab.news:
-  title: Titre
-  category: Catégorie
-  tags: Tags
-  slug: Slug
-  first: Mea
-  published: Publié
-  url: Url
-  date:
-    published: Date de publication
-    created: Date de création
-    updated: Date de mise a jour
-    
+  
+  news:
+    title: Titre
+    category: Catégorie
+    tags: Tags
+    slug: Slug
+    published: Publié
+    first: Mea
+    url: Url
+    date:
+      published: Date de publication
+      created: Date de création
+      updated: Date de mise a jour

@@ -1,22 +1,24 @@
-funkylab.logout: "Logout"
-funkylab.login.success: "You are now connected"
-funkylab.login.badrequest: "Bad request"
-funkylab.confirm.delete: "Are you sure ?"
-funkylab.btn:
+funkylab:
+  logout: "Logout"
+  login.success: "You are now connected"
+  login.badrequest: "Bad request"
+  confirm.delete: "Are you sure ?"
+
+  btn:
     add: Add
     edit: Edit
     delete: Delete
     view: View
-
-funkylab.page:
+  
+  page:
     title: Title
     slug: Slug
     date:
-        published: Published
-        created: Created at
-        updated: Updated at
-
-funkylab.news:
+      published: Published
+      created: Created at
+      updated: Updated at
+  
+  news:
     title: Title
     category: Category
     tags: Tags
@@ -25,6 +27,6 @@ funkylab.news:
     first: First
     url: Url
     date:
-        published: Published
-        created: Created at
-        updated: Updated at
+      published: Published
+      created: Created at
+      updated: Updated at
