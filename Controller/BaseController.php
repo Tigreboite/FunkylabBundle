@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Tigreboite\FunkylabBundle\Event\EntityEvent;
+use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
 
 class BaseController extends Controller
 {
@@ -32,6 +34,10 @@ class BaseController extends Controller
 
             $em->persist($entity);
             $em->flush();
+
+            $event = new EntityEvent($entity);
+            $dispatcher = $this->get('event_dispatcher');
+            $dispatcher->dispatch(TigreboiteFunkylabEvent::ENTITY_CREATED, $event);
 
             return $this->redirect($this->generateUrl($this->route_base));
         }
@@ -144,6 +150,10 @@ class BaseController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+            $event = new EntityEvent($entity);
+            $dispatcher = $this->get('event_dispatcher');
+            $dispatcher->dispatch(TigreboiteFunkylabEvent::ENTITY_UPDATED, $event);
+
             return $this->redirect($this->generateUrl($this->route_base.'_edit', array('id' => $id)));
         }
 
@@ -162,6 +172,10 @@ class BaseController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find entity.');
         }
+
+        $event = new EntityEvent($entity);
+        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher->dispatch(TigreboiteFunkylabEvent::ENTITY_DELETED, $event);
 
         $em->remove($entity);
         $em->flush();

@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
+use Tigreboite\FunkylabBundle\Event\EntityEvent;
+use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
 
 /**
  * Page controller.
@@ -121,6 +123,10 @@ class PageController extends DatagridController
         foreach ($blocs as $bloc) {
             $em->remove($bloc);
         }
+
+        $event = new EntityEvent($entity);
+        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher->dispatch(TigreboiteFunkylabEvent::ENTITY_DELETED, $event);
 
         $em->remove($entity);
         $em->flush();

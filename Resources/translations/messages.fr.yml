@@ -3,13 +3,20 @@ funkylab:
   login.success: "Vous êtes maintenant connecté !"
   login.badrequest: "Mauvaise requête"
   confirm.delete: "Êtes vous sur ?"
+  loading: Chargement
+  pleasewait: Veuillez patienter
 
   btn:
     add: Ajouter
     edit: Editer
     delete: Effacer
     view: Voir
-  
+    back: Retour
+
+  bloc:
+      title: Titre
+      layout: Layout
+
   page:
     title: Titre
     slug: Slug

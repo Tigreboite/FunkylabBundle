@@ -60,6 +60,8 @@ class SortableController extends BaseController
 
         $em->flush();
 
+
+
         return new JsonResponse($data);
     }
 }

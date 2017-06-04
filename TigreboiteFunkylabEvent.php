@@ -21,4 +21,7 @@ class TigreboiteFunkylabEvent
      * @Event("Tigreboite\FunkylabBundle\Event\EntityEvent")
      */
     const ENTITY_DELETED = 'funkylab.entity_deleted';
+
 }
+
+

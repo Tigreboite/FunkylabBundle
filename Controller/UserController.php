@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Tigreboite\FunkylabBundle\Event\EntityEvent;
+use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
 
 /**
  * @Route("/user")
@@ -95,6 +97,10 @@ class UserController extends DatagridController
             }
 
             $em->flush();
+
+            $event = new EntityEvent($entity);
+            $dispatcher = $this->get('event_dispatcher');
+            $dispatcher->dispatch(TigreboiteFunkylabEvent::ENTITY_CREATED, $event);
 
             return $this->redirect($this->generateUrl('admin_user'));
         }

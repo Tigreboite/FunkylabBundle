@@ -2,10 +2,10 @@
 
 {% block action %}
     <a class="btn btn-default btn-lg" href="{{ url_type }}">
-        <i class="fa fa-backward"></i> {{ "funlylab.btn.back"|trans }}
+        <i class="fa fa-backward"></i> {{ "funkylab.btn.back"|trans }}
     </a>
     <a id="btn-add" class="btn btn-default btn-lg" href="#" data-toggle="modal" data-url="{{ path('admin_bloc_new',{type:type,id:id}) }}">
-        <i class="fa fa-plus"></i> Ajouter un bloc
+        <i class="fa fa-plus"></i> {{ "funkylab.btn.add"|trans }}
     </a>
 {% endblock %}
 
@@ -17,8 +17,8 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Titre</th>
-                        <th>Layout</th>
+                        <th>{{ "funkylab.bloc.title"|trans }}</th>
+                        <th>{{ "funkylab.bloc.layout"|trans }}</th>
                         <th></th>
                     </tr>
                     </thead>

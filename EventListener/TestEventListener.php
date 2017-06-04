@@ -15,6 +15,7 @@ class TestEventListener implements EventSubscriberInterface
         return [
             TigreboiteFunkylabEvent::ENTITY_CREATED => 'onCreated',
             TigreboiteFunkylabEvent::ENTITY_UPDATED => 'onUpdated',
+            TigreboiteFunkylabEvent::ENTITY_DELETED => 'onDeleted',
         ];
     }
 
