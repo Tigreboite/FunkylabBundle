@@ -34,6 +34,7 @@ class BaseController extends Controller
 
             if(in_array( "Tigreboite\\FunkylabBundle\\Traits\\Blameable", class_uses($entity) )){
                 $entity->setCreatedBy($this->getUser());
+                $entity->setUpdatedBy($this->getUser());
             }
 
             $em->persist($entity);
