@@ -32,6 +32,10 @@ class BaseController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+            if(in_array( "Tigreboite\\FunkylabBundle\\Traits\\Blameable", class_uses($entity) )){
+                $entity->setCreatedBy($this->getUser());
+            }
+
             $em->persist($entity);
             $em->flush();
 
@@ -148,6 +152,12 @@ class BaseController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            if(in_array( "Tigreboite\\FunkylabBundle\\Traits\\Blameable", class_uses($entity) )){
+                $entity->setUpdatedBy($this->getUser());
+                $em->persist($entity);
+            }
+
             $em->flush();
 
             $event = new EntityEvent($entity);

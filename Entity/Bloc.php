@@ -4,6 +4,7 @@ namespace Tigreboite\FunkylabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Tigreboite\FunkylabBundle\Traits\Blameable;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -13,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Bloc
 {
-    use Blameable;
+    use Blameable, TimestampableEntity;
 
     public $layouts = array(
         'bloc-wysiwyg' => 'WYSIWYG',
@@ -23,18 +24,7 @@ class Bloc
         'bloc-image' => 'Wide image',
         'bloc-bref' => 'En bref',
     );
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime", nullable=true)
-     */
-    protected $createdAt;
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
-     */
-    protected $updatedAt;
+
     /**
      * @var int
      *
@@ -289,21 +279,5 @@ class Bloc
     public function setOnsidebar($onsidebar)
     {
         $this->onsidebar = $onsidebar;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

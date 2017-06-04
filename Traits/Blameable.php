@@ -12,7 +12,7 @@ trait Blameable
      * @var User
      *
      * @\Gedmo\Mapping\Annotation\Blameable(on="create")
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="Tigreboite\FunkylabBundle\Entity\User")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
      */
     private $createdBy;
@@ -21,7 +21,7 @@ trait Blameable
      * @var User
      *
      * @\Gedmo\Mapping\Annotation\Blameable(on="update")
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="Tigreboite\FunkylabBundle\Entity\User")
      * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
      */
     private $updatedBy;

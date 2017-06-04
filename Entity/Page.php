@@ -4,8 +4,10 @@ namespace Tigreboite\FunkylabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Tigreboite\FunkylabBundle\Traits\Blameable;
 use Doctrine\Common\Collections\ArrayCollection;
+use Tigreboite\FunkylabBundle\Traits\Seo;
 
 /**
  * @ORM\Table(name="flb_page")
@@ -13,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Page
 {
-    use Blameable;
+    use Blameable, Seo, TimestampableEntity;
 
     /**
      * @var int
@@ -46,41 +48,12 @@ class Page
     private $image;
 
     /**
-     * @ORM\Column(name="meta_title", type="string", nullable=true)
-     */
-    private $metaTitle;
-
-    /**
-     * @ORM\Column(name="meta_summary", type="string", nullable=true)
-     */
-    private $metaSummary;
-
-    /**
-     * @ORM\Column(name="meta_keywords", type="string", nullable=true)
-     */
-    private $metaKeywords;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Bloc", mappedBy="page", cascade={"remove"})
      * @ORM\OrderBy({"ordre" = "ASC"})
      */
     private $blocs;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime", nullable=true)
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
-     */
-    protected $updatedAt;
 
     /**
      * Constructor.
@@ -183,78 +156,6 @@ class Page
     }
 
     /**
-     * Set metaTitle.
-     *
-     * @param string $metaTitle
-     *
-     * @return Page
-     */
-    public function setMetaTitle($metaTitle)
-    {
-        $this->metaTitle = $metaTitle;
-
-        return $this;
-    }
-
-    /**
-     * Get metaTitle.
-     *
-     * @return string
-     */
-    public function getMetaTitle()
-    {
-        return $this->metaTitle;
-    }
-
-    /**
-     * Set metaSummary.
-     *
-     * @param string $metaSummary
-     *
-     * @return Page
-     */
-    public function setMetaSummary($metaSummary)
-    {
-        $this->metaSummary = $metaSummary;
-
-        return $this;
-    }
-
-    /**
-     * Get metaSummary.
-     *
-     * @return string
-     */
-    public function getMetaSummary()
-    {
-        return $this->metaSummary;
-    }
-
-    /**
-     * Set metaKeywords.
-     *
-     * @param string $metaKeywords
-     *
-     * @return Page
-     */
-    public function setMetaKeywords($metaKeywords)
-    {
-        $this->metaKeywords = $metaKeywords;
-
-        return $this;
-    }
-
-    /**
-     * Get metaKeywords.
-     *
-     * @return string
-     */
-    public function getMetaKeywords()
-    {
-        return $this->metaKeywords;
-    }
-
-    /**
      * Add bloc.
      *
      * @param Bloc $bloc
@@ -287,21 +188,5 @@ class Page
     public function getBlocs()
     {
         return $this->blocs;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

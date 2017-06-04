@@ -4,9 +4,11 @@ namespace Tigreboite\FunkylabBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Tigreboite\FunkylabBundle\Traits\Blameable;
 
 /**
  * @ORM\Table(name="flb_user")
@@ -20,6 +22,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class User extends BaseUser
 {
+
+    use Blameable, TimestampableEntity;
+
     const ROLE_MODERATOR = 'ROLE_MODERATOR';
     const ROLE_BRAND = 'ROLE_BRAND';
     const ROLE_USER = 'ROLE_USER';
@@ -105,20 +110,6 @@ class User extends BaseUser
      * @ORM\Column(name="newsletter_partner", type="boolean", nullable=true)
      */
     protected $newsletterPartner;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime", nullable=true)
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
-     */
-    protected $updatedAt;
 
     /**
      * @var \DateTime
@@ -385,29 +376,6 @@ class User extends BaseUser
         return $this->city;
     }
 
-    /**
-     * Set avatar.
-     *
-     * @param string $avatar
-     *
-     * @return User
-     */
-    public function setAvatar($avatar)
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * Get avatar.
-     *
-     * @return string
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
 
     /**
      * Set oldpassword.
@@ -672,21 +640,5 @@ class User extends BaseUser
     public function getPhone()
     {
         return $this->phone;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

@@ -4,9 +4,11 @@ namespace Tigreboite\FunkylabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Tigreboite\FunkylabBundle\Traits\Blameable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Tigreboite\FunkylabBundle\Traits\Publishable;
+use Tigreboite\FunkylabBundle\Traits\Seo;
 
 /**
  * @ORM\Table(name="flb_actuality")
@@ -14,25 +16,14 @@ use Tigreboite\FunkylabBundle\Traits\Publishable;
  */
 class Actuality
 {
-    use Blameable, Publishable;
+    use Blameable, Publishable, Seo, TimestampableEntity;
 
     public $categories = array(
         'news' => 'News',
         'study' => 'Study',
         'discover' => 'Discover'
     );
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime", nullable=true)
-     */
-    protected $createdAt;
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
-     */
-    protected $updatedAt;
+
     /**
      * @var int
      *
@@ -90,18 +81,6 @@ class Actuality
      */
     private $comments;
 
-    /**
-     * @ORM\Column(name="meta_title", type="string", nullable=true)
-     */
-    private $metaTitle;
-    /**
-     * @ORM\Column(name="meta_summary", type="string", nullable=true)
-     */
-    private $metaSummary;
-    /**
-     * @ORM\Column(name="meta_keywords", type="string", nullable=true)
-     */
-    private $metaKeywords;
     /**
      * @ORM\Column(name="tags", type="string", nullable=true)
      */
@@ -237,54 +216,6 @@ class Actuality
     public function getBlocs()
     {
         return $this->blocs;
-    }
-
-    /**
-     * Get metaTitle.
-     *
-     * @return string
-     */
-    public function getMetaTitle()
-    {
-        return $this->metaTitle;
-    }
-
-    /**
-     * Set metaTitle.
-     *
-     * @param string $metaTitle
-     *
-     * @return Actuality
-     */
-    public function setMetaTitle($metaTitle)
-    {
-        $this->metaTitle = $metaTitle;
-
-        return $this;
-    }
-
-    /**
-     * Get metaSummary.
-     *
-     * @return string
-     */
-    public function getMetaSummary()
-    {
-        return $this->metaSummary;
-    }
-
-    /**
-     * Set metaSummary.
-     *
-     * @param string $metaSummary
-     *
-     * @return Actuality
-     */
-    public function setMetaSummary($metaSummary)
-    {
-        $this->metaSummary = $metaSummary;
-
-        return $this;
     }
 
     /**
@@ -432,38 +363,6 @@ class Actuality
     public function isMea()
     {
         return $this->mea;
-    }
-
-    /**
-     * Get metaKeywords.
-     *
-     * @return string
-     */
-    public function getMetaKeywords()
-    {
-        return $this->metaKeywords;
-    }
-
-    /**
-     * Set metaKeywords.
-     *
-     * @param string $metaKeywords
-     *
-     * @return Actuality
-     */
-    public function setMetaKeywords($metaKeywords)
-    {
-        $this->metaKeywords = $metaKeywords;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 
     /**
