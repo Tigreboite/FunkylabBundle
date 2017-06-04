@@ -8,7 +8,6 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Annotation\Driver\MenuConverter;
 use Tigreboite\FunkylabBundle\Service\FunkylabService;
 
