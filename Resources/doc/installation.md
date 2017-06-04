@@ -96,7 +96,7 @@ you can easily disable all of them by adding this config to your `app/config/con
 
 ```yaml
 tigreboite_funkylab:
-    controllers:
+    default_menu:
         user: false
         page: false
         actuality: false

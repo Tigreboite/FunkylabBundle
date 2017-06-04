@@ -3,10 +3,12 @@
 namespace Tigreboite\FunkylabBundle\Menu;
 
 use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Cache\PhpFileCache;
 use Knp\Menu\FactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Annotation\Driver\MenuConverter;
 use Tigreboite\FunkylabBundle\Service\FunkylabService;
 
@@ -23,11 +25,11 @@ class MenuBuilder
         $this->factory = $factory;
     }
 
-    public function createMainMenu($tigreboite_funkylab_param, FunkylabService $funkylabService, RequestStack $requestStack, Reader $reader, AuthorizationChecker $authorizationChecker, Router $router)
+    public function createMainMenu(PhpFileCache $cache, FunkylabService $funkylabService, RequestStack $requestStack, Reader $reader, AuthorizationChecker $authorizationChecker, Router $router)
     {
 
         $request = $requestStack->getCurrentRequest();
-        $menuConverter = new MenuConverter($reader, $router, $authorizationChecker, $tigreboite_funkylab_param);
+        $menuConverter = new MenuConverter($reader, $router, $authorizationChecker, $cache);
         $this->config = $menuConverter->getFunkylabConfiguration();
         $list = $menuConverter->getControllersWithAnnotationModules();
 
@@ -59,6 +61,14 @@ class MenuBuilder
                         continue;
                     }
 
+                    if ($m['route'] == 'admin_actuality' && !$this->config['actuality']) {
+                        continue;
+                    }
+
+                    if ($m['route'] == 'admin_page' && !$this->config['page']) {
+                        continue;
+                    }
+
                     $i->addChild($m['menu']->getPropertyName(), array(
                         'route' => $m['route'],
                         'extras' => array('class_icon' => 'fa ' . $m['menu']->getIcon()),
@@ -79,7 +89,7 @@ class MenuBuilder
         return $menu;
     }
 
-    public function createBreadcrumbMenu($tigreboite_funkylab_param, RequestStack $requestStack, Reader $reader, AuthorizationChecker $authorizationChecker, Router $router)
+    public function createBreadcrumbMenu(PhpFileCache $cache, RequestStack $requestStack, Reader $reader, AuthorizationChecker $authorizationChecker, Router $router)
     {
         $request = $requestStack->getCurrentRequest();
         $menu = $this->factory->createItem('root', array(
@@ -94,7 +104,7 @@ class MenuBuilder
         $section = $route_root[1];
         $action = (!empty($route_root[2]) ? $route_root[2] : '');
 
-        $menuConverter = new MenuConverter($reader, $router, $authorizationChecker, $tigreboite_funkylab_param);
+        $menuConverter = new MenuConverter($reader, $router, $authorizationChecker, $cache);
 
         $list = $menuConverter->getControllersWithAnnotationModules();
 

@@ -9,7 +9,7 @@ services:
         class: Knp\Menu\MenuItem
         factory: ["@tigreboitefunkylab.menu_builder", createMainMenu]
         arguments:
-          - "%tigreboite_funkylab%"
+          - "@funkylab.cache"
           - "@funkylab.service"
           - "@request_stack"
           - "@annotation_reader"
@@ -23,7 +23,7 @@ services:
         class: Knp\Menu\MenuItem
         factory: ["@tigreboitefunkylab.menu_builder",createBreadcrumbMenu]
         arguments:
-          - "%tigreboite_funkylab%"
+          - "@funkylab.cache"
           - "@request_stack"
           - "@annotation_reader"
           - "@security.authorization_checker"
@@ -60,3 +60,7 @@ services:
     funkylab.handler.authentication:
         class: Tigreboite\FunkylabBundle\Handler\AuthenticationHandler
         arguments: ["@translator"]
+
+    funkylab.cache:
+        class: Doctrine\Common\Cache\PhpFileCache
+        arguments: ["%kernel.cache_dir%"]

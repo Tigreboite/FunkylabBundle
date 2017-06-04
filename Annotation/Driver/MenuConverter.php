@@ -3,8 +3,10 @@
 namespace Tigreboite\FunkylabBundle\Annotation\Driver;
 
 use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Cache\PhpFileCache;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Annotation\Menu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,30 +15,21 @@ use Symfony\Component\ExpressionLanguage\Expression;
 class MenuConverter
 {
     private $reader;
-    private $param;
     private $router;
     private $authorizationChecker;
+    private $cache;
 
-    public function __construct(Reader $reader, Router $router, AuthorizationChecker $authorizationChecker, $param)
+    public function __construct(Reader $reader, Router $router, AuthorizationChecker $authorizationChecker, PhpFileCache $cache)
     {
         $this->reader = $reader;
         $this->router = $router;
-        $this->param = $param;
+        $this->cache = $cache;
         $this->authorizationChecker = $authorizationChecker;
     }
 
     public function getFunkylabConfiguration()
     {
-        $config = array(
-            'user' => false,
-        );
-        if ($this->param['tigreboite_funkylab'] && isset($this->param['tigreboite_funkylab']['default_menu'])) {
-            foreach ($config as $k => $v) {
-                $config[$k] = $this->param['tigreboite_funkylab']['default_menu'][$k];
-            }
-        }
-
-        return $config;
+        return $this->cache->fetch('tigreboite_funkylab.default_menu');
     }
 
     /**
