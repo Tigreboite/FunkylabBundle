@@ -23,6 +23,7 @@ Configure with annotation your action's controller
    {
        return array();
    }
+```
 
 Menu : name, icon : image to display in admin, groupe, tab where to put this action
 Security : Role ROLE_MODERATOR, ROLE_BRAND, ROLE_USER, ROLE_ADMIN

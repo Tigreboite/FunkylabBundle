@@ -7,13 +7,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-/**
- * This is the class that loads and manages your bundle configuration.
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
- *
- * @author Cyril Pereira <cyril.pereira@extreme-sensio.com>
- */
 class TigreboiteFunkylabExtension extends Extension
 {
     /**
@@ -39,6 +32,7 @@ class TigreboiteFunkylabExtension extends Extension
             $cache->save('tigreboite_funkylab.default_menu',$default_menu);
         }
 
+        $container->setParameter("funkylab", $config);
     }
 
     public function getAlias()

@@ -1,8 +1,5 @@
 twig:
     globals:
-        froala_editor: "%froala_editor_key%"
-        admin_skin: "skin-%admin_skin%"
-
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main

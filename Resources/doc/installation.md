@@ -16,9 +16,13 @@ public function registerBundles()
 {
   $bundles = array(
       ...
+      new Shapecode\Bundle\HiddenEntityTypeBundle\ShapecodeHiddenEntityTypeBundle(),
+      new Liip\ImagineBundle\LiipImagineBundle(),
+      new Vich\UploaderBundle\VichUploaderBundle(),
       new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-      new FOS\UserBundle\FOSUserBundle(),
+      new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
       new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+      new FOS\UserBundle\FOSUserBundle(),
       new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
       new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
       new JMS\SerializerBundle\JMSSerializerBundle(),
@@ -74,34 +78,37 @@ php app/console doctrine:fixtures:load
 
 ## Configuration
 
-Add those parameters to you `app/config/parameters.yml.dist` :
+you need to define a locale, put it in your `app/config/parameters.yml.dist` :
 
 ```yaml
-    froala_editor_key: null
-    admin_skin: red
     locale: fr
 ```
-
-`froala_editor_key` : is the serial you get form https://www.froala.com/wysiwyg-editor 
-`admin_skin` : you have choices red, green, blue, yellow, orange and red-light, green-light ..*[]: 
+ 
 `locale` : your locale
 
 Funkylab have by default a set of entities and controllers to help you to create website : 
 
 - user
 - page
-- actuality (blog like)
+- actuality (blog like with comment and category)
 
-you can easily disable all of them by adding this config to your `app/config/config.yml`
+you can configure funkylab `app/config/config.yml`
 
 ```yaml
 tigreboite_funkylab:
+    name: Funkylab CMS
+    shortname: TOTO
+    skin: red
+    froala_editor_key: null
     default_menu:
         user: false
-        page: false
-        actuality: false
+        page: true
+        actuality: true
 ```
 
+`froala_editor_key` : is the serial number you get form https://www.froala.com/wysiwyg-editor 
+`skin` : you have choices between red, green, blue, yellow, orange and red-light, green-light ...:
+`default_menu` : you can disable any default menu if you don't need them
 
 ## Start
 

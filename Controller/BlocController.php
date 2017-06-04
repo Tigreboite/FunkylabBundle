@@ -22,7 +22,7 @@ class BlocController extends SortableController
     protected $entityName = 'Tigreboite\FunkylabBundle\Entity\Bloc';
     protected $formType = 'Tigreboite\FunkylabBundle\Form\Type\BlocType';
     protected $route_base = 'admin_bloc';
-    protected $repository = 'AppBundle:Bloc';
+    protected $repository = 'TigreboiteFunkylabBundle:Bloc';
     protected $dir_path = 'medias/bloc/';
 
     /**
@@ -35,14 +35,14 @@ class BlocController extends SortableController
      */
     public function indexAction()
     {
-        $request = $this->get('request');
+        $request = $this->get('request_stack')->getCurrentRequest();
         $data = array(
             'type' => $request->get('type', false),
             'id' => $request->get('id', false),
         );
 
         if ($data['type'] == 'page') {
-            $url_type = 'admin_nexity_page';
+            $url_type = 'admin_page';
         } else {
             $url_type = 'admin_'.$data['type'];
         }
@@ -57,7 +57,7 @@ class BlocController extends SortableController
      *
      * @Route("/", name="admin_bloc_create")
      * @Method("POST")
-     * @Template("AdminBundle:Bloc:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Bloc:form.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -69,7 +69,7 @@ class BlocController extends SortableController
      *
      * @Route("/new", name="admin_bloc_new")
      * @Method("GET")
-     * @Template("AdminBundle:Bloc:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Bloc:form.html.twig")
      */
     public function newAction(Request $request)
     {
@@ -79,7 +79,7 @@ class BlocController extends SortableController
         /*
          * @var $entity Bloc
          */
-        $bloc = $this->get('appbundle.factory.bloc')->createBloc($type, $id);
+        $bloc = $this->get('funkylab.factory.bloc')->createBloc($type, $id);
 
         $form = $this->createCreateForm($bloc);
 
@@ -95,7 +95,7 @@ class BlocController extends SortableController
      *
      * @Route("/{id}/edit", name="admin_bloc_edit", options={"expose"=true})
      * @Method("GET")
-     * @Template("AdminBundle:Bloc:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Bloc:form.html.twig")
      */
     public function editAction(Request $request, $id)
     {
@@ -107,7 +107,7 @@ class BlocController extends SortableController
      *
      * @Route("/update/{id}", name="admin_bloc_update")
      * @Method("PUT")
-     * @Template("AdminBundle:Bloc:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Bloc:form.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -144,12 +144,12 @@ class BlocController extends SortableController
      */
     public function listeAction()
     {
-        $request = $this->get('request');
+        $request = $this->get('request_stack')->getCurrentRequest();
         $type = $request->get('type', false);
         $id = $request->get('id', false);
 
         if ($type) {
-            $entities = $this->get('appbundle.manager.bloc')->findAllByParent($type, $id);
+            $entities = $this->get('funkylab.manager.bloc')->findAllByParent($type, $id);
         } else {
             $entities = array();
         }
