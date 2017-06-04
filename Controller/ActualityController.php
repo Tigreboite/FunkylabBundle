@@ -62,7 +62,7 @@ class ActualityController extends DatagridController
      *
      * @Route("/", name="admin_actuality_create")
      * @Method("POST")
-     * @Template("AdminBundle:Actuality:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Actuality:form.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -74,7 +74,7 @@ class ActualityController extends DatagridController
      *
      * @Route("/new", name="admin_actuality_new")
      * @Method("GET")
-     * @Template("AdminBundle:Actuality:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Actuality:form.html.twig")
      */
     public function newAction(Request $request)
     {
@@ -86,7 +86,7 @@ class ActualityController extends DatagridController
      *
      * @Route("/{id}/edit", name="admin_actuality_edit", options={"expose"=true})
      * @Method("GET")
-     * @Template("AdminBundle:Actuality:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Actuality:form.html.twig")
      */
     public function editAction(Request $request, $id)
     {
@@ -98,7 +98,7 @@ class ActualityController extends DatagridController
      *
      * @Route("/update/{id}", name="admin_actuality_update")
      * @Method("PUT")
-     * @Template("AdminBundle:Actuality:form.html.twig")
+     * @Template("TigreboiteFunkylabBundle:Actuality:form.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
