@@ -25,7 +25,7 @@
                             <label for="{{ form.body.vars.id }}">Contenu</label>
                             {{ form_widget(form.body, {'attr':{'class': 'form-control wysiwyg'}}) }}
                         </div>
-                        <div class="form-group bloc-item bloc-file>
+                        <div class="form-group bloc-item bloc-file">
                             <label for="id-loader-file">Fichier</label>
                             {{ form_widget(form.file) }}
                             <div id="{{ form.file.vars.id }}-preview">
@@ -110,9 +110,6 @@
 
         var updateBlocLayout=function()
         {
-            console.log('{{ form.layout.vars.id }}');
-            console.log($('#{{ form.layout.vars.id }}').val());
-
             $('.bloc-item').hide();
             $('.'+$('#{{ form.layout.vars.id }}').val()).show();
         };
