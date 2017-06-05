@@ -16,7 +16,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Tigreboite\FunkylabBundle\Event\EntityEvent;
 use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
-use Tigreboite\FunkylabBundle\Traits\Publishable;
 
 /**
  * Actuality controller.
@@ -25,8 +24,6 @@ use Tigreboite\FunkylabBundle\Traits\Publishable;
  */
 class ActualityController extends DatagridController
 {
-
-    use Publishable;
 
     protected $entityName = 'Tigreboite\FunkylabBundle\Entity\Actuality';
     protected $formType = 'Tigreboite\FunkylabBundle\Form\Type\ActualityType';

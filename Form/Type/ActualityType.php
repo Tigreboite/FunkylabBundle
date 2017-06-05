@@ -54,11 +54,11 @@ class ActualityType extends AbstractType
           'format' => 'dd/MM/yyyy', )
         );
         $builder->add('image', HiddenType::class);
-        $builder->add('category', ChoiceType::class, [
+        /*$builder->add('category', ChoiceType::class, [
           'choices' => $actuality->categories,
           'expanded' => false,
           'multiple' => false,
-        ]);
+        ]);*/
 
     }
 

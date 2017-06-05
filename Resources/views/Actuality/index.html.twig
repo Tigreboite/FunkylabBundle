@@ -12,7 +12,7 @@
             <thead>
                 <tr>
                     <th>{{ "funkylab.news.title"|trans }}</th>
-                    <th>{{ "funkylab.news.category"|trans }}</th>
+                    {#<th>{{ "funkylab.news.category"|trans }}</th>#}
                     <th>{{ "funkylab.news.tags"|trans }}</th>
                     <th>{{ "funkylab.news.published"|trans }}</th>
                     <th>{{ "funkylab.news.first"|trans }}</th>
@@ -39,10 +39,11 @@
             "ajax": Routing.generate('admin_actuality_list'),
             "aoColumns": [
                 { "sName": "title" },
-                { "sName": "category" },
+//                { "sName": "category" },
                 { "sName": "tags" },
                 { "sName": "published" },
                 { "sName": "mea" },
+                { "sName": "slug" },
                 { "sName": "dateStart" },
                 { "sName": "createdAt" },
                 { "sName": "updatedAt" },
@@ -60,26 +61,21 @@
                         '<span class="sr-only">Toggle Dropdown</span>'+
                     '</button>'+
                     '<ul class="dropdown-menu" role="menu">'+
-                        '<li>'+
-                        '   <a class="btn-view" href="#" target="_blank">' +
-                        '       <i class="fa fa-eye"></i>{{ "funkylab.btn.view"|trans }}' +
-                        '   </a>' +
-                        '</li>'+
-                        '<li>'+
-                        '   <a class="btn-editblock" href="#">' +
-                        '       <i class="fa fa-plus-square-o"></i>Blocs' +
-                        '   </a>' +
-                        '</li>'+
-                        '<li>'+
-                        '   <a class="btn-edit" href="#" data-toggle="modal" data-url="">' +
-                        '       <i class="fa fa-edit"></i>{{ "funkylab.btn.edit"|trans }}' +
-                        '   </a>' +
-                        '</li>'+
-                        '<li>'+
-                        '   <a class="btn-remove" href="#" data-url="admin_advice_delete">' +
-                        '       <i class="fa fa-trash"></i>{{ "funkylab.btn.delete"|trans }}' +
-                        '   </a> ' +
-                        '</li>'+
+                    '<li>'+
+                    '   <a class="btn-editblock" href="#">' +
+                    '       <i class="fa fa-plus-square-o"></i>Blocs' +
+                    '   </a>' +
+                    '</li>'+
+                    '<li>'+
+                    '   <a class="btn-edit" href="#" data-toggle="modal" data-url="">' +
+                    '       <i class="fa fa-edit"></i>{{ "funkylab.btn.edit"|trans }}' +
+                    '   </a>' +
+                    '</li>'+
+                    '<li>'+
+                    '   <a class="btn-remove" href="#">' +
+                    '       <i class="fa fa-remove"></i>{{ "funkylab.btn.delete"|trans }}' +
+                    '   </a>' +
+                    '</li>'+
                     '</ul>'+
                 '</div>'
             }],
@@ -91,14 +87,12 @@
             },
             "fnCreatedRow": function( nRow, aData, iDataIndex ) {
 
-                var url_view = Routing.generate('actuality_page', {slug:aData[aData.length-5],category:aData[1]});
-                $(nRow).find('td:last .btn-view').attr('href', url_view);
+                var url_bloc = Routing.generate('admin_bloc', {id:aData[aData.length-1],type:"actuality"});
+                $(nRow).find('td:last .btn-editblock').attr('href', url_bloc);
 
                 var url_update = Routing.generate('admin_actuality_edit', {id:aData[aData.length-1]});
                 $(nRow).find('td:last .btn-edit').attr('data-url', url_update);
 
-                var url_bloc = Routing.generate('admin_bloc', {id:aData[aData.length-1],type:"actuality"});
-                $(nRow).find('td:last .btn-editblock').attr('href', url_bloc);
             }
         });
 
