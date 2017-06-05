@@ -30,10 +30,6 @@ class BlocType extends AbstractType
             ->add('layout', ChoiceType::class, array(
               'choices' => $bloc->layouts,
             ))
-            ->add('onsidebar', CheckboxType::class, array(
-                'label' => 'Greffé à la sticky ?',
-                'required' => false,
-            ))
             ->add('file', HiddenType::class)
             ->add('type', HiddenType::class)
             ->add('actuality', HiddenEntityType::class, array(
@@ -42,7 +38,7 @@ class BlocType extends AbstractType
             ->add('page', HiddenEntityType::class, array(
                 'class' => 'Tigreboite\\FunkylabBundle\\Entity\\Page',
             ))
-            ->add('ordre', HiddenType::class);
+            ->add('position', HiddenType::class);
     }
 
     /**

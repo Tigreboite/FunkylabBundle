@@ -53,7 +53,7 @@ class SortableController extends BaseController
         $count = 1;
         foreach ($items as $id) {
             $entity = $em->getRepository($this->repository)->find($id);
-            $entity->setOrdre($count);
+            $entity->setPosition($count);
             $em->persist($entity);
             ++$count;
         }

@@ -162,7 +162,7 @@ class BlocController extends SortableController
     /**
      * Save order.
      *
-     * @Route("/save/order", name="admin_bloc_order")
+     * @Route("/save/position", name="admin_bloc_order")
      * @Method("POST")
      */
     public function orderAction()

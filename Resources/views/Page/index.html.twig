@@ -61,6 +61,11 @@
                         '       <i class="fa fa-edit"></i>{{ "funkylab.btn.edit"|trans }}' +
                         '   </a>' +
                         '</li>'+
+                        '<li>'+
+                        '   <a class="btn-remove" href="#">' +
+                        '       <i class="fa fa-remove"></i>{{ "funkylab.btn.delete"|trans }}' +
+                        '   </a>' +
+                        '</li>'+
                     '</ul>'+
                 '</div>'
             }],
@@ -71,13 +76,32 @@
               updateModalBtn();
             },
             "fnCreatedRow": function( nRow, aData, iDataIndex ) {
-                var url_update = Routing.generate('admin_page_edit', {id:aData[aData.length-1]});
-                $(nRow).find('td:last .btn-edit').attr('data-url', url_update);
 
                 var url_bloc = Routing.generate('admin_bloc', {id:aData[aData.length-1],type:"page"});
                 $(nRow).find('td:last .btn-editblock').attr('href', url_bloc);
 
+                var url_update = Routing.generate('admin_page_edit', {id:aData[aData.length-1]});
+                $(nRow).find('td:last .btn-edit').attr('data-url', url_update);
             }
+        });
+
+        $(document).on('click', '.btn-remove', function (e) {
+            e.preventDefault();
+            var data = table.row($(this).parents('tr')).data();
+            var id_line = data[data.length - 1];
+
+            $.confirm({
+                text: '{{ "funkylab.confirm.delete"|trans }}',
+                confirm: function (button) {
+                    $.ajax({
+                        url: Routing.generate('admin_page_delete', {id: id_line}),
+                        method: 'DELETE',
+                        success: function (msg) {
+                            table.draw();
+                        }
+                    });
+                }
+            });
         });
 
     });

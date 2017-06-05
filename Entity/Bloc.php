@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Tigreboite\FunkylabBundle\Traits\Blameable;
 use Doctrine\Common\Collections\ArrayCollection;
+use Tigreboite\FunkylabBundle\Traits\Position;
 
 /**
  * @ORM\Table(name="flb_bloc")
@@ -14,15 +15,11 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Bloc
 {
-    use Blameable, TimestampableEntity;
+    use Blameable, TimestampableEntity, Position;
 
     public $layouts = array(
-        'bloc-wysiwyg' => 'WYSIWYG',
-        'bloc-quote' => 'Quote',
-        'bloc-h2' => 'H2',
-        'bloc-file' => 'File',
-        'bloc-image' => 'Wide image',
-        'bloc-bref' => 'En bref',
+        'Wysiwyg' => 'bloc-wysiwyg',
+        'File' => 'bloc-file',
     );
 
     /**
@@ -59,10 +56,6 @@ class Bloc
      */
     private $type;
     /**
-     * @ORM\Column(name="is_onsidebar", type="boolean", nullable=true)
-     */
-    private $onsidebar;
-    /**
      * @ORM\ManyToOne(targetEntity="Actuality", inversedBy="blocs")
      * @ORM\JoinColumn(name="actuality_id", referencedColumnName="id")
      */
@@ -72,12 +65,7 @@ class Bloc
      * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
      */
     private $page;
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ordre", type="integer", nullable=true)
-     */
-    private $ordre = '999';
+
     /**
      * @var string
      *
@@ -96,29 +84,13 @@ class Bloc
      */
     public function __construct()
     {
-        $this->ordre = 999;
         $this->media = new ArrayCollection();
+        $this->position = 999;
     }
 
     public function __toString()
     {
         return $this->title ? $this->title : 'pas de titre';
-    }
-
-    /**
-     * @return int
-     */
-    public function getOrdre()
-    {
-        return $this->ordre;
-    }
-
-    /**
-     * @param $ordre
-     */
-    public function setOrdre($ordre)
-    {
-        $this->ordre = $ordre;
     }
 
     /**
@@ -265,19 +237,4 @@ class Bloc
         $this->slug = $slug;
     }
 
-    /**
-     * @return mixed
-     */
-    public function isOnsidebar()
-    {
-        return $this->onsidebar;
-    }
-
-    /**
-     * @param mixed $onsidebar
-     */
-    public function setOnsidebar($onsidebar)
-    {
-        $this->onsidebar = $onsidebar;
-    }
 }

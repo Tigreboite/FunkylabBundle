@@ -51,7 +51,7 @@ class Page
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Bloc", mappedBy="page", cascade={"remove"})
-     * @ORM\OrderBy({"ordre" = "ASC"})
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $blocs;
 
