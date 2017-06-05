@@ -36,7 +36,6 @@
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.css') }}">
     <link href="{{ asset('bundles/tigreboitefunkylab/vendor/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
 <body class="hold-transition skin-{{ funkylab.skin }} sidebar-mini {% if app.request.cookies.has('sidebar_collasped') %}sidebar-collapse{% endif %}">
@@ -199,8 +198,7 @@
     {% block js %}{% endblock %}
 
     {% block javascript_footer %}
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
-        <script src="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.js') }}"></script>
+        {#<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>#}
     {% endblock %}
 
 </div>

@@ -104,3 +104,6 @@ form.newproject .project, form.newproject .user {
 #table_admin .btn-group{
     min-width:95px;
 }
+.dataTables_wrapper{
+    margin-bottom:40px;
+}
