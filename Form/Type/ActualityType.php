@@ -17,8 +17,6 @@ class ActualityType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $actuality = new Actuality();
-
         $builder->add('title');
         $builder->add('summary');
         $builder->add('metaTitle');
@@ -54,11 +52,6 @@ class ActualityType extends AbstractType
           'format' => 'dd/MM/yyyy', )
         );
         $builder->add('image', HiddenType::class);
-        /*$builder->add('category', ChoiceType::class, [
-          'choices' => $actuality->categories,
-          'expanded' => false,
-          'multiple' => false,
-        ]);*/
 
     }
 

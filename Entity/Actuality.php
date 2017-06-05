@@ -82,18 +82,6 @@ class Actuality
     private $comments;
 
     /**
-     * @ORM\Column(name="meta_title", type="string", nullable=true)
-     */
-    private $metaTitle;
-    /**
-     * @ORM\Column(name="meta_summary", type="string", nullable=true)
-     */
-    private $metaSummary;
-    /**
-     * @ORM\Column(name="meta_keywords", type="string", nullable=true)
-     */
-    private $metaKeywords;
-    /**
      * @ORM\Column(name="tags", type="string", nullable=true)
      */
     private $tags;

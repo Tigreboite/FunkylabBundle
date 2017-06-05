@@ -1,14 +1,9 @@
 <?php
-/**
- * Code by Cyril Pereira, Julien Hay
- * Extreme-Sensio 2015.
- */
 
 namespace Tigreboite\FunkylabBundle\Form\Type;
 
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenEntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
