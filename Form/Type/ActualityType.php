@@ -7,7 +7,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Tigreboite\FunkylabBundle\Entity\Actuality;
 
 class ActualityType extends AbstractType
 {
