@@ -38,7 +38,7 @@ class SortableController extends BaseController
      */
     public function orderAction()
     {
-        $request = $this->get('request');
+        $request = $this->get('request_stack')->getCurrentRequest();
         $type = $request->get('type', false);
         $platform = $request->get('platform', false);
         $items = $request->get('item', array());

@@ -14,8 +14,6 @@ class BaseEvent extends Event
 
     /**
      * BaseEvent constructor.
-     *
-     * @param Container $container
      */
     public function __construct()
     {

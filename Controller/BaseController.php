@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Event\EntityEvent;
 use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
+use Tigreboite\FunkylabBundle\Traits\Blameable;
 
 class BaseController extends Controller
 {
@@ -32,7 +33,7 @@ class BaseController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            if(in_array( "Tigreboite\\FunkylabBundle\\Traits\\Blameable", class_uses($entity) )){
+            if (in_array(Blameable::class, class_uses($entity))) {
                 $entity->setCreatedBy($this->getUser());
                 $entity->setUpdatedBy($this->getUser());
             }
@@ -58,7 +59,7 @@ class BaseController extends Controller
     protected function createCreateForm($entity)
     {
         $form = $this->createForm($this->formType, $entity, array(
-            'action' => $this->generateUrl($this->route_base.'_create'),
+            'action' => $this->generateUrl($this->route_base . '_create'),
             'method' => 'POST',
             'allow_extra_fields' => true,
         ));
@@ -131,7 +132,7 @@ class BaseController extends Controller
     protected function createEditForm($entity)
     {
         $form = $this->createForm($this->formType, $entity, array(
-            'action' => $this->generateUrl($this->route_base.'_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl($this->route_base . '_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -154,7 +155,7 @@ class BaseController extends Controller
 
         if ($editForm->isValid()) {
 
-            if(in_array( "Tigreboite\\FunkylabBundle\\Traits\\Blameable", class_uses($entity) )){
+            if (in_array(Blameable::class, class_uses($entity))) {
                 $entity->setUpdatedBy($this->getUser());
                 $em->persist($entity);
             }
@@ -165,7 +166,7 @@ class BaseController extends Controller
             $dispatcher = $this->get('event_dispatcher');
             $dispatcher->dispatch(TigreboiteFunkylabEvent::ENTITY_UPDATED, $event);
 
-            return $this->redirect($this->generateUrl($this->route_base.'_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl($this->route_base . '_edit', array('id' => $id)));
         }
 
         return array(
@@ -200,12 +201,12 @@ class BaseController extends Controller
         $uploadedFile = $request->files->get('file');
 
         if ($uploadedFile) {
-            $file = $uploadedFile->move('../web/'.$this->dir_path, $uploadedFile->getClientOriginalName());
+            $file = $uploadedFile->move('../web/' . $this->dir_path, $uploadedFile->getClientOriginalName());
             if ($file) {
                 $data = array(
                     'success' => true,
                     'filename' => $uploadedFile->getClientOriginalName(),
-                    'path' => $this->dir_path.$uploadedFile->getClientOriginalName(),
+                    'path' => $this->dir_path . $uploadedFile->getClientOriginalName(),
                 );
             }
         }

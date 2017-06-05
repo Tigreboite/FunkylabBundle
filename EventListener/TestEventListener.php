@@ -3,7 +3,6 @@
 namespace Tigreboite\FunkylabBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Event\EntityEvent;
 use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
 
@@ -24,8 +23,6 @@ class TestEventListener implements EventSubscriberInterface
      */
     public function onCreated(EntityEvent $event = null)
     {
-        VarDumper::dump('updatcreateded');
-        VarDumper::dump($event);
     }
 
     /**
@@ -33,8 +30,6 @@ class TestEventListener implements EventSubscriberInterface
      */
     public function onUpdated(EntityEvent $event = null)
     {
-        VarDumper::dump('updated');
-        VarDumper::dump($event);
     }
 
     /**
@@ -42,8 +37,6 @@ class TestEventListener implements EventSubscriberInterface
      */
     public function onDeleted(EntityEvent $event = null)
     {
-        VarDumper::dump('deleted');
-        VarDumper::dump($event);
     }
 
 }
