@@ -12,6 +12,8 @@ funkylab:
     delete: Delete
     view: View
     back: Back
+    submit: Submit
+    cancel: Cancel
 
   bloc:
     title: Title

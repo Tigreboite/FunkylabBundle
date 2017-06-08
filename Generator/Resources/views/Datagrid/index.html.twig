@@ -2,7 +2,7 @@
 
 {% block action %}
      <a class="btn btn-default btn-lg" href="#" data-toggle="modal" data-url="{{ path('%admin_entity_path%_new') }}">
-        <i class="fa fa-plus"></i> Add %admin_entity_name%
+        <i class="fa fa-plus"></i> {{ "funkylab.btn.add"|trans }}
     </a>
 {% endblock %}
 
@@ -37,10 +37,13 @@
                 "targets": -1,
                 "data": null,
                 'bSortable': false, 'aTargets': [ 1 ],
-                "defaultContent": '<div class="btn-group pull-right"><a class="btn btn-info btn-sm btn-edit" href="#" data-toggle="modal" data-url=""><i class="fa fa-edit"></i> Edit</a><a class="btn btn-danger btn-sm btn-remove" href="#" data-url="%admin_entity_path%_delete"><i class="fa fa-edit"></i> Delete</a> </div>'
+                "defaultContent": '<div class="btn-group pull-right">' +
+                '<a class="btn btn-info btn-sm btn-edit" href="#" data-toggle="modal" data-url=""><i class="fa fa-edit"></i> {{ "funkylab.btn.edit"|trans }}</a>' +
+                '<a class="btn btn-danger btn-sm btn-remove" href="#" data-url="%admin_entity_path%_delete"><i class="fa fa-edit"></i> {{ "funkylab.btn.delete"|trans }}</a> ' +
+                '</div>'
             }],
             "oLanguage": {
-                "sProcessing": "<img src='/bundles/tigreboitefunkylab/images/ajax-loader.gif'>"
+                "sProcessing": "<img src='{{ asset('bundles/tigreboitefunkylab/images/ajax-loader.gif') }}'>"
             },
             "fnDrawCallback": function( oSettings ) {
               updateModalBtn();
@@ -59,7 +62,7 @@
             var id_line = data[data.length-1];
 
             $.confirm({
-                text: "Are you sure you want to delete ?",
+                text: "{{ "funkylab.confirm.delete"|trans }}",
                 confirm: function(button) {
                     $.ajax({
                         type: "DELETE",
