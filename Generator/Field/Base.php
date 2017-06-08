@@ -44,6 +44,11 @@ class Base
         return '';
     }
 
+    public function getUseType()
+    {
+        return '';
+    }
+
     public function getBuilder()
     {
         return "\$builder->add('".$this->varname."');\n";

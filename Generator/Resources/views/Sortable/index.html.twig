@@ -3,7 +3,7 @@
 
 {% block action %}
     <a class="btn btn-default btn-lg" href="#" data-toggle="modal" data-url="{{ path('%admin_entity_path%_new') }}">
-        <i class="fa fa-plus"></i> Add %admin_entity_name%
+        <i class="fa fa-plus"></i> {{ "funkylab.btn.add"|trans }}
     </a>
 {% endblock %}
 
@@ -24,27 +24,14 @@
                 <div class="box box-info">
                     <div class="box-body">
                         <div class="callout callout-info">
-                            <h4>Chargement...</h4>
-                            <p>Veuillez patienter</p>
+                            <h4>{{ "funkylab.loading"|trans }}...</h4>
+                            <p>{{ "funkylab.pleasewait"|trans }}</p>
                         </div>
                     </div><!-- /.box-body -->
                 </div>
             </ul>
         </div>
     </div>
-    <style type="text/css">
-        table.table {margin-top:0!important;margin-bottom:0!important;}
-        .sortable-bloc,.sortable { list-style-type: none; margin: 0; padding: 0; }
-        .sortable-bloc li,.sortable li { margin: 0; padding:0;}
-        .sortable-bloc li span,.sortable li span { position: absolute; margin-left: 5px; margin-top:5px;}
-        .sortable-bloc table,.sortable table{margin:0;padding:0;}
-        li.ui-sortable-helper{
-            cursor:move;
-        }
-        .ui-state-highlight {
-            height: 3.5em; line-height: 3.2em;
-        }
-    </style>
 {% endblock %}
 
 {% block js %}

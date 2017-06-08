@@ -1,14 +1,11 @@
 <?php
-/**
- * Code by Cyril Pereira, Julien Hay
- * Extreme-Sensio 2015.
- */
 
 namespace Tigreboite\FunkylabBundle\Generator\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+/*use*/
 
 class DataType extends AbstractType
 {

@@ -50,6 +50,8 @@ and @Crud annotation to your property
   private $name;
 ```
 
+### Fields
+
 ## Datagrid
 
 Add the repository Tigreboite\FunkylabBundle\Entity\BaseRepository to your entity
@@ -62,7 +64,7 @@ use Tigreboite\FunkylabBundle\Traits\Position;
  * @ORM\Table(name="car")
  * @ORM\Entity(repositoryClass="Tigreboite\FunkylabBundle\Repository\BaseRepository")
  */
-class YourEntity
+class Car
 {
 ```
 

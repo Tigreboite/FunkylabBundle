@@ -6,7 +6,9 @@
 {% block content -%}
     <div class="modal-body">
         <div class="row">
-            <form method="post" action="{% if app.request.get('_route') == "admin_actuality_edit" %}{{ path('admin_actuality_update',{'id':entity.id}) }}{% else %}{{ path('admin_actuality_create') }}{% endif %}" role="form" enctype="multipart/form-data">
+            <form method="post"
+                  action="{% if app.request.get('_route') == "admin_actuality_edit" %}{{ path('admin_actuality_update',{'id':entity.id}) }}{% else %}{{ path('admin_actuality_create') }}{% endif %}"
+                  role="form" enctype="multipart/form-data">
 
                 {% if app.request.get('_route') == "admin_actuality_edit" %}
                     <input type="hidden" name="_method" value="PUT">
@@ -43,11 +45,16 @@
                                         {{ form_widget(form.image) }}
                                         <div id="{{ form.image.vars.id }}-preview">
                                             {% if entity.image %}
-                                                <img src="/{{ entity.image }}" style="max-width:128px;" />
+                                                <img src="/{{ entity.image }}" style="max-width:128px;"/>
                                             {% endif %}
                                         </div>
-                                        <input {% if entity.image is not empty %}style="display:none;"{% endif %} type="file" id="id-loader-image" data-after="{{ form.image.vars.id }}" name="file" class="file-loader-image" data-url="{{ path('admin_page_upload') }}" />
-                                        <span class="image-remove btn btn-danger btn-xs" {% if entity.image is empty %}style="display:none;"{% endif %}> <i class="fa fa-remove"></i></span>
+                                        <input {% if entity.image is not empty %}style="display:none;"{% endif %}
+                                               type="file" id="id-loader-image" data-after="{{ form.image.vars.id }}"
+                                               name="file" class="file-loader-image"
+                                               data-url="{{ path('admin_page_upload') }}"/>
+                                        <span class="image-remove btn btn-danger btn-xs"
+                                              {% if entity.image is empty %}style="display:none;"{% endif %}> <i
+                                                    class="fa fa-remove"></i></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="{{ form.tags.vars.id }}">Tags</label>
@@ -103,10 +110,8 @@
 {% endblock %}
 
 {% block callback_popin %}
-
     <script type="text/javascript">
-        function callBackAfterSubmit()
-        {
+        function callBackAfterSubmit() {
             table.draw();
         }
         $('.date').datepicker({
@@ -116,13 +121,11 @@
             dateFormat: 'dd/mm/yy',
             yearRange: "-1:+2"
         });
-
-
         $('.wysiwyg').froalaEditor({
             inlineMode: false,
             buttons: ["bold", "italic", "underline", "formatBlock", "sep", "insertUnorderedList", "sep", "createLink", "insertImage", "insertVideo", "sep", "undo", "redo", "html"],
-            imagesLoadURL:Routing.generate('admin_media_list')+"?dir=page",
-            imageDeleteURL:Routing.generate('admin_media_delete')+"?dir=page",
+            imagesLoadURL: Routing.generate('admin_media_list') + "?dir=page",
+            imageDeleteURL: Routing.generate('admin_media_delete') + "?dir=page",
             blockTags: {
                 n: 'Normal',
                 h2: 'Heading 2',
@@ -134,34 +137,5 @@
             imageUploadURL: Routing.generate('upload_image_wysiwyg'),
             imageUploadParams: {id: "my_editor"}
         });
-
-        $(".file-loader-image").fileupload({
-            dataType: "json",
-            done: function (e, data) {
-                var _div = $("#"+$(this).data("after")+"-preview");
-                _div.html("");
-                if(data.result.success){
-                    var filename = data.result.filename;
-                    var path = data.result.path;
-                    _div.html('<img src="/'+path+'" style="width:128px;" />');
-                    $("#"+$(this).data("after")).val(path);
-                    _div.parent().find('input[type=file]').hide();
-                    _div.parent().find('.image-remove').show();
-                }
-            }
-        });
-
-        $('.image-remove').click(function(e)
-        {
-            e.preventDefault();
-            $(this).hide();
-            var _file = $(this).parent().find('input[type=file]');
-            $("#"+_file.data("after")+"-preview").html("");
-            _file.val("");
-            $(this).parent().find('input[type=hidden]').val("");
-            $(this).parent().find('input[type=file]').show();
-        });
-
     </script>
-
 {% endblock %}

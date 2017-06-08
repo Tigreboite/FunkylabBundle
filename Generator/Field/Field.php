@@ -32,6 +32,11 @@ class Field
         return ($this->field) ? $this->field->getJS() : '';
     }
 
+    public function getUseType()
+    {
+        return ($this->field) ? $this->field->getUseType() : '';
+    }
+
     public function getBuilder()
     {
         return ($this->field) ? $this->field->getBuilder() : '';

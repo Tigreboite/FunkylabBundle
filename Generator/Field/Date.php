@@ -14,8 +14,28 @@ class Date extends Base
                 </div>';
     }
 
+    public function getJS()
+    {
+        $js = array();
+
+        $js[] = '$("#{{ form.'.$this->getVarname().'.vars.id }}").datepicker({';
+        $js[] = '   buttonImageOnly: true,';
+        $js[] = '   changeMonth: true,';
+        $js[] = '   changeYear: true,';
+        $js[] = '   dateFormat: \'dd/mm/yy\',';
+        $js[] = '   yearRange: "-1:+2"';
+        $js[] = '});';
+
+        return implode("\n", $js);
+    }
+
     public function getBuilder()
     {
-        return "\$builder->add('".$this->getVarname()."', 'date', array('required' => false,'widget'   => 'single_text','input'    => 'datetime','format'   => 'dd/MM/yyyy'));\n";
+        return "\$builder->add('".$this->getVarname()."', DateType::class, array('required' => false,'widget'   => 'single_text','input'    => 'datetime','format'   => 'dd/MM/yyyy'));\n";
+    }
+
+    public function getUseType()
+    {
+        return 'use Symfony\Component\Form\Extension\Core\Type\DateType;';
     }
 }
