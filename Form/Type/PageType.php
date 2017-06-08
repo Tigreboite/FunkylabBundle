@@ -1,8 +1,4 @@
 <?php
-/**
- * Code by Cyril Pereira, Julien Hay
- * Extreme-Sensio 2015.
- */
 
 namespace Tigreboite\FunkylabBundle\Form\Type;
 
