@@ -2,8 +2,6 @@
 
 ## Add your own field
 
-Add to you your `app/Resources/config/services.yml` 
-
 ```yaml
 # app/Resources/config/services.yml
 services:
@@ -13,10 +11,14 @@ services:
             - {name: "funkylab.fields"}
 ```
 
+### Create your own Field 
+
 ```php
 <?php
 // src/AppBundle/Generator/Field/myfield.php
 namespace AppBundle\Generator\Field;
+
+use Tigreboite\FunkylabBundle\Generator\Field\FieldBase;
 
 class MyField extends FieldBase
 {
@@ -41,7 +43,7 @@ class MyField extends FieldBase
 
 ```
 
-Use your field
+### How to use your field
 
 ```php
   /**
@@ -67,6 +69,8 @@ services:
             - {name: "funkylab.formats"}
 ```
 
+### Create your formater
+
 ```php
 <?php
 
@@ -81,3 +85,15 @@ class MyFormater extends FormaterBase
 }
 
 ```
+
+Create those files in `src/AppBundle/Resources/MyFormater`
+- `form.html.twig` use as exemple this file [form.html.twig](../../Generator/Resources/views/Datagrid/form.html.twig)
+- `index.html.twig` use as exemple this file [form.html.twig](../../Generator/Resources/views/Datagrid/index.html.twig)
+
+Inside the twig you have 
+- `%javascript%` is where the javascript will be injected
+- `%editable_fields%` is where all the html fields will be injected
+- `%admin_entity_path%` is the path of the controller 
+
+
+
