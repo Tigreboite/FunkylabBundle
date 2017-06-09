@@ -24,8 +24,9 @@ class BaseController extends Controller
         return array();
     }
 
-    public function createAction(Request $request)
+    public function createAction()
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $entity = new $this->entityName();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -97,8 +98,9 @@ class BaseController extends Controller
         }
     }
 
-    public function newAction(Request $request)
+    public function newAction()
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $entity = new $this->entityName();
         $form = $this->createCreateForm($entity);
 
@@ -110,8 +112,9 @@ class BaseController extends Controller
         );
     }
 
-    public function editAction(Request $request, $id)
+    public function editAction($id)
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository($this->repository)->find($id);
@@ -140,8 +143,9 @@ class BaseController extends Controller
         return $form;
     }
 
-    public function updateAction(Request $request, $id)
+    public function updateAction($id)
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository($this->repository)->find($id);
@@ -176,7 +180,7 @@ class BaseController extends Controller
         );
     }
 
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository($this->repository)->find($id);
@@ -195,8 +199,9 @@ class BaseController extends Controller
         return new Response('Deleted');
     }
 
-    public function uploadAction(Request $request)
+    public function uploadAction()
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $data = array('success' => false);
         $uploadedFile = $request->files->get('file');
 
@@ -214,8 +219,9 @@ class BaseController extends Controller
         return new JsonResponse($data);
     }
 
-    public function ajaxAction(Request $request)
+    public function ajaxAction()
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $query = $request->get('q', '');
         $orderby = $request->get('orderyby', $this->orderBy);
         $order = $request->get('order', 'ASC');

@@ -45,9 +45,9 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
      * @Method("POST")
      * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction()
     {
-        return parent::createAction($request);
+        return parent::createAction();
     }
 
     /**
@@ -57,9 +57,9 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
-    public function newAction(Request $request)
+    public function newAction()
     {
-        return parent::newAction($request);
+        return parent::newAction();
     }
 
     /**
@@ -69,9 +69,9 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
-    public function editAction(Request $request, $id)
+    public function editAction($id)
     {
-        return parent::editAction($request, $id);
+        return parent::editAction($id);
     }
 
     /**
@@ -81,9 +81,9 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Sortable:form.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction($id)
     {
-        return parent::updateAction($request, $id);
+        return parent::updateAction(id);
     }
 
     /**
@@ -92,9 +92,9 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
      * @Route("/{id}", name="admin_sortable_delete", options={"expose"=true})
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        return parent::deleteAction($request, $id);
+        return parent::deleteAction($id);
     }
 
     /**
@@ -103,9 +103,9 @@ class SortableController extends \Tigreboite\FunkylabBundle\Controller\SortableC
      * @Route("/upload", name="admin_sortable_upload")
      * @Method({"POST","PUT"})
      */
-    public function uploadAction(Request $request)
+    public function uploadAction()
     {
-        return parent::uploadAction($request);
+        return parent::uploadAction();
     }
 
     /**

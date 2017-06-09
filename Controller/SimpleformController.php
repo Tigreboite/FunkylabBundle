@@ -2,8 +2,6 @@
 
 namespace Tigreboite\FunkylabBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-
 class SimpleformController extends BaseController
 {
     protected $entityName = 'Simpleform';
@@ -19,7 +17,7 @@ class SimpleformController extends BaseController
      */
     public function indexAction()
     {
-        $request = $this->get('request');
+        $request = $this->get('request_stack')->getCurrentRequest();
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository($this->repository);
         $entity = $repo->findOneBy(array(), array('id' => 'DESC'));
@@ -35,12 +33,12 @@ class SimpleformController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @param $id
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction($id)
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository($this->repository)->find($id);

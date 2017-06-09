@@ -59,9 +59,9 @@ class BlocController extends SortableController
      * @Method("POST")
      * @Template("TigreboiteFunkylabBundle:Bloc:form.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction()
     {
-        return parent::createAction($request);
+        return parent::createAction();
     }
 
     /**
@@ -71,8 +71,9 @@ class BlocController extends SortableController
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Bloc:form.html.twig")
      */
-    public function newAction(Request $request)
+    public function newAction()
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $type = $request->get('type', false);
         $id = $request->get('id', false);
 
@@ -97,9 +98,9 @@ class BlocController extends SortableController
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Bloc:form.html.twig")
      */
-    public function editAction(Request $request, $id)
+    public function editAction($id)
     {
-        return parent::editAction($request, $id);
+        return parent::editAction($id);
     }
 
     /**
@@ -109,9 +110,9 @@ class BlocController extends SortableController
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Bloc:form.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction($id)
     {
-        return parent::updateAction($request, $id);
+        return parent::updateAction($id);
     }
     /**
      * Deletes an entity.
@@ -119,9 +120,9 @@ class BlocController extends SortableController
      * @Route("/remove/{id}", name="admin_bloc_delete", options={"expose"=true})
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        return parent::deleteAction($request, $id);
+        return parent::deleteAction($id);
     }
 
     /**
@@ -130,9 +131,9 @@ class BlocController extends SortableController
      * @Route("/upload", name="admin_bloc_upload")
      * @Method({"POST","PUT"})
      */
-    public function uploadAction(Request $request)
+    public function uploadAction()
     {
-        return parent::uploadAction($request);
+        return parent::uploadAction();
     }
 
     /**

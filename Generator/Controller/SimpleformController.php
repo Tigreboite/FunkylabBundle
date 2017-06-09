@@ -46,9 +46,9 @@ class SimpleformController extends BaseController
      * @Method("POST")
      * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction()
     {
-        return parent::createAction($request);
+        return parent::createAction();
     }
 
     /**
@@ -58,9 +58,9 @@ class SimpleformController extends BaseController
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
      */
-    public function newAction(Request $request)
+    public function newAction()
     {
-        return parent::newAction($request);
+        return parent::newAction();
     }
 
     /**
@@ -70,9 +70,9 @@ class SimpleformController extends BaseController
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
      */
-    public function editAction(Request $request, $id)
+    public function editAction($id)
     {
-        return parent::editAction($request, $id);
+        return parent::editAction($id);
     }
 
     /**
@@ -82,9 +82,9 @@ class SimpleformController extends BaseController
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Simpleform:form.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction($id)
     {
-        return parent::updateAction($request, $id);
+        return parent::updateAction($id);
     }
 
     /**
@@ -93,8 +93,8 @@ class SimpleformController extends BaseController
      * @Route("/upload", name="admin_simpleform_upload")
      * @Method({"POST","PUT"})
      */
-    public function uploadAction(Request $request)
+    public function uploadAction()
     {
-        return parent::uploadAction($request);
+        return parent::uploadAction();
     }
 }

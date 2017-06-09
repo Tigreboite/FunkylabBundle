@@ -44,12 +44,11 @@ class DatagridController extends BaseController
      *
      * @Route("/list", name="admin_datagrid_list", options={"expose"=true})
      * @Method("GET")
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
-        return parent::listAction($request);
+        return parent::listAction();
     }
 
     /**
@@ -58,12 +57,11 @@ class DatagridController extends BaseController
      * @Route("/", name="admin_datagrid_create")
      * @Method("POST")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
-     * @param Request $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function createAction(Request $request)
+    public function createAction()
     {
-        return parent::createAction($request);
+        return parent::createAction();
     }
 
     /**
@@ -72,12 +70,11 @@ class DatagridController extends BaseController
      * @Route("/new", name="admin_datagrid_new")
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
-     * @param Request $request
      * @return array
      */
-    public function newAction(Request $request)
+    public function newAction()
     {
-        return parent::newAction($request);
+        return parent::newAction();
     }
 
     /**
@@ -86,13 +83,12 @@ class DatagridController extends BaseController
      * @Route("/{id}/edit", name="admin_datagrid_edit", options={"expose"=true})
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
-     * @param Request $request
      * @param $id
      * @return array
      */
-    public function editAction(Request $request, $id)
+    public function editAction($id)
     {
-        return parent::editAction($request, $id);
+        return parent::editAction($id);
     }
 
     /**
@@ -101,13 +97,12 @@ class DatagridController extends BaseController
      * @Route("/update/{id}", name="admin_datagrid_update")
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Datagrid:form.html.twig")
-     * @param Request $request
      * @param $id
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction($id)
     {
-        return parent::updateAction($request, $id);
+        return parent::updateAction($id);
     }
 
     /**
@@ -115,13 +110,12 @@ class DatagridController extends BaseController
      *
      * @Route("/{id}", name="admin_datagrid_delete", options={"expose"=true})
      * @Method("DELETE")
-     * @param Request $request
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        return parent::deleteAction($request, $id);
+        return parent::deleteAction($id);
     }
 
     /**
@@ -129,11 +123,10 @@ class DatagridController extends BaseController
      *
      * @Route("/upload", name="admin_datagrid_upload")
      * @Method({"POST","PUT"})
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function uploadAction(Request $request)
+    public function uploadAction()
     {
-        return parent::uploadAction($request);
+        return parent::uploadAction();
     }
 }

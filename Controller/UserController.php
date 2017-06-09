@@ -42,9 +42,9 @@ class UserController extends DatagridController
      * @Route("/list", name="admin_user_list", options={"expose"=true})
      * @Method("GET")
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
-        return parent::listAction($request);
+        return parent::listAction();
     }
 
     /**
@@ -54,9 +54,9 @@ class UserController extends DatagridController
      * @Method("POST")
      * @Template("TigreboiteFunkylabBundle:User:form.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction()
     {
-        return parent::createAction($request);
+        return parent::createAction();
     }
 
     /**
@@ -66,9 +66,9 @@ class UserController extends DatagridController
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:User:form.html.twig")
      */
-    public function newAction(Request $request)
+    public function newAction()
     {
-        return parent::newAction($request);
+        return parent::newAction();
     }
 
     /**
@@ -78,8 +78,10 @@ class UserController extends DatagridController
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:User:form.html.twig")
      */
-    public function editAction(Request $request,  $id)
+    public function editAction($id)
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TigreboiteFunkylabBundle:User')->find($id);
@@ -87,6 +89,7 @@ class UserController extends DatagridController
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
+
 
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
@@ -105,6 +108,7 @@ class UserController extends DatagridController
             return $this->redirect($this->generateUrl('admin_user'));
         }
 
+
         return array(
           'entity' => $entity,
           'form' => $editForm->createView(),
@@ -118,9 +122,9 @@ class UserController extends DatagridController
      * @Route("/update/{id}", name="admin_user_update")
      * @Template("TigreboiteFunkylabBundle:User:form.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction($id)
     {
-        return parent::updateAction($request, $id);
+        return parent::updateAction($id);
     }
 
     /**
@@ -129,9 +133,9 @@ class UserController extends DatagridController
      * @Route("/{id}", name="admin_user_delete", options={"expose"=true})
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        return parent::deleteAction($request, $id);
+        return parent::deleteAction($id);
     }
 
     /**
@@ -139,18 +143,18 @@ class UserController extends DatagridController
      *
      * @Route("/upload", name="admin_user_upload")
      */
-    public function uploadAction(Request $request)
+    public function uploadAction()
     {
-        return parent::uploadAction($request);
+        return parent::uploadAction();
     }
 
     /**
      * @Route("/autocomplete/request", name="admin_user_autocomplete_request", options={"expose"=true})
      * @Method("GET")
      */
-    public function ajaxAction(Request $request)
+    public function ajaxAction()
     {
-        return parent::ajaxAction($request);
+        return parent::ajaxAction();
     }
 
 }

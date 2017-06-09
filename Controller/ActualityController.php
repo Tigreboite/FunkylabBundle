@@ -51,9 +51,9 @@ class ActualityController extends DatagridController
      * @Route("/list", name="admin_actuality_list", options={"expose"=true})
      * @Method("GET")
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
-        return parent::listAction($request);
+        return parent::listAction();
     }
 
     /**
@@ -63,9 +63,9 @@ class ActualityController extends DatagridController
      * @Method("POST")
      * @Template("TigreboiteFunkylabBundle:Actuality:form.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction()
     {
-        return parent::createAction($request);
+        return parent::createAction();
     }
 
     /**
@@ -75,9 +75,9 @@ class ActualityController extends DatagridController
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Actuality:form.html.twig")
      */
-    public function newAction(Request $request)
+    public function newAction()
     {
-        return parent::newAction($request);
+        return parent::newAction();
     }
 
     /**
@@ -87,9 +87,9 @@ class ActualityController extends DatagridController
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Actuality:form.html.twig")
      */
-    public function editAction(Request $request, $id)
+    public function editAction($id)
     {
-        return parent::editAction($request, $id);
+        return parent::editAction($id);
     }
 
     /**
@@ -99,9 +99,9 @@ class ActualityController extends DatagridController
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Actuality:form.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction($id)
     {
-        return parent::updateAction($request, $id);
+        return parent::updateAction($id);
     }
 
     /**
@@ -110,7 +110,7 @@ class ActualityController extends DatagridController
      * @Route("/{id}", name="admin_actuality_delete", options={"expose"=true})
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository($this->repository)->find($id);
@@ -141,7 +141,7 @@ class ActualityController extends DatagridController
      * @Route("/upload", name="admin_actuality_upload")
      * @Method({"POST","PUT"})
      */
-    public function uploadAction(Request $request)
+    public function uploadAction()
     {
         return parent::uploadAction($request);
     }
@@ -150,8 +150,9 @@ class ActualityController extends DatagridController
      * @Route("/autocomplete/request", name="admin_actuality_autocomplete_request", options={"expose"=true})
      * @Method("GET")
      */
-    public function ajaxAction(Request $request)
+    public function ajaxAction()
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $query = $request->get('q', '');
         $orderby = $request->get('orderyby', 'title');
         $order = $request->get('order', 'ASC');

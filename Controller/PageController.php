@@ -50,9 +50,9 @@ class PageController extends DatagridController
      * @Route("/list", name="admin_page_list", options={"expose"=true})
      * @Method("GET")
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
-        return parent::listAction($request);
+        return parent::listAction();
     }
 
     /**
@@ -62,9 +62,9 @@ class PageController extends DatagridController
      * @Method("POST")
      * @Template("TigreboiteFunkylabBundle:Page:form.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction()
     {
-        return parent::createAction($request);
+        return parent::createAction();
     }
 
     /**
@@ -74,9 +74,9 @@ class PageController extends DatagridController
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Page:form.html.twig")
      */
-    public function newAction(Request $request)
+    public function newAction()
     {
-        return parent::newAction($request);
+        return parent::newAction();
     }
 
     /**
@@ -86,9 +86,9 @@ class PageController extends DatagridController
      * @Method("GET")
      * @Template("TigreboiteFunkylabBundle:Page:form.html.twig")
      */
-    public function editAction(Request $request, $id)
+    public function editAction($id)
     {
-        return parent::editAction($request, $id);
+        return parent::editAction($id);
     }
 
     /**
@@ -98,9 +98,9 @@ class PageController extends DatagridController
      * @Method("PUT")
      * @Template("TigreboiteFunkylabBundle:Page:form.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction($id)
     {
-        return parent::updateAction($request, $id);
+        return parent::updateAction($id);
     }
 
     /**
@@ -109,7 +109,7 @@ class PageController extends DatagridController
      * @Route("/{id}", name="admin_page_delete", options={"expose"=true})
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository($this->repository)->find($id);
@@ -140,17 +140,18 @@ class PageController extends DatagridController
      * @Route("/upload", name="admin_page_upload")
      * @Method({"POST","PUT"})
      */
-    public function uploadAction(Request $request)
+    public function uploadAction()
     {
-        return parent::uploadAction($request);
+        return parent::uploadAction();
     }
 
     /**
      * @Route("/autocomplete/request", name="admin_page_autocomplete_request", options={"expose"=true})
      * @Method("GET")
      */
-    public function ajaxAction(Request $request)
+    public function ajaxAction()
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $query = $request->get('q', '');
         $orderby = $request->get('orderyby', 'title');
         $order = $request->get('order', 'ASC');

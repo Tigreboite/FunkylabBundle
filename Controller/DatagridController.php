@@ -16,12 +16,11 @@ class DatagridController extends BaseController
     /**
      * Get a list to feed datagrid.
      *
-     * @param Request $request
-     *
      * @return Response
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         if (!$request->isXmlHttpRequest()) {
             throw $this->createNotFoundException('Not found');
         }
