@@ -46,6 +46,8 @@ class MyField extends FieldBase
 ### How to use your field
 
 ```php
+  // src/AppBundle/Entity/MyEntity.php
+  
   /**
    * @var string
    *
