@@ -11,4 +11,4 @@ Documentation
 - [Installation](Resources/doc/installation.md)
 - [Use the crud generator](Resources/doc/generatecrud.md)
 - [Use your own controller](Resources/doc/addyourcontrollers.md)
-- [Override](Resources/doc/override.md)
+- [Extend yourself](Resources/doc/extend.md)
