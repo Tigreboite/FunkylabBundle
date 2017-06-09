@@ -62,7 +62,13 @@ class CrudCommand extends ContainerAwareCommand
 
         // Get Type to generate
         if (!$type) {
-            $choices = array('datagrid', 'simpleform', 'sortable');
+
+            $choices = array();
+
+            $formaters = $generator->getFormaterChain()->getFormaters();
+            foreach($formaters as $formater){
+                $choices[]=$formater->getType();
+            }
 
             $helper = $this->getHelper('question');
             $question = new ChoiceQuestion(
