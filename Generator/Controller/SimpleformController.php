@@ -20,7 +20,7 @@ use Tigreboite\FunkylabBundle\Controller\SimpleformController as BaseController;
 class SimpleformController extends BaseController
 {
     protected $entityName = '%bundle_name%\Entity\Simpleform';
-    protected $formType = '%bundle_name%\Form\SimpleformType';
+    protected $formType = '%bundle_name%\Form\Type\SimpleformType';
     protected $route_base = 'admin_simpleform';
     protected $repository = '%bundle_name%:%entity_name%';
     protected $dir_path = 'medias/%bundle_name%/';
