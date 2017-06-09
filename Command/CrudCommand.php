@@ -67,7 +67,7 @@ class CrudCommand extends ContainerAwareCommand
 
             $formaters = $generator->getFormaterChain()->getFormaters();
             foreach($formaters as $formater){
-                $choices[]=$formater->getType();
+                $choices[$formater->getType()]=$formater->getType();
             }
 
             $helper = $this->getHelper('question');

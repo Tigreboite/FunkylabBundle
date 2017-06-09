@@ -17,10 +17,6 @@ services:
         class: Tigreboite\FunkylabBundle\Generator\DatagridFormater
         tags:
             - {name: "funkylab.formaters"}
-    tigreboitefunkylab.formaters.tree:
-        class: Tigreboite\FunkylabBundle\Generator\TreeFormater
-        tags:
-            - {name: "funkylab.formaters"}
     tigreboitefunkylab.formaters.simpleform:
         class: Tigreboite\FunkylabBundle\Generator\SimpleformFormater
         tags:
