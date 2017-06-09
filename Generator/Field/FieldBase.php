@@ -2,18 +2,24 @@
 
 namespace Tigreboite\FunkylabBundle\Generator\Field;
 
-class Base
+use Symfony\Component\VarDumper\VarDumper;
+
+class FieldBase implements FieldInterface
 {
     public $type = 'base';
     private $varname;
     private $name;
     private $options;
 
-    public function __construct($varname, $name, $options = array())
+    public function config($varname, $name, $options = array())
     {
         $this->name = $name;
         $this->varname = $varname;
         $this->options = $options;
+    }
+
+    public function getType(){
+        return $this->type;
     }
 
     public function getVarname()

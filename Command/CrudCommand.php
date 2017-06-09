@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
-use Tigreboite\FunkylabBundle\Generator\GeneratorCrud;
+use Symfony\Component\VarDumper\VarDumper;
 
 class CrudCommand extends ContainerAwareCommand
 {
@@ -21,14 +21,15 @@ class CrudCommand extends ContainerAwareCommand
             ->setName('funkylab:crud')
             ->setDescription('Create a CRUD from entity for Funkylab')
             ->addOption('entity', null, InputOption::VALUE_REQUIRED, 'Entity Class ex AppbBundle\\Entity\\Post')
-            ->addOption('type', null, InputOption::VALUE_REQUIRED, 'Type of the crud to generate : datagrid|sortable|simpleform')
+            ->addOption('type', null, InputOption::VALUE_REQUIRED, 'Type of the crud to generate')
             ->addOption('bundle', null, InputOption::VALUE_REQUIRED, 'Bundle where to create CRUD');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $timeStart = microtime(true);
+
+        $generator = $this->getContainer()->get('tigreboitefunkylab.generator');
 
         $this->input = $input;
         $this->output = $output;
@@ -81,10 +82,11 @@ class CrudCommand extends ContainerAwareCommand
             $output->writeln('You have just selected: ' . $type);
         }
 
-        // Generate CRUD
-        $res = new GeneratorCrud($entityClass, $bundle, $type);
+
+        $generator->generate($entityClass, $bundle, $type);
+
         $this->output->writeln('<info>Files generated in</info> : ' . $bundle);
-        $this->output->writeln($res->getFiles());
+        $this->output->writeln($generator->getFiles());
 
         // Display Timer
         $this->processEnd($timeStart);

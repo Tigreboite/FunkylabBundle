@@ -1,0 +1,60 @@
+services:
+
+    # Generator
+    tigreboitefunkylab.generator:
+        class: Tigreboite\FunkylabBundle\Generator\GeneratorCrud
+        arguments: ["@tigreboitefunkylab.fields.chain", "@tigreboitefunkylab.formaters.chain"]
+
+    # Formaters
+    tigreboitefunkylab.formaters.chain:
+        class: Tigreboite\FunkylabBundle\Generator\FormaterChain
+
+    tigreboitefunkylab.formaters.sortable:
+        class: Tigreboite\FunkylabBundle\Generator\SortableFormater
+        tags:
+            - {name: "funkylab.formaters"}
+    tigreboitefunkylab.formaters.datagrid:
+        class: Tigreboite\FunkylabBundle\Generator\DatagridFormater
+        tags:
+            - {name: "funkylab.formaters"}
+    tigreboitefunkylab.formaters.tree:
+        class: Tigreboite\FunkylabBundle\Generator\TreeFormater
+        tags:
+            - {name: "funkylab.formaters"}
+    tigreboitefunkylab.formaters.simpleform:
+        class: Tigreboite\FunkylabBundle\Generator\SimpleformFormater
+        tags:
+            - {name: "funkylab.formaters"}
+
+    # Fields
+    tigreboitefunkylab.fields.chain:
+        class: Tigreboite\FunkylabBundle\Generator\Field\FieldChain
+
+    tigreboitefunkylab.fields.base:
+        class: Tigreboite\FunkylabBundle\Generator\Field\FieldBase
+        tags:
+            - {name: "funkylab.fields"}
+    tigreboitefunkylab.fields.html:
+        class: Tigreboite\FunkylabBundle\Generator\Field\Html
+        tags:
+            - {name: "funkylab.fields"}
+    tigreboitefunkylab.fields.date:
+        class: Tigreboite\FunkylabBundle\Generator\Field\Date
+        tags:
+            - {name: "funkylab.fields"}
+    tigreboitefunkylab.fields.file:
+        class: Tigreboite\FunkylabBundle\Generator\Field\File
+        tags:
+            - {name: "funkylab.fields"}
+    tigreboitefunkylab.fields.number:
+        class: Tigreboite\FunkylabBundle\Generator\Field\Number
+        tags:
+            - {name: "funkylab.fields"}
+    tigreboitefunkylab.fields.text:
+        class: Tigreboite\FunkylabBundle\Generator\Field\Text
+        tags:
+            - {name: "funkylab.fields"}
+    tigreboitefunkylab.fields.textarea:
+        class: Tigreboite\FunkylabBundle\Generator\Field\Date
+        tags:
+            - {name: "funkylab.fields"}

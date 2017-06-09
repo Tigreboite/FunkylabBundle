@@ -2,7 +2,7 @@
 
 namespace Tigreboite\FunkylabBundle\Generator;
 
-class TreeFormater extends Formater
+class TreeFormater extends FormaterBase
 {
     protected $type = 'Tree';
 }

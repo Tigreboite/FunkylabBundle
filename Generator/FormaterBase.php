@@ -3,21 +3,27 @@
 namespace Tigreboite\FunkylabBundle\Generator;
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Generator\Field\Field;
+use Tigreboite\FunkylabBundle\Generator\Field\FieldChain;
 
-abstract class Formater
+abstract class FormaterBase
 {
     protected $bundle;
     protected $entity;
     protected $type;
     protected $classController;
     protected $path;
+    protected $fields = [];
+    protected $fieldChain;
 
-    public function __construct($bundle, $entity)
+    public function config($bundle, $entity, FieldChain $fieldChain)
     {
         $this->path = getcwd() . "/vendor/tigreboite/funkylab-bundle/Generator";
         $this->bundle = $bundle;
         $this->entity = $entity;
+        $this->fieldChain = $fieldChain;
+
         $this->entityName = explode('\\', $entity);
         $this->entityName = end($this->entityName);
         $this->annotations = $this->processAnnotation();
@@ -125,15 +131,21 @@ abstract class Formater
         $fields = '';
         foreach ($this->getFields() as $field) {
             if ($field['editable']) {
-                $OBjField = new Field($field['dataType'], $field['name'], $field['varname'], array('path' => 'admin_' . strtolower($this->entityName)));
-                $fields .= $OBjField->getBuilder();
-                $usedType[]= $OBjField->getUseType();
+
+                $fieldObj = $this->fieldChain->getField($field['dataType']);
+
+                if (!$fieldObj) {
+                    $fieldObj = $this->fieldChain->getField('base');
+                }
+                $fieldObj->config($field['varname'],$field['name'],array('path' => 'admin_' . strtolower($this->entityName)));
+                $fields .= $fieldObj->getBuilder();
+                $usedType[] = $fieldObj->getUseType();
             }
         }
 
         $code = str_replace('$builder->add(\'\');', $fields, $code);
 
-        $code = str_replace('/*use*/', implode("\n",$usedType), $code);
+        $code = str_replace('/*use*/', implode("\n", $usedType), $code);
 
         return $code;
     }
@@ -170,7 +182,7 @@ abstract class Formater
             );
 
             foreach ($annotations as $annotation) {
-                if (get_class($annotation) == 'Tigreboite\\FunkylabBundle\\Annotation\\Crud') {
+                if (get_class($annotation) === 'Tigreboite\\FunkylabBundle\\Annotation\\Crud') {
                     $field['name'] = $annotation->getPropertyName();
                     $field['visible'] = $annotation->getVisible();
                     $field['sortable'] = $annotation->getSortable();
@@ -212,12 +224,19 @@ abstract class Formater
 
         foreach ($this->getFields() as $field) {
             if ($field['editable']) {
-                $OBjField = new Field($field['dataType'], $field['name'], $field['varname'], array('path' => 'admin_' . strtolower($this->entityName)));
-                if ($OBjField->getHTML()) {
-                    $EditableFields[] = $OBjField->getHTML();
+                $fieldObj = $this->fieldChain->getField($field['dataType']);
+
+                if (!$fieldObj) {
+                    $fieldObj = $this->fieldChain->getField('base');
                 }
-                if ($OBjField->getJS()) {
-                    $EditableJS[] = $OBjField->getJS();
+
+                $fieldObj->config($field['varname'],$field['name'],array('path' => 'admin_' . strtolower($this->entityName)));
+
+                if ($fieldObj->getHTML()) {
+                    $EditableFields[] = $fieldObj->getHTML();
+                }
+                if ($fieldObj->getJS()) {
+                    $EditableJS[] = $fieldObj->getJS();
                 }
             }
         }

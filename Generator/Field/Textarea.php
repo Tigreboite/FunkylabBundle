@@ -2,7 +2,7 @@
 
 namespace Tigreboite\FunkylabBundle\Generator\Field;
 
-class Textarea extends Base
+class Textarea extends FieldBase
 {
     public $type = 'textarea';
 }

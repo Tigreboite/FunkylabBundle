@@ -2,13 +2,24 @@
 
 namespace Tigreboite\FunkylabBundle\Generator;
 
-use Symfony\Component\VarDumper\VarDumper;
+use Tigreboite\FunkylabBundle\Generator\Field\FieldChain;
 
 class GeneratorCrud
 {
     private $files = array();
+    private $fieldChain;
+    private $formaterChain;
 
-    public function __construct($entity, $bundle, $type)
+    /**
+     * @param FieldChain $fieldChain
+     * @param FormaterChain $formaterChain
+     */
+    public function __construct(FieldChain $fieldChain, FormaterChain $formaterChain){
+        $this->fieldChain = $fieldChain;
+        $this->formaterChain = $formaterChain;
+    }
+
+    public function generate($entity, $bundle, $type)
     {
         $type = UCFirst(strtolower($type));
         $this->bundle = $bundle;
@@ -19,9 +30,10 @@ class GeneratorCrud
         $path = $basePath.'/src/'.$bundle.'/';
 
         $this->files = array();
-        $className = 'Tigreboite\\FunkylabBundle\\Generator\\'.$type.'Formater';
-        if (class_exists($className)) {
-            $formater = new $className($bundle, $entity);
+        $formater = $this->getFormaterChain()->getFormater($type);
+
+        if (is_object($formater)) {
+            $formater->config($bundle, $entity, $this->getFieldChain());
 
             //Process Controller
             $code_controller = $formater->getController($type);
@@ -53,9 +65,7 @@ class GeneratorCrud
                     }
                 }
 
-
                 foreach ($code_views as $filename => $body) {
-                    VarDumper::dump($path.'Resources/views/'.$this->entityName);
                     if (!is_dir($path.'Resources/views/'.$this->entityName)) {
                         mkdir($path.'Resources/views/'.$this->entityName);
                     }
@@ -77,5 +87,15 @@ class GeneratorCrud
     public function getFiles()
     {
         return $this->files;
+    }
+
+    public function getFormaterChain()
+    {
+        return $this->formaterChain;
+    }
+
+    public function getFieldChain()
+    {
+        return $this->fieldChain;
     }
 }

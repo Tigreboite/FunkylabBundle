@@ -2,15 +2,15 @@
 
 namespace Tigreboite\FunkylabBundle\Generator\Field;
 
-class Image extends Base
+class Image extends FieldBase
 {
     public $type = 'image';
     private $id;
     private $class;
 
-    public function __construct($varname, $name, $options = array())
+    public function config($varname, $name, $options = array())
     {
-        parent::__construct($varname, $name, $options);
+        parent::config($varname, $name, $options);
 
         $this->class = 'file-loader-'.strtolower($this->getName());
         $this->id = 'id-loader-'.strtolower($this->getName());

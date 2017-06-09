@@ -2,7 +2,7 @@
 
 namespace Tigreboite\FunkylabBundle\Generator\Field;
 
-class Date extends Base
+class Date extends FieldBase
 {
     public $type = 'date';
 

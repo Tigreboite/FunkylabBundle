@@ -21,6 +21,7 @@ class TigreboiteFunkylabExtension extends Extension
         $loader->load('services.yml');
         $loader->load('events.yml');
         $loader->load('managers.yml');
+        $loader->load('generator.yml');
 
         $cache = $container->get('funkylab.cache');
 

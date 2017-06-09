@@ -2,7 +2,7 @@
 
 namespace Tigreboite\FunkylabBundle\Generator\Field;
 
-class Html extends Base
+class Html extends FieldBase
 {
     public $type = 'html';
 

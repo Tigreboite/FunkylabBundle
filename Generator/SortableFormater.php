@@ -2,7 +2,7 @@
 
 namespace Tigreboite\FunkylabBundle\Generator;
 
-class SortableFormater extends Formater
+class SortableFormater extends FormaterBase
 {
     protected $type = 'Sortable';
 
