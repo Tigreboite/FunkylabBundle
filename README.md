@@ -1,4 +1,4 @@
-![Funkylab](Resources/images/logo.png)
+![Funkylab](Resources/images/logo_brown.png)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/c984641e-7cd9-46fc-95b9-1ce74bea62d4/mini.png)](https://insight.sensiolabs.com/projects/c984641e-7cd9-46fc-95b9-1ce74bea62d4)
 
