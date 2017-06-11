@@ -2,8 +2,6 @@
 
 namespace Tigreboite\FunkylabBundle\Generator\Field;
 
-use Symfony\Component\VarDumper\VarDumper;
-
 class FieldBase implements FieldInterface
 {
     public $type = 'base';
