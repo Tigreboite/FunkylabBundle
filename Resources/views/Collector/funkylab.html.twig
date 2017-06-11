@@ -51,23 +51,19 @@
 {% macro render_table(value) %}
 
     <table>
+        <thead>
+            <tr>
+                <th>key</th>
+                <th class="full-width">value</th>
+            </tr>
+        </thead>
         <tbody>
         {% for kdata, data in value %}
             <tr>
-                <td class="font-normal" width="100">{{ kdata }}</td>
-                <td class="font-normal">
+                <td class="font-normal text-small text-bold" nowrap>{{ kdata }}</td>
+                <td class="font-normal text-small" nowrap>
                     {% if data is iterable %}
-                        <table>
-                            <tbody>
-
-                            {% for kd, d in data %}
-                                <tr>
-                                    <td width="100" class="font-normal">{{ kd }}</td>
-                                    <td class="font-normal">{{ d }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                        {{ dump(data) }}
                     {% else %}
                         {{ data }}
                     {% endif %}
