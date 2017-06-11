@@ -38,5 +38,4 @@ class FieldChain
     {
         return isset($this->fields[$fieldName]) ? $this->fields[$fieldName] : null;
     }
-
 }

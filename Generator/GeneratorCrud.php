@@ -14,7 +14,8 @@ class GeneratorCrud
      * @param FieldChain $fieldChain
      * @param FormaterChain $formaterChain
      */
-    public function __construct(FieldChain $fieldChain, FormaterChain $formaterChain){
+    public function __construct(FieldChain $fieldChain, FormaterChain $formaterChain)
+    {
         $this->fieldChain = $fieldChain;
         $this->formaterChain = $formaterChain;
     }
@@ -57,7 +58,6 @@ class GeneratorCrud
             //Process Views
             $code_views = $formater->getViews($type);
             if (is_array($code_views)) {
-
                 if (!is_dir($path.'Resources')) {
                     mkdir($path.'Resources');
                     if (!is_dir($path.'Resources/views')) {

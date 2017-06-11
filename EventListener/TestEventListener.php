@@ -8,7 +8,6 @@ use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
 
 class TestEventListener implements EventSubscriberInterface
 {
-
     public static function getSubscribedEvents()
     {
         return [
@@ -38,5 +37,4 @@ class TestEventListener implements EventSubscriberInterface
     public function onDeleted(EntityEvent $event = null)
     {
     }
-
 }

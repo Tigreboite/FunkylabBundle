@@ -4,7 +4,6 @@ namespace Tigreboite\FunkylabBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tigreboite\FunkylabBundle\Event\EntityEvent;
@@ -158,7 +157,6 @@ class BaseController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-
             if (in_array(Blameable::class, class_uses($entity))) {
                 $entity->setUpdatedBy($this->getUser());
                 $em->persist($entity);

@@ -37,5 +37,4 @@ class GeneratorCompilerPass implements CompilerPassInterface
         $collectorDefinition = $container->findDefinition('funkylab.service');
         $collectorDefinition->addMethodCall('set', array($chainName, $ids));
     }
-
 }

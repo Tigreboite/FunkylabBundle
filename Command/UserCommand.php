@@ -39,8 +39,9 @@ class UserCommand extends ContainerAwareCommand
         $this->input = $input;
         $this->output = $output;
         $action = $input->getArgument('action', false);
-        if (!$action)
+        if (!$action) {
             return;
+        }
 
         switch ($action) {
             case "update-password":
@@ -65,7 +66,6 @@ class UserCommand extends ContainerAwareCommand
 
     private function changePasswordUser()
     {
-
         $this->output->writeln("---------------------------");
         $this->output->writeln("Update Password");
         $this->output->writeln("---------------------------");
@@ -101,7 +101,6 @@ class UserCommand extends ContainerAwareCommand
 
     private function changeRolesUser()
     {
-
         $this->output->writeln("---------------------------");
         $this->output->writeln("Update Role");
         $this->output->writeln("---------------------------");
@@ -131,7 +130,7 @@ class UserCommand extends ContainerAwareCommand
 
         if ($roles == "app") {
             $roles = self::ROLES_APP;
-        } else if ($roles == "admin") {
+        } elseif ($roles == "admin") {
             $roles = self::ROLES_ADMIN;
         } else {
             $roles = self::ROLES_USER;
@@ -142,7 +141,6 @@ class UserCommand extends ContainerAwareCommand
 
     private function deleteUser()
     {
-
         $this->output->writeln("---------------------------");
         $this->output->writeln("Delete User");
         $this->output->writeln("---------------------------");
@@ -170,7 +168,6 @@ class UserCommand extends ContainerAwareCommand
             '/^(y|j)/i'
         );
         return $helper->ask($this->input, $this->output, $question);
-
     }
 
     private function activeUser()
@@ -229,5 +226,4 @@ class UserCommand extends ContainerAwareCommand
         $manager->save($user, true);
         $this->output->writeln("<comment>New user created</comment>");
     }
-
 }

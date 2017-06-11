@@ -30,7 +30,7 @@ class TigreboiteFunkylabExtension extends Extension
             foreach ($config['default_menu'] as $k1 => $v1) {
                 $default_menu[$k1] = $v1;
             }
-            $cache->save('tigreboite_funkylab.default_menu',$default_menu);
+            $cache->save('tigreboite_funkylab.default_menu', $default_menu);
         }
 
         $container->setParameter("funkylab", $config);

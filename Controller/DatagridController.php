@@ -3,7 +3,6 @@
 namespace Tigreboite\FunkylabBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 
 class DatagridController extends BaseController
 {

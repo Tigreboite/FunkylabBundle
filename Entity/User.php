@@ -22,7 +22,6 @@ use Tigreboite\FunkylabBundle\Traits\Blameable;
  */
 class User extends BaseUser
 {
-
     use Blameable, TimestampableEntity;
 
     const ROLE_MODERATOR = 'ROLE_MODERATOR';

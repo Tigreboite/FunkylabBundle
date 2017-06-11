@@ -236,5 +236,4 @@ class Bloc
     {
         $this->slug = $slug;
     }
-
 }

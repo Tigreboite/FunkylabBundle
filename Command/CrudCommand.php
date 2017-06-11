@@ -8,7 +8,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\VarDumper\VarDumper;
 
 class CrudCommand extends ContainerAwareCommand
 {
@@ -62,11 +61,10 @@ class CrudCommand extends ContainerAwareCommand
 
         // Get Type to generate
         if (!$type) {
-
             $choices = array();
 
             $formaters = $generator->getFormaterChain()->getFormaters();
-            foreach($formaters as $formater){
+            foreach ($formaters as $formater) {
                 $choices[$formater->getType()]=$formater->getType();
             }
 

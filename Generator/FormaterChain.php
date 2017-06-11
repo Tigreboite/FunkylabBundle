@@ -35,5 +35,4 @@ class FormaterChain
     {
         return isset($this->formaters[$formatName]) && !is_null($this->formaters[$formatName]) ? $this->formaters[$formatName] : false;
     }
-
 }

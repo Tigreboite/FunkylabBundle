@@ -26,7 +26,6 @@ class MenuBuilder
 
     public function createMainMenu(PhpFileCache $cache, FunkylabService $funkylabService, RequestStack $requestStack, Reader $reader, AuthorizationChecker $authorizationChecker, Router $router)
     {
-
         $request = $requestStack->getCurrentRequest();
         $menuConverter = new MenuConverter($reader, $router, $authorizationChecker, $cache);
         $this->config = $menuConverter->getFunkylabConfiguration();
@@ -75,7 +74,6 @@ class MenuBuilder
 
                     $menuData[] = $k . "/" . $m['menu']->getPropertyName();
                 }
-
             } else {
                 $menu->addChild($l['menu']->getName(), array(
                     'route' => $l['route'],

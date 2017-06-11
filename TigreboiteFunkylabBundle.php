@@ -9,7 +9,6 @@ use Tigreboite\FunkylabBundle\DependencyInjection\Compiler\GeneratorCompilerPass
 
 class TigreboiteFunkylabBundle extends Bundle
 {
-
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

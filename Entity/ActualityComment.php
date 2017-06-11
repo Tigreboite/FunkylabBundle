@@ -5,7 +5,6 @@ namespace Tigreboite\FunkylabBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Tigreboite\FunkylabBundle\Traits\Blameable;
-use Doctrine\Common\Collections\ArrayCollection;
 use Tigreboite\FunkylabBundle\Traits\Publishable;
 
 /**
@@ -109,5 +108,4 @@ class ActualityComment
         $this->actuality = $actuality;
         return $this;
     }
-
 }

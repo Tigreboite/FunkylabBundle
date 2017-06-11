@@ -7,7 +7,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Tigreboite\FunkylabBundle\Traits\Blameable;
 use Doctrine\Common\Collections\ArrayCollection;
-use Tigreboite\FunkylabBundle\Traits\Publishable;
 use Tigreboite\FunkylabBundle\Traits\Seo;
 
 /**
@@ -139,5 +138,4 @@ class ActualityCategory
         $this->actuality->remove($actuality);
         $actuality->setCategory(null);
     }
-
 }

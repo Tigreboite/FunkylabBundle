@@ -36,7 +36,6 @@ class MenuConverter
      */
     public function onKernel()
     {
-
         $menu = $this->getControllersWithAnnotationModules();
 
         return $menu;

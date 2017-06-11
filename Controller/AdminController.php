@@ -43,9 +43,9 @@ class AdminController extends Controller
      */
     public function loginCheckAction()
     {
-        if($this->getLoggedUser()!==false){
+        if ($this->getLoggedUser()!==false) {
             $logout = $this->generateUrl('funkylab_home');
-        }else{
+        } else {
             $logout = $this->generateUrl('funkylab_login');
         }
 

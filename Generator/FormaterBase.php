@@ -3,7 +3,6 @@
 namespace Tigreboite\FunkylabBundle\Generator;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Symfony\Component\VarDumper\VarDumper;
 use Tigreboite\FunkylabBundle\Generator\Field\Field;
 use Tigreboite\FunkylabBundle\Generator\Field\FieldChain;
 
@@ -131,13 +130,12 @@ abstract class FormaterBase
         $fields = '';
         foreach ($this->getFields() as $field) {
             if ($field['editable']) {
-
                 $fieldObj = $this->fieldChain->getField($field['dataType']);
 
                 if (!$fieldObj) {
                     $fieldObj = $this->fieldChain->getField('base');
                 }
-                $fieldObj->config($field['varname'],$field['name'],array('path' => 'admin_' . strtolower($this->entityName)));
+                $fieldObj->config($field['varname'], $field['name'], array('path' => 'admin_' . strtolower($this->entityName)));
                 $fields .= $fieldObj->getBuilder();
                 $usedType[] = $fieldObj->getUseType();
             }
@@ -230,7 +228,7 @@ abstract class FormaterBase
                     $fieldObj = $this->fieldChain->getField('base');
                 }
 
-                $fieldObj->config($field['varname'],$field['name'],array('path' => 'admin_' . strtolower($this->entityName)));
+                $fieldObj->config($field['varname'], $field['name'], array('path' => 'admin_' . strtolower($this->entityName)));
 
                 if ($fieldObj->getHTML()) {
                     $EditableFields[] = $fieldObj->getHTML();

@@ -1,8 +1,4 @@
 <?php
-/**
- * Code by Cyril Pereira, Julien Hay
- * Extreme-Sensio 2015.
- */
 
 namespace Tigreboite\FunkylabBundle\Controller;
 
@@ -24,7 +20,6 @@ use Tigreboite\FunkylabBundle\TigreboiteFunkylabEvent;
  */
 class ActualityController extends DatagridController
 {
-
     protected $entityName = 'Tigreboite\FunkylabBundle\Entity\Actuality';
     protected $formType = 'Tigreboite\FunkylabBundle\Form\Type\ActualityType';
     protected $route_base = 'admin_actuality';

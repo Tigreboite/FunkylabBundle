@@ -114,5 +114,3 @@ class Image extends FieldBase
         return 'use Symfony\Component\Form\Extension\Core\Type\HiddenType;';
     }
 }
-
-

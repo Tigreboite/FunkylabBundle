@@ -18,7 +18,8 @@ class FieldBase implements FieldInterface
         $this->options = $options;
     }
 
-    public function getType(){
+    public function getType()
+    {
         return $this->type;
     }
 

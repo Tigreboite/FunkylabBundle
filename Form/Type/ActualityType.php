@@ -51,7 +51,6 @@ class ActualityType extends AbstractType
           'format' => 'dd/MM/yyyy', )
         );
         $builder->add('image', HiddenType::class);
-
     }
 
     /**
