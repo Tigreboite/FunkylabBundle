@@ -68,7 +68,7 @@ services:
     appbundle.myformat:
         class: AppBundle\Generator\MyFormat
         tags:
-            - {name: "funkylab.formats"}
+            - {name: "funkylab.formaters"}
 ```
 
 ### Create your formater
@@ -88,14 +88,20 @@ class MyFormater extends FormaterBase
 
 ```
 
-Create those files in `src/AppBundle/Resources/MyFormater`
-- `form.html.twig` use as exemple this file [form.html.twig](../../Generator/Resources/views/Datagrid/form.html.twig)
-- `index.html.twig` use as exemple this file [form.html.twig](../../Generator/Resources/views/Datagrid/index.html.twig)
+Create a directory `src/AppBundle/Resources/MyFormater` and create all the twig file you need
 
-Inside the twig you have 
+Use as exemple those file :
+- [index.html.twig](../../Generator/Resources/views/Datagrid/index.html.twig)
+- [form.html.twig](../../Generator/Resources/views/Datagrid/form.html.twig)
+
+In your twig files you can use those variables 
+
+- `%datagrid_entity_fields%` is the name exposed field who can be sorted 
+- `%sname_fields%` is the real name exposed field who can be sorted
+- `%admin_entity_path%` is the path of the controller
 - `%javascript%` is where the javascript will be injected
 - `%editable_fields%` is where all the html fields will be injected
-- `%admin_entity_path%` is the path of the controller 
+
 
 
 
